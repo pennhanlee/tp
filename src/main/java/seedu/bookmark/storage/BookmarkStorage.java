@@ -10,7 +10,7 @@ import seedu.bookmark.model.ReadOnlyAddressBook;
 /**
  * Represents a storage for {@link seedu.bookmark.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface BookmarkStorage {
 
     /**
      * Returns the file path of the data file.

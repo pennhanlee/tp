@@ -22,8 +22,8 @@ import seedu.bookmark.model.ReadOnlyAddressBook;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.util.SampleDataUtil;
-import seedu.bookmark.storage.AddressBookStorage;
-import seedu.bookmark.storage.JsonAddressBookStorage;
+import seedu.bookmark.storage.BookmarkStorage;
+import seedu.bookmark.storage.JsonBookmarkStorage;
 import seedu.bookmark.storage.JsonUserPrefsStorage;
 import seedu.bookmark.storage.Storage;
 import seedu.bookmark.storage.StorageManager;
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        BookmarkStorage bookmarkStorage = new JsonBookmarkStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(bookmarkStorage, userPrefsStorage);
 
         initLogging(config);
 
