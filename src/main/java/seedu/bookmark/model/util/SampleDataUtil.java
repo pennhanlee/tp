@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.bookmark.model.AddressBook;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.BookList;
+import seedu.bookmark.model.ReadOnlyBookList;
 import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.person.Email;
 import seedu.bookmark.model.person.Name;
@@ -33,8 +33,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyBookList getSampleAddressBook() {
+        BookList sampleAb = new BookList();
         for (Book sampleBook : getSamplePersons()) {
             sampleAb.addPerson(sampleBook);
         }

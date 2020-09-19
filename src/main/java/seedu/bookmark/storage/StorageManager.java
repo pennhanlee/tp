@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.commons.exceptions.DataConversionException;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.ReadOnlyBookList;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.UserPrefs;
 
@@ -55,23 +55,23 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyBookList> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(bookmarkStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyBookList> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return bookmarkStorage.readAddressBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyBookList addressBook) throws IOException {
         saveAddressBook(addressBook, bookmarkStorage.getAddressBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyBookList addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         bookmarkStorage.saveAddressBook(addressBook, filePath);
     }

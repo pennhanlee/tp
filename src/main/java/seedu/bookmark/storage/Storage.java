@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.bookmark.commons.exceptions.DataConversionException;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.ReadOnlyBookList;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends BookmarkStorage, UserPrefsStorage {
     Path getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyBookList> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyBookList addressBook) throws IOException;
 
 }

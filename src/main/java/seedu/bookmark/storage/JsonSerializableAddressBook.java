@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.bookmark.commons.exceptions.IllegalValueException;
-import seedu.bookmark.model.AddressBook;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.BookList;
+import seedu.bookmark.model.ReadOnlyBookList;
 import seedu.bookmark.model.person.Book;
 
 /**
@@ -36,8 +36,8 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedBook::new).collect(Collectors.toList()));
+    public JsonSerializableAddressBook(ReadOnlyBookList source) {
+        persons.addAll(source.getBookList().stream().map(JsonAdaptedBook::new).collect(Collectors.toList()));
     }
 
     /**
@@ -45,16 +45,16 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public BookList toModelType() throws IllegalValueException {
+        BookList bookList = new BookList();
         for (JsonAdaptedBook jsonAdaptedBook : persons) {
             Book book = jsonAdaptedBook.toModelType();
-            if (addressBook.hasPerson(book)) {
+            if (bookList.hasPerson(book)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(book);
+            bookList.addPerson(book);
         }
-        return addressBook;
+        return bookList;
     }
 
 }

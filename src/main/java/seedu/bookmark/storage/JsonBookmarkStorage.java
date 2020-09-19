@@ -12,7 +12,7 @@ import seedu.bookmark.commons.exceptions.DataConversionException;
 import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.commons.util.FileUtil;
 import seedu.bookmark.commons.util.JsonUtil;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.ReadOnlyBookList;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -32,7 +32,7 @@ public class JsonBookmarkStorage implements BookmarkStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
+    public Optional<ReadOnlyBookList> readAddressBook() throws DataConversionException {
         return readAddressBook(filePath);
     }
 
@@ -42,7 +42,7 @@ public class JsonBookmarkStorage implements BookmarkStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyBookList> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
@@ -60,16 +60,16 @@ public class JsonBookmarkStorage implements BookmarkStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyBookList addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveAddressBook(ReadOnlyBookList)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyBookList addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

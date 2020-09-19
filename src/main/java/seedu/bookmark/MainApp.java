@@ -15,10 +15,10 @@ import seedu.bookmark.commons.util.ConfigUtil;
 import seedu.bookmark.commons.util.StringUtil;
 import seedu.bookmark.logic.Logic;
 import seedu.bookmark.logic.LogicManager;
-import seedu.bookmark.model.AddressBook;
+import seedu.bookmark.model.BookList;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.ReadOnlyBookList;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.util.SampleDataUtil;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyBookList> addressBookOptional;
+        ReadOnlyBookList initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new BookList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new BookList();
         }
 
         return new ModelManager(initialData, userPrefs);

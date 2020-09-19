@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
-import seedu.bookmark.model.AddressBook;
+import seedu.bookmark.model.BookList;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.ReadOnlyAddressBook;
+import seedu.bookmark.model.ReadOnlyBookList;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.person.Book;
 import seedu.bookmark.testutil.PersonBuilder;
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyBookList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyBookList getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,8 +186,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyBookList getAddressBook() {
+            return new BookList();
         }
     }
 

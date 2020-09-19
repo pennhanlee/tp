@@ -29,7 +29,7 @@ import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
 import seedu.bookmark.testutil.PersonBuilder;
 import seedu.bookmark.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class BookListParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 

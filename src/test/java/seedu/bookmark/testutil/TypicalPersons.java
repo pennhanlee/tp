@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.bookmark.model.AddressBook;
+import seedu.bookmark.model.BookList;
 import seedu.bookmark.model.person.Book;
 
 /**
@@ -59,8 +59,8 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static BookList getTypicalAddressBook() {
+        BookList ab = new BookList();
         for (Book book : getTypicalPersons()) {
             ab.addPerson(book);
         }
