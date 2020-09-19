@@ -14,7 +14,7 @@ import seedu.bookmark.logic.parser.AddressBookParser;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ReadOnlyAddressBook;
-import seedu.bookmark.model.person.Person;
+import seedu.bookmark.model.person.Book;
 import seedu.bookmark.storage.Storage;
 
 /**
@@ -60,7 +60,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Book> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 

@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.bookmark.model.person.Email;
 import seedu.bookmark.model.person.Name;
-import seedu.bookmark.model.person.Person;
+import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.person.Phone;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.model.util.SampleDataUtil;
@@ -37,11 +37,11 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        tags = new HashSet<>(personToCopy.getTags());
+    public PersonBuilder(Book bookToCopy) {
+        name = bookToCopy.getName();
+        phone = bookToCopy.getPhone();
+        email = bookToCopy.getEmail();
+        tags = new HashSet<>(bookToCopy.getTags());
     }
 
     /**
@@ -76,8 +76,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, tags);
+    public Book build() {
+        return new Book(name, phone, email, tags);
     }
 
 }

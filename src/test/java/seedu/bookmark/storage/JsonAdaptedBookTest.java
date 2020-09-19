@@ -16,7 +16,7 @@ import seedu.bookmark.model.person.Email;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.person.Phone;
 
-public class JsonAdaptedPersonTest {
+public class JsonAdaptedBookTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";

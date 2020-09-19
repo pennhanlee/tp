@@ -13,7 +13,7 @@ import seedu.bookmark.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Book {
 
     // Identity fields
     private final Name name;
@@ -26,7 +26,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Book(Name name, Phone phone, Email email, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
@@ -58,14 +58,14 @@ public class Person {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Book otherBook) {
+        if (otherBook == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+        return otherBook != null
+                && otherBook.getName().equals(getName())
+                && (otherBook.getPhone().equals(getPhone()) || otherBook.getEmail().equals(getEmail()));
     }
 
     /**
@@ -78,15 +78,15 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Book)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getTags().equals(getTags());
+        Book otherBook = (Book) other;
+        return otherBook.getName().equals(getName())
+                && otherBook.getPhone().equals(getPhone())
+                && otherBook.getEmail().equals(getEmail())
+                && otherBook.getTags().equals(getTags());
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.bookmark.model.person.Person;
+import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -20,19 +20,19 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Book book) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(book);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Book book) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + book.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + book.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + book.getEmail().value + " ");
+        book.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

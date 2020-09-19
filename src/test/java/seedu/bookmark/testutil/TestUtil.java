@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.person.Person;
+import seedu.bookmark.model.person.Book;
 
 /**
  * A utility class for test cases.
@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
+    public static Book getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
     }
 }
