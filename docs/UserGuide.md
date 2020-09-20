@@ -26,7 +26,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`Fifty Shades of Gray / 350 / 200` : Adds a book titled `Fifty Shades of Grey` to the Storage Library.
+   * **`add`**`n/Fifty Shades of Gray total/350 bookmark/200` : Adds a book titled `Fifty Shades of Grey` to the Storage Library.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -71,11 +71,11 @@ Format: `help`
 
 Adds a book to the storage library.
 
-Format: `add {book title} / {total number of pages} / {current bookmarked page}`
+Format: `add n/{book title} total/{total number of pages} bookmark/{current bookmarked page}`
 
 Examples:
-* `add Fifty Shades of Gray / 350 / 200`
-* `add Harry Potter and the Chamber of Secrets / 1500 / 25`
+* `add n/Fifty Shades of Gray total/350 bookmark/200`
+* `add n/Harry Potter and the Chamber of Secrets total/1500 bookmark/25`
 
 ### Listing all persons : `list`
 
