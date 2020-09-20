@@ -83,19 +83,19 @@ Format: `list`
 Find books whose names contain any of the given keywords.
 
 
-### Deleting a person : `delete`
+### Deleting a book : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified book from the book list.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the book at the specified `INDEX`.
+* The index refers to the index number shown in the displayed book list.
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd book in the book list.
+* `find MyBook` followed by `delete 1` deletes the 1st book in the results of the `find` command.
 
 ### Clearing all entries : `clear` [coming soon]
 
