@@ -9,12 +9,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kenneth Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/angrybunny123.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/angrybunny123)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
@@ -39,21 +39,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Pang Wai Kye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pangpuncake.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/pangpuncake)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: 
 
-### James Doe
+### Le Minh Giang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mgiang2015.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/mgiang2015)]
+
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
