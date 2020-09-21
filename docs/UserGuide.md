@@ -26,7 +26,7 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
    * **`list`** : Lists all books.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/Fifty Shades of Gray total/350 bookmark/200` : Adds a book titled `Fifty Shades of Grey` to the Storage Library.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -58,23 +58,21 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
 </div>
 
+
 ### Adding a person: `add`
 
-Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Adds a book to the Storage Library.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add n/{book title} total/{total number of pages} bookmark/{current bookmarked page}`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Fifty Shades of Gray total/350 bookmark/200`
+* `add n/Harry Potter and the Chamber of Secrets total/1500 bookmark/25`
 
 ### Listing all persons : `list`
 
-Shows a list of all books in the Book List.
+Shows a list of all books in the Storage Library.
 
 Format: `list`
 
@@ -99,7 +97,7 @@ Examples:
 
 ### Clearing all entries : `clear` [coming soon]
 
-Clears all entries from the Book List.
+Clears all entries from the Storage Library.
 
 Format: `clear`
 
