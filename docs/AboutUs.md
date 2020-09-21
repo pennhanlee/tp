@@ -19,11 +19,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Tan Le Yang 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanleyang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/TanLeYang)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
