@@ -97,6 +97,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd book in the book list.
 * `find MyBook` followed by `delete 1` deletes the 1st book in the results of the `find` command.
 
+### Updating a book : `update`
+
+Updates the bookmark of the specified book.
+
+Format: `update BOOK_NAME /bookmark PAGE_NUMBER`
+
+* Updates the entry `/bookmark` of book with name `BOOK_NAME` to value of `PAGE_NUMBER`.
+* `PAGE_NUMBER` **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `update Fifty Shades of Grey /bookmark 69` updates the bookmark of `Fifty Shades of Grey` to value `69`.
+
 ### Clearing all entries : `clear` [coming soon]
 
 Clears all entries from the Book List.
