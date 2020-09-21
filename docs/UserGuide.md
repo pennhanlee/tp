@@ -62,7 +62,7 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 ### Adding a person: `add`
 
 
-Adds a book to the storage library.
+Adds a book to the Storage Library.
 
 Format: `add n/{book title} total/{total number of pages} bookmark/{current bookmarked page}`
 
@@ -72,7 +72,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all books in the Book List.
+Shows a list of all books in the Storage Library.
 
 Format: `list`
 
@@ -97,7 +97,7 @@ Examples:
 
 ### Clearing all entries : `clear` [coming soon]
 
-Clears all entries from the Book List.
+Clears all entries from the Storage Library.
 
 Format: `clear`
 
