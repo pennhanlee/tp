@@ -11,9 +11,9 @@ Example usages:
 * Adding a book and its current bookmark and library due date (optional)
 * View a specific book and its details
 * Update the details of a specified book
-* Delete a specified book 
-* Listing all books in the application 
-## User Guide 
+* Delete a specified book
+* Listing all books in the application
+## User Guide
 Interested to try out the application? Head over to the [User Guide](https://nus-cs2103-ay2021s1.github.io/tp/UserGuide.html)
 to get started!
 ## Developer Guide
