@@ -14,10 +14,10 @@ Example usages:
 * Delete a specified book
 * Listing all books in the application
 ## User Guide
-Interested to try out the application? Head over to the [User Guide](https://nus-cs2103-ay2021s1.github.io/tp/UserGuide.html)
+Interested to try out the application? Head over to the [User Guide](https://ay2021s1-cs2103t-f13-2.github.io/tp/UserGuide.html)
 to get started!
 ## Developer Guide
 bookmark is an open source project and we welcome contributions from the community. Head over to the 
-[Developer Guide](https://nus-cs2103-ay2021s1.github.io/tp/DeveloperGuide.html#product-scope) to get started!
+[Developer Guide](https://ay2021s1-cs2103t-f13-2.github.io/tp/DeveloperGuide.html) to get started!
 ## Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
