@@ -308,32 +308,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update a book**
+
+**Use case: Edit a book**
 
 **MSS**
 
-1. User requests to update a specific book based on name
-2. The requested entry is updated
+1. User requests to list books
+2. bookmark shows a list of books
+3. User requests to edit a specific book based on index shown on the list.
+4. The requested entry is updated
 
 **Extensions**
 
-* 1a. The book does not exist
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid
     
-    * 1a1. bookmark shows an error message
+    * 3a1. bookmark shows an error message
     
-    Use case resumes at step 1.
+    Use case resumes at step 2.
    
- * 1b. The requested entry to update is invalid
+ * 3b. The requested entry to update is invalid
  
-    * 1b1. bookmark shows an error message
+    * 3b1. bookmark shows an error message
     
-    Use case resumes at step 1.
+    Use case resumes at step 2.
     
- * 1c. The provided value for the entry to update is invalid
+ * 3c. The provided value for the entry to update is invalid
  
-    * 1c1. bookmark shows an error message
+    * 3c1. bookmark shows an error message
     
-    Use case resumes at step 1.
+    Use case resumes at step 2.
     
 ### Non-Functional Requirements
 
