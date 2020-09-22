@@ -290,8 +290,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a book
-2. bookmark adds the book
+1. User requests to add a book.
+2. bookmark adds the book.
 
     Use case ends
     
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
     * 1c1. bookmark shows an error message.
     
-    Use case ends
+    Use case ends.
 
 **Use case: Delete a book**
 
