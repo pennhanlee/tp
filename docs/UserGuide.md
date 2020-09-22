@@ -97,17 +97,19 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd book in the book list.
 * `find MyBook` followed by `delete 1` deletes the 1st book in the results of the `find` command.
 
-### Updating a book : `update`
+### Editing a person : `edit`
 
-Updates the bookmark of the specified book.
+Edits an existing book in the list.
 
-Format: `update BOOK_NAME /bookmark PAGE_NUMBER`
+Format: `edit INDEX b/PAGE_NUMBER​`
 
-* Updates the entry `/bookmark` of book with name `BOOK_NAME` to value of `PAGE_NUMBER`.
-* `PAGE_NUMBER` **must be a positive integer** 1, 2, 3, …
+* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
 
 Examples:
-* `update Fifty Shades of Grey /bookmark 69` updates the bookmark of `Fifty Shades of Grey` to value `69`.
+*  `edit 1 b/101` Edits the bookmark of the 1st book to be `101`.
+* `find MyBook` followed by `edit 1 b/101` edits the 1st book in the results of the `find` command and sets the bookmark page to `101`.
 
 ### Clearing all entries : `clear` [coming soon]
 
@@ -142,3 +144,4 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`
+**Edit** | `edit INDEX b/PAGE_NUMBER`
