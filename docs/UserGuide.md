@@ -72,7 +72,7 @@ Examples:
 
 ### Viewing details of a book : `View`
 
-Shows a list of all books in the Storage Library.
+Shows all details of one specified book.
 
 Format: `view INDEX`
 * View the title, bookmark and percentage completed of a specified book.
