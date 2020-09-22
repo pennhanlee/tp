@@ -342,11 +342,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
     
+**Use Case: List all books**
+
+**MSS**
+
+1. User requests to list all books
+2. bookmark shows a list of books
+
+    Use case ends
+
+**Extensions**
+
+* 1a. The book list is empty
+    * 1a1. bookmark shows a message informing user that book list is empty
+  
+    Use case ends    
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 books without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The user interface should be self-explanatory and intuitive for first time users.
+5.  The app should give proper indications to user when user action is in an invalid format.
+6.  The app should be accessible via the downloaded JAR file without any other installations needed.
 
 *{More to be added}*
 
