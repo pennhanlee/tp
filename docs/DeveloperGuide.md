@@ -236,59 +236,105 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to keep track of pages stopped at for multiple books
+* has a need to keep track of library loans
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage bookmarks and library loans faster than a typical mouse/GUI driven app. Removes the need for physical bookmarks and loan receipts.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                         |
+| -------- | ------------------------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | see all the data of the book                                               | get information about the book                                         |
+| `* * *`  | user                                       | add a new book                                                             | track my progress                                                      |
+| `* * *`  | user                                       | delete a book                                                              | remove books that I no longer read                                     |
+| `* * *`  | user                                       | find a book by name                                                        | locate details of books without having to go through the entire list   |
+| `* * *`  | user                                       | view a list of all the books and their progress                            | conveniently check my progress on all my books                         |
+| `* * *`  | user                                       | update the data of a book                                                  |                                                                        |
+| `* *`    | user                                       | classify my books according to genre                                       | organise my books better                                               |
+| `* *`    | analytical user                            | write down my thoughts on a book                                           | re-read my analysis later                                              |
+| `* *`    | user                                       | create my own classifications for genres not in the application            | organise the books to my liking                                        |
+| `* *`    | Kindle user                                | have a clearer representation of my progress                               | conveniently get my progress without navigating to the Kindle screen   |
+| `* * *`  | forgetful user                             | keep track of my loan expiry                                               | remember to return the book or extend the loan                         |
+| `*`      | user                                       | have a visual representation of my loans expiry period                     | instantly know the urgency of each loan                                |
+| `*`      | user                                       | set reminders for a book loan                                              | be reminded to return my book on time                                  |
+| `* *`    | user                                       | place tags or notes at different pages                                     | stop using sticky notes                                                |
+| `* * *`  | user                                       | have an easy interface                                                     | easily navigate through the system with minimal difficulty             |
+| `* * *`  | user                                       | have a help page                                                           | find out how to use the app                                            |
+| `* *`    | user                                       | have a few functions that I can use seamlessly                             | learn the app easily without bothering with large numbers of functions |
+| `* *`    | user                                       | be able to edit my tags and reflections                                    | edit mistakes and typos                                                |
+| `* *`    | careless user                              | undo any wrong commands that i’ve entered                                  |                                                                        |
+| `*`      | user                                       | have colour coded tags                                                     | so that I can easily differentiate important tags from the rest        |
+| `*`      | user                                       | customise the look of the application                                      | make it feel personal                                                  |
+| `*`      | user                                       | have a summary page for statistics on the books I've read                  |                                                                        |
+| `*`      | user                                       | be able to resize the application                                          | fit it to different screens                                            |
+| `* *`    | user                                       | be able to filter my books by Lexicographic order, Date, Reading, Finished | get the information I'm looking for                                    |
+| `*`      | user                                       | see and modify my current settings                                         |                                                                        |
+| `* * *`  | user                                       | have a home page that summarises important details                         | conveniently access the most important information                     |
+| `* *`    | beginner user                              | have default settings                                                      | skip configuring them at the start                                     |
+| `*`      | user                                       | customise the background by uploading my own photo                         | get the information I'm looking for                                    |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `bookmark` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a book**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all books
+2.  bookmark shows a list of books
+3.  User requests to delete a specific book in the book list
+4.  bookmark deletes the book.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The book list is empty.
 
   Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. bookmark shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Update a book**
 
+**MSS**
+
+1. User requests to update a specific book based on name
+2. The requested entry is updated
+
+**Extensions**
+
+* 1a. The book does not exist
+    
+    * 1a1. bookmark shows an error message
+    
+    Use case resumes at step 1.
+   
+ * 1b. The requested entry to update is invalid
+ 
+    * 1b1. bookmark shows an error message
+    
+    Use case resumes at step 1.
+    
+ * 1c. The provided value for the entry to update is invalid
+ 
+    * 1c1. bookmark shows an error message
+    
+    Use case resumes at step 1.
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -345,7 +391,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases …​ }_ 
 
 ### Saving data
 

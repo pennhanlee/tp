@@ -70,6 +70,7 @@ Examples:
 * `add n/Fifty Shades of Gray tp/350 b/200`
 * `add n/Harry Potter and the Chamber of Secrets tp/1500 b/25`
 
+
 ### Listing all persons : `list`
 
 Shows a list of all books in the Storage Library.
