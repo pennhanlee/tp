@@ -308,33 +308,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update a book**
+
+**Use case: Edit a book**
 
 **MSS**
 
-1. User requests to update a specific book based on name
-2. The requested entry is updated
+1. User requests to list books
+2. bookmark shows a list of books
+3. User requests to edit a specific book based on index shown on the list.
+4. The requested entry is updated
 
 **Extensions**
 
-* 1a. The book does not exist
-    
-    * 1a1. bookmark shows an error message
-    
-    Use case resumes at step 1.
-   
- * 1b. The requested entry to update is invalid
- 
-    * 1b1. bookmark shows an error message
-    
-    Use case resumes at step 1.
-    
- * 1c. The provided value for the entry to update is invalid
- 
-    * 1c1. bookmark shows an error message
-    
-    Use case resumes at step 1.
+* 2a. The list is empty.
 
+    Use case ends.
+
+* 3a. The given index is invalid
+    
+    * 3a1. bookmark shows an error message
+    
+    Use case resumes at step 2.
+   
+ * 3b. The requested entry to update is invalid
+ 
+    * 3b1. bookmark shows an error message
+    
+    Use case resumes at step 2.
+    
+ * 3c. The provided value for the entry to update is invalid
+ 
+    * 3c1. bookmark shows an error message
+    
+    Use case resumes at step 2.
+    
 **Use Case: List all books**
 
 **MSS**
@@ -348,8 +355,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The book list is empty
     * 1a1. bookmark shows a message informing user that book list is empty
-    
+  
     Use case ends    
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
