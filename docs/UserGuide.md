@@ -64,11 +64,12 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
 Adds a book to the Storage Library.
 
-Format: `add n/{book title} total/{total number of pages} bookmark/{current bookmarked page}`
+Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER`
 
 Examples:
-* `add n/Fifty Shades of Gray total/350 bookmark/200`
-* `add n/Harry Potter and the Chamber of Secrets total/1500 bookmark/25`
+* `add n/Fifty Shades of Gray tp/350 b/200`
+* `add n/Harry Potter and the Chamber of Secrets tp/1500 b/25`
+
 
 ### Viewing details of a book : `View`
 
@@ -111,6 +112,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd book in the book list.
 * `find MyBook` followed by `delete 1` deletes the 1st book in the results of the `find` command.
 
+### Editing a person : `edit`
+
+Edits an existing book in the list.
+
+Format: `edit INDEX b/PAGE_NUMBER​`
+
+* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 b/101` Edits the bookmark of the 1st book to be `101`.
+* `find MyBook` followed by `edit 1 b/101` edits the 1st book in the results of the `find` command and sets the bookmark page to `101`.
+
 ### Clearing all entries : `clear` [coming soon]
 
 Clears all entries from the Storage Library.
@@ -144,3 +159,4 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`
+**Edit** | `edit INDEX b/PAGE_NUMBER`
