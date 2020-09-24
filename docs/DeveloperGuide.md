@@ -284,14 +284,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `bookmark` and the **Actor** is the `user`, unless specified otherwise)
+**Use case: Add a book**
+
+**Use case: Add a book**
+
+**MSS**
+
+1. User requests to add a book.
+2. bookmark adds the book.
+
+    Use case ends
+    
+**Extensions**
+
+* 1a. User types the wrong code. 
+    
+    * 1a1. bookmark shows an error message.
+    
+    Use case ends.
+    
+* 1b. User types a non-numeral for total pages or bookmarked page.
+
+    * 1b1. bookmark shows an error message.
+    
+    Use case ends.
+    
+* 1c. User input of bookmarked page is larger than total pages.
+   
+    * 1c1. bookmark shows an error message.
+    
+    Use case ends.
 
 **Use case: Delete a book**
 
 **MSS**
 
-1.  User requests to list all books
-2.  bookmark shows a list of books
-3.  User requests to delete a specific book in the book list
+1.  User requests to list all books.
+2.  bookmark shows a list of books.
+3.  User requests to delete a specific book in the book list.
 4.  bookmark deletes the book.
 
     Use case ends.
@@ -317,6 +347,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. bookmark shows a list of books
 3. User requests to edit a specific book based on index shown on the list.
 4. The requested entry is updated
+
+    Use case ends.
 
 **Extensions**
 
