@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.bookmark.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Book in the book list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Book {
@@ -55,7 +55,7 @@ public class Book {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both books of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Book otherBook) {
@@ -69,7 +69,7 @@ public class Book {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
