@@ -59,7 +59,7 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 </div>
 
 
-### Adding a person: `add`
+### Adding a bookmark: `add`
 
 
 Adds a book to the Storage Library.
@@ -70,6 +70,22 @@ Examples:
 * `add n/Fifty Shades of Gray tp/350 b/200`
 * `add n/Harry Potter and the Chamber of Secrets tp/1500 b/25`
 
+
+### Viewing details of a book : `View`
+
+Shows all details of one specified book.
+
+Format: `view INDEX`
+* View the title, bookmark and percentage completed of a specified book.
+* INDEX refers to index number shown in displayed book list, which must be 
+a positive integer and be from 1 to total number of books you track.
+
+Examples:
+* This assumes you are tracking at least 3 books.
+* `list` followed by `view 3` results in:
+    * **book title:** Fifty shades of grey
+    * **bookmark:** Page 138
+    * **read**: 138/200 (69%)
 
 ### Listing all persons : `list`
 
