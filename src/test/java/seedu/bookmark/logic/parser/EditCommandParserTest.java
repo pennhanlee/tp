@@ -1,16 +1,16 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bookmark.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_AMY;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_BOB;
+import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
 import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_AMY;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_BOB;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
@@ -70,7 +70,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_GENRE_DESC, Genre.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
@@ -80,7 +80,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_GENRE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -88,10 +88,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                + GENRE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withEmail(VALID_EMAIL_AMY)
+                .withGenre(VALID_GENRE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -101,10 +101,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + GENRE_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withEmail(VALID_EMAIL_AMY).build();
+                .withGenre(VALID_GENRE_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -120,8 +120,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        userInput = targetIndex.getOneBased() + GENRE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withGenre(VALID_GENRE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -135,12 +135,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND  + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                 + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        String userInput = targetIndex.getOneBased() + GENRE_DESC_AMY
+                + TAG_DESC_FRIEND  + GENRE_DESC_AMY + TAG_DESC_FRIEND
+                 + GENRE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withGenre(VALID_GENRE_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

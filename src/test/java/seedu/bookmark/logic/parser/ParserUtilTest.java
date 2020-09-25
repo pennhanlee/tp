@@ -14,17 +14,17 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.parser.exceptions.ParseException;
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_GENRE = "F@ACTS0nLY";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_GENRE = "Fiction";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -74,26 +74,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseGenre_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGenre((String) null));
     }
 
     @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+    public void parseGenre_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGenre(INVALID_GENRE));
     }
 
     @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+    public void parseGenre_validValueWithoutWhitespace_returnsGenre() throws Exception {
+        Genre expectedGenre = new Genre(VALID_GENRE);
+        assertEquals(expectedGenre, ParserUtil.parseGenre(VALID_GENRE));
     }
 
     @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    public void parseGenre_validValueWithWhitespace_returnsTrimmedGenre() throws Exception {
+        String emailWithWhitespace = WHITESPACE + VALID_GENRE + WHITESPACE;
+        Genre expectedGenre = new Genre(VALID_GENRE);
+        assertEquals(expectedGenre, ParserUtil.parseGenre(emailWithWhitespace));
     }
 
     @Test

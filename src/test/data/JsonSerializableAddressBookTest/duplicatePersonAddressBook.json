@@ -1,10 +1,10 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
-    "email": "alice@example.com",
+    "genre": "fiction",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
-    "email": "alice@example.com"
+    "genre": "fiction"
   } ]
 }

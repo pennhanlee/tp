@@ -1,7 +1,7 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -19,11 +19,11 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_GENRE + "EMAIL "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_GENRE + "johnd@example.com "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

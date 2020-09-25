@@ -27,7 +27,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Book validBook = new PersonBuilder().build();
+        Book validBook = new PersonBuilder().withName("TESTER BOOK").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validBook);

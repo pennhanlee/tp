@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.tag.Tag;
 
@@ -20,10 +20,10 @@ import seedu.bookmark.model.tag.Tag;
  */
 class JsonAdaptedBook {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Book's %s field is missing!";
 
     private final String name;
-    private final String email;
+    private final String genre;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -31,10 +31,10 @@ class JsonAdaptedBook {
      */
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("name") String name,
-                           @JsonProperty("email") String email,
+                           @JsonProperty("genre") String genre,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.email = email;
+        this.genre = genre;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -45,7 +45,7 @@ class JsonAdaptedBook {
      */
     public JsonAdaptedBook(Book source) {
         name = source.getName().fullName;
-        email = source.getEmail().value;
+        genre = source.getGenre().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,16 +70,16 @@ class JsonAdaptedBook {
         }
         final Name modelName = new Name(name);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (genre == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Genre.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Genre.isValidGenre(genre)) {
+            throw new IllegalValueException(Genre.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Genre modelGenre = new Genre(genre);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Book(modelName, modelEmail, modelTags);
+        return new Book(modelName, modelGenre, modelTags);
     }
 
 }

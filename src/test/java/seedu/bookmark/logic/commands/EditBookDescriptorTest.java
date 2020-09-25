@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 

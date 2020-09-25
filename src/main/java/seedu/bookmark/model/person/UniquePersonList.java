@@ -20,7 +20,7 @@ import seedu.bookmark.model.person.exceptions.PersonNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Book#isSamePerson(Book)
+ * @see Book#isSameBook(Book)
  */
 public class UniquePersonList implements Iterable<Book> {
 
@@ -33,7 +33,7 @@ public class UniquePersonList implements Iterable<Book> {
      */
     public boolean contains(Book toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameBook);
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniquePersonList implements Iterable<Book> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedBook) && contains(editedBook)) {
+        if (!target.isSameBook(editedBook) && contains(editedBook)) {
             throw new DuplicatePersonException();
         }
 
@@ -127,7 +127,7 @@ public class UniquePersonList implements Iterable<Book> {
     private boolean personsAreUnique(List<Book> books) {
         for (int i = 0; i < books.size() - 1; i++) {
             for (int j = i + 1; j < books.size(); j++) {
-                if (books.get(i).isSamePerson(books.get(j))) {
+                if (books.get(i).isSameBook(books.get(j))) {
                     return false;
                 }
             }

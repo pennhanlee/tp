@@ -1,11 +1,11 @@
 {
   "persons": [ {
-    "name": "Valid Person",
-    "email": "hans@example.com",
+    "name": "Harry Potter",
+    "genre": "Fiction",
     "address": "4th street"
   }, {
-    "name": " Person With Invalid Name Field",
-    "email": "hans@example.com",
+    "name": " ",
+    "genre": "F@ction",
     "address": "4th street"
   } ]
 }

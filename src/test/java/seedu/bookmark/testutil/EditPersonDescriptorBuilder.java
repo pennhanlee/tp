@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.tag.Tag;
 
@@ -31,7 +31,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Book book) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(book.getName());
-        descriptor.setEmail(book.getEmail());
+        descriptor.setGenre(book.getGenre());
         descriptor.setTags(book.getTags());
     }
 
@@ -46,8 +46,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+    public EditPersonDescriptorBuilder withGenre(String genre) {
+        descriptor.setGenre(new Genre(genre));
         return this;
     }
 

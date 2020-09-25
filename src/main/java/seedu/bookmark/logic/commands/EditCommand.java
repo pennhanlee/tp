@@ -1,7 +1,7 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -18,7 +18,7 @@ import seedu.bookmark.commons.util.CollectionUtil;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.tag.Tag;
 
@@ -34,10 +34,10 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GENRE + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_GENRE + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -70,7 +70,7 @@ public class EditCommand extends Command {
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         Book editedBook = createEditedPerson(bookToEdit, editPersonDescriptor);
 
-        if (!bookToEdit.isSamePerson(editedBook) && model.hasPerson(editedBook)) {
+        if (!bookToEdit.isSameBook(editedBook) && model.hasPerson(editedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -87,10 +87,10 @@ public class EditCommand extends Command {
         assert bookToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(bookToEdit.getName());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(bookToEdit.getEmail());
+        Genre updatedGenre = editPersonDescriptor.getGenre().orElse(bookToEdit.getGenre());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bookToEdit.getTags());
 
-        return new Book(updatedName, updatedEmail, updatedTags);
+        return new Book(updatedName, updatedGenre, updatedTags);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Email email;
+        private Genre genre;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setEmail(toCopy.email);
+            setGenre(toCopy.genre);
             setTags(toCopy.tags);
         }
 
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, tags);
+            return CollectionUtil.isAnyNonNull(name, genre, tags);
         }
 
         public void setName(Name name) {
@@ -147,12 +147,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setGenre(Genre genre) {
+            this.genre = genre;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Genre> getGenre() {
+            return Optional.ofNullable(genre);
         }
 
         /**
@@ -188,7 +188,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getEmail().equals(e.getEmail())
+                    && getGenre().equals(e.getGenre())
                     && getTags().equals(e.getTags());
         }
     }

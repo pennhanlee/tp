@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.StringUtil;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.tag.Tag;
 
@@ -49,18 +49,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String genre} into an {@code Genre}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Genre parseGenre(String genre) throws ParseException {
+        requireNonNull(genre);
+        String trimmedGenre = genre.trim();
+        if (!Genre.isValidGenre(trimmedGenre)) {
+            throw new ParseException(Genre.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Genre(trimmedGenre);
     }
 
     /**

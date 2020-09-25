@@ -3,7 +3,7 @@ package seedu.bookmark.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_AMY;
 import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalPersons.AMY;
@@ -77,7 +77,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENRE_DESC_AMY;
         Book expectedBook = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedBook);

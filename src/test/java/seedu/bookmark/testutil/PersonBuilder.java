@@ -3,7 +3,7 @@ package seedu.bookmark.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.bookmark.model.person.Email;
+import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
 import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.tag.Tag;
@@ -15,10 +15,10 @@ import seedu.bookmark.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_GENRE = "Fiction";
 
     private Name name;
-    private Email email;
+    private Genre genre;
     private Set<Tag> tags;
 
     /**
@@ -26,7 +26,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        email = new Email(DEFAULT_EMAIL);
+        genre = new Genre(DEFAULT_GENRE);
         tags = new HashSet<>();
     }
 
@@ -35,7 +35,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Book bookToCopy) {
         name = bookToCopy.getName();
-        email = bookToCopy.getEmail();
+        genre = bookToCopy.getGenre();
         tags = new HashSet<>(bookToCopy.getTags());
     }
 
@@ -56,15 +56,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Genre} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public PersonBuilder withGenre(String genre) {
+        this.genre = new Genre(genre);
         return this;
     }
 
     public Book build() {
-        return new Book(name, email, tags);
+        return new Book(name, genre, tags);
     }
 
 }

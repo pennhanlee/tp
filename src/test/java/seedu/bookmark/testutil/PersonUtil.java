@@ -1,6 +1,6 @@
 package seedu.bookmark.testutil;
 
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -29,7 +29,7 @@ public class PersonUtil {
     public static String getPersonDetails(Book book) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + book.getName().fullName + " ");
-        sb.append(PREFIX_EMAIL + book.getEmail().value + " ");
+        sb.append(PREFIX_GENRE + book.getGenre().value + " ");
         book.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -42,7 +42,7 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getGenre().ifPresent(email -> sb.append(PREFIX_GENRE).append(email.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

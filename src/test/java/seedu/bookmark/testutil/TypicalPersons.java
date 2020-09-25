@@ -1,7 +1,7 @@
 package seedu.bookmark.testutil;
 
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_AMY;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_BOB;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -20,33 +20,33 @@ import seedu.bookmark.model.person.Book;
 public class TypicalPersons {
 
     public static final Book ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withEmail("alice@example.com")
+            .withGenre("Fiction")
             .withTags("friends").build();
     public static final Book BENSON = new PersonBuilder().withName("Benson Meier")
-            .withEmail("johnd@example.com")
+            .withGenre("Horror")
             .withTags("owesMoney", "friends").build();
     public static final Book CARL = new PersonBuilder().withName("Carl Kurz")
-            .withEmail("heinz@example.com").build();
+            .withGenre("Non fiction").build();
     public static final Book DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withEmail("cornelia@example.com").withTags("friends").build();
+            .withGenre("Crime").withTags("friends").build();
     public static final Book ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withEmail("werner@example.com").build();
+            .withGenre("Mystery").build();
     public static final Book FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withEmail("lydia@example.com").build();
+            .withGenre("Thriller").build();
     public static final Book GEORGE = new PersonBuilder().withName("George Best")
-            .withEmail("anna@example.com").build();
+            .withGenre("Travel").build();
 
     // Manually added
     public static final Book HOON = new PersonBuilder().withName("Hoon Meier")
-            .withEmail("stefan@example.com").build();
+            .withGenre("Survival").build();
     public static final Book IDA = new PersonBuilder().withName("Ida Mueller")
-            .withEmail("hans@example.com").build();
+            .withGenre("Horror").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Book AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withGenre(VALID_GENRE_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Book BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withGenre(VALID_GENRE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
