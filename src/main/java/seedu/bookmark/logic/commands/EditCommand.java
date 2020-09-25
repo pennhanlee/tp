@@ -1,10 +1,8 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,7 +20,6 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.person.Email;
 import seedu.bookmark.model.person.Name;
-import seedu.bookmark.model.person.Phone;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -37,12 +34,9 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -93,11 +87,10 @@ public class EditCommand extends Command {
         assert bookToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(bookToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(bookToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(bookToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bookToEdit.getTags());
 
-        return new Book(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Book(updatedName, updatedEmail, updatedTags);
     }
 
     @Override
@@ -124,7 +117,6 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
         private Email email;
         private Set<Tag> tags;
 
@@ -136,7 +128,6 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
         }
@@ -145,7 +136,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, email, tags);
         }
 
         public void setName(Name name) {
@@ -154,14 +145,6 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
         }
 
         public void setEmail(Email email) {
@@ -205,7 +188,6 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getTags().equals(e.getTags());
         }

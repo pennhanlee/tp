@@ -8,7 +8,6 @@ import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.person.Email;
 import seedu.bookmark.model.person.Name;
-import seedu.bookmark.model.person.Phone;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -32,7 +31,6 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Book book) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(book.getName());
-        descriptor.setPhone(book.getPhone());
         descriptor.setEmail(book.getEmail());
         descriptor.setTags(book.getTags());
     }
@@ -42,14 +40,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
         return this;
     }
 

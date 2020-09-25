@@ -17,7 +17,6 @@ public class Book {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
 
     // Data fields
@@ -26,20 +25,15 @@ public class Book {
     /**
      * Every field must be present and not null.
      */
-    public Book(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Book(Name name, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, email, tags);
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
     }
 
     public Email getEmail() {
@@ -65,7 +59,7 @@ public class Book {
 
         return otherBook != null
                 && otherBook.getName().equals(getName())
-                && (otherBook.getPhone().equals(getPhone()) || otherBook.getEmail().equals(getEmail()));
+                && otherBook.getEmail().equals(getEmail());
     }
 
     /**
@@ -84,7 +78,6 @@ public class Book {
 
         Book otherBook = (Book) other;
         return otherBook.getName().equals(getName())
-                && otherBook.getPhone().equals(getPhone())
                 && otherBook.getEmail().equals(getEmail())
                 && otherBook.getTags().equals(getTags());
     }
@@ -92,15 +85,13 @@ public class Book {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, email, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")

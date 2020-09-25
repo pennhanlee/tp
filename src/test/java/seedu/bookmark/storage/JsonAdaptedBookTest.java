@@ -14,16 +14,13 @@ import org.junit.jupiter.api.Test;
 import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.model.person.Email;
 import seedu.bookmark.model.person.Name;
-import seedu.bookmark.model.person.Phone;
 
 public class JsonAdaptedBookTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
@@ -38,44 +35,29 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedBook person =
-                new JsonAdaptedBook(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS);
+                new JsonAdaptedBook(INVALID_NAME, VALID_EMAIL, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedBook person = new JsonAdaptedBook(null, VALID_PHONE, VALID_EMAIL, VALID_TAGS);
+        JsonAdaptedBook person = new JsonAdaptedBook(null, VALID_EMAIL, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedBook person =
-                new JsonAdaptedBook(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_TAGS);
-        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedBook person = new JsonAdaptedBook(VALID_NAME, null, VALID_EMAIL, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedBook person =
-                new JsonAdaptedBook(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_TAGS);
+                new JsonAdaptedBook(VALID_NAME, INVALID_EMAIL, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedBook person = new JsonAdaptedBook(VALID_NAME, VALID_PHONE, null, VALID_TAGS);
+        JsonAdaptedBook person = new JsonAdaptedBook(VALID_NAME, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -85,7 +67,7 @@ public class JsonAdaptedBookTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedBook person =
-                new JsonAdaptedBook(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidTags);
+                new JsonAdaptedBook(VALID_NAME, VALID_EMAIL, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
