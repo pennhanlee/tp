@@ -256,6 +256,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new book                                                             | track my progress                                                      |
 | `* * *`  | user                                       | delete a book                                                              | remove books that I no longer read                                     |
 | `* * *`  | user                                       | find a book by name                                                        | locate details of books without having to go through the entire list   |
+| `* * *`  | user                                       | see all the data about a particular book (title, bookmark, progress)                                                        | locate details of books without having to go through the entire list   |
 | `* * *`  | user                                       | view a list of all the books and their progress                            | conveniently check my progress on all my books                         |
 | `* * *`  | user                                       | update the data of a book                                                  |                                                                        |
 | `* *`    | user                                       | classify my books according to genre                                       | organise my books better                                               |
@@ -314,6 +315,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. bookmark shows an error message.
     
     Use case ends.
+
+
+**Use case: View a book**
+
+**MSS**
+
+1. User requests to list all books.
+2. bookmark shows a list of books, along with index.
+3. User requests to view a specific book using its index.
+4. bookmark shows title, bookmark and progress of the book to user.
+
+    Use case ends.
+    
+**Extensions**
+* 2a. The book list is empty.
+    
+    Use case ends.
+    
+* 3a. The index given is invalid.
+
+    * 3a1. bookmark shows an error message.
+    
+      Use case resumes at step 2.
+
 
 **Use case: Delete a book**
 
