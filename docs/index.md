@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: bookmark
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
@@ -8,12 +8,26 @@ title: AddressBook Level-3
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+## bookmark v1.1
+Have you ever lost track of where you stopped reading your last book, misplaced your bookmark, or forgot about a library book due date?
+Fret no more, **bookmark** is here to save the day!<br>
+**bookmark** (not your regular bookmark!) is a desktop app for tracking reading progress and book loans. It allows you to centralise all your
+reading progress into one place.
+Example usages:
+* Adding a book and its current bookmark and library due date (optional)
+* View a specific book and its details
+* Update the details of a specified book
+* Delete a specified book
+* Listing all books in the application
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+**bookmark is a desktop application for managing your books and book loans.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-
-**Acknowledgements**
-
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+## User Guide
+Interested to try out the application? Head over to the [User Guide](https://ay2021s1-cs2103t-f13-2.github.io/tp/UserGuide.html)
+to get started!
+## Developer Guide
+bookmark is an open source project and we welcome contributions from the community. Head over to the 
+[Developer Guide](https://ay2021s1-cs2103t-f13-2.github.io/tp/DeveloperGuide.html) to get started!
+## Acknowledgements
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

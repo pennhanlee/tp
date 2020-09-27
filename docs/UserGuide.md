@@ -112,7 +112,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd book in the book list.
 * `find MyBook` followed by `delete 1` deletes the 1st book in the results of the `find` command.
 
-### Editing a person : `edit`
+### Editing a book : `edit`
 
 Edits an existing book in the list.
 
