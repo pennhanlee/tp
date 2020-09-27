@@ -21,25 +21,25 @@ import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.person.exceptions.DuplicatePersonException;
 import seedu.bookmark.testutil.PersonBuilder;
 
-public class BookListTest {
+public class LibraryTest {
 
-    private final BookList bookList = new BookList();
+    private final Library library = new Library();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), bookList.getBookList());
+        assertEquals(Collections.emptyList(), library.getBookList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> bookList.resetData(null));
+        assertThrows(NullPointerException.class, () -> library.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        BookList newData = getTypicalAddressBook();
-        bookList.resetData(newData);
-        assertEquals(newData, bookList);
+        Library newData = getTypicalAddressBook();
+        library.resetData(newData);
+        assertEquals(newData, library);
     }
 
     @Test
@@ -48,47 +48,47 @@ public class BookListTest {
         Book editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Book> newBooks = Arrays.asList(ALICE, editedAlice);
-        BookListStub newData = new BookListStub(newBooks);
+        LibraryStub newData = new LibraryStub(newBooks);
 
-        assertThrows(DuplicatePersonException.class, () -> bookList.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> library.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> bookList.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> library.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(bookList.hasPerson(ALICE));
+        assertFalse(library.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        bookList.addPerson(ALICE);
-        assertTrue(bookList.hasPerson(ALICE));
+        library.addPerson(ALICE);
+        assertTrue(library.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        bookList.addPerson(ALICE);
+        library.addPerson(ALICE);
         Book editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(bookList.hasPerson(editedAlice));
+        assertTrue(library.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> bookList.getBookList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> library.getBookList().remove(0));
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class BookListStub implements ReadOnlyBookList {
+    private static class LibraryStub implements ReadOnlyLibrary {
         private final ObservableList<Book> books = FXCollections.observableArrayList();
 
-        BookListStub(Collection<Book> books) {
+        LibraryStub(Collection<Book> books) {
             this.books.setAll(books);
         }
 

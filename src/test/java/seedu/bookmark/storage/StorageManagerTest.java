@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.bookmark.commons.core.GuiSettings;
-import seedu.bookmark.model.BookList;
-import seedu.bookmark.model.ReadOnlyBookList;
+import seedu.bookmark.model.Library;
+import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,7 +24,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonBookmarkStorage addressBookStorage = new JsonBookmarkStorage(getTempFilePath("ab"));
+        JsonLibraryStorage addressBookStorage = new JsonLibraryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -54,10 +54,10 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        BookList original = getTypicalAddressBook();
+        Library original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyBookList retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new BookList(retrieved));
+        ReadOnlyLibrary retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new Library(retrieved));
     }
 
     @Test

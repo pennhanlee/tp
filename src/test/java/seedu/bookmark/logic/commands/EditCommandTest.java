@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.bookmark.model.BookList;
+import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -41,7 +41,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new BookList(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Library(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedBook);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -62,7 +62,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new BookList(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Library(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastBook, editedBook);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -75,7 +75,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new BookList(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Library(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -91,7 +91,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new BookList(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Library(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedBook);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

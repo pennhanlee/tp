@@ -13,9 +13,9 @@ import seedu.bookmark.model.person.Book;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class BookListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
     private ListView<Book> personListView;
@@ -23,7 +23,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Book> bookList) {
+    public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
         personListView.setItems(bookList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(book, getIndex() + 1).getRoot());
+                setGraphic(new BookCard(book, getIndex() + 1).getRoot());
             }
         }
     }

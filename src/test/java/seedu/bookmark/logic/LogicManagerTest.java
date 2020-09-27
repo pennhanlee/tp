@@ -22,10 +22,10 @@ import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
-import seedu.bookmark.model.ReadOnlyBookList;
+import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.person.Book;
-import seedu.bookmark.storage.JsonBookmarkStorage;
+import seedu.bookmark.storage.JsonLibraryStorage;
 import seedu.bookmark.storage.JsonUserPrefsStorage;
 import seedu.bookmark.storage.StorageManager;
 import seedu.bookmark.testutil.PersonBuilder;
@@ -41,8 +41,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonBookmarkStorage addressBookStorage =
-                new JsonBookmarkStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonLibraryStorage addressBookStorage =
+                new JsonLibraryStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -69,8 +69,8 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonBookmarkStorage addressBookStorage =
-                new JsonBookmarkIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonLibraryStorage addressBookStorage =
+                new JsonLibraryIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -146,13 +146,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonBookmarkIoExceptionThrowingStub extends JsonBookmarkStorage {
-        private JsonBookmarkIoExceptionThrowingStub(Path filePath) {
+    private static class JsonLibraryIoExceptionThrowingStub extends JsonLibraryStorage {
+        private JsonLibraryIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyBookList addressBook, Path filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyLibrary addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

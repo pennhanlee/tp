@@ -12,18 +12,18 @@ import seedu.bookmark.commons.exceptions.DataConversionException;
 import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.commons.util.FileUtil;
 import seedu.bookmark.commons.util.JsonUtil;
-import seedu.bookmark.model.ReadOnlyBookList;
+import seedu.bookmark.model.ReadOnlyLibrary;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonBookmarkStorage implements BookmarkStorage {
+public class JsonLibraryStorage implements LibraryStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonBookmarkStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonLibraryStorage.class);
 
     private Path filePath;
 
-    public JsonBookmarkStorage(Path filePath) {
+    public JsonLibraryStorage(Path filePath) {
         this.filePath = filePath;
     }
 
@@ -32,7 +32,7 @@ public class JsonBookmarkStorage implements BookmarkStorage {
     }
 
     @Override
-    public Optional<ReadOnlyBookList> readAddressBook() throws DataConversionException {
+    public Optional<ReadOnlyLibrary> readAddressBook() throws DataConversionException {
         return readAddressBook(filePath);
     }
 
@@ -42,11 +42,11 @@ public class JsonBookmarkStorage implements BookmarkStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyBookList> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyLibrary> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableLibrary> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableLibrary.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,21 @@ public class JsonBookmarkStorage implements BookmarkStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyBookList addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyLibrary addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyBookList)}.
+     * Similar to {@link #saveAddressBook(ReadOnlyLibrary)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyBookList addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyLibrary addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableLibrary(addressBook), filePath);
     }
 
 }

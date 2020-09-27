@@ -6,15 +6,15 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.UniquePersonList;
+import seedu.bookmark.model.person.UniqueBookList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the bookmark level
+ * Duplicates are not allowed (by .isSameBook comparison)
  */
-public class BookList implements ReadOnlyBookList {
+public class Library implements ReadOnlyLibrary {
 
-    private final UniquePersonList persons;
+    private final UniqueBookList persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,15 +24,15 @@ public class BookList implements ReadOnlyBookList {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueBookList();
     }
 
-    public BookList() {}
+    public Library() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public BookList(ReadOnlyBookList toBeCopied) {
+    public Library(ReadOnlyLibrary toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,7 +50,7 @@ public class BookList implements ReadOnlyBookList {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyBookList newData) {
+    public void resetData(ReadOnlyLibrary newData) {
         requireNonNull(newData);
 
         setPersons(newData.getBookList());
@@ -109,8 +109,8 @@ public class BookList implements ReadOnlyBookList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BookList // instanceof handles nulls
-                && persons.equals(((BookList) other).persons));
+                || (other instanceof Library // instanceof handles nulls
+                && persons.equals(((Library) other).persons));
     }
 
     @Override

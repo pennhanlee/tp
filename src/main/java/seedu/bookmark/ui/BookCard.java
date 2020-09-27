@@ -12,7 +12,7 @@ import seedu.bookmark.model.person.Book;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class BookCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -40,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Book book, int displayedIndex) {
+    public BookCard(Book book, int displayedIndex) {
         super(FXML);
         this.book = book;
         id.setText(displayedIndex + ". ");
@@ -59,12 +59,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof BookCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        BookCard card = (BookCard) other;
         return id.getText().equals(card.id.getText())
                 && book.equals(card.book);
     }

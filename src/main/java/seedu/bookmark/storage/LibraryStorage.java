@@ -5,13 +5,13 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.bookmark.commons.exceptions.DataConversionException;
-import seedu.bookmark.model.BookList;
-import seedu.bookmark.model.ReadOnlyBookList;
+import seedu.bookmark.model.Library;
+import seedu.bookmark.model.ReadOnlyLibrary;
 
 /**
- * Represents a storage for {@link BookList}.
+ * Represents a storage for {@link Library}.
  */
-public interface BookmarkStorage {
+public interface LibraryStorage {
 
     /**
      * Returns the file path of the data file.
@@ -19,28 +19,28 @@ public interface BookmarkStorage {
     Path getAddressBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyBookList}.
+     * Returns AddressBook data as a {@link ReadOnlyLibrary}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyBookList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyLibrary> readAddressBook() throws DataConversionException, IOException;
 
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyBookList> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyLibrary> readAddressBook(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyBookList} to the storage.
+     * Saves the given {@link ReadOnlyLibrary} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyBookList addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyLibrary addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyBookList)
+     * @see #saveAddressBook(ReadOnlyLibrary)
      */
-    void saveAddressBook(ReadOnlyBookList addressBook, Path filePath) throws IOException;
+    void saveAddressBook(ReadOnlyLibrary addressBook, Path filePath) throws IOException;
 
 }

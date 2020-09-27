@@ -19,26 +19,26 @@ import seedu.bookmark.model.person.Book;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final BookList bookList;
+    private final Library library;
     private final UserPrefs userPrefs;
     private final FilteredList<Book> filteredBooks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyBookList addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyLibrary addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.bookList = new BookList(addressBook);
+        this.library = new Library(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredBooks = new FilteredList<>(this.bookList.getBookList());
+        filteredBooks = new FilteredList<>(this.library.getBookList());
     }
 
     public ModelManager() {
-        this(new BookList(), new UserPrefs());
+        this(new Library(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,29 +79,29 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyBookList addressBook) {
-        this.bookList.resetData(addressBook);
+    public void setAddressBook(ReadOnlyLibrary addressBook) {
+        this.library.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyBookList getAddressBook() {
-        return bookList;
+    public ReadOnlyLibrary getAddressBook() {
+        return library;
     }
 
     @Override
     public boolean hasPerson(Book book) {
         requireNonNull(book);
-        return bookList.hasPerson(book);
+        return library.hasPerson(book);
     }
 
     @Override
     public void deletePerson(Book target) {
-        bookList.removePerson(target);
+        library.removePerson(target);
     }
 
     @Override
     public void addPerson(Book book) {
-        bookList.addPerson(book);
+        library.addPerson(book);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     public void setPerson(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
 
-        bookList.setPerson(target, editedBook);
+        library.setPerson(target, editedBook);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -143,7 +143,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return bookList.equals(other.bookList)
+        return library.equals(other.library)
                 && userPrefs.equals(other.userPrefs)
                 && filteredBooks.equals(other.filteredBooks);
     }

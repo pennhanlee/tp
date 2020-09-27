@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.bookmark.model.BookList;
-import seedu.bookmark.model.ReadOnlyBookList;
+import seedu.bookmark.model.Library;
+import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.person.Book;
 import seedu.bookmark.model.person.Genre;
 import seedu.bookmark.model.person.Name;
@@ -32,8 +32,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyBookList getSampleAddressBook() {
-        BookList sampleAb = new BookList();
+    public static ReadOnlyLibrary getSampleAddressBook() {
+        Library sampleAb = new Library();
         for (Book sampleBook : getSamplePersons()) {
             sampleAb.addPerson(sampleBook);
         }

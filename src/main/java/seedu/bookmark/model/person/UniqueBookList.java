@@ -22,7 +22,7 @@ import seedu.bookmark.model.person.exceptions.PersonNotFoundException;
  *
  * @see Book#isSameBook(Book)
  */
-public class UniquePersonList implements Iterable<Book> {
+public class UniqueBookList implements Iterable<Book> {
 
     private final ObservableList<Book> internalList = FXCollections.observableArrayList();
     private final ObservableList<Book> internalUnmodifiableList =
@@ -79,7 +79,7 @@ public class UniquePersonList implements Iterable<Book> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueBookList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -112,8 +112,8 @@ public class UniquePersonList implements Iterable<Book> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueBookList // instanceof handles nulls
+                        && internalList.equals(((UniqueBookList) other).internalList));
     }
 
     @Override

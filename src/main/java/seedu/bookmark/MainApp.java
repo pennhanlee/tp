@@ -15,15 +15,15 @@ import seedu.bookmark.commons.util.ConfigUtil;
 import seedu.bookmark.commons.util.StringUtil;
 import seedu.bookmark.logic.Logic;
 import seedu.bookmark.logic.LogicManager;
-import seedu.bookmark.model.BookList;
+import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
-import seedu.bookmark.model.ReadOnlyBookList;
+import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.util.SampleDataUtil;
-import seedu.bookmark.storage.BookmarkStorage;
-import seedu.bookmark.storage.JsonBookmarkStorage;
+import seedu.bookmark.storage.JsonLibraryStorage;
+import seedu.bookmark.storage.LibraryStorage;
 import seedu.bookmark.storage.JsonUserPrefsStorage;
 import seedu.bookmark.storage.Storage;
 import seedu.bookmark.storage.StorageManager;
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        BookmarkStorage bookmarkStorage = new JsonBookmarkStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(bookmarkStorage, userPrefsStorage);
+        LibraryStorage libraryStorage = new JsonLibraryStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(libraryStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,8 +74,8 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyBookList> addressBookOptional;
-        ReadOnlyBookList initialData;
+        Optional<ReadOnlyLibrary> addressBookOptional;
+        ReadOnlyLibrary initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new BookList();
+            initialData = new Library();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new BookList();
+            initialData = new Library();
         }
 
         return new ModelManager(initialData, userPrefs);

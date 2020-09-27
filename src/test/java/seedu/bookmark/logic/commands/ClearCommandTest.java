@@ -5,7 +5,7 @@ import static seedu.bookmark.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.bookmark.model.BookList;
+import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -24,7 +24,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new BookList());
+        expectedModel.setAddressBook(new Library());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

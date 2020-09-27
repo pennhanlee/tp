@@ -1,6 +1,6 @@
 package seedu.bookmark.testutil;
 
-import seedu.bookmark.model.BookList;
+import seedu.bookmark.model.Library;
 import seedu.bookmark.model.person.Book;
 
 /**
@@ -10,25 +10,25 @@ import seedu.bookmark.model.person.Book;
  */
 public class AddressBookBuilder {
 
-    private BookList bookList;
+    private Library library;
 
     public AddressBookBuilder() {
-        bookList = new BookList();
+        library = new Library();
     }
 
-    public AddressBookBuilder(BookList bookList) {
-        this.bookList = bookList;
+    public AddressBookBuilder(Library library) {
+        this.library = library;
     }
 
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Book book) {
-        bookList.addPerson(book);
+        library.addPerson(book);
         return this;
     }
 
-    public BookList build() {
-        return bookList;
+    public Library build() {
+        return library;
     }
 }
