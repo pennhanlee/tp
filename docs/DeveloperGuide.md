@@ -363,25 +363,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The index given is invalid
 
-    Use case ends.
-
-* 3a. The index given is invalid
-
-    * 3a1. bookmark shows an error message
+    * 2a1. bookmark shows an error message
 
     Use case resumes at step 2.
 
- * 3b. The requested entry to update is invalid
+ * 2b. The requested entry to update is invalid
 
-    * 3b1. bookmark shows an error message
+    * 2b1. bookmark shows an error message
 
     Use case resumes at step 2.
 
- * 3c. The provided value for the entry to update is invalid
+ * 2c. The provided value for the entry to update is invalid
 
-    * 3c1. bookmark shows an error message
+    * 2c1. bookmark shows an error message
 
     Use case resumes at step 2.
     
