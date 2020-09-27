@@ -413,8 +413,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The book list is empty
     * 1a1. bookmark shows a message informing user that book list is empty
   
-    Use case ends    
-    
+    Use case ends
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -474,7 +474,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_ 
+1. _{ more test cases …​ }_
 
 ### Saving data
 
