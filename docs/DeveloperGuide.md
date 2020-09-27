@@ -295,25 +295,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. bookmark adds the book.
 
     Use case ends
-    
+
 **Extensions**
 
-* 1a. User types the wrong code. 
-    
+* 1a. User types the wrong code.
+
     * 1a1. bookmark shows an error message.
-    
+
     Use case ends.
-    
+
 * 1b. User types a non-numeral for total pages or bookmarked page.
 
     * 1b1. bookmark shows an error message.
-    
+
     Use case ends.
-    
+
 * 1c. User input of bookmarked page is larger than total pages.
-   
+
     * 1c1. bookmark shows an error message.
-    
+
     Use case ends.
 
 
@@ -327,16 +327,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. bookmark shows title, bookmark and progress of the book to user.
 
     Use case ends.
-    
+
 **Extensions**
 * 2a. The book list is empty.
-    
+
     Use case ends.
-    
+
 * 3a. The index given is invalid.
 
     * 3a1. bookmark shows an error message.
-    
+
       Use case resumes at step 2.
 
 
@@ -382,23 +382,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 * 3a. The given index is invalid
-    
+
     * 3a1. bookmark shows an error message
-    
+
     Use case resumes at step 2.
-   
+
  * 3b. The requested entry to update is invalid
- 
+
     * 3b1. bookmark shows an error message
-    
+
     Use case resumes at step 2.
-    
+
  * 3c. The provided value for the entry to update is invalid
- 
+
     * 3c1. bookmark shows an error message
-    
+
     Use case resumes at step 2.
-    
+
 **Use Case: List all books**
 
 **MSS**
@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The book list is empty
     * 1a1. bookmark shows a message informing user that book list is empty
-  
+
     Use case ends
 
 ### Non-Functional Requirements
