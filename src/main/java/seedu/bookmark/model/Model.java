@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * The API of the Model component.

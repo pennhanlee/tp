@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.GuiSettings;
-import seedu.bookmark.model.person.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

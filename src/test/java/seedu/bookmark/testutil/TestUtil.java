@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * A utility class for test cases.

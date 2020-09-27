@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.exceptions.IllegalValueException;
-import seedu.bookmark.model.person.Genre;
-import seedu.bookmark.model.person.Name;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
 
 public class JsonAdaptedBookTest {
     private static final String INVALID_NAME = "R@chel";

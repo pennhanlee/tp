@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.bookmark.commons.core.LogsCenter;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * Panel containing the list of persons.

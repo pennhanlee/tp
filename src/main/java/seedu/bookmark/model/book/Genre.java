@@ -1,4 +1,4 @@
-package seedu.bookmark.model.person;
+package seedu.bookmark.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.AppUtil.checkArgument;
@@ -20,7 +20,7 @@ public class Genre {
     public final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs an {@code Genre}.
      *
      * @param genre A valid genre string.
      */

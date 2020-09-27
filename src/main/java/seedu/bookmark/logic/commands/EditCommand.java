@@ -17,9 +17,9 @@ import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.CollectionUtil;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.Genre;
-import seedu.bookmark.model.person.Name;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
 
 /**

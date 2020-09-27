@@ -7,7 +7,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * Adds a person to the address book.

@@ -8,7 +8,7 @@ import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.

@@ -15,8 +15,8 @@ import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.person.NameContainsKeywordsPredicate;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
 
 /**

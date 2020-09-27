@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.bookmark.model.Library;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

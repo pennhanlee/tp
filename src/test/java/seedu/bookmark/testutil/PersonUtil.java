@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
 
 /**

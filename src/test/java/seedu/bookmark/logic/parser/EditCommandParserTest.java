@@ -26,8 +26,8 @@ import org.junit.jupiter.api.Test;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.bookmark.model.person.Genre;
-import seedu.bookmark.model.person.Name;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
 

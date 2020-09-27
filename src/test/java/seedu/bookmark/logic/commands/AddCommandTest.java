@@ -20,7 +20,7 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.testutil.PersonBuilder;
 
 public class AddCommandTest {

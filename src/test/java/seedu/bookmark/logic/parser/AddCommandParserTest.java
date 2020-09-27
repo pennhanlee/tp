@@ -24,9 +24,9 @@ import static seedu.bookmark.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.commands.AddCommand;
-import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.Genre;
-import seedu.bookmark.model.person.Name;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.testutil.PersonBuilder;
 

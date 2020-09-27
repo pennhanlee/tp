@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
-import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.Genre;
-import seedu.bookmark.model.person.Name;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
 
 /**

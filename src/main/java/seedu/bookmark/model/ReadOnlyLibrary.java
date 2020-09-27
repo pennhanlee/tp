@@ -1,7 +1,7 @@
 package seedu.bookmark.model;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * Unmodifiable view of a Library

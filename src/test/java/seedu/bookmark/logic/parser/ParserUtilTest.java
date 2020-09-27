@@ -14,8 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.parser.exceptions.ParseException;
-import seedu.bookmark.model.person.Genre;
-import seedu.bookmark.model.person.Name;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
 
 public class ParserUtilTest {

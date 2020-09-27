@@ -22,7 +22,7 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
 import seedu.bookmark.testutil.PersonBuilder;
 

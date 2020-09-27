@@ -24,7 +24,7 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.UserPrefs;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.storage.JsonLibraryStorage;
 import seedu.bookmark.storage.JsonUserPrefsStorage;
 import seedu.bookmark.storage.StorageManager;

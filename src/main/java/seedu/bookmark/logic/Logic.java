@@ -8,7 +8,7 @@ import seedu.bookmark.logic.commands.CommandResult;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.ReadOnlyLibrary;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 
 /**
  * API of the Logic component

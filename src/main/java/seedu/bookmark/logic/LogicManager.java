@@ -14,7 +14,7 @@ import seedu.bookmark.logic.parser.AddressBookParser;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ReadOnlyLibrary;
-import seedu.bookmark.model.person.Book;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.storage.Storage;
 
 /**

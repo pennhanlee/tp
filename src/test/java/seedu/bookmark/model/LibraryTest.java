@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.exceptions.DuplicatePersonException;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.exceptions.DuplicateBookException;
 import seedu.bookmark.testutil.PersonBuilder;
 
 public class LibraryTest {
@@ -50,7 +50,7 @@ public class LibraryTest {
         List<Book> newBooks = Arrays.asList(ALICE, editedAlice);
         LibraryStub newData = new LibraryStub(newBooks);
 
-        assertThrows(DuplicatePersonException.class, () -> library.resetData(newData));
+        assertThrows(DuplicateBookException.class, () -> library.resetData(newData));
     }
 
     @Test

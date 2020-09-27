@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.model.person.Book;
-import seedu.bookmark.model.person.UniqueBookList;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.UniqueBookList;
 
 /**
  * Wraps all data at the bookmark level
@@ -44,7 +44,7 @@ public class Library implements ReadOnlyLibrary {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Book> books) {
-        this.persons.setPersons(books);
+        this.persons.setBooks(books);
     }
 
     /**
@@ -82,7 +82,7 @@ public class Library implements ReadOnlyLibrary {
     public void setPerson(Book target, Book editedBook) {
         requireNonNull(editedBook);
 
-        persons.setPerson(target, editedBook);
+        persons.setBook(target, editedBook);
     }
 
     /**

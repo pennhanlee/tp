@@ -1,10 +1,10 @@
-package seedu.bookmark.model.person;
+package seedu.bookmark.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Book's name in the Book List.
+ * Represents a Book's name in the library.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
