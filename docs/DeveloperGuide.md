@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>requests to list all books (UC05)</u>.
-2. User requests to view a specific book using its index.
+2. User requests to view a specific book using its index on list.
 3. bookmark shows title, bookmark and progress of the book to user.
 
     Use case ends.
@@ -339,14 +339,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User <u>requests to list all books (UC05)</u>.
-2.  User requests to delete a specific book in the book list.
+2.  User requests to delete a specific book using its index on list.
 3.  bookmark deletes the book.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. The index given is invalid.
 
     * 2a1. bookmark shows an error message.
 
@@ -357,15 +357,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>requests to list books (UC05)</u>.
-2. User requests to edit a specific book based on index shown on the list.
+1. User <u>requests to list all books (UC05)</u>.
+2. User requests to edit a specific book using its index on list.
 3. The requested entry is updated
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid
+* 3a. The index given is invalid
     
     * 3a1. bookmark shows an error message
     
