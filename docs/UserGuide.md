@@ -77,7 +77,7 @@ Shows all details of one specified book.
 
 Format: `view INDEX`
 * View the title, bookmark and percentage completed of a specified book.
-* INDEX refers to index number shown in displayed book list, which must be 
+* INDEX refers to index number shown in displayed book list, which must be
 a positive integer and be from 1 to total number of books you track.
 
 Examples:
