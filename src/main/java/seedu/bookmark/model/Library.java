@@ -14,7 +14,7 @@ import seedu.bookmark.model.book.UniqueBookList;
  */
 public class Library implements ReadOnlyLibrary {
 
-    private final UniqueBookList persons;
+    private final UniqueBookList books;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class Library implements ReadOnlyLibrary {
      *   among constructors.
      */
     {
-        persons = new UniqueBookList();
+        books = new UniqueBookList();
     }
 
     public Library() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Library using the Books in the {@code toBeCopied}
      */
     public Library(ReadOnlyLibrary toBeCopied) {
         this();
@@ -40,81 +40,81 @@ public class Library implements ReadOnlyLibrary {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the book list with {@code books}.
+     * {@code books} must not contain duplicate books.
      */
-    public void setPersons(List<Book> books) {
-        this.persons.setBooks(books);
+    public void setBooks(List<Book> books) {
+        this.books.setBooks(books);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Library} with {@code newData}.
      */
     public void resetData(ReadOnlyLibrary newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getBookList());
+        setBooks(newData.getBookList());
     }
 
-    //// person-level operations
+    //// book-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the library.
      */
-    public boolean hasPerson(Book book) {
+    public boolean hasBook(Book book) {
         requireNonNull(book);
-        return persons.contains(book);
+        return books.contains(book);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a book to the library.
+     * The book must not already exist in the library.
      */
-    public void addPerson(Book p) {
-        persons.add(p);
+    public void addBook(Book p) {
+        books.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given book {@code target} in the list with {@code editedBook}.
+     * {@code target} must exist in the library.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the library.
      */
-    public void setPerson(Book target, Book editedBook) {
+    public void setBook(Book target, Book editedBook) {
         requireNonNull(editedBook);
 
-        persons.setBook(target, editedBook);
+        books.setBook(target, editedBook);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code Library}.
+     * {@code key} must exist in the library.
      */
-    public void removePerson(Book key) {
-        persons.remove(key);
+    public void removeBook(Book key) {
+        books.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return books.asUnmodifiableObservableList().size() + " books";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Book> getBookList() {
-        return persons.asUnmodifiableObservableList();
+        return books.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Library // instanceof handles nulls
-                && persons.equals(((Library) other).persons));
+                && books.equals(((Library) other).books));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return books.hashCode();
     }
 }

@@ -49,10 +49,10 @@ class JsonSerializableLibrary {
         Library library = new Library();
         for (JsonAdaptedBook jsonAdaptedBook : persons) {
             Book book = jsonAdaptedBook.toModelType();
-            if (library.hasPerson(book)) {
+            if (library.hasBook(book)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            library.addPerson(book);
+            library.addBook(book);
         }
         return library;
     }

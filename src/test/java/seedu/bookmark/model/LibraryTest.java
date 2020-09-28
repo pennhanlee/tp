@@ -55,26 +55,26 @@ public class LibraryTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> library.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> library.hasBook(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(library.hasPerson(ALICE));
+        assertFalse(library.hasBook(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        library.addPerson(ALICE);
-        assertTrue(library.hasPerson(ALICE));
+        library.addBook(ALICE);
+        assertTrue(library.hasBook(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        library.addPerson(ALICE);
+        library.addBook(ALICE);
         Book editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(library.hasPerson(editedAlice));
+        assertTrue(library.hasBook(editedAlice));
     }
 
     @Test

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -61,7 +61,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Book> lastShownList = model.getFilteredPersonList();
+        List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -70,12 +70,12 @@ public class EditCommand extends Command {
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         Book editedBook = createEditedPerson(bookToEdit, editPersonDescriptor);
 
-        if (!bookToEdit.isSameBook(editedBook) && model.hasPerson(editedBook)) {
+        if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(bookToEdit, editedBook);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setBook(bookToEdit, editedBook);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedBook));
     }
 

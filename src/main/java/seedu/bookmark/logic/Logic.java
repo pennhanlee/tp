@@ -26,7 +26,7 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see seedu.bookmark.model.Model#getAddressBook()
+     * @see seedu.bookmark.model.Model#getLibrary()
      */
     ReadOnlyLibrary getAddressBook();
 

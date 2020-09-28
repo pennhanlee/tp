@@ -59,7 +59,7 @@ public class TypicalPersons {
     public static Library getTypicalAddressBook() {
         Library ab = new Library();
         for (Book book : getTypicalPersons()) {
-            ab.addPerson(book);
+            ab.addBook(book);
         }
         return ab;
     }

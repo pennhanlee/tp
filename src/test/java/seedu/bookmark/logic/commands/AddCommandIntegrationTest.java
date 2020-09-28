@@ -29,8 +29,8 @@ public class AddCommandIntegrationTest {
     public void execute_newPerson_success() {
         Book validBook = new PersonBuilder().withName("TESTER BOOK").build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validBook);
+        Model expectedModel = new ModelManager(model.getLibrary(), new UserPrefs());
+        expectedModel.addBook(validBook);
 
         assertCommandSuccess(new AddCommand(validBook), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validBook), expectedModel);
@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Book bookInList = model.getAddressBook().getBookList().get(0);
+        Book bookInList = model.getLibrary().getBookList().get(0);
         assertCommandFailure(new AddCommand(bookInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

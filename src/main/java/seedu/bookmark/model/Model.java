@@ -12,7 +12,7 @@ import seedu.bookmark.model.book.Book;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Book> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +35,53 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' bookmark file path.
      */
-    Path getAddressBookFilePath();
+    Path getBookmarkFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' bookmark file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setBookmarkFilePath(Path bookMarkFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces bookmark data with the data in {@code library}.
      */
-    void setAddressBook(ReadOnlyLibrary addressBook);
+    void setLibrary(ReadOnlyLibrary library);
 
-    /** Returns the AddressBook */
-    ReadOnlyLibrary getAddressBook();
+    /** Returns the Library */
+    ReadOnlyLibrary getLibrary();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the Library.
      */
-    boolean hasPerson(Book book);
+    boolean hasBook(Book book);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given book.
+     * The book must exist in the library.
      */
-    void deletePerson(Book target);
+    void deleteBook(Book target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given book.
+     * {@code book} must not already exist in the library.
      */
-    void addPerson(Book book);
+    void addBook(Book book);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given book {@code target} with {@code editedBook}.
+     * {@code target} must exist in the library.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the library.
      */
-    void setPerson(Book target, Book editedBook);
+    void setBook(Book target, Book editedBook);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Book> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered book list */
+    ObservableList<Book> getFilteredBookList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered book list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Book> predicate);
+    void updateFilteredBookList(Predicate<Book> predicate);
 }

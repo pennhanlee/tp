@@ -35,7 +35,7 @@ public class SampleDataUtil {
     public static ReadOnlyLibrary getSampleAddressBook() {
         Library sampleAb = new Library();
         for (Book sampleBook : getSamplePersons()) {
-            sampleAb.addPerson(sampleBook);
+            sampleAb.addBook(sampleBook);
         }
         return sampleAb;
     }

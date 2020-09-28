@@ -92,25 +92,25 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        Library expectedLibrary = new Library(actualModel.getAddressBook());
-        List<Book> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        Library expectedLibrary = new Library(actualModel.getLibrary());
+        List<Book> expectedFilteredList = new ArrayList<>(actualModel.getFilteredBookList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedLibrary, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedLibrary, actualModel.getLibrary());
+        assertEquals(expectedFilteredList, actualModel.getFilteredBookList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredBookList().size());
 
-        Book book = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Book book = model.getFilteredBookList().get(targetIndex.getZeroBased());
         final String[] splitName = book.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredBookList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredBookList().size());
     }
 
 }

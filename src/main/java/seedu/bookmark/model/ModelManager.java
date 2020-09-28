@@ -14,7 +14,7 @@ import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.model.book.Book;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the bookmark data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -24,15 +24,15 @@ public class ModelManager implements Model {
     private final FilteredList<Book> filteredBooks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given library and userPrefs.
      */
-    public ModelManager(ReadOnlyLibrary addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyLibrary library, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(library, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with library: " + library + " and user prefs " + userPrefs);
 
-        this.library = new Library(addressBook);
+        this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredBooks = new FilteredList<>(this.library.getBookList());
     }
@@ -66,65 +66,65 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getBookmarkFilePath() {
+        return userPrefs.getBookmarkFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setBookmarkFilePath(Path bookMarkFilePath) {
+        requireNonNull(bookMarkFilePath);
+        userPrefs.setBookmarkFilePath(bookMarkFilePath);
     }
 
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyLibrary addressBook) {
-        this.library.resetData(addressBook);
+    public void setLibrary(ReadOnlyLibrary library) {
+        this.library.resetData(library);
     }
 
     @Override
-    public ReadOnlyLibrary getAddressBook() {
+    public ReadOnlyLibrary getLibrary() {
         return library;
     }
 
     @Override
-    public boolean hasPerson(Book book) {
+    public boolean hasBook(Book book) {
         requireNonNull(book);
-        return library.hasPerson(book);
+        return library.hasBook(book);
     }
 
     @Override
-    public void deletePerson(Book target) {
-        library.removePerson(target);
+    public void deleteBook(Book target) {
+        library.removeBook(target);
     }
 
     @Override
-    public void addPerson(Book book) {
-        library.addPerson(book);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addBook(Book book) {
+        library.addBook(book);
+        updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
     }
 
     @Override
-    public void setPerson(Book target, Book editedBook) {
+    public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
 
-        library.setPerson(target, editedBook);
+        library.setBook(target, editedBook);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Book List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Book> getFilteredPersonList() {
+    public ObservableList<Book> getFilteredBookList() {
         return filteredBooks;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Book> predicate) {
+    public void updateFilteredBookList(Predicate<Book> predicate) {
         requireNonNull(predicate);
         filteredBooks.setPredicate(predicate);
     }
