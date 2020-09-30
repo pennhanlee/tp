@@ -24,19 +24,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the Library.
      *
      * @see seedu.bookmark.model.Model#getLibrary()
      */
-    ReadOnlyLibrary getAddressBook();
+    ReadOnlyLibrary getLibrary();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Book> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of books */
+    ObservableList<Book> getFilteredBookList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' library file path.
      */
-    Path getAddressBookFilePath();
+    Path getLibraryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
