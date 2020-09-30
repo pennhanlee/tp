@@ -5,7 +5,7 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the total number of pages in a Book.
- * Guarantees: immutable;
+ * Guarantees: immutable; is valid as declared in {@link #isValidTotalPages(String)}
  */
 public class TotalPages {
 
@@ -26,14 +26,14 @@ public class TotalPages {
      */
     public TotalPages(String totalPages) {
         requireNonNull(totalPages);
-        checkArgument(isValidGenre(totalPages), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTotalPages(totalPages), MESSAGE_CONSTRAINTS);
         value = totalPages;
     }
 
     /**
      * Returns if a given string is a valid total pages.
      */
-    public static boolean isValidGenre(String test) {
+    public static boolean isValidTotalPages(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
