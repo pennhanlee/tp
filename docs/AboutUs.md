@@ -51,7 +51,7 @@ You can reach us at the genre `seer[at]comp.nus.edu.sg`
 
 ### Le Minh Giang
 
-<img src="images/mgiang2015.jpg" width="200px">
+<img src="images/mgiang2015.png" width="200px">
 
 [[github](http://github.com/mgiang2015)]
 

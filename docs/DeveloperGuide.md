@@ -23,11 +23,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-F13-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,7 +62,7 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
@@ -78,7 +78,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -97,7 +97,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
 
@@ -117,7 +117,7 @@ The `Model`,
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
@@ -256,6 +256,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new book                                                             | track my progress                                                      |
 | `* * *`  | user                                       | delete a book                                                              | remove books that I no longer read                                     |
 | `* * *`  | user                                       | find a book by name                                                        | locate details of books without having to go through the entire list   |
+| `* * *`  | user                                       | see all the data about a particular book (title, bookmark, progress)                                                        | locate details of books without having to go through the entire list   |
 | `* * *`  | user                                       | view a list of all the books and their progress                            | conveniently check my progress on all my books                         |
 | `* * *`  | user                                       | update the data of a book                                                  |                                                                        |
 | `* *`    | user                                       | classify my books according to genre                                       | organise my books better                                               |
@@ -285,9 +286,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `bookmark` and the **Actor** is the `user`, unless specified otherwise)
-**Use case: Add a book**
 
-**Use case: Add a book**
+**Use case: UC01 - Add a book**
 
 **MSS**
 
@@ -295,87 +295,94 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. bookmark adds the book.
 
     Use case ends
-    
+
 **Extensions**
 
-* 1a. User types the wrong code. 
-    
+* 1a. User types the wrong code.
+
     * 1a1. bookmark shows an error message.
-    
+
     Use case ends.
-    
+
 * 1b. User types a non-numeral for total pages or bookmarked page.
 
     * 1b1. bookmark shows an error message.
-    
-    Use case ends.
-    
-* 1c. User input of bookmarked page is larger than total pages.
-   
-    * 1c1. bookmark shows an error message.
-    
+
     Use case ends.
 
-**Use case: Delete a book**
+* 1c. User input of bookmarked page is larger than total pages.
+
+    * 1c1. bookmark shows an error message.
+
+    Use case ends.
+
+**Use case: UC02 - View a book**
 
 **MSS**
 
-1.  User requests to list all books.
-2.  bookmark shows a list of books.
-3.  User requests to delete a specific book in the book list.
-4.  bookmark deletes the book.
+1. User <u>requests to list all books (UC05)</u>.
+2. User requests to view a specific book using its index on list.
+3. bookmark shows title, bookmark and progress of the book to user.
 
     Use case ends.
 
 **Extensions**
-
-* 2a. The book list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
+    
+* 2a. The index given is invalid.
 
     * 3a1. bookmark shows an error message.
 
       Use case resumes at step 2.
 
-
-**Use case: Edit a book**
+**Use case: UC03 - Delete a book**
 
 **MSS**
 
-1. User requests to list books
-2. bookmark shows a list of books
-3. User requests to edit a specific book based on index shown on the list.
-4. The requested entry is updated
+1.  User <u>requests to list all books (UC05)</u>.
+2.  User requests to delete a specific book using its index on list.
+3.  bookmark deletes the book.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The index given is invalid.
+
+    * 2a1. bookmark shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Edit a book**
+
+**MSS**
+
+1. User <u>requests to list all books (UC05)</u>.
+2. User requests to edit a specific book using its index on list.
+3. The requested entry is updated
 
     Use case ends.
 
-* 3a. The given index is invalid
-    
-    * 3a1. bookmark shows an error message
-    
+**Extensions**
+
+* 2a. The index given is invalid
+
+    * 2a1. bookmark shows an error message
+
     Use case resumes at step 2.
-   
- * 3b. The requested entry to update is invalid
- 
-    * 3b1. bookmark shows an error message
-    
+
+ * 2b. The requested entry to update is invalid
+
+    * 2b1. bookmark shows an error message
+
+    Use case resumes at step 2.
+
+ * 2c. The provided value for the entry to update is invalid
+
+    * 2c1. bookmark shows an error message
+
     Use case resumes at step 2.
     
- * 3c. The provided value for the entry to update is invalid
- 
-    * 3c1. bookmark shows an error message
-    
-    Use case resumes at step 2.
-    
-**Use Case: List all books**
+**Use Case: UC05 - List all books**
 
 **MSS**
 
@@ -388,9 +395,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The book list is empty
     * 1a1. bookmark shows a message informing user that book list is empty
-  
-    Use case ends    
-    
+
+    Use case ends
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -450,7 +457,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_ 
+1. _{ more test cases …​ }_
 
 ### Saving data
 
