@@ -2,7 +2,7 @@ package seedu.bookmark.logic.commands;
 
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bookmark.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.testutil.PersonBuilder;
+import seedu.bookmark.testutil.BookBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -22,12 +22,12 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalLibrary(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
-        Book validBook = new PersonBuilder().withName("TESTER BOOK").build();
+        Book validBook = new BookBuilder().withName("TESTER BOOK").build();
 
         Model expectedModel = new ModelManager(model.getLibrary(), new UserPrefs());
         expectedModel.addBook(validBook);

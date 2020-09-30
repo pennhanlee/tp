@@ -1,12 +1,12 @@
 package seedu.bookmark.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalPersons.AMY;
+import static seedu.bookmark.testutil.TypicalBooks.NINETEEN_EIGHTY_FOUR;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,7 +28,7 @@ import seedu.bookmark.model.book.Book;
 import seedu.bookmark.storage.JsonLibraryStorage;
 import seedu.bookmark.storage.JsonUserPrefsStorage;
 import seedu.bookmark.storage.StorageManager;
-import seedu.bookmark.testutil.PersonBuilder;
+import seedu.bookmark.testutil.BookBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -41,10 +41,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonLibraryStorage addressBookStorage =
+        JsonLibraryStorage libraryStorage =
                 new JsonLibraryStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(libraryStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -57,7 +57,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -77,8 +77,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENRE_DESC_AMY;
-        Book expectedBook = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_1984 + GENRE_DESC_1984;
+        Book expectedBook = new BookBuilder(NINETEEN_EIGHTY_FOUR).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addBook(expectedBook);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -86,7 +86,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 

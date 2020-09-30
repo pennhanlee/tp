@@ -21,7 +21,7 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.testutil.PersonBuilder;
+import seedu.bookmark.testutil.BookBuilder;
 
 public class AddCommandTest {
 
@@ -33,7 +33,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Book validBook = new PersonBuilder().build();
+        Book validBook = new BookBuilder().build();
 
         CommandResult commandResult = new AddCommand(validBook).execute(modelStub);
 
@@ -43,7 +43,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Book validBook = new PersonBuilder().build();
+        Book validBook = new BookBuilder().build();
         AddCommand addCommand = new AddCommand(validBook);
         ModelStub modelStub = new ModelStubWithPerson(validBook);
 
@@ -52,8 +52,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Book alice = new PersonBuilder().withName("Alice").build();
-        Book bob = new PersonBuilder().withName("Bob").build();
+        Book alice = new BookBuilder().withName("Alice").build();
+        Book bob = new BookBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

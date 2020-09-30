@@ -10,9 +10,9 @@ import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Book objects.
  */
-public class PersonBuilder {
+public class BookBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_GENRE = "Fiction";
@@ -22,43 +22,43 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code BookBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public BookBuilder() {
         name = new Name(DEFAULT_NAME);
         genre = new Genre(DEFAULT_GENRE);
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the BookBuilder with the data of {@code bookToCopy}.
      */
-    public PersonBuilder(Book bookToCopy) {
+    public BookBuilder(Book bookToCopy) {
         name = bookToCopy.getName();
         genre = bookToCopy.getGenre();
         tags = new HashSet<>(bookToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Book} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public BookBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Book} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public BookBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Sets the {@code Genre} of the {@code Person} that we are building.
+     * Sets the {@code Genre} of the {@code Book} that we are building.
      */
-    public PersonBuilder withGenre(String genre) {
+    public BookBuilder withGenre(String genre) {
         this.genre = new Genre(genre);
         return this;
     }

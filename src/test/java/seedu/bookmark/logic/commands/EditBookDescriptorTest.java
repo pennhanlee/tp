@@ -2,42 +2,42 @@ package seedu.bookmark.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
+import seedu.bookmark.logic.commands.EditCommand.EditBookDescriptor;
+import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 
 public class EditBookDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
-        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
+        EditBookDescriptor descriptorWithSameValues = new EditBookDescriptor(DESC_1984);
+        assertTrue(DESC_1984.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_AMY.equals(DESC_AMY));
+        assertTrue(DESC_1984.equals(DESC_1984));
 
         // null -> returns false
-        assertFalse(DESC_AMY.equals(null));
+        assertFalse(DESC_1984.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
+        assertFalse(DESC_1984.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_BOB));
+        assertFalse(DESC_1984.equals(DESC_JANE_EYRE));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        EditCommand.EditBookDescriptor editedAmy = new EditBookDescriptorBuilder(DESC_1984).withName(VALID_NAME_JANE_EYRE).build();
+        assertFalse(DESC_1984.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditBookDescriptorBuilder(DESC_1984).withTags(VALID_TAG_GOOD).build();
+        assertFalse(DESC_1984.equals(editedAmy));
     }
 }

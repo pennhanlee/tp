@@ -3,10 +3,10 @@ package seedu.bookmark.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalPersons.ALICE;
-import static seedu.bookmark.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
+import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.exceptions.DuplicateBookException;
-import seedu.bookmark.testutil.PersonBuilder;
+import seedu.bookmark.testutil.BookBuilder;
 
 public class LibraryTest {
 
@@ -37,53 +37,53 @@ public class LibraryTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Library newData = getTypicalAddressBook();
+        Library newData = getTypicalLibrary();
         library.resetData(newData);
         assertEquals(newData, library);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Book editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateBooks_throwsDuplicateBookException() {
+        // Two books with the same identity fields
+        Book editedHarryPotter = new BookBuilder(HARRY_POTTER).withTags(VALID_TAG_GOOD)
                 .build();
-        List<Book> newBooks = Arrays.asList(ALICE, editedAlice);
+        List<Book> newBooks = Arrays.asList(HARRY_POTTER, editedHarryPotter);
         LibraryStub newData = new LibraryStub(newBooks);
 
         assertThrows(DuplicateBookException.class, () -> library.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasBook_nullBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> library.hasBook(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(library.hasBook(ALICE));
+    public void hasBook_bookNotInAddressBook_returnsFalse() {
+        assertFalse(library.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        library.addBook(ALICE);
-        assertTrue(library.hasBook(ALICE));
+    public void hasBook_bookInAddressBook_returnsTrue() {
+        library.addBook(HARRY_POTTER);
+        assertTrue(library.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        library.addBook(ALICE);
-        Book editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+    public void hasBook_bookWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        library.addBook(HARRY_POTTER);
+        Book editedHarryPotter = new BookBuilder(HARRY_POTTER).withTags(VALID_TAG_GOOD)
                 .build();
-        assertTrue(library.hasBook(editedAlice));
+        assertTrue(library.hasBook(editedHarryPotter));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getBookList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> library.getBookList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose books list can violate interface constraints.
      */
     private static class LibraryStub implements ReadOnlyLibrary {
         private final ObservableList<Book> books = FXCollections.observableArrayList();

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalPersons.ALICE;
-import static seedu.bookmark.testutil.TypicalPersons.BENSON;
+import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
+import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
-import seedu.bookmark.testutil.AddressBookBuilder;
+import seedu.bookmark.testutil.LibraryBuilder;
 
 public class ModelManagerTest {
 
@@ -73,29 +73,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasBook_nullBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasBook(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasBook(ALICE));
+    public void hasBook_bookNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addBook(ALICE);
-        assertTrue(modelManager.hasBook(ALICE));
+    public void hasBook_bookInAddressBook_returnsTrue() {
+        modelManager.addBook(HARRY_POTTER);
+        assertTrue(modelManager.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredBookList().remove(0));
     }
 
     @Test
     public void equals() {
-        Library library = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Library library = new LibraryBuilder().withBook(HARRY_POTTER).withBook(TO_KILL_A_MOCKINGBIRD).build();
         Library differentLibrary = new Library();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentLibrary, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = HARRY_POTTER.getName().fullName.split("\\s+");
         modelManager.updateFilteredBookList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(library, userPrefs)));
 

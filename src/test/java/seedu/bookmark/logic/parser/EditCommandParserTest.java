@@ -1,19 +1,19 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_BOB;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_JANE_EYRE;
 import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
 import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_BOB;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_GOOD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_BAD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -25,11 +25,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand;
-import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.bookmark.logic.commands.EditCommand.EditBookDescriptor;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
-import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
+import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -43,7 +43,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "n/" + VALID_NAME_1984, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -55,10 +55,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_1984, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_1984, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -75,9 +75,9 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_GOOD + TAG_DESC_BAD + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_GOOD + TAG_EMPTY + TAG_DESC_BAD, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_GOOD + TAG_DESC_BAD, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_GENRE_DESC,
@@ -87,12 +87,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND
-                + GENRE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_BAD
+                + GENRE_DESC_1984 + NAME_DESC_1984 + TAG_DESC_GOOD;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withGenre(VALID_GENRE_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_1984)
+                .withGenre(VALID_GENRE_1984)
+                .withTags(VALID_TAG_GOOD, VALID_TAG_BAD).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -101,10 +101,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + GENRE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + GENRE_DESC_1984;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withGenre(VALID_GENRE_AMY).build();
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder()
+                .withGenre(VALID_GENRE_1984).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -114,20 +114,20 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        String userInput = targetIndex.getOneBased() + NAME_DESC_1984;
+        EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_1984).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + GENRE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withGenre(VALID_GENRE_AMY).build();
+        userInput = targetIndex.getOneBased() + GENRE_DESC_1984;
+        descriptor = new EditBookDescriptorBuilder().withGenre(VALID_GENRE_1984).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        userInput = targetIndex.getOneBased() + TAG_DESC_BAD;
+        descriptor = new EditBookDescriptorBuilder().withTags(VALID_TAG_BAD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -135,12 +135,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + GENRE_DESC_AMY
-                + TAG_DESC_FRIEND  + GENRE_DESC_AMY + TAG_DESC_FRIEND
-                 + GENRE_DESC_BOB + TAG_DESC_HUSBAND;
+        String userInput = targetIndex.getOneBased() + GENRE_DESC_1984
+                + TAG_DESC_GOOD + GENRE_DESC_1984 + TAG_DESC_GOOD
+                 + GENRE_DESC_JANE_EYRE + TAG_DESC_BAD;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withGenre(VALID_GENRE_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        EditBookDescriptor descriptor = new EditBookDescriptorBuilder()
+                .withGenre(VALID_GENRE_JANE_EYRE).withTags(VALID_TAG_BAD, VALID_TAG_GOOD)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -156,7 +156,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

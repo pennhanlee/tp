@@ -1,0 +1,32 @@
+{
+  "_comment": "bookmark save file which contains the same Book values as in TypicalBooks#getTypicalLibrary()",
+  "books" : [ {
+    "name" : "Harry Potter",
+    "genre" : "Fiction",
+    "tagged" : [ "Good" ]
+  }, {
+    "name" : "To Kill a Mockingbird",
+    "genre" : "Fiction",
+    "tagged" : [ "Good", "Lengthy" ]
+  }, {
+    "name" : "The Hunger Games",
+    "genre" : "Fiction",
+    "tagged" : [ ]
+  }, {
+    "name" : "Crime and Punishment",
+    "genre" : "Crime",
+    "tagged" : [ "Bad" ]
+  }, {
+    "name" : "Lord of the Flies",
+    "genre" : "Mystery",
+    "tagged" : [ ]
+  }, {
+    "name" : "Enders Game",
+    "genre" : "Thriller",
+    "tagged" : [ ]
+  }, {
+    "name" : "On the Road",
+    "genre" : "Travel",
+    "tagged" : [ ]
+  } ]
+}

@@ -3,12 +3,12 @@ package seedu.bookmark.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bookmark.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bookmark.testutil.TypicalPersons.CARL;
-import static seedu.bookmark.testutil.TypicalPersons.ELLE;
-import static seedu.bookmark.testutil.TypicalPersons.FIONA;
-import static seedu.bookmark.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
+import static seedu.bookmark.testutil.TypicalBooks.LORD_OF_THE_FLIES;
+import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
+import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -56,7 +56,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
@@ -66,12 +66,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate predicate = preparePredicate("hunger flies enders");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredBookList());
+        assertEquals(Arrays.asList(THE_HUNGER_GAMES, LORD_OF_THE_FLIES, ENDERS_GAME), model.getFilteredBookList());
     }
 
     /**

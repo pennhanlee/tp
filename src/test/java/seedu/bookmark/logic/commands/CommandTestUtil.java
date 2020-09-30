@@ -17,26 +17,26 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
+import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_GENRE_AMY = "Fiction";
-    public static final String VALID_GENRE_BOB = "Non fiction";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NAME_1984 = "1984";
+    public static final String VALID_NAME_JANE_EYRE = "Jane Eyre";
+    public static final String VALID_GENRE_1984 = "Science Fiction";
+    public static final String VALID_GENRE_JANE_EYRE = "Novel";
+    public static final String VALID_TAG_GOOD = "Good";
+    public static final String VALID_TAG_BAD = "Bad";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String GENRE_DESC_AMY = " " + PREFIX_GENRE + VALID_GENRE_AMY;
-    public static final String GENRE_DESC_BOB = " " + PREFIX_GENRE + VALID_GENRE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NAME_DESC_1984 = " " + PREFIX_NAME + VALID_NAME_1984;
+    public static final String NAME_DESC_JANE_EYRE = " " + PREFIX_NAME + VALID_NAME_JANE_EYRE;
+    public static final String GENRE_DESC_1984 = " " + PREFIX_GENRE + VALID_GENRE_1984;
+    public static final String GENRE_DESC_JANE_EYRE = " " + PREFIX_GENRE + VALID_GENRE_JANE_EYRE;
+    public static final String TAG_DESC_GOOD = " " + PREFIX_TAG + VALID_TAG_GOOD;
+    public static final String TAG_DESC_BAD = " " + PREFIX_TAG + VALID_TAG_BAD;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "@@@@"; // '@' not allowed in genres
@@ -45,16 +45,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditBookDescriptor DESC_1984;
+    public static final EditCommand.EditBookDescriptor DESC_JANE_EYRE;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withGenre(VALID_GENRE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withGenre(VALID_GENRE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_1984 = new EditBookDescriptorBuilder().withName(VALID_NAME_1984)
+                .withGenre(VALID_GENRE_1984)
+                .withTags(VALID_TAG_BAD).build();
+        DESC_JANE_EYRE = new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE)
+                .withGenre(VALID_GENRE_JANE_EYRE)
+                .withTags(VALID_TAG_GOOD, VALID_TAG_BAD).build();
     }
 
     /**
@@ -87,7 +87,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the library, filtered book list and selected book in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -100,10 +100,10 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredBookList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the book at the given {@code targetIndex} in the
+     * {@code model}'s library.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showBookAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredBookList().size());
 
         Book book = model.getFilteredBookList().get(targetIndex.getZeroBased());

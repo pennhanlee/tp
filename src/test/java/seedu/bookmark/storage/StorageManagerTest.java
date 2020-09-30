@@ -2,7 +2,7 @@ package seedu.bookmark.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.bookmark.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.nio.file.Path;
 
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonLibraryStorage addressBookStorage = new JsonLibraryStorage(getTempFilePath("ab"));
+        JsonLibraryStorage libraryStorage = new JsonLibraryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(libraryStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void libraryReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonLibraryStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonLibraryStorageTest} class.
          */
-        Library original = getTypicalAddressBook();
+        Library original = getTypicalLibrary();
         storageManager.saveLibrary(original);
         ReadOnlyLibrary retrieved = storageManager.readLibrary().get();
         assertEquals(original, new Library(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getLibraryFilePath() {
         assertNotNull(storageManager.getLibraryFilePath());
     }
 

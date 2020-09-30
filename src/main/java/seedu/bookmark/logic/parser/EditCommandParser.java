@@ -13,7 +13,6 @@ import java.util.Set;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand;
-import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.tag.Tag;
 
@@ -40,20 +39,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditCommand.EditBookDescriptor editBookDescriptor = new EditCommand.EditBookDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editBookDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_GENRE).isPresent()) {
-            editPersonDescriptor.setGenre(ParserUtil.parseGenre(argMultimap.getValue(PREFIX_GENRE).get()));
+            editBookDescriptor.setGenre(ParserUtil.parseGenre(argMultimap.getValue(PREFIX_GENRE).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBookDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editBookDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editBookDescriptor);
     }
 
     /**

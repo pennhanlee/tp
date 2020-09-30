@@ -44,18 +44,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditBookDescriptor editBookDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editBookDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditBookDescriptor editBookDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editBookDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editBookDescriptor = new EditBookDescriptor(editBookDescriptor);
     }
 
     @Override
@@ -64,11 +64,11 @@ public class EditCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedPerson(bookToEdit, editPersonDescriptor);
+        Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
 
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -83,12 +83,12 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Book createEditedPerson(Book bookToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Book createEditedPerson(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
         assert bookToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(bookToEdit.getName());
-        Genre updatedGenre = editPersonDescriptor.getGenre().orElse(bookToEdit.getGenre());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bookToEdit.getTags());
+        Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
+        Genre updatedGenre = editBookDescriptor.getGenre().orElse(bookToEdit.getGenre());
+        Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
 
         return new Book(updatedName, updatedGenre, updatedTags);
     }
@@ -108,25 +108,25 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editBookDescriptor.equals(e.editBookDescriptor);
     }
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditBookDescriptor {
         private Name name;
         private Genre genre;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditBookDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditBookDescriptor(EditBookDescriptor toCopy) {
             setName(toCopy.name);
             setGenre(toCopy.genre);
             setTags(toCopy.tags);
@@ -180,12 +180,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditBookDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditBookDescriptor e = (EditBookDescriptor) other;
 
             return getName().equals(e.getName())
                     && getGenre().equals(e.getGenre())

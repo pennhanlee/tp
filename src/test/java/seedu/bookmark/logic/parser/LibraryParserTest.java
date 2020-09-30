@@ -17,7 +17,6 @@ import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.commands.ClearCommand;
 import seedu.bookmark.logic.commands.DeleteCommand;
 import seedu.bookmark.logic.commands.EditCommand;
-import seedu.bookmark.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.bookmark.logic.commands.ExitCommand;
 import seedu.bookmark.logic.commands.FindCommand;
 import seedu.bookmark.logic.commands.HelpCommand;
@@ -25,8 +24,8 @@ import seedu.bookmark.logic.commands.ListCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
-import seedu.bookmark.testutil.EditPersonDescriptorBuilder;
-import seedu.bookmark.testutil.PersonBuilder;
+import seedu.bookmark.testutil.EditBookDescriptorBuilder;
+import seedu.bookmark.testutil.BookBuilder;
 import seedu.bookmark.testutil.PersonUtil;
 
 public class LibraryParserTest {
@@ -35,7 +34,7 @@ public class LibraryParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Book book = new PersonBuilder().build();
+        Book book = new BookBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(book));
         assertEquals(new AddCommand(book), command);
     }
@@ -55,8 +54,8 @@ public class LibraryParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Book book = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(book).build();
+        Book book = new BookBuilder().build();
+        EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder(book).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
