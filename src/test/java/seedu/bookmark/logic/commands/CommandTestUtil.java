@@ -30,6 +30,10 @@ public class CommandTestUtil {
     public static final String VALID_GENRE_JANE_EYRE = "Novel";
     public static final String VALID_TAG_GOOD = "Good";
     public static final String VALID_TAG_BAD = "Bad";
+    public static final String VALID_TOTAL_PAGES_1984 = "684";
+    public static final String VALID_TOTAL_PAGES_JANE_EYRE = "532";
+    public static final String VALID_BOOKMARK_1984 = "239";
+    public static final String VALID_BOOKMARK_JANE_EYRE = "123";
 
     public static final String NAME_DESC_1984 = " " + PREFIX_NAME + VALID_NAME_1984;
     public static final String NAME_DESC_JANE_EYRE = " " + PREFIX_NAME + VALID_NAME_JANE_EYRE;

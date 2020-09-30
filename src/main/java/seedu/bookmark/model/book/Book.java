@@ -47,7 +47,7 @@ public class Book {
         this.genre = genre;
         this.tags.addAll(tags);
         this.totalPages = totalPages;
-        this.bookmark = Optional.of(bookmark);
+        this.bookmark = Optional.ofNullable(bookmark);
     }
 
     public Name getName() {

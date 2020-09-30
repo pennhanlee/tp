@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -37,7 +38,8 @@ public class JsonUtil {
             .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
             .registerModule(new SimpleModule("SimpleModule")
                     .addSerializer(Level.class, new ToStringSerializer())
-                    .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
+                    .addDeserializer(Level.class, new LevelDeserializer(Level.class)))
+                    .setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));

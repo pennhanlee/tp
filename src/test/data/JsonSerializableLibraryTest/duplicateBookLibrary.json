@@ -2,9 +2,11 @@
   "books": [ {
     "name": "Alice Pauline",
     "genre": "fiction",
+    "totalPages": "100",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
-    "genre": "fiction"
+    "genre": "fiction",
+    "totalPages": "100"
   } ]
 }

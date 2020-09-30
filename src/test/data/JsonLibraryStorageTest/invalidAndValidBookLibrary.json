@@ -1,9 +1,11 @@
 {
   "books": [ {
     "name": "Harry Potter",
-    "genre": "Fiction"
+    "genre": "Fiction",
+    "totalPages": "500"
   }, {
     "name": " ",
-    "genre": "F@ction"
+    "genre": "F@ction",
+    "totalPages": "120"
   } ]
 }

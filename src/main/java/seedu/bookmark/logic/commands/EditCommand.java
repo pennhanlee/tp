@@ -18,8 +18,10 @@ import seedu.bookmark.commons.util.CollectionUtil;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -119,6 +121,8 @@ public class EditCommand extends Command {
         private Name name;
         private Genre genre;
         private Set<Tag> tags;
+        private TotalPages totalPages;
+        private Bookmark bookmark;
 
         public EditBookDescriptor() {}
 
@@ -130,6 +134,8 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setGenre(toCopy.genre);
             setTags(toCopy.tags);
+            setTotalPages(toCopy.totalPages);
+            setBookmark(toCopy.bookmark);
         }
 
         /**
@@ -153,6 +159,22 @@ public class EditCommand extends Command {
 
         public Optional<Genre> getGenre() {
             return Optional.ofNullable(genre);
+        }
+
+        public void setTotalPages(TotalPages totalPages) {
+            this.totalPages = totalPages;
+        }
+
+        public Optional<TotalPages> getTotalPages() {
+            return Optional.ofNullable(totalPages);
+        }
+
+        public void setBookmark(Bookmark bookmark) {
+            this.bookmark = bookmark;
+        }
+
+        public Optional<Bookmark> getBookmark() {
+            return Optional.ofNullable(bookmark);
         }
 
         /**

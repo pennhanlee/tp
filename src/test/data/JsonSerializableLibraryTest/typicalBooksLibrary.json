@@ -3,30 +3,42 @@
   "books" : [ {
     "name" : "Harry Potter",
     "genre" : "Fiction",
-    "tagged" : [ "Good" ]
+    "tagged" : [ "Good" ],
+    "totalPages" : "1000",
+    "bookmark" : "500"
   }, {
     "name" : "To Kill a Mockingbird",
     "genre" : "Fiction",
-    "tagged" : [ "Good", "Lengthy" ]
+    "tagged" : [ "Good", "Lengthy" ],
+    "totalPages" : "1500",
+    "bookmark" : "269"
   }, {
     "name" : "The Hunger Games",
     "genre" : "Fiction",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "totalPages" : "500"
   }, {
     "name" : "Crime and Punishment",
     "genre" : "Crime",
-    "tagged" : [ "Bad" ]
+    "tagged" : [ "Bad" ],
+    "totalPages" : "1000"
   }, {
     "name" : "Lord of the Flies",
     "genre" : "Mystery",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "totalPages" : "369",
+    "bookmark" : "123"
   }, {
     "name" : "Enders Game",
     "genre" : "Thriller",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "totalPages" : "123",
+    "bookmark" : "23"
   }, {
     "name" : "On the Road",
     "genre" : "Travel",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "totalPages" : "239",
+    "bookmark" : "111"
   } ]
 }

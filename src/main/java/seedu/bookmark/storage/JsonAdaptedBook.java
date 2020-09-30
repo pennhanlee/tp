@@ -28,7 +28,7 @@ class JsonAdaptedBook {
     private final String name;
     private final String genre;
     private final String totalPages;
-    private final Optional<String> bookmark;
+    private final String bookmark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -46,7 +46,7 @@ class JsonAdaptedBook {
             this.tagged.addAll(tagged);
         }
         this.totalPages = totalPages;
-        this.bookmark = Optional.of(bookmark);
+        this.bookmark = bookmark;
     }
 
     /**
@@ -60,7 +60,8 @@ class JsonAdaptedBook {
                 .collect(Collectors.toList()));
         totalPages = source.getTotalPages().value;
         bookmark = source.getBookmark()
-                .map((bookmark) -> bookmark.value);
+                .map((bookmark) -> bookmark.value)
+                .orElse(null);
     }
 
     /**
@@ -101,10 +102,9 @@ class JsonAdaptedBook {
         }
         final TotalPages modelTotalPages = new TotalPages(totalPages);
 
-        Bookmark modelBookmark = bookmark
+        Bookmark modelBookmark = Optional.ofNullable(this.bookmark)
                 .map((bookmarkStr) -> new Bookmark(bookmarkStr, modelTotalPages))
                 .orElse(null);
-
         return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
     }
 
