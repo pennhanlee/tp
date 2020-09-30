@@ -1,5 +1,5 @@
 {
-  "persons": [ {
+  "books": [ {
     "name": "Alice Pauline",
     "genre": "fiction",
     "tagged": [ "friends" ]

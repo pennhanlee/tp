@@ -14,43 +14,43 @@ import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Library that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "bookmark")
 class JsonSerializableLibrary {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_BOOKS = "book list contains duplicate book(s).";
 
-    private final List<JsonAdaptedBook> persons = new ArrayList<>();
+    private final List<JsonAdaptedBook> books = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableLibrary} with the given books.
      */
     @JsonCreator
-    public JsonSerializableLibrary(@JsonProperty("persons") List<JsonAdaptedBook> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableLibrary(@JsonProperty("books") List<JsonAdaptedBook> books) {
+        this.books.addAll(books);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyLibrary} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableLibrary}.
      */
     public JsonSerializableLibrary(ReadOnlyLibrary source) {
-        persons.addAll(source.getBookList().stream().map(JsonAdaptedBook::new).collect(Collectors.toList()));
+        books.addAll(source.getBookList().stream().map(JsonAdaptedBook::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this library into the model's {@code Library} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Library toModelType() throws IllegalValueException {
         Library library = new Library();
-        for (JsonAdaptedBook jsonAdaptedBook : persons) {
+        for (JsonAdaptedBook jsonAdaptedBook : books) {
             Book book = jsonAdaptedBook.toModelType();
             if (library.hasBook(book)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_BOOKS);
             }
             library.addBook(book);
         }

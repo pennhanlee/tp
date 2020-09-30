@@ -1,11 +1,9 @@
 {
-  "persons": [ {
+  "books": [ {
     "name": "Harry Potter",
-    "genre": "Fiction",
-    "address": "4th street"
+    "genre": "Fiction"
   }, {
     "name": " ",
-    "genre": "F@ction",
-    "address": "4th street"
+    "genre": "F@ction"
   } ]
 }

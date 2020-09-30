@@ -1,7 +1,6 @@
 {
-  "persons": [ {
+  "books": [ {
     "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "genre": "Invalid genre: @",
-    "address": "4th street"
+    "genre": "Invalid genre: @"
   } ]
 }

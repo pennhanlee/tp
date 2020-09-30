@@ -12,7 +12,7 @@ import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Library data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -21,7 +21,7 @@ public class StorageManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code libraryStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(LibraryStorage libraryStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -47,33 +47,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Library methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return libraryStorage.getAddressBookFilePath();
+    public Path getLibraryFilePath() {
+        return libraryStorage.getLibraryFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyLibrary> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(libraryStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyLibrary> readLibrary() throws DataConversionException, IOException {
+        return readLibrary(libraryStorage.getLibraryFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyLibrary> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyLibrary> readLibrary(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return libraryStorage.readAddressBook(filePath);
+        return libraryStorage.readLibrary(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyLibrary addressBook) throws IOException {
-        saveAddressBook(addressBook, libraryStorage.getAddressBookFilePath());
+    public void saveLibrary(ReadOnlyLibrary library) throws IOException {
+        saveLibrary(library, libraryStorage.getLibraryFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyLibrary addressBook, Path filePath) throws IOException {
+    public void saveLibrary(ReadOnlyLibrary library, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        libraryStorage.saveAddressBook(addressBook, filePath);
+        libraryStorage.saveLibrary(library, filePath);
     }
 
 }

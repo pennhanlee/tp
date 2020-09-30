@@ -1,5 +1,5 @@
 {
-  "persons": [ {
+  "books": [ {
     "name": "Hans Muster",
     "genre": "invalid@genre"
   } ]
