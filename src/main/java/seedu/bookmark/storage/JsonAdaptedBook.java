@@ -3,6 +3,7 @@ package seedu.bookmark.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -24,6 +27,8 @@ class JsonAdaptedBook {
 
     private final String name;
     private final String genre;
+    private final String totalPages;
+    private final Optional<String> bookmark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -32,12 +37,16 @@ class JsonAdaptedBook {
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("name") String name,
                            @JsonProperty("genre") String genre,
-                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                           @JsonProperty("totalPages") String totalPages,
+                           @JsonProperty("bookmark") String bookmark) {
         this.name = name;
         this.genre = genre;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.totalPages = totalPages;
+        this.bookmark = Optional.of(bookmark);
     }
 
     /**
@@ -49,6 +58,9 @@ class JsonAdaptedBook {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        totalPages = source.getTotalPages().value;
+        bookmark = source.getBookmark()
+                .map((bookmark) -> bookmark.value);
     }
 
     /**
@@ -57,9 +69,9 @@ class JsonAdaptedBook {
      * @throws IllegalValueException if there were any data constraints violated in the adapted book.
      */
     public Book toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> bookTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            bookTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -78,8 +90,22 @@ class JsonAdaptedBook {
         }
         final Genre modelGenre = new Genre(genre);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Book(modelName, modelGenre, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(bookTags);
+
+        if (totalPages == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TotalPages.class.getSimpleName()));
+        }
+        if (!TotalPages.isValidTotalPages(totalPages)) {
+            throw new IllegalValueException(TotalPages.MESSAGE_CONSTRAINTS);
+        }
+        final TotalPages modelTotalPages = new TotalPages(totalPages);
+
+        Bookmark modelBookmark = bookmark
+                .map((bookmarkStr) -> new Bookmark(bookmarkStr, modelTotalPages))
+                .orElse(null);
+
+        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
     }
 
 }
