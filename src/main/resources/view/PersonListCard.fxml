@@ -29,6 +29,8 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="genre" styleClass="cell_small_label" text="\$genre" />
+      <Label fx:id="totalPages" styleClass="cell_small_label" text="\$totalPages" />
+      <Label fx:id="bookmark" styleClass="cell_small_label" text="\$bookmark" />
     </VBox>
   </GridPane>
 </HBox>

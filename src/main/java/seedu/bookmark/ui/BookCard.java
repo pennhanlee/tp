@@ -35,6 +35,10 @@ public class BookCard extends UiPart<Region> {
     @FXML
     private Label genre;
     @FXML
+    private Label totalPages;
+    @FXML
+    private Label bookmark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -46,6 +50,10 @@ public class BookCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
         genre.setText(book.getGenre().value);
+        totalPages.setText("Total pages: " + book.getTotalPages().value);
+        bookmark.setText(book.getBookmark()
+            .map(bookmark -> "Bookmarked at page " + bookmark.toString())
+            .orElse("No bookmark for this book"));
         book.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

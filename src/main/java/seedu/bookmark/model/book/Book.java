@@ -12,7 +12,7 @@ import seedu.bookmark.model.tag.Tag;
 
 /**
  * Represents a Book in the book list.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present, field values are validated, immutable.
  */
 public class Book {
 
@@ -23,7 +23,7 @@ public class Book {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Optional<Bookmark> bookmark;
+    private final Bookmark bookmark;
 
     /**
      * Every field must be present and not null.
@@ -34,7 +34,7 @@ public class Book {
         this.genre = genre;
         this.tags.addAll(tags);
         this.totalPages = new TotalPages("500");
-        this.bookmark = Optional.empty();
+        this.bookmark = null;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Book {
         this.genre = genre;
         this.tags.addAll(tags);
         this.totalPages = totalPages;
-        this.bookmark = Optional.ofNullable(bookmark);
+        this.bookmark = bookmark;
     }
 
     public Name getName() {
@@ -71,7 +71,7 @@ public class Book {
     }
 
     public Optional<Bookmark> getBookmark() {
-        return bookmark;
+        return Optional.ofNullable(bookmark);
     }
 
     /**
@@ -120,7 +120,7 @@ public class Book {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        String bookmarkPage = bookmark
+        String bookmarkPage = Optional.ofNullable(bookmark)
                 .map(Bookmark::toString)
                 .orElse("No bookmark for this book");
 
