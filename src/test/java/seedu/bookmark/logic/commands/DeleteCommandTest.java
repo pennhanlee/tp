@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bookmark.logic.commands.CommandTestUtil.showBookAtIndex;
+import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import org.junit.jupiter.api.Test;
 

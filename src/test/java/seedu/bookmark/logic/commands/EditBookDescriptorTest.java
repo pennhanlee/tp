@@ -33,7 +33,8 @@ public class EditBookDescriptorTest {
         assertFalse(DESC_1984.equals(DESC_JANE_EYRE));
 
         // different name -> returns false
-        EditCommand.EditBookDescriptor editedAmy = new EditBookDescriptorBuilder(DESC_1984).withName(VALID_NAME_JANE_EYRE).build();
+        EditCommand.EditBookDescriptor editedAmy = new EditBookDescriptorBuilder(DESC_1984)
+                .withName(VALID_NAME_JANE_EYRE).build();
         assertFalse(DESC_1984.equals(editedAmy));
 
         // different tags -> returns false

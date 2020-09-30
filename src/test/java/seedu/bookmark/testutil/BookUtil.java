@@ -14,19 +14,19 @@ import seedu.bookmark.model.tag.Tag;
 /**
  * A utility class for Person.
  */
-public class PersonUtil {
+public class BookUtil {
 
     /**
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Book book) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(book);
+        return AddCommand.COMMAND_WORD + " " + getBookDetails(book);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Book book) {
+    public static String getBookDetails(Book book) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + book.getName().fullName + " ");
         sb.append(PREFIX_GENRE + book.getGenre().value + " ");
@@ -39,7 +39,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditBookDescriptor descriptor) {
+    public static String getEditBookDescriptorDetails(EditCommand.EditBookDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getGenre().ifPresent(email -> sb.append(PREFIX_GENRE).append(email.value).append(" "));

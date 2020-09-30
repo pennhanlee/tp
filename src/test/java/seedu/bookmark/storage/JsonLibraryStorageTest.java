@@ -3,8 +3,8 @@ package seedu.bookmark.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.HAMLET;
+import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.THE_FAULT_IN_OUR_STARS;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 

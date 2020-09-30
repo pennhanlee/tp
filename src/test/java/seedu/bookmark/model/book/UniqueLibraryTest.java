@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.bookmark.model.book.exceptions.DuplicateBookException;
 import seedu.bookmark.model.book.exceptions.BookNotFoundException;
+import seedu.bookmark.model.book.exceptions.DuplicateBookException;
 import seedu.bookmark.testutil.BookBuilder;
 
 public class UniqueLibraryTest {

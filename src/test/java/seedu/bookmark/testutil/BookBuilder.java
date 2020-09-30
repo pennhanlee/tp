@@ -3,10 +3,10 @@ package seedu.bookmark.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
-import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.model.util.SampleDataUtil;

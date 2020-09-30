@@ -2,8 +2,8 @@ package seedu.bookmark.logic.commands;
 
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bookmark.logic.commands.CommandTestUtil.showBookAtIndex;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

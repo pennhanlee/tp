@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
-import static seedu.bookmark.testutil.TypicalBooks.LORD_OF_THE_FLIES;
 import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
+import static seedu.bookmark.testutil.TypicalBooks.LORD_OF_THE_FLIES;
+import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.util.Arrays;

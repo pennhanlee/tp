@@ -1,7 +1,7 @@
 package seedu.bookmark.model.book;
 
-import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.bookmark.commons.util.AppUtil.checkArgument;
+import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Book's bookmark.
