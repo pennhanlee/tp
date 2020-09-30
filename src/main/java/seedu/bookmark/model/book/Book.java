@@ -5,6 +5,7 @@ import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.bookmark.model.tag.Tag;
@@ -18,9 +19,11 @@ public class Book {
     // Identity fields
     private final Name name;
     private final Genre genre;
+    private final TotalPages totalPages;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Optional<Bookmark> bookmark;
 
     /**
      * Every field must be present and not null.
@@ -30,6 +33,21 @@ public class Book {
         this.name = name;
         this.genre = genre;
         this.tags.addAll(tags);
+        this.totalPages = new TotalPages("500");
+        this.bookmark = Optional.empty();
+    }
+
+    /**
+     * Overloaded constructor, to accommodate totalPages and bookmark, remove the other constructor when integration
+     * is completed.
+     */
+    public Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark) {
+        requireAllNonNull(name, genre, tags, totalPages);
+        this.name = name;
+        this.genre = genre;
+        this.tags.addAll(tags);
+        this.totalPages = totalPages;
+        this.bookmark = Optional.of(bookmark);
     }
 
     public Name getName() {
@@ -48,6 +66,14 @@ public class Book {
         return Collections.unmodifiableSet(tags);
     }
 
+    public TotalPages getTotalPages() {
+        return totalPages;
+    }
+
+    public Optional<Bookmark> getBookmark() {
+        return bookmark;
+    }
+
     /**
      * Returns true if both books of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two books.
@@ -59,7 +85,8 @@ public class Book {
 
         return otherBook != null
                 && otherBook.getName().equals(getName())
-                && otherBook.getGenre().equals(getGenre());
+                && otherBook.getGenre().equals(getGenre())
+                && otherBook.getTotalPages().equals(getTotalPages());
     }
 
     /**
@@ -79,7 +106,9 @@ public class Book {
         Book otherBook = (Book) other;
         return otherBook.getName().equals(getName())
                 && otherBook.getGenre().equals(getGenre())
-                && otherBook.getTags().equals(getTags());
+                && otherBook.getTags().equals(getTags())
+                && otherBook.getTotalPages().equals(getTotalPages())
+                && otherBook.getBookmark().equals(getBookmark());
     }
 
     @Override
@@ -91,9 +120,17 @@ public class Book {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+        String bookmarkPage = bookmark
+                .map(Bookmark::toString)
+                .orElse("No bookmark for this book");
+
         builder.append(getName())
                 .append(" Genre: ")
                 .append(getGenre())
+                .append(" Total Pages: ")
+                .append(getTotalPages())
+                .append(" Bookmarked at: ")
+                .append(bookmarkPage)
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
