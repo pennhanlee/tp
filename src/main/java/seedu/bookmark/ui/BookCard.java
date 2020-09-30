@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.bookmark.model.book.Book;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Book}.
  */
 public class BookCard extends UiPart<Region> {
 

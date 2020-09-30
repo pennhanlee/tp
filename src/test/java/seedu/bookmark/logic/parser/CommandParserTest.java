@@ -28,9 +28,9 @@ import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 import seedu.bookmark.testutil.BookBuilder;
 import seedu.bookmark.testutil.PersonUtil;
 
-public class LibraryParserTest {
+public class CommandParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final CommandParser parser = new CommandParser();
 
     @Test
     public void parseCommand_add() throws Exception {

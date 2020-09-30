@@ -11,7 +11,7 @@ import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.model.book.Book;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of books.
  */
 public class BookListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
@@ -21,7 +21,7 @@ public class BookListPanel extends UiPart<Region> {
     private ListView<Book> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code BookListPanel} with the given {@code ObservableList}.
      */
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class BookListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */
     class PersonListViewCell extends ListCell<Book> {
         @Override

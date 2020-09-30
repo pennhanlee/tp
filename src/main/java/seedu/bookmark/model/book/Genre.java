@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Book's genre
+ * Represents a Book's genre.
  * Guarantees: immutable; is valid as declared in {@link #isValidGenre(String)}
  */
 public class Genre {
