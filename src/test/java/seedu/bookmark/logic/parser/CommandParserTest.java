@@ -26,8 +26,8 @@ import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.testutil.BookBuilder;
-import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 import seedu.bookmark.testutil.BookUtil;
+import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 
 public class CommandParserTest {
 
