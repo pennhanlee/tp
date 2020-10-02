@@ -2,6 +2,7 @@
   "books": [ {
     "name": "Book with invalid name field: Ha!ns Mu@ster",
     "genre": "Invalid genre: @",
-    "totalPages": "InValid Total pages"
+    "totalPages": "InValid Total pages",
+    "bookmark": "20"
   } ]
 }

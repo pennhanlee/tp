@@ -2,6 +2,7 @@
   "books": [ {
     "name": "Hans Muster",
     "genre": "invalid@genre",
-    "totalPages": "abc"
+    "totalPages": "abc",
+    "bookmark": "20"
   } ]
 }

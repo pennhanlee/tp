@@ -35,7 +35,7 @@ public class EditBookDescriptorBuilder {
         descriptor.setGenre(book.getGenre());
         descriptor.setTags(book.getTags());
         descriptor.setTotalPages(book.getTotalPages());
-        descriptor.setBookmark(book.getBookmark().orElse(null));
+        descriptor.setBookmark(book.getBookmark());
     }
 
     /**

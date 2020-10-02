@@ -51,9 +51,7 @@ public class BookCard extends UiPart<Region> {
         name.setText(book.getName().fullName);
         genre.setText(book.getGenre().value);
         totalPages.setText("Total pages: " + book.getTotalPages().value);
-        bookmark.setText(book.getBookmark()
-            .map(bookmark -> "Bookmarked at page " + bookmark.toString())
-            .orElse("No bookmark for this book"));
+        bookmark.setText("Bookmarked at page " + book.getBookmark().value);
         book.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

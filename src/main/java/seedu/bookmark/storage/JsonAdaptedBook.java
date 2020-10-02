@@ -59,9 +59,7 @@ class JsonAdaptedBook {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         totalPages = source.getTotalPages().value;
-        bookmark = source.getBookmark()
-                .map((bookmark) -> bookmark.value)
-                .orElse(null);
+        bookmark = source.getBookmark().value;
     }
 
     /**
@@ -102,9 +100,14 @@ class JsonAdaptedBook {
         }
         final TotalPages modelTotalPages = new TotalPages(totalPages);
 
-        Bookmark modelBookmark = Optional.ofNullable(this.bookmark)
-                .map((bookmarkStr) -> new Bookmark(bookmarkStr, modelTotalPages))
-                .orElse(null);
+        if (bookmark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Bookmark.class.getSimpleName()));
+        }
+        if (!Bookmark.isValidBookmark(bookmark, modelTotalPages)) {
+            throw new IllegalValueException(Bookmark.MESSAGE_CONSTRAINTS);
+        }
+        final Bookmark modelBookmark = new Bookmark(bookmark, modelTotalPages);
         return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
     }
 

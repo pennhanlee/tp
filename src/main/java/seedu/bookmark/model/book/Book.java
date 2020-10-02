@@ -12,7 +12,7 @@ import seedu.bookmark.model.tag.Tag;
 
 /**
  * Represents a Book in the book list.
- * Guarantees: details are present, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Book {
 
@@ -34,7 +34,7 @@ public class Book {
         this.genre = genre;
         this.tags.addAll(tags);
         this.totalPages = new TotalPages("500");
-        this.bookmark = null;
+        this.bookmark = new Bookmark();
     }
 
     /**
@@ -42,7 +42,7 @@ public class Book {
      * is completed.
      */
     public Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark) {
-        requireAllNonNull(name, genre, tags, totalPages);
+        requireAllNonNull(name, genre, tags, totalPages, bookmark);
         this.name = name;
         this.genre = genre;
         this.tags.addAll(tags);
@@ -70,8 +70,8 @@ public class Book {
         return totalPages;
     }
 
-    public Optional<Bookmark> getBookmark() {
-        return Optional.ofNullable(bookmark);
+    public Bookmark getBookmark() {
+        return bookmark;
     }
 
     /**

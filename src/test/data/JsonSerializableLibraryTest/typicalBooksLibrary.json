@@ -16,12 +16,14 @@
     "name" : "The Hunger Games",
     "genre" : "Fiction",
     "tagged" : [ ],
-    "totalPages" : "500"
+    "totalPages" : "500",
+    "bookmark": "20"
   }, {
     "name" : "Crime and Punishment",
     "genre" : "Crime",
     "tagged" : [ "Bad" ],
-    "totalPages" : "1000"
+    "totalPages" : "1000",
+    "bookmark": "20"
   }, {
     "name" : "Lord of the Flies",
     "genre" : "Mystery",

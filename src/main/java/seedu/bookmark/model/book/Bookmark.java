@@ -21,6 +21,13 @@ public class Bookmark {
     public final String value;
 
     /**
+     * Constructs a default {@code Bookmark} at page 0.
+     */
+    public Bookmark() {
+        this.value = "0";
+    }
+
+    /**
      * Constructs an {@code Bookmark}.
      *
      * @param bookmarkedPage A valid page string.

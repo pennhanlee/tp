@@ -33,6 +33,7 @@ public class BookBuilder {
         name = new Name(DEFAULT_NAME);
         genre = new Genre(DEFAULT_GENRE);
         totalPages = new TotalPages(DEFAULT_TOTAL_PAGES);
+        bookmark = new Bookmark();
         tags = new HashSet<>();
     }
 
@@ -43,7 +44,7 @@ public class BookBuilder {
         name = bookToCopy.getName();
         genre = bookToCopy.getGenre();
         totalPages = bookToCopy.getTotalPages();
-        bookmark = bookToCopy.getBookmark().orElse(null);
+        bookmark = bookToCopy.getBookmark();
         tags = new HashSet<>(bookToCopy.getTags());
     }
 

@@ -3,10 +3,12 @@
     "name": "Alice Pauline",
     "genre": "fiction",
     "totalPages": "100",
+    "bookmark": "20",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "genre": "fiction",
+    "bookmark": "20",
     "totalPages": "100"
   } ]
 }
