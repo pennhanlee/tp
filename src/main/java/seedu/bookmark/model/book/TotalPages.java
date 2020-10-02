@@ -10,7 +10,8 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 public class TotalPages {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Total pages should only contain numeric characters, and it should not be blank";
+            "Total pages should only contain numeric characters, it should not be blank"
+                    + "and its numerical value should be greater than 0";
 
     /*
      * Only a 1 or more of the digits 0-9 allowed
@@ -34,7 +35,8 @@ public class TotalPages {
      * Returns if a given string is a valid total pages.
      */
     public static boolean isValidTotalPages(String test) {
-        return test.matches(VALIDATION_REGEX);
+        int numericalValue = Integer.parseInt(test);
+        return test.matches(VALIDATION_REGEX) && numericalValue > 0;
     }
 
     @Override
