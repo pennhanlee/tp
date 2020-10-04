@@ -35,8 +35,7 @@ public class TotalPages {
      * Returns if a given string is a valid total pages.
      */
     public static boolean isValidTotalPages(String test) {
-        int numericalValue = Integer.parseInt(test);
-        return test.matches(VALIDATION_REGEX) && numericalValue > 0;
+        return test.matches(VALIDATION_REGEX) && Integer.parseInt(test) > 0;
     }
 
     @Override
