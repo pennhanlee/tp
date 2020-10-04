@@ -52,6 +52,10 @@ public class Bookmark {
         }
 
         int bookmarkInt = Integer.parseInt(bookmarkedPage);
+        if (bookmarkInt < 0) {
+            return false;
+        }
+
         int totalPagesInt = Integer.parseInt(totalPages.value);
         return bookmarkInt <= totalPagesInt;
     }
