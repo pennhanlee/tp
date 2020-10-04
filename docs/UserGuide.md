@@ -59,7 +59,6 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
 ### Adding a bookmark: `add`
 
-
 Adds a book to the Storage Library.
 
 Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER`
@@ -67,7 +66,6 @@ Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER`
 Examples:
 * `add n/Fifty Shades of Gray tp/350 b/200`
 * `add n/Harry Potter and the Chamber of Secrets tp/1500 b/25`
-
 
 ### Viewing details of a book : `View`
 
@@ -94,7 +92,6 @@ Format: `list`
 ### Locating books by name: `find` [coming soon]
 
 Find books whose names contain any of the given keywords.
-
 
 ### Deleting a book : `delete`
 

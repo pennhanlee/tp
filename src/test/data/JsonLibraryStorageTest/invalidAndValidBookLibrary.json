@@ -1,0 +1,13 @@
+{
+  "books": [ {
+    "name": "Harry Potter",
+    "genre": "Fiction",
+    "totalPages": "500",
+    "bookmark": "20"
+  }, {
+    "name": " ",
+    "genre": "F@ction",
+    "totalPages": "120",
+    "bookmark": "20"
+  } ]
+}
