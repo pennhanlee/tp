@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.commands.AddCommand;
-import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.Genre;
-import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.*;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.testutil.BookBuilder;
 
@@ -75,23 +73,31 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + GENRE_DESC_JANE_EYRE
-                + TAG_DESC_BAD + TAG_DESC_GOOD, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_BAD + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid email
+        // invalid genre
         assertParseFailure(parser, NAME_DESC_JANE_EYRE + INVALID_GENRE_DESC
-                + TAG_DESC_BAD + TAG_DESC_GOOD, Genre.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_BAD + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE, Genre.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
-                + INVALID_TAG_DESC + VALID_TAG_BAD, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_BAD + TOTAL_PAGES_DESC_JANE_EYRE, Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid total pages
+        assertParseFailure(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
+                + INVALID_TOTAL_PAGES_DESC, TotalPages.MESSAGE_CONSTRAINTS);
+
+        // invalid bookmark
+        assertParseFailure(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
+                + TOTAL_PAGES_DESC_JANE_EYRE + INVALID_BOOKMARK_DESC, Bookmark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + GENRE_DESC_JANE_EYRE,
+        assertParseFailure(parser, INVALID_NAME_DESC + GENRE_DESC_JANE_EYRE + TOTAL_PAGES_DESC_JANE_EYRE,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
-                        + TAG_DESC_BAD + TAG_DESC_GOOD,
+                        + TAG_DESC_BAD + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
