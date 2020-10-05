@@ -3,7 +3,6 @@ package seedu.bookmark.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;

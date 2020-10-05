@@ -10,7 +10,6 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;

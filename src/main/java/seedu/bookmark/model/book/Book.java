@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.tag.Tag;
 
 /**
