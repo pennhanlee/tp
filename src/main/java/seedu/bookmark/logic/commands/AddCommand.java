@@ -29,9 +29,9 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "Harry Potter "
             + PREFIX_GENRE + "Fiction "
             + PREFIX_TAG + "Magic "
-            + PREFIX_TAG + "Witches"
-            + PREFIX_TOTAL_PAGES + "500"
-            + PREFIX_BOOKMARK + "10";
+            + PREFIX_TAG + "Witches "
+            + PREFIX_TOTAL_PAGES + "500 "
+            + PREFIX_BOOKMARK + "10 ";
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library";
