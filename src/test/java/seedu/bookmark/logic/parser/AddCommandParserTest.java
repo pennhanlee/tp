@@ -1,16 +1,40 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bookmark.logic.commands.CommandTestUtil.*;
+import static seedu.bookmark.logic.commands.CommandTestUtil.BOOKMARK_DESC_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_BOOKMARK_DESC;
+import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
+import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_TOTAL_PAGES_DESC;
+import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.bookmark.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_BAD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_GOOD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TOTAL_PAGES_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TOTAL_PAGES_DESC_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TOTAL_PAGES_JANE_EYRE;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.bookmark.testutil.TypicalBooks.*;
+import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_NINETEEN_EIGHTY_FOUR;
+import static seedu.bookmark.testutil.TypicalBooks.FULL_JANE_EYRE;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.commands.AddCommand;
-import seedu.bookmark.model.book.*;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Bookmark;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.testutil.BookBuilder;
 
@@ -37,7 +61,8 @@ public class AddCommandParserTest {
         Book expectedBookMultipleTags = new BookBuilder(FULL_JANE_EYRE).withTags(VALID_TAG_BAD, VALID_TAG_GOOD)
                 .build();
         assertParseSuccess(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
-                + TAG_DESC_BAD + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBookMultipleTags));
+                + TAG_DESC_BAD + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE
+                + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBookMultipleTags));
     }
 
     @Test

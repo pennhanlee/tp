@@ -3,16 +3,16 @@ package seedu.bookmark.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.*;
+import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.TOTAL_PAGES_DESC_1984;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_NINETEEN_EIGHTY_FOUR;
-import static seedu.bookmark.testutil.TypicalBooks.FULL_NINETEEN_EIGHTY_FOUR;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

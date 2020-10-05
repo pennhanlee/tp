@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.FULL_JANE_EYRE;
-import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_JANE_EYRE;
+import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 
 import java.util.Arrays;
 import java.util.Collections;

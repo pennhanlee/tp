@@ -9,9 +9,8 @@ import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_JANE_EYRE
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TOTAL_PAGES_1984;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
-import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_JANE_EYRE;
 import static seedu.bookmark.testutil.TypicalBooks.FULL_JANE_EYRE;
+import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 
 import org.junit.jupiter.api.Test;
 
