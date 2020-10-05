@@ -1,11 +1,11 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;

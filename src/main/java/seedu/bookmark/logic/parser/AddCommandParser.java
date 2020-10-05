@@ -3,7 +3,6 @@ package seedu.bookmark.logic.parser;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bookmark.logic.parser.CliSyntax.*;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -24,7 +23,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE, PREFIX_TAG, PREFIX_TOTAL_PAGES, PREFIX_BOOKMARK);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE, PREFIX_TAG,
+                        PREFIX_TOTAL_PAGES, PREFIX_BOOKMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENRE, PREFIX_TOTAL_PAGES)
                 || !argMultimap.getPreamble().isEmpty()) {
