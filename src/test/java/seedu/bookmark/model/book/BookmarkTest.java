@@ -54,7 +54,7 @@ public class BookmarkTest {
 
         // valid bookmarks
         assertTrue(Bookmark.isValidBookmark("123", VALID_TOTAL_PAGES));
-        assertTrue(Bookmark.isValidBookmark("0", VALID_TOTAL_PAGES));
+        assertTrue(Bookmark.isValidBookmark("0", VALID_TOTAL_PAGES)); // pg 0 explicitly stated
         assertTrue(Bookmark.isValidBookmark("000001", VALID_TOTAL_PAGES)); // leading zeroes
     }
 }
