@@ -18,7 +18,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a book to the Library. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a book to the Library. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_GENRE + "GENRE "
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Magic "
             + PREFIX_TAG + "Witches "
             + PREFIX_TOTAL_PAGES + "500 "
-            + PREFIX_BOOKMARK + "10 ";
+            + PREFIX_BOOKMARK + "10 \n";
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library";
