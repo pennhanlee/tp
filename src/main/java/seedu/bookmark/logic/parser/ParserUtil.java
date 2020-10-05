@@ -109,7 +109,7 @@ public class ParserUtil {
      * Parses {@code Optional<String> bookmark} into a {@code Bookmark}
      */
     public static Bookmark parseBookmark(Optional<String> bookmark, TotalPages totalPages) throws ParseException {
-        if (bookmark.equals(Optional.empty())) {
+        if (bookmark.isEmpty()) {
             return new Bookmark();
         } else {
             String trimmedBookmark = bookmark.get();
