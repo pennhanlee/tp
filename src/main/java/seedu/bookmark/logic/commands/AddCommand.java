@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
@@ -21,11 +23,15 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_GENRE + "GENRE "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_TOTAL_PAGES + "TOTAL PAGES "
+            + PREFIX_BOOKMARK + "BOOKMARK "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Harry Potter "
             + PREFIX_GENRE + "Fiction "
             + PREFIX_TAG + "Magic "
-            + PREFIX_TAG + "Witches";
+            + PREFIX_TAG + "Witches"
+            + PREFIX_TOTAL_PAGES + "500"
+            + PREFIX_BOOKMARK + "10";
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library";
