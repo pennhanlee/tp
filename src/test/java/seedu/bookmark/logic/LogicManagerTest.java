@@ -3,10 +3,10 @@ package seedu.bookmark.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
+import static seedu.bookmark.logic.commands.CommandTestUtil.*;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalBooks.NINETEEN_EIGHTY_FOUR;
+import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_NINETEEN_EIGHTY_FOUR;
+import static seedu.bookmark.testutil.TypicalBooks.FULL_NINETEEN_EIGHTY_FOUR;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -67,7 +67,6 @@ public class LogicManagerTest {
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
-    @Disabled("Add Command not refactored yet")
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
@@ -79,8 +78,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_1984 + GENRE_DESC_1984;
-        Book expectedBook = new BookBuilder(NINETEEN_EIGHTY_FOUR).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_1984 + GENRE_DESC_1984 + TOTAL_PAGES_DESC_1984;
+        Book expectedBook = new BookBuilder(COMPULSORY_NINETEEN_EIGHTY_FOUR).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addBook(expectedBook);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

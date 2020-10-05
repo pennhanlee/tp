@@ -6,7 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
-import static seedu.bookmark.testutil.TypicalBooks.JANE_EYRE;
+import static seedu.bookmark.testutil.TypicalBooks.FULL_JANE_EYRE;
+import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_JANE_EYRE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,17 +96,17 @@ public class UniqueLibraryTest {
     @Test
     public void setBook_editedBookHasDifferentIdentity_success() {
         uniqueBookList.add(HARRY_POTTER);
-        uniqueBookList.setBook(HARRY_POTTER, JANE_EYRE);
+        uniqueBookList.setBook(HARRY_POTTER, FULL_JANE_EYRE);
         UniqueBookList expectedUniqueBookList = new UniqueBookList();
-        expectedUniqueBookList.add(JANE_EYRE);
+        expectedUniqueBookList.add(FULL_JANE_EYRE);
         assertEquals(expectedUniqueBookList, uniqueBookList);
     }
 
     @Test
     public void setBook_editedBookHasNonUniqueIdentity_throwsDuplicateBookException() {
         uniqueBookList.add(HARRY_POTTER);
-        uniqueBookList.add(JANE_EYRE);
-        assertThrows(DuplicateBookException.class, () -> uniqueBookList.setBook(HARRY_POTTER, JANE_EYRE));
+        uniqueBookList.add(FULL_JANE_EYRE);
+        assertThrows(DuplicateBookException.class, () -> uniqueBookList.setBook(HARRY_POTTER, FULL_JANE_EYRE));
     }
 
     @Test
@@ -135,7 +136,7 @@ public class UniqueLibraryTest {
     public void setBooks_uniqueBookList_replacesOwnListWithProvidedUniqueBookList() {
         uniqueBookList.add(HARRY_POTTER);
         UniqueBookList expectedUniqueBookList = new UniqueBookList();
-        expectedUniqueBookList.add(JANE_EYRE);
+        expectedUniqueBookList.add(FULL_JANE_EYRE);
         uniqueBookList.setBooks(expectedUniqueBookList);
         assertEquals(expectedUniqueBookList, uniqueBookList);
     }
@@ -148,10 +149,10 @@ public class UniqueLibraryTest {
     @Test
     public void setBooks_list_replacesOwnListWithProvidedList() {
         uniqueBookList.add(HARRY_POTTER);
-        List<Book> bookList = Collections.singletonList(JANE_EYRE);
+        List<Book> bookList = Collections.singletonList(FULL_JANE_EYRE);
         uniqueBookList.setBooks(bookList);
         UniqueBookList expectedUniqueBookList = new UniqueBookList();
-        expectedUniqueBookList.add(JANE_EYRE);
+        expectedUniqueBookList.add(FULL_JANE_EYRE);
         assertEquals(expectedUniqueBookList, uniqueBookList);
     }
 

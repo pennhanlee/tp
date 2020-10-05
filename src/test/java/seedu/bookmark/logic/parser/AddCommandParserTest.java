@@ -1,25 +1,10 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_JANE_EYRE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_JANE_EYRE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.bookmark.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_BAD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_GOOD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_JANE_EYRE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_JANE_EYRE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.*;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.bookmark.testutil.TypicalBooks.JANE_EYRE;
-import static seedu.bookmark.testutil.TypicalBooks.NINETEEN_EIGHTY_FOUR;
+import static seedu.bookmark.testutil.TypicalBooks.*;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -35,35 +20,33 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    @Disabled("AddCommandParser not refactored to work with TotalPages and Bookmark yet")
     public void parse_allFieldsPresent_success() {
-        Book expectedBook = new BookBuilder(JANE_EYRE).withTags(VALID_TAG_GOOD).build();
+        Book expectedBook = new BookBuilder(FULL_JANE_EYRE).withTags(VALID_TAG_GOOD).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
-                 + TAG_DESC_GOOD, new AddCommand(expectedBook));
+                 + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBook));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_1984 + NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
-                 + TAG_DESC_GOOD, new AddCommand(expectedBook));
+                 + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBook));
 
         // multiple genres - last genres accepted
         assertParseSuccess(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_1984 + GENRE_DESC_JANE_EYRE
-                 + TAG_DESC_GOOD, new AddCommand(expectedBook));
+                 + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBook));
 
         // multiple tags - all accepted
-        Book expectedBookMultipleTags = new BookBuilder(JANE_EYRE).withTags(VALID_TAG_BAD, VALID_TAG_GOOD)
+        Book expectedBookMultipleTags = new BookBuilder(FULL_JANE_EYRE).withTags(VALID_TAG_BAD, VALID_TAG_GOOD)
                 .build();
         assertParseSuccess(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
-                + TAG_DESC_BAD + TAG_DESC_GOOD, new AddCommand(expectedBookMultipleTags));
+                + TAG_DESC_BAD + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBookMultipleTags));
     }
 
     @Test
-    @Disabled("AddCommandParser not refactored to work with TotalPages and Bookmark yet")
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Book expectedBook = new BookBuilder(NINETEEN_EIGHTY_FOUR).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_1984 + GENRE_DESC_1984,
+        Book expectedBook = new BookBuilder(COMPULSORY_NINETEEN_EIGHTY_FOUR).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_1984 + GENRE_DESC_1984 + TOTAL_PAGES_DESC_1984,
                 new AddCommand(expectedBook));
     }
 
@@ -72,15 +55,19 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_JANE_EYRE + GENRE_DESC_JANE_EYRE,
+        assertParseFailure(parser, VALID_NAME_JANE_EYRE + GENRE_DESC_JANE_EYRE + TOTAL_PAGES_DESC_JANE_EYRE,
                 expectedMessage);
 
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_JANE_EYRE + VALID_GENRE_JANE_EYRE,
+        // missing genre prefix
+        assertParseFailure(parser, NAME_DESC_JANE_EYRE + VALID_GENRE_JANE_EYRE + TOTAL_PAGES_DESC_JANE_EYRE,
+                expectedMessage);
+
+        // missing total prefix
+        assertParseFailure(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE + VALID_TOTAL_PAGES_JANE_EYRE,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_JANE_EYRE + VALID_GENRE_JANE_EYRE,
+        assertParseFailure(parser, VALID_NAME_JANE_EYRE + VALID_GENRE_JANE_EYRE + VALID_TOTAL_PAGES_JANE_EYRE,
                 expectedMessage);
     }
 

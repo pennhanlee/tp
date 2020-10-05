@@ -2,9 +2,7 @@ package seedu.bookmark.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bookmark.logic.parser.CliSyntax.*;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -41,10 +39,16 @@ public class CommandTestUtil {
     public static final String GENRE_DESC_JANE_EYRE = " " + PREFIX_GENRE + VALID_GENRE_JANE_EYRE;
     public static final String TAG_DESC_GOOD = " " + PREFIX_TAG + VALID_TAG_GOOD;
     public static final String TAG_DESC_BAD = " " + PREFIX_TAG + VALID_TAG_BAD;
+    public static final String TOTAL_PAGES_DESC_1984 = " " + PREFIX_TOTAL_PAGES + VALID_TOTAL_PAGES_1984;
+    public static final String TOTAL_PAGES_DESC_JANE_EYRE = " " + PREFIX_TOTAL_PAGES + VALID_TOTAL_PAGES_JANE_EYRE;
+    public static final String BOOKMARK_DESC_1984 = " " + PREFIX_BOOKMARK + VALID_BOOKMARK_1984;
+    public static final String BOOKMARK_DESC_JANE_EYRE = " " + PREFIX_BOOKMARK + VALID_BOOKMARK_JANE_EYRE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "@@@@"; // '@' not allowed in genres
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TOTAL_PAGES_DESC = " " + PREFIX_TOTAL_PAGES + "cnweiw"; // "alphabets not allowed in total pages
+    public static final String INVALID_BOOKMARK_DESC = " " + PREFIX_BOOKMARK + "-12"; // "negative numbers not allowed"
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
