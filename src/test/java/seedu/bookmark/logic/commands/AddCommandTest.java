@@ -45,7 +45,7 @@ public class AddCommandTest {
     public void execute_duplicateBook_throwsCommandException() {
         Book validBook = new BookBuilder().build();
         AddCommand addCommand = new AddCommand(validBook);
-        ModelStub modelStub = new ModelStubWithPerson(validBook);
+        ModelStub modelStub = new ModelStubWithBook(validBook);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_BOOK, () -> addCommand.execute(modelStub));
     }
@@ -70,7 +70,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different book -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -150,12 +150,12 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single book.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithBook extends ModelStub {
         private final Book book;
 
-        ModelStubWithPerson(Book book) {
+        ModelStubWithBook(Book book) {
             requireNonNull(book);
             this.book = book;
         }
@@ -168,7 +168,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the book being added.
      */
     private class ModelStubAcceptingBookAdded extends ModelStub {
         final ArrayList<Book> booksAdded = new ArrayList<>();
