@@ -33,8 +33,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Genre genre = ParserUtil.parseGenre(argMultimap.getValue(PREFIX_GENRE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        TotalPages totalPages = ParserUtil.parseTotalPages(argMultimap.getAllValues(PREFIX_TOTAL_PAGES));
-        Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getAllValues(PREFIX_BOOKMARK));
+        TotalPages totalPages = ParserUtil.parseTotalPages(argMultimap.getValue(PREFIX_TOTAL_PAGES).get());
+        Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getValue(PREFIX_BOOKMARK).get(), totalPages);
 
         Book book = new Book(name, genre, tagList, totalPages, bookmark);
 
