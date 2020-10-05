@@ -41,7 +41,7 @@ public class EditCommandTest {
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder(editedBook).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
@@ -62,7 +62,7 @@ public class EditCommandTest {
                 .withTags(VALID_TAG_GOOD).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
@@ -75,7 +75,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditBookDescriptor());
         Book editedBook = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
 
@@ -91,7 +91,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
@@ -99,13 +99,14 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditBookDescriptor descriptor = new EditBookDescriptorBuilder(firstBook).build();
+        seedu.bookmark.model.book.Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
+        seedu.bookmark.logic.commands.EditCommand.EditBookDescriptor descriptor =
+                new seedu.bookmark.testutil.EditBookDescriptorBuilder(firstBook).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, seedu.bookmark.logic.commands.EditCommand.MESSAGE_DUPLICATE_BOOK);
     }
 
     @Test
@@ -117,7 +118,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditBookDescriptorBuilder(bookInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_BOOK);
     }
 
     @Test

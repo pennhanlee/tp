@@ -31,19 +31,19 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the book identified "
+            + "by the index number used in the displayed book list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_GENRE + "EMAIL] "
+            + "[" + PREFIX_GENRE + "GENRE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_GENRE + "johndoe@example.com";
+            + PREFIX_GENRE + "Horror";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
@@ -70,22 +70,22 @@ public class EditCommand extends Command {
         }
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
+        Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
 
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
 
         model.setBook(bookToEdit, editedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Book createEditedPerson(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
+    private static Book createEditedBook(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
         assert bookToEdit != null;
 
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
