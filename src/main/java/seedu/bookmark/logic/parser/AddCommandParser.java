@@ -1,14 +1,22 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bookmark.logic.parser.CliSyntax.*;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
-import seedu.bookmark.model.book.*;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Bookmark;
+import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
