@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.bookmark.commons.core.index.Index;
@@ -104,12 +105,16 @@ public class ParserUtil {
         return new TotalPages(trimmedTotalPages);
     }
 
-    public static Bookmark parseBookmark(String bookmark, TotalPages totalPages) throws ParseException {
-        requireNonNull(bookmark);
-        String trimmedBookmark = bookmark.trim();
-        if (!Bookmark.isValidBookmark(trimmedBookmark, totalPages)) {
-            throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
+    public static Bookmark parseBookmark(Optional<String> bookmark, TotalPages totalPages) throws ParseException {
+        if (bookmark.equals(Optional.empty())) {
+            return new Bookmark();
+        } else {
+            String trimmedBookmark = bookmark.get();
+            trimmedBookmark.trim();
+            if (!Bookmark.isValidBookmark(trimmedBookmark, totalPages)) {
+                throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
+            }
+            return new Bookmark(trimmedBookmark, totalPages);
         }
-        return new Bookmark(bookmark, totalPages);
     }
 }

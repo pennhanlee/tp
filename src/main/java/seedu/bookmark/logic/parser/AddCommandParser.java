@@ -3,6 +3,7 @@ package seedu.bookmark.logic.parser;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bookmark.logic.parser.CliSyntax.*;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -25,7 +26,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE, PREFIX_TAG, PREFIX_TOTAL_PAGES, PREFIX_BOOKMARK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENRE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENRE, PREFIX_TOTAL_PAGES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -34,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Genre genre = ParserUtil.parseGenre(argMultimap.getValue(PREFIX_GENRE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         TotalPages totalPages = ParserUtil.parseTotalPages(argMultimap.getValue(PREFIX_TOTAL_PAGES).get());
-        Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getValue(PREFIX_BOOKMARK).get(), totalPages);
+        Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getValue(PREFIX_BOOKMARK), totalPages);
 
         Book book = new Book(name, genre, tagList, totalPages, bookmark);
 
