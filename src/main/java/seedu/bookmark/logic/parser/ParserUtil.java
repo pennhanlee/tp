@@ -110,6 +110,6 @@ public class ParserUtil {
         if (!Bookmark.isValidBookmark(trimmedBookmark, totalPages)) {
             throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
         }
-        return new Bookmark(bookmark);
+        return new Bookmark(bookmark, totalPages);
     }
 }
