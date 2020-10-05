@@ -89,7 +89,7 @@ public class BookBuilder {
         return this;
     }
 
-    public Book build() throws ParseException {
+    public Book build() {
         return new Book(name, genre, tags, totalPages, bookmark);
     }
 
