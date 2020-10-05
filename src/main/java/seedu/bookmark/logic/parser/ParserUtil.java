@@ -9,8 +9,10 @@ import java.util.Set;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.StringUtil;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
+import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -88,5 +90,26 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String totalPages} into a {@code TotalPages}.
+     */
+    public static TotalPages parseTotalPages(String totalPages) throws ParseException {
+        requireNonNull(totalPages);
+        String trimmedTotalPages = totalPages.trim();
+        if (!TotalPages.isValidTotalPages(trimmedTotalPages)) {
+            throw new ParseException(TotalPages.MESSAGE_CONSTRAINTS);
+        }
+        return new TotalPages(trimmedTotalPages);
+    }
+
+    public static Bookmark parseBookmark(String bookmark, TotalPages totalPages) throws ParseException {
+        requireNonNull(bookmark);
+        String trimmedBookmark = bookmark.trim();
+        if (!Bookmark.isValidBookmark(trimmedBookmark, totalPages)) {
+            throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
+        }
+        return new Bookmark(bookmark);
     }
 }
