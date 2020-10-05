@@ -114,10 +114,10 @@ public class ParserUtil {
         } else {
             String trimmedBookmark = bookmark.get();
             trimmedBookmark.trim();
-            if (!Bookmark.isValidBookmark(trimmedBookmark, totalPages)) {
+            if (!Bookmark.isValidBookmark(trimmedBookmark)) {
                 throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
             }
-            return new Bookmark(trimmedBookmark, totalPages);
+            return new Bookmark(trimmedBookmark);
         }
     }
 }

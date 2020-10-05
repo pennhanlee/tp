@@ -5,7 +5,7 @@ import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Book's bookmark.
- * Guarantees: immutable; is valid as declared in {@link #isValidBookmark(String, TotalPages)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidBookmark(String)}
  */
 public class Bookmark {
 
@@ -31,22 +31,20 @@ public class Bookmark {
      * Constructs an {@code Bookmark}.
      *
      * @param bookmarkedPage A valid page string.
-     * @param totalPages total pages in the book this bookmark is in.
      */
-    public Bookmark(String bookmarkedPage, TotalPages totalPages) {
-        requireAllNonNull(bookmarkedPage, totalPages);
-        checkArgument(isValidBookmark(bookmarkedPage, totalPages), MESSAGE_CONSTRAINTS);
+    public Bookmark(String bookmarkedPage) {
+        requireAllNonNull(bookmarkedPage);
+        checkArgument(isValidBookmark(bookmarkedPage), MESSAGE_CONSTRAINTS);
         this.value = bookmarkedPage;
     }
 
     /**
-     * Returns if a given string and {@code TotalPages} forms a valid bookmark.
+     * Returns if a given string forms a valid bookmark.
      *
      * @param bookmarkedPage String representing the bookmark page
-     * @param totalPages the total number of pages in the Book which the bookmark will be placed in
-     * @return true iff bookmarkedPage String is valid and bookmark page is less than equals to total pages
+     * @return true iff bookmarkPage String is valid
      */
-    public static boolean isValidBookmark(String bookmarkedPage, TotalPages totalPages) {
+    public static boolean isValidBookmark(String bookmarkedPage) {
         if (!bookmarkedPage.matches(VALIDATION_REGEX)) {
             return false;
         }
@@ -56,8 +54,21 @@ public class Bookmark {
             return false;
         }
 
-        int totalPagesInt = Integer.parseInt(totalPages.value);
-        return bookmarkInt <= totalPagesInt;
+        return true;
+    }
+
+
+    /**
+     * Returns if a given string and {@code TotalPages} forms a valid bookmark.
+     *
+     * @param bookmark Bookmark Object representing the bookmark page
+     * @param totalPages the total number of pages in the Book which the bookmark will be placed in
+     * @return true iff bookmark page is less than equals to total pages
+     */
+    public static boolean isValidBookmark(Bookmark bookmark, TotalPages totalPages) {
+        int bookmarkPage = Integer.parseInt(bookmark.value);
+        int totalPage = Integer.parseInt(totalPages.value);
+        return bookmarkPage <= totalPage;
     }
 
     @Override

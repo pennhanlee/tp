@@ -3,6 +3,7 @@ package seedu.bookmark.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
@@ -84,11 +85,11 @@ public class BookBuilder {
      * Sets the {@code Bookmark} of the {@code Book} that we are building.
      */
     public BookBuilder withBookmark(String bookmark) {
-        this.bookmark = new Bookmark(bookmark, this.totalPages);
+        this.bookmark = new Bookmark(bookmark);
         return this;
     }
 
-    public Book build() {
+    public Book build() throws ParseException {
         return new Book(name, genre, tags, totalPages, bookmark);
     }
 

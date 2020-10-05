@@ -10,6 +10,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
@@ -44,6 +45,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         TotalPages totalPages = ParserUtil.parseTotalPages(argMultimap.getValue(PREFIX_TOTAL_PAGES).get());
         Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getValue(PREFIX_BOOKMARK), totalPages);
+
+        if (!Bookmark.isValidBookmark(bookmark, totalPages)) {
+            throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
+        }
 
         Book book = new Book(name, genre, tagList, totalPages, bookmark);
 
