@@ -33,7 +33,6 @@ public class CommandParserTest {
 
     private final CommandParser parser = new CommandParser();
 
-    @Disabled("Add Command not yet refactored to work with TotalPages and Bookmark")
     @Test
     public void parseCommand_add() throws Exception {
         Book book = new BookBuilder().build();

@@ -1,15 +1,13 @@
 package seedu.bookmark.testutil;
 
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Set;
 
 import seedu.bookmark.logic.commands.AddCommand;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
+
+import static seedu.bookmark.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -30,6 +28,8 @@ public class BookUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + book.getName().fullName + " ");
         sb.append(PREFIX_GENRE + book.getGenre().value + " ");
+        sb.append(PREFIX_TOTAL_PAGES + book.getTotalPages().value + " ");
+        sb.append(PREFIX_BOOKMARK + book.getBookmark().value + " ");
         book.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

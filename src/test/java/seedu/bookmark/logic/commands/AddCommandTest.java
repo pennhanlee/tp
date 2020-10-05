@@ -26,23 +26,23 @@ import seedu.bookmark.testutil.BookBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_bookAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingBookAdded modelStub = new ModelStubAcceptingBookAdded();
         Book validBook = new BookBuilder().build();
 
         CommandResult commandResult = new AddCommand(validBook).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validBook), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validBook), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validBook), modelStub.booksAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateBook_throwsCommandException() {
         Book validBook = new BookBuilder().build();
         AddCommand addCommand = new AddCommand(validBook);
         ModelStub modelStub = new ModelStubWithPerson(validBook);
@@ -170,19 +170,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Book> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingBookAdded extends ModelStub {
+        final ArrayList<Book> booksAdded = new ArrayList<>();
 
         @Override
         public boolean hasBook(Book book) {
             requireNonNull(book);
-            return personsAdded.stream().anyMatch(book::isSameBook);
+            return booksAdded.stream().anyMatch(book::isSameBook);
         }
 
         @Override
         public void addBook(Book book) {
             requireNonNull(book);
-            personsAdded.add(book);
+            booksAdded.add(book);
         }
 
         @Override
