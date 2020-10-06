@@ -48,7 +48,10 @@ public class BookUtil {
     public static String getEditBookDescriptorDetails(EditCommand.EditBookDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getGenre().ifPresent(email -> sb.append(PREFIX_GENRE).append(email.value).append(" "));
+        descriptor.getGenre().ifPresent(genre -> sb.append(PREFIX_GENRE).append(genre.value).append(" "));
+        descriptor.getTotalPages().ifPresent(totalPages -> sb.append(PREFIX_TOTAL_PAGES)
+                                                                   .append(totalPages.value).append(" "));
+        descriptor.getBookmark().ifPresent(bookmark -> sb.append(PREFIX_BOOKMARK).append(bookmark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
