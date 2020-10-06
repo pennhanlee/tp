@@ -58,7 +58,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getLibrary(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
-        showNoPerson(expectedModel);
+        showNoBook(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -94,14 +94,14 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different book -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoBook(Model model) {
         model.updateFilteredBookList(p -> false);
 
         assertTrue(model.getFilteredBookList().isEmpty());
