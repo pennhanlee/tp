@@ -3,7 +3,7 @@ package seedu.bookmark.logic.commands;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bookmark.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showBookAtIndex(model, INDEX_FIRST_PERSON);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
