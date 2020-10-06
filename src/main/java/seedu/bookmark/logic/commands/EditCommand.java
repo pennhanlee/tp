@@ -218,7 +218,9 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getGenre().equals(e.getGenre())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getTotalPages().equals(e.getTotalPages())
+                    && getBookmark().equals(e.getBookmark());
         }
     }
 }

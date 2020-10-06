@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_1984;
 import static seedu.bookmark.logic.commands.CommandTestUtil.DESC_JANE_EYRE;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_BOOKMARK_JANE_EYRE;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_JANE_EYRE;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
+import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TOTAL_PAGES_JANE_EYRE;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +41,14 @@ public class EditBookDescriptorTest {
 
         // different tags -> returns false
         editedAmy = new EditBookDescriptorBuilder(DESC_1984).withTags(VALID_TAG_GOOD).build();
+        assertFalse(DESC_1984.equals(editedAmy));
+
+        // different totalPages -> returns false
+        editedAmy = new EditBookDescriptorBuilder(DESC_1984).withTotalPages(VALID_TOTAL_PAGES_JANE_EYRE).build();
+        assertFalse(DESC_1984.equals(editedAmy));
+
+        // different bookmark -> returns false
+        editedAmy = new EditBookDescriptorBuilder(DESC_1984).withBookmark(VALID_BOOKMARK_JANE_EYRE).build();
         assertFalse(DESC_1984.equals(editedAmy));
     }
 }
