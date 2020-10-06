@@ -84,7 +84,7 @@ public class BookBuilder {
      * Sets the {@code Bookmark} of the {@code Book} that we are building.
      */
     public BookBuilder withBookmark(String bookmark) {
-        this.bookmark = new Bookmark(bookmark, this.totalPages);
+        this.bookmark = new Bookmark(bookmark);
         return this;
     }
 

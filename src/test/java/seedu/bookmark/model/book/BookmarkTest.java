@@ -23,18 +23,14 @@ public class BookmarkTest {
 
     @Test
     public void constructor_nullArguments_throwsNullPointerException() {
-        // both null
-        assertThrows(NullPointerException.class, () -> new Bookmark(null, null));
         // bookmarked page null
-        assertThrows(NullPointerException.class, () -> new Bookmark(null, new TotalPages("20")));
-        // total pages null
-        assertThrows(NullPointerException.class, () -> new Bookmark("123", null));
+        assertThrows(NullPointerException.class, () -> new Bookmark(null));
     }
 
     @Test
     public void constructor_invalidBookmarkPage_throwsIllegalArgumentException() {
         String invalidBookmarkPage = "-1";
-        assertThrows(IllegalArgumentException.class, () -> new Bookmark(invalidBookmarkPage, VALID_TOTAL_PAGES));
+        assertThrows(IllegalArgumentException.class, () -> new Bookmark(invalidBookmarkPage));
     }
 
     @Test
@@ -43,18 +39,18 @@ public class BookmarkTest {
         assertThrows(NullPointerException.class, () -> Bookmark.isValidBookmark(null, VALID_TOTAL_PAGES));
 
         // blank bookmark page
-        assertFalse(Bookmark.isValidBookmark("", VALID_TOTAL_PAGES)); // empty string
-        assertFalse(Bookmark.isValidBookmark(" ", VALID_TOTAL_PAGES)); // spaces only
+        assertFalse(Bookmark.isValidBookmark("")); // empty string
+        assertFalse(Bookmark.isValidBookmark(" ")); // spaces only
 
         // invalid bookmark page
-        assertFalse(Bookmark.isValidBookmark("@@@", VALID_TOTAL_PAGES));
+        assertFalse(Bookmark.isValidBookmark("@@@"));
 
         // bookmarked page > total pages
-        assertFalse(Bookmark.isValidBookmark("12345", VALID_TOTAL_PAGES));
+        assertFalse(Bookmark.isValidBookmark(new Bookmark("12345"), VALID_TOTAL_PAGES));
 
         // valid bookmarks
-        assertTrue(Bookmark.isValidBookmark("123", VALID_TOTAL_PAGES));
-        assertTrue(Bookmark.isValidBookmark("0", VALID_TOTAL_PAGES));
-        assertTrue(Bookmark.isValidBookmark("000001", VALID_TOTAL_PAGES)); // leading zeroes
+        assertTrue(Bookmark.isValidBookmark(new Bookmark("123"), VALID_TOTAL_PAGES));
+        assertTrue(Bookmark.isValidBookmark(new Bookmark("0"), VALID_TOTAL_PAGES)); // pg 0 explicitly stated
+        assertTrue(Bookmark.isValidBookmark(new Bookmark("000001"), VALID_TOTAL_PAGES)); // leading zeroes
     }
 }

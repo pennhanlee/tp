@@ -4,13 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.StringUtil;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
+import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -88,5 +91,33 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String totalPages} into a {@code TotalPages}.
+     */
+    public static TotalPages parseTotalPages(String totalPages) throws ParseException {
+        requireNonNull(totalPages);
+        String trimmedTotalPages = totalPages.trim();
+        if (!TotalPages.isValidTotalPages(trimmedTotalPages)) {
+            throw new ParseException(TotalPages.MESSAGE_CONSTRAINTS);
+        }
+        return new TotalPages(trimmedTotalPages);
+    }
+
+    /**
+     * Parses {@code Optional<String> bookmark} into a {@code Bookmark}
+     */
+    public static Bookmark parseBookmark(Optional<String> bookmark) throws ParseException {
+        if (bookmark.isEmpty()) {
+            return new Bookmark();
+        } else {
+            String trimmedBookmark = bookmark.get();
+            trimmedBookmark.trim();
+            if (!Bookmark.isValidBookmark(trimmedBookmark)) {
+                throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
+            }
+            return new Bookmark(trimmedBookmark);
+        }
     }
 }

@@ -26,7 +26,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newBook_success() {
         Book validBook = new BookBuilder().withName("TESTER BOOK").build();
 
         Model expectedModel = new ModelManager(model.getLibrary(), new UserPrefs());
@@ -37,9 +37,9 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateBook_throwsCommandException() {
         Book bookInList = model.getLibrary().getBookList().get(0);
-        assertCommandFailure(new AddCommand(bookInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddCommand(bookInList), model, AddCommand.MESSAGE_DUPLICATE_BOOK);
     }
 
 }

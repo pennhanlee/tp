@@ -26,7 +26,7 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
    * **`list`** : Lists all books.
 
-   * **`add`**`n/Fifty Shades of Gray total/350 bookmark/200` : Adds a book titled `Fifty Shades of Grey` to the Storage Library.
+   * **`add`**`n/Fifty Shades of Gray g/Romance tp/350 b/200` : Adds a book titled `Fifty Shades of Grey` to the Storage Library.
 
    * **`delete`**`3` : Deletes the 3rd book shown in the current list.
 
@@ -64,8 +64,8 @@ Adds a book to the Storage Library.
 Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER`
 
 Examples:
-* `add n/Fifty Shades of Gray tp/350 b/200`
-* `add n/Harry Potter and the Chamber of Secrets tp/1500 b/25`
+* `add n/Fifty Shades of Gray g/Romance tp/350 b/200`
+* `add n/Harry Potter and the Chamber of Secrets g/Fiction tp/1500 b/25`
 
 ### Viewing details of a book : `View`
 

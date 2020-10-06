@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.commands.AddCommand;
@@ -33,7 +32,6 @@ public class CommandParserTest {
 
     private final CommandParser parser = new CommandParser();
 
-    @Disabled("Add Command not yet refactored to work with TotalPages and Bookmark")
     @Test
     public void parseCommand_add() throws Exception {
         Book book = new BookBuilder().build();
