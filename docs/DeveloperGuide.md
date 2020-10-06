@@ -80,7 +80,7 @@ The `UI` component,
 **API** :
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+1. `Logic` uses the `CommandParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
 1. The command execution can affect the `Model` (e.g. adding a book).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -103,7 +103,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
 * stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
@@ -125,7 +125,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.bookmark.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,21 +298,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User types the wrong code.
+* 1a. User provides the wrong code.
 
-    * 1a1. bookmark shows an error message.
-
-    Use case ends.
-
-* 1b. User types a non-numeral for total pages or bookmarked page.
-
-    * 1b1. bookmark shows an error message.
+    * 1a1. bookmark returns an error message.
 
     Use case ends.
 
-* 1c. User input of bookmarked page is larger than total pages.
+* 1b. User provides a non-numeral for total pages or bookmarked page.
 
-    * 1c1. bookmark shows an error message.
+    * 1b1. bookmark returns an error message.
+
+    Use case ends.
+
+* 1c. Provided bookmarked page is larger than total pages.
+
+    * 1c1. bookmark returns an error message.
 
     Use case ends.
 
@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User <u>requests to list all books (UC05)</u>.
 2. User requests to view a specific book using its index on list.
-3. bookmark shows title, bookmark and progress of the book to user.
+3. bookmark returns title, bookmark and progress of the book to user.
 
     Use case ends.
 
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 * 2a. The index given is invalid.
 
-    * 3a1. bookmark shows an error message.
+    * 3a1. bookmark returns an error message.
 
       Use case resumes at step 2.
 
@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The index given is invalid.
 
-    * 2a1. bookmark shows an error message.
+    * 2a1. bookmark returns an error message.
 
       Use case resumes at step 2.
 
@@ -366,19 +366,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The index given is invalid
 
-    * 2a1. bookmark shows an error message
+    * 2a1. bookmark returns an error message
 
     Use case resumes at step 2.
 
  * 2b. The requested entry to update is invalid
 
-    * 2b1. bookmark shows an error message
+    * 2b1. bookmark returns an error message
 
     Use case resumes at step 2.
 
  * 2c. The provided value for the entry to update is invalid
 
-    * 2c1. bookmark shows an error message
+    * 2c1. bookmark returns an error message
 
     Use case resumes at step 2.
     
@@ -387,14 +387,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list all books
-2. bookmark shows a list of books
+2. bookmark returns a list of books
 
     Use case ends
 
 **Extensions**
 
 * 1a. The book list is empty
-    * 1a1. bookmark shows a message informing user that book list is empty
+    * 1a1. bookmark returns a message informing user that book list is empty
 
     Use case ends
 
