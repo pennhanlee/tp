@@ -29,9 +29,10 @@ public class GenreTest {
         assertFalse(Genre.isValidGenre(" ")); // spaces only
 
         // invalid genre
-        assertFalse(Genre.isValidGenre("a1+be!@example1.com")); // mixture of alphanumeric and special characters
+        assertFalse(Genre.isValidGenre("f1ct10nXDXD@@@@")); // mixture of alphanumeric and special characters
 
         // valid genre
+        assertTrue(Genre.isValidGenre("Horror 1")); // alphanumeric
         assertTrue(Genre.isValidGenre("Horror")); // First letter capitalized
         assertTrue(Genre.isValidGenre("horror")); // all lower caps
         assertTrue(Genre.isValidGenre("HORROR")); // all caps

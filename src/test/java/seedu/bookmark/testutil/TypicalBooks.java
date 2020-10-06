@@ -57,13 +57,21 @@ public class TypicalBooks {
     public static final Book THE_FAULT_IN_OUR_STARS = new BookBuilder().withName("The Fault in Our Stars")
             .withGenre("Tragic").withTotalPages("239").build();
 
-    // Manually added - Books's details found in {@code CommandTestUtil}
-    public static final Book NINETEEN_EIGHTY_FOUR = new BookBuilder().withName(VALID_NAME_1984)
+    // Manually added - Books's compulsory details found in {@code CommandTestUtil}
+    public static final Book COMPULSORY_NINETEEN_EIGHTY_FOUR = new BookBuilder().withName(VALID_NAME_1984)
             .withGenre(VALID_GENRE_1984)
-            .withTags(VALID_TAG_BAD)
+            .withTotalPages(VALID_TOTAL_PAGES_1984).build();
+    public static final Book COMPULSORY_JANE_EYRE = new BookBuilder().withName(VALID_NAME_JANE_EYRE)
+            .withGenre(VALID_GENRE_JANE_EYRE)
+            .withTotalPages(VALID_TOTAL_PAGES_JANE_EYRE).build();
+
+    // Manually added - Book's full details found in {@code CommandTestUtil}
+    public static final Book FULL_NINETEEN_EIGHTY_FOUR = new BookBuilder().withName(VALID_NAME_1984)
+            .withGenre(VALID_GENRE_1984)
+            .withTags(VALID_TAG_GOOD, VALID_TAG_BAD)
             .withTotalPages(VALID_TOTAL_PAGES_1984)
             .withBookmark(VALID_BOOKMARK_1984).build();
-    public static final Book JANE_EYRE = new BookBuilder().withName(VALID_NAME_JANE_EYRE)
+    public static final Book FULL_JANE_EYRE = new BookBuilder().withName(VALID_NAME_JANE_EYRE)
             .withGenre(VALID_GENRE_JANE_EYRE)
             .withTags(VALID_TAG_GOOD, VALID_TAG_BAD)
             .withTotalPages(VALID_TOTAL_PAGES_JANE_EYRE)

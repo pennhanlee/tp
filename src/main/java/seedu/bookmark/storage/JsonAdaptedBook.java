@@ -103,10 +103,11 @@ class JsonAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Bookmark.class.getSimpleName()));
         }
-        if (!Bookmark.isValidBookmark(bookmark, modelTotalPages)) {
+
+        final Bookmark modelBookmark = new Bookmark(bookmark);
+        if (!Bookmark.isValidBookmark(modelBookmark, modelTotalPages)) {
             throw new IllegalValueException(Bookmark.MESSAGE_CONSTRAINTS);
         }
-        final Bookmark modelBookmark = new Bookmark(bookmark, modelTotalPages);
         return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
     }
 
