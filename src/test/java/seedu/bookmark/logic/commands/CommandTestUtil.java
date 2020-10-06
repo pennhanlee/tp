@@ -34,6 +34,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_BAD = "Bad";
     public static final String VALID_TOTAL_PAGES_1984 = "684";
     public static final String VALID_TOTAL_PAGES_JANE_EYRE = "532";
+    public static final String VALID_TOTAL_PAGES = "1";
     public static final String VALID_BOOKMARK_1984 = "239";
     public static final String VALID_BOOKMARK_JANE_EYRE = "123";
 
@@ -63,10 +64,14 @@ public class CommandTestUtil {
     static {
         DESC_1984 = new EditBookDescriptorBuilder().withName(VALID_NAME_1984)
                 .withGenre(VALID_GENRE_1984)
-                .withTags(VALID_TAG_BAD).build();
+                .withTags(VALID_TAG_BAD)
+                .withTotalPages(VALID_TOTAL_PAGES_1984)
+                .withBookmark(VALID_BOOKMARK_1984).build();
         DESC_JANE_EYRE = new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE)
                 .withGenre(VALID_GENRE_JANE_EYRE)
-                .withTags(VALID_TAG_GOOD, VALID_TAG_BAD).build();
+                .withTags(VALID_TAG_GOOD, VALID_TAG_BAD)
+                .withTotalPages(VALID_TOTAL_PAGES_JANE_EYRE)
+                .withBookmark(VALID_BOOKMARK_JANE_EYRE).build();
     }
 
     /**

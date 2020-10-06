@@ -17,9 +17,9 @@ import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_THIRD_BOOK;
 
 import org.junit.jupiter.api.Test;
 
@@ -86,7 +86,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_BOOK;
         String userInput = targetIndex.getOneBased() + TAG_DESC_BAD
                 + GENRE_DESC_1984 + NAME_DESC_1984 + TAG_DESC_GOOD;
 
@@ -100,7 +100,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_BOOK;
         String userInput = targetIndex.getOneBased() + GENRE_DESC_1984;
 
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder()
@@ -113,7 +113,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_BOOK;
         String userInput = targetIndex.getOneBased() + NAME_DESC_1984;
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_1984).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -134,7 +134,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_BOOK;
         String userInput = targetIndex.getOneBased() + GENRE_DESC_1984
                 + TAG_DESC_GOOD + GENRE_DESC_1984 + TAG_DESC_GOOD
                  + GENRE_DESC_JANE_EYRE + TAG_DESC_BAD;
@@ -153,7 +153,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_BOOK;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withTags().build();
