@@ -178,7 +178,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidBookmark_failure() {
+    public void execute_invalidOutOfRangeBookmark_failure() {
 
         Book oldBook = new BookBuilder()
                                .withName(VALID_NAME_JANE_EYRE)
