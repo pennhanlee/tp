@@ -9,24 +9,31 @@ import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.parser.exceptions.ParseException;
+import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENRE = "F@ACTS0nLY";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TOTAL_PAGES = "-500";
+    private static final String INVALID_BOOKMARK = "-100";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_GENRE = "Fiction";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TOTAL_PAGES = "500";
+    private static final String VALID_BOOKMARK = "1";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -141,4 +148,51 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseTotalPages_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTotalPages((String) null));
+    }
+
+    @Test
+    public void parseTotalPages_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTotalPages(INVALID_TOTAL_PAGES));
+    }
+
+    @Test
+    public void parseTotalPages_validValueWithoutWhitespace_returnsTotalPages() throws Exception {
+        TotalPages expectedTotalPages = new TotalPages(VALID_TOTAL_PAGES);
+        assertEquals(expectedTotalPages, ParserUtil.parseTotalPages(VALID_TOTAL_PAGES));
+    }
+
+    @Test
+    public void parseTotalPages_validValueWithWhitespace_returnsTrimmedTotalPages() throws Exception {
+        String totalPagesWithWhitespace = WHITESPACE + VALID_TOTAL_PAGES + WHITESPACE;
+        TotalPages expectedTotalPages = new TotalPages(VALID_TOTAL_PAGES);
+        assertEquals(expectedTotalPages, ParserUtil.parseTotalPages(totalPagesWithWhitespace));
+    }
+
+    @Test
+    public void parseBookmark_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBookmark((Optional<String>) null));
+    }
+
+    @Test
+    public void parseBookmark_invalidValueNegativeValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBookmark(Optional.of(INVALID_BOOKMARK)));
+    }
+
+    @Test
+    public void parseBookmark_validValueWithoutWhitespace_returnsBookmark() throws Exception {
+        Bookmark expectedBookmark = new Bookmark(VALID_BOOKMARK);
+        assertEquals(expectedBookmark, ParserUtil.parseBookmark(Optional.of(VALID_BOOKMARK)));
+    }
+
+    @Test
+    public void parseBookmark_validValueWithWhitespace_returnsTrimmedBookmark() throws Exception {
+        String bookmarkWithWhitespace = WHITESPACE + VALID_BOOKMARK + WHITESPACE;
+        Bookmark expectedBookmark = new Bookmark(VALID_BOOKMARK);
+        assertEquals(expectedBookmark, ParserUtil.parseBookmark(Optional.of(bookmarkWithWhitespace)));
+    }
+
 }

@@ -13,7 +13,6 @@ import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
@@ -30,7 +29,7 @@ import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
-@Disabled("EditCommand is not refactored to work with TotalPages and Bookmark yet")
+//@Disabled("EditCommand is not refactored to work with TotalPages and Bookmark yet")
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
