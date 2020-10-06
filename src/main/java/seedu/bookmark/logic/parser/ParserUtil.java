@@ -113,7 +113,7 @@ public class ParserUtil {
             return new Bookmark();
         } else {
             String trimmedBookmark = bookmark.get();
-            trimmedBookmark.trim();
+            trimmedBookmark = trimmedBookmark.trim();
             if (!Bookmark.isValidBookmark(trimmedBookmark)) {
                 throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
             }

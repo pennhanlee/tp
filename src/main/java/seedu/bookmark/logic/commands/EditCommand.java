@@ -1,9 +1,11 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
@@ -25,32 +27,34 @@ import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing book in the library.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the book identified "
+            + "by the index number used in the displayed book list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_GENRE + "EMAIL] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_GENRE + "GENRE] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_TOTAL_PAGES + "TOTAL_PAGES] "
+            + "[" + PREFIX_BOOKMARK + "BOOKMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_GENRE + "johndoe@example.com";
+            + PREFIX_GENRE + "Horror";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editBookDescriptor details to edit the person with
+     * @param index of the book in the filtered book list to edit
+     * @param editBookDescriptor details to edit the book with
      */
     public EditCommand(Index index, EditBookDescriptor editBookDescriptor) {
         requireNonNull(index);
@@ -70,29 +74,32 @@ public class EditCommand extends Command {
         }
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
-
+        Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
-
+        if (!Bookmark.isValidBookmark(editedBook.getBookmark(), editedBook.getTotalPages())) {
+            throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
+        }
         model.setBook(bookToEdit, editedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Book} with the details of {@code bookToEdit}
+     * edited with {@code editBookDescriptor}.
      */
-    private static Book createEditedPerson(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
+    private static Book createEditedBook(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
         assert bookToEdit != null;
 
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
         Genre updatedGenre = editBookDescriptor.getGenre().orElse(bookToEdit.getGenre());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
+        TotalPages updatedTotalPages = editBookDescriptor.getTotalPages().orElse(bookToEdit.getTotalPages());
+        Bookmark updatedBookmark = editBookDescriptor.getBookmark().orElse(bookToEdit.getBookmark());
 
-        return new Book(updatedName, updatedGenre, updatedTags);
+        return new Book(updatedName, updatedGenre, updatedTags, updatedTotalPages, updatedBookmark);
     }
 
     @Override
@@ -114,8 +121,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the book with. Each non-empty field value will replace the
+     * corresponding field value of the book.
      */
     public static class EditBookDescriptor {
         private Name name;
@@ -142,7 +149,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, genre, tags);
+            return CollectionUtil.isAnyNonNull(name, genre, tags, totalPages, bookmark);
         }
 
         public void setName(Name name) {
@@ -211,7 +218,9 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getGenre().equals(e.getGenre())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getTotalPages().equals(e.getTotalPages())
+                    && getBookmark().equals(e.getBookmark());
         }
     }
 }

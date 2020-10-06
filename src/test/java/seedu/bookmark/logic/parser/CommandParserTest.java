@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.bookmark.testutil.Assert.assertThrows;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,8 +48,8 @@ public class CommandParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_BOOK.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_BOOK), command);
     }
 
     @Test
@@ -57,8 +57,8 @@ public class CommandParserTest {
         Book book = new BookBuilder().build();
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder(book).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + BookUtil.getEditBookDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_BOOK.getOneBased() + " " + BookUtil.getEditBookDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_BOOK, descriptor), command);
     }
 
     @Test
