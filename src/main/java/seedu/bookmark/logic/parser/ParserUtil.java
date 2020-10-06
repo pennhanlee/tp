@@ -108,7 +108,7 @@ public class ParserUtil {
     /**
      * Parses {@code Optional<String> bookmark} into a {@code Bookmark}
      */
-    public static Bookmark parseBookmark(Optional<String> bookmark, TotalPages totalPages) throws ParseException {
+    public static Bookmark parseBookmark(Optional<String> bookmark) throws ParseException {
         if (bookmark.isEmpty()) {
             return new Bookmark();
         } else {

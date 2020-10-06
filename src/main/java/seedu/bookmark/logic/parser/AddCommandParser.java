@@ -27,7 +27,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format or bookmark > totalpages
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -43,7 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Genre genre = ParserUtil.parseGenre(argMultimap.getValue(PREFIX_GENRE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         TotalPages totalPages = ParserUtil.parseTotalPages(argMultimap.getValue(PREFIX_TOTAL_PAGES).get());
-        Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getValue(PREFIX_BOOKMARK), totalPages);
+        Bookmark bookmark = ParserUtil.parseBookmark(argMultimap.getValue(PREFIX_BOOKMARK));
 
         if (!Bookmark.isValidBookmark(bookmark, totalPages)) {
             throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
