@@ -19,7 +19,6 @@ public class BookBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_GENRE = "Fiction";
     public static final String DEFAULT_TOTAL_PAGES = "1000";
-    public static final String DEFAULT_BOOKMARK = "0";
 
     private Name name;
     private Genre genre;
@@ -34,7 +33,7 @@ public class BookBuilder {
         name = new Name(DEFAULT_NAME);
         genre = new Genre(DEFAULT_GENRE);
         totalPages = new TotalPages(DEFAULT_TOTAL_PAGES);
-        bookmark = new Bookmark(DEFAULT_BOOKMARK);
+        bookmark = new Bookmark();
         tags = new HashSet<>();
     }
 

@@ -27,7 +27,7 @@ import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing book in the library.
  */
 public class EditCommand extends Command {
 
@@ -53,8 +53,8 @@ public class EditCommand extends Command {
     private final EditBookDescriptor editBookDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editBookDescriptor details to edit the person with
+     * @param index of the book in the filtered book list to edit
+     * @param editBookDescriptor details to edit the book with
      */
     public EditCommand(Index index, EditBookDescriptor editBookDescriptor) {
         requireNonNull(index);
@@ -87,8 +87,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Book} with the details of {@code bookToEdit}
+     * edited with {@code editBookDescriptor}.
      */
     private static Book createEditedBook(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
         assert bookToEdit != null;
@@ -121,8 +121,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the book with. Each non-empty field value will replace the
+     * corresponding field value of the book.
      */
     public static class EditBookDescriptor {
         private Name name;

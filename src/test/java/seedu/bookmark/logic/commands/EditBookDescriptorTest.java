@@ -18,6 +18,7 @@ public class EditBookDescriptorTest {
 
     @Test
     public void equals() {
+        // DESC_1984 is a different book from JANE_EYRE, and hence the values for each property are different.
         // same values -> returns true
         EditBookDescriptor descriptorWithSameValues = new EditBookDescriptor(DESC_1984);
         assertTrue(DESC_1984.equals(descriptorWithSameValues));

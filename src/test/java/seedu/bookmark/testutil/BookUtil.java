@@ -16,19 +16,19 @@ import seedu.bookmark.model.tag.Tag;
 
 
 /**
- * A utility class for Person.
+ * A utility class for Book.
  */
 public class BookUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code book}.
      */
     public static String getAddCommand(Book book) {
         return AddCommand.COMMAND_WORD + " " + getBookDetails(book);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code book}'s details.
      */
     public static String getBookDetails(Book book) {
         StringBuilder sb = new StringBuilder();
@@ -43,7 +43,7 @@ public class BookUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditBookDescriptor}'s details.
      */
     public static String getEditBookDescriptorDetails(EditCommand.EditBookDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();

@@ -34,6 +34,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_BAD = "Bad";
     public static final String VALID_TOTAL_PAGES_1984 = "684";
     public static final String VALID_TOTAL_PAGES_JANE_EYRE = "532";
+    public static final String VALID_TOTAL_PAGES = "1";
     public static final String VALID_BOOKMARK_1984 = "239";
     public static final String VALID_BOOKMARK_JANE_EYRE = "123";
 

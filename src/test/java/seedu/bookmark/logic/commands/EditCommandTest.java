@@ -33,7 +33,7 @@ import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
-//@Disabled("EditCommand is not refactored to work with TotalPages and Bookmark yet")
+
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
@@ -54,8 +54,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredBookList().size());
-        Book lastBook = model.getFilteredBookList().get(indexLastPerson.getZeroBased());
+        Index indexLastBook = Index.fromOneBased(model.getFilteredBookList().size());
+        Book lastBook = model.getFilteredBookList().get(indexLastBook.getZeroBased());
 
         BookBuilder bookInList = new BookBuilder(lastBook);
         Book editedBook = bookInList.withName(VALID_NAME_JANE_EYRE)
@@ -63,7 +63,7 @@ public class EditCommandTest {
 
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE)
                 .withTags(VALID_TAG_GOOD).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastBook, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
@@ -103,7 +103,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateBookUnfilteredList_failure() {
         seedu.bookmark.model.book.Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         seedu.bookmark.logic.commands.EditCommand.EditBookDescriptor descriptor =
                 new seedu.bookmark.testutil.EditBookDescriptorBuilder(firstBook).build();
@@ -113,10 +113,10 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateBookFilteredList_failure() {
         showBookAtIndex(model, INDEX_FIRST_BOOK);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit book in filtered list into a duplicate in address book
         Book bookInList = model.getLibrary().getBookList().get(INDEX_SECOND_BOOK.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK,
                 new EditBookDescriptorBuilder(bookInList).build());
@@ -125,7 +125,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidBookIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -135,13 +135,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of library
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidBookIndexFilteredList_failure() {
         showBookAtIndex(model, INDEX_FIRST_BOOK);
         Index outOfBoundIndex = INDEX_SECOND_BOOK;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of the library book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getLibrary().getBookList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
@@ -151,7 +151,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_validBookmark_failure() {
+    public void execute_validBookmark_success() {
         Book editedBook = new BookBuilder()
                                   .withName(VALID_NAME_JANE_EYRE)
                                   .withGenre(VALID_GENRE_JANE_EYRE)
