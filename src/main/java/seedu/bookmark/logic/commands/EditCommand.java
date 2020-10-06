@@ -1,9 +1,11 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
@@ -37,7 +39,9 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_GENRE + "GENRE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_TOTAL_PAGES + "TOTAL_PAGES] "
+            + "[" + PREFIX_BOOKMARK + "BOOKMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GENRE + "Horror";
 
@@ -71,11 +75,12 @@ public class EditCommand extends Command {
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
-
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
-
+        if (!Bookmark.isValidBookmark(editedBook.getBookmark(), editedBook.getTotalPages())) {
+            throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
+        }
         model.setBook(bookToEdit, editedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
@@ -91,8 +96,10 @@ public class EditCommand extends Command {
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
         Genre updatedGenre = editBookDescriptor.getGenre().orElse(bookToEdit.getGenre());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
+        TotalPages updatedTotalPages = editBookDescriptor.getTotalPages().orElse(bookToEdit.getTotalPages());
+        Bookmark updatedBookmark = editBookDescriptor.getBookmark().orElse(bookToEdit.getBookmark());
 
-        return new Book(updatedName, updatedGenre, updatedTags);
+        return new Book(updatedName, updatedGenre, updatedTags, updatedTotalPages, updatedBookmark);
     }
 
     @Override
@@ -142,7 +149,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, genre, tags);
+            return CollectionUtil.isAnyNonNull(name, genre, tags, totalPages, bookmark);
         }
 
         public void setName(Name name) {

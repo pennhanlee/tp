@@ -2,9 +2,11 @@ package seedu.bookmark.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -29,7 +31,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_NAME, PREFIX_GENRE, PREFIX_TAG, PREFIX_TOTAL_PAGES, PREFIX_BOOKMARK);
 
         Index index;
 
@@ -47,6 +50,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             editBookDescriptor.setGenre(ParserUtil.parseGenre(argMultimap.getValue(PREFIX_GENRE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBookDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_TOTAL_PAGES).isPresent()) {
+            editBookDescriptor.setTotalPages(
+                    ParserUtil.parseTotalPages(argMultimap.getValue(PREFIX_TOTAL_PAGES).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_BOOKMARK).isPresent()) {
+            editBookDescriptor.setBookmark(
+                    ParserUtil.parseBookmark(Optional.of(argMultimap.getValue(PREFIX_BOOKMARK).get())));
+        }
 
         if (!editBookDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
