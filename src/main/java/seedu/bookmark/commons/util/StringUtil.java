@@ -65,4 +65,16 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Converts {@code s} representing an unsigned integer into a String representing the same integer but with
+     * any leading "0"s removed.
+     *
+     * @param s String representing a non-zero unsigned integer
+     */
+    public static String trimLeadingZeroes(String s) {
+        requireNonNull(s);
+        int value = Integer.parseInt(s);
+        return String.valueOf(value);
+    }
 }
