@@ -1,7 +1,13 @@
 package seedu.bookmark.logic.commands;
 
+import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.IsSpecifiedBookPredicate;
+
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
@@ -16,6 +22,7 @@ public class ViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_NOT_IMPLEMENTED = "Hello from View Command! I'm still under development, please wait :)";
+    public static final String MESSAGE_SUCCESS = "Viewing %1$d";
 
     public final Index index;
 
@@ -24,11 +31,17 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        List<Book> lastShownList = model.getFilteredBookList();
 
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+        }
+
+        Book bookToView = lastShownList.get(index.getZeroBased());
+        model.updateFilteredBookList(new IsSpecifiedBookPredicate(bookToView));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, index.getOneBased()));
     }
 
     @Override
