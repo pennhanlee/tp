@@ -6,15 +6,7 @@ import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.bookmark.logic.commands.AddCommand;
-import seedu.bookmark.logic.commands.ClearCommand;
-import seedu.bookmark.logic.commands.Command;
-import seedu.bookmark.logic.commands.DeleteCommand;
-import seedu.bookmark.logic.commands.EditCommand;
-import seedu.bookmark.logic.commands.ExitCommand;
-import seedu.bookmark.logic.commands.FindCommand;
-import seedu.bookmark.logic.commands.HelpCommand;
-import seedu.bookmark.logic.commands.ListCommand;
+import seedu.bookmark.logic.commands.*;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,6 +59,10 @@ public class CommandParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
