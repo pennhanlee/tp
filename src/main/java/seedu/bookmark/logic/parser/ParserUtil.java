@@ -102,6 +102,7 @@ public class ParserUtil {
         if (!TotalPages.isValidTotalPages(trimmedTotalPages)) {
             throw new ParseException(TotalPages.MESSAGE_CONSTRAINTS);
         }
+        trimmedTotalPages = StringUtil.trimLeadingZeroes(trimmedTotalPages);
         return new TotalPages(trimmedTotalPages);
     }
 
@@ -117,6 +118,7 @@ public class ParserUtil {
             if (!Bookmark.isValidBookmark(trimmedBookmark)) {
                 throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
             }
+            trimmedBookmark = StringUtil.trimLeadingZeroes(trimmedBookmark);
             return new Bookmark(trimmedBookmark);
         }
     }
