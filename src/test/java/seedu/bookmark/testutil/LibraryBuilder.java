@@ -6,7 +6,7 @@ import seedu.bookmark.model.book.Book;
 /**
  * A utility class to help with building Library objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code Library ab = new LibraryBuilder().withBook("Harry", "Potter").build();}
  */
 public class LibraryBuilder {
 

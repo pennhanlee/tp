@@ -31,7 +31,7 @@ public class DeleteCommandTest {
         Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_BOOK);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, bookToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getLibrary(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
@@ -54,11 +54,11 @@ public class DeleteCommandTest {
         Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_BOOK);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, bookToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
         Model expectedModel = new ModelManager(model.getLibrary(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
-        showNoPerson(expectedModel);
+        showNoBook(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -94,14 +94,14 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different book -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoBook(Model model) {
         model.updateFilteredBookList(p -> false);
 
         assertTrue(model.getFilteredBookList().isEmpty());
