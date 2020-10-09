@@ -46,23 +46,23 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        ViewCommand deleteFirstCommand = new ViewCommand(INDEX_FIRST_BOOK);
-        ViewCommand deleteSecondCommand = new ViewCommand(INDEX_SECOND_BOOK);
+        ViewCommand viewFirstCommand = new ViewCommand(INDEX_FIRST_BOOK);
+        ViewCommand viewSecondCommand = new ViewCommand(INDEX_SECOND_BOOK);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewCommand deleteFirstCommandCopy = new ViewCommand(INDEX_FIRST_BOOK);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        ViewCommand viewFirstCommandCopy = new ViewCommand(INDEX_FIRST_BOOK);
+        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(viewFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(viewFirstCommand.equals(null));
 
         // different book -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
 }

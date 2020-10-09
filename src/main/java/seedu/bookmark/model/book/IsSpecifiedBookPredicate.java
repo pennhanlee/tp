@@ -2,6 +2,9 @@ package seedu.bookmark.model.book;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Book} matches the {@code Book} specified by user.
+ */
 public class IsSpecifiedBookPredicate implements Predicate<Book> {
     private final Book otherBook;
 
