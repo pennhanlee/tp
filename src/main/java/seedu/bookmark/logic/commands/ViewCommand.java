@@ -9,7 +9,6 @@ import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.IsSpecifiedBookPredicate;
 
 /**
  * Allows user to view a all details of a specific book
@@ -38,7 +37,7 @@ public class ViewCommand extends Command {
         }
 
         Book bookToView = lastShownList.get(index.getZeroBased());
-        model.updateFilteredBookList(new IsSpecifiedBookPredicate(bookToView));
+        model.updateFilteredBookList(b -> b.equals(bookToView));
         return new CommandResult(String.format(MESSAGE_SUCCESS, index.getOneBased()));
     }
 

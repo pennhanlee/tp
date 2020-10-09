@@ -16,7 +16,6 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.IsSpecifiedBookPredicate;
 
 public class ViewCommandTest {
 
@@ -30,8 +29,7 @@ public class ViewCommandTest {
         String expectedMessage = String.format(ViewCommand.MESSAGE_SUCCESS, INDEX_FIRST_BOOK.getOneBased());
 
         Book bookToView = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
-        IsSpecifiedBookPredicate predicate = new IsSpecifiedBookPredicate(bookToView);
-        expectedModel.updateFilteredBookList(predicate);
+        expectedModel.updateFilteredBookList(b -> b.equals(bookToView));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
