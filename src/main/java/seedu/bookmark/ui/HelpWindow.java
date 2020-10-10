@@ -16,7 +16,42 @@ import seedu.bookmark.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HEADER_MESSAGE = "Welcome to bookmark! These are the commands currently avaliable! \n"
+                                                + "(* means it is optional!) \n";
+    public static final String HELP_ADD = "Add a book!: ";
+    public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} t/{Tags}* t/{Tags}* "
+                                            + "tp/{Total Pages} b/{Bookmarked Page} \n";
+    public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 \n";
+    public static final String ADD_RESPONSE = "Response: New book added: Harry Potter Genre: Fiction Total Pages: 550"
+                                            + "Bookmarked at: 0 Tags: [Wizard]";
+    public static final String HELP_DELETE = "Delete a book!: ";
+    public static final String DELETE_COMMAND = "delete {Index} \n";
+    public static final String DELETE_EXAMPLE = "eg. delete 3 \n";
+    public static final String DELETE_RESPONSE = "";
+    public static final String HELP_VIEW = "View a book!: ";
+    public static final String VIEW_COMMAND = "view {Index} \n";
+    public static final String VIEW_EXAMPLE = "eg. view 3 \n";
+    public static final String VIEW_RESPONSE = "";
+    public static final String HELP_LIST = "List all books!: ";
+    public static final String LIST_COMMAND = "list \n";
+    public static final String LIST_EXAMPLE = "eg. list \n";
+    public static final String LIST_RESPONSE = "";
+    public static final String HELP_EDIT = "Edit a book!: ";
+    public static final String EDIT_COMMAND = "edit {Index} *t/{Tags} *b/{Bookmarked Page} \n";
+    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 \n";
+    public static final String EDIT_RESPONSE = "";
+    public static final String LINE_BREAK = " _________________________________________________________________ \n";
+
+    //public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = HEADER_MESSAGE + HELP_ADD + ADD_COMMAND + ADD_EXAMPLE
+                                              + LINE_BREAK
+                                              + HELP_LIST + LIST_COMMAND + LIST_EXAMPLE
+                                              + LINE_BREAK
+                                              + HELP_VIEW + VIEW_COMMAND + VIEW_EXAMPLE
+                                              + LINE_BREAK
+                                              + HELP_EDIT + EDIT_COMMAND + EDIT_EXAMPLE
+                                              + LINE_BREAK
+                                              + HELP_DELETE + DELETE_COMMAND + DELETE_EXAMPLE;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
