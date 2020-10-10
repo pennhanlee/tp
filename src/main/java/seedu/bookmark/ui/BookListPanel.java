@@ -14,7 +14,7 @@ import seedu.bookmark.model.book.Book;
  * Panel containing the list of books.
  */
 public class BookListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "BookListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
