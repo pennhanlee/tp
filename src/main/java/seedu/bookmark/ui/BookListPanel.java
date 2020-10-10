@@ -18,21 +18,21 @@ public class BookListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
-    private ListView<Book> personListView;
+    private ListView<Book> bookListView;
 
     /**
      * Creates a {@code BookListPanel} with the given {@code ObservableList}.
      */
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
-        personListView.setItems(bookList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        bookListView.setItems(bookList);
+        bookListView.setCellFactory(listView -> new BookListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */
-    class PersonListViewCell extends ListCell<Book> {
+    class BookListViewCell extends ListCell<Book> {
         @Override
         protected void updateItem(Book book, boolean empty) {
             super.updateItem(book, empty);

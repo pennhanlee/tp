@@ -14,7 +14,7 @@ import seedu.bookmark.model.book.Book;
  */
 public class BookCard extends UiPart<Region> {
 
-    private static final String FXML = "BookListCard.fxml";
+    private static final String FXML = "BookCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
