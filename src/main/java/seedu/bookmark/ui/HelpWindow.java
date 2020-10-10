@@ -27,19 +27,21 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_DELETE = "Delete a book!: ";
     public static final String DELETE_COMMAND = "delete {Index} \n";
     public static final String DELETE_EXAMPLE = "eg. delete 3 \n";
-    public static final String DELETE_RESPONSE = "";
+    public static final String DELETE_RESPONSE = "Response: Deleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
+                                            + "Bookmarked at: 3 Tags: [Japanese]";
     public static final String HELP_VIEW = "View a book!: ";
     public static final String VIEW_COMMAND = "view {Index} \n";
     public static final String VIEW_EXAMPLE = "eg. view 3 \n";
-    public static final String VIEW_RESPONSE = "";
+    public static final String VIEW_RESPONSE = "Response: Viewing 3";
     public static final String HELP_LIST = "List all books!: ";
     public static final String LIST_COMMAND = "list \n";
     public static final String LIST_EXAMPLE = "eg. list \n";
-    public static final String LIST_RESPONSE = "";
+    public static final String LIST_RESPONSE = "Response: Listing all books";
     public static final String HELP_EDIT = "Edit a book!: ";
     public static final String EDIT_COMMAND = "edit {Index} *t/{Tags} *b/{Bookmarked Page} \n";
-    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 \n";
-    public static final String EDIT_RESPONSE = "";
+    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 t/Anime \n";
+    public static final String EDIT_RESPONSE = "Edited Book: Haikyuu Genre: Manga Total Pages: 500"
+                                            + " Bookmarked at: 360 Tags: [Anime]";
     public static final String LINE_BREAK = " _________________________________________________________________ \n";
 
     //public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
