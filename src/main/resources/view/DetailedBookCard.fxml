@@ -20,6 +20,7 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
+            <Label text="You are viewing:" styleClass="cell_big_label"/>
             <HBox spacing="5" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
@@ -38,7 +39,6 @@
                     </ImageView>
                 </graphic>
             </Label>
-            <Label text="\$viewing detailed book card"/>
         </VBox>
     </GridPane>
 </HBox>
