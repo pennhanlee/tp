@@ -180,6 +180,7 @@ public class MainWindow extends UiPart<Stage> {
     private void resetView() {
         if (!isDefaultView) {
             bookListPanel = new BookListPanel(logic.getFilteredBookList());
+            bookListPanelPlaceholder.getChildren().clear();
             bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
         }
         isDefaultView = true;
