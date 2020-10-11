@@ -4,9 +4,12 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.bookmark.MainApp;
 import seedu.bookmark.model.book.Book;
 
 /**
@@ -15,6 +18,8 @@ import seedu.bookmark.model.book.Book;
 public class BookCard extends UiPart<Region> {
 
     private static final String FXML = "BookCard.fxml";
+    private static final String BOOKMARK_ICON_PATH = "/images/bookmark.png";
+    private static final String NO_BOOKMARK_ICON_PATH = "/images/no_bookmark.png";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,6 +45,8 @@ public class BookCard extends UiPart<Region> {
     private Label bookmark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ImageView bookmarkIcon;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,8 +57,16 @@ public class BookCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
         genre.setText(book.getGenre().value);
-        totalPages.setText("Total pages: " + book.getTotalPages().value);
-        bookmark.setText("Bookmarked at page " + book.getBookmark().value);
+        totalPages.setText(book.getTotalPages().value + " pages");
+        if (!book.getBookmark().value.equals("0")) {
+            bookmark.setText("Bookmarked @ page " + book.getBookmark().value);
+            Image image = new Image(MainApp.class.getResourceAsStream(BOOKMARK_ICON_PATH));
+            bookmarkIcon.setImage(image);
+        } else {
+            bookmark.setText("No bookmark for this book yet");
+            Image image = new Image(MainApp.class.getResourceAsStream(NO_BOOKMARK_ICON_PATH));
+            bookmarkIcon.setImage(image);
+        }
         book.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
