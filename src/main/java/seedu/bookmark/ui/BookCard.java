@@ -17,9 +17,9 @@ import seedu.bookmark.model.book.Book;
  */
 public class BookCard extends UiPart<Region> {
 
+    protected static final String BOOKMARK_ICON_PATH = "/images/bookmark.png";
+    protected static final String NO_BOOKMARK_ICON_PATH = "/images/no_bookmark.png";
     private static final String FXML = "BookCard.fxml";
-    private static final String BOOKMARK_ICON_PATH = "/images/bookmark.png";
-    private static final String NO_BOOKMARK_ICON_PATH = "/images/no_bookmark.png";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,28 +32,40 @@ public class BookCard extends UiPart<Region> {
     public final Book book;
 
     @FXML
-    private HBox cardPane;
+    protected HBox cardPane;
     @FXML
-    private Label name;
+    protected Label name;
     @FXML
-    private Label id;
+    protected Label id;
     @FXML
-    private Label genre;
+    protected Label genre;
     @FXML
-    private Label totalPages;
+    protected Label totalPages;
     @FXML
-    private Label bookmark;
+    protected Label bookmark;
     @FXML
-    private FlowPane tags;
+    protected FlowPane tags;
     @FXML
-    private ImageView bookmarkIcon;
+    protected ImageView bookmarkIcon;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code BookCard} with the given {@code Book} and index to display.
      */
     public BookCard(Book book, int displayedIndex) {
         super(FXML);
         this.book = book;
+        initialize(book, displayedIndex);
+    }
+
+    /**
+     * Work around for subclasses to specify their own fxml file path.
+     */
+    public BookCard(Book book, String fxml) {
+        super(fxml);
+        this.book = book;
+    }
+
+    protected void initialize(Book book, int displayedIndex) {
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
         genre.setText(book.getGenre().value);

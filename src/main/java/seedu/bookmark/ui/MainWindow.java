@@ -163,7 +163,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public BookListPanel getPersonListPanel() {
+    private void handleView() {
+        bookListPanel = new DetailedBookListPanel(logic.getFilteredBookList());
+        personListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+    }
+
+    public BookListPanel getBookListPanel() {
         return bookListPanel;
     }
 
@@ -185,6 +190,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            handleView();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

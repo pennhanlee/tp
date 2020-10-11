@@ -18,15 +18,20 @@ public class BookListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
-    private ListView<Book> bookListView;
+    protected ListView<Book> bookListView;
 
     /**
      * Creates a {@code BookListPanel} with the given {@code ObservableList}.
      */
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
+        System.out.println(bookList.get(0).getTotalPages());
         bookListView.setItems(bookList);
-        bookListView.setCellFactory(listView -> new BookListViewCell());
+        bookListView.setCellFactory(lv -> new BookListViewCell());
+    }
+
+    public BookListPanel() {
+        super(FXML);
     }
 
     /**
