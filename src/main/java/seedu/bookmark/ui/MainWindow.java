@@ -35,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private boolean isDefaultView = true;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -42,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane bookListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +113,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+        bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,9 +165,24 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Changes the view of books to the detailed view.
+     */
     private void handleView() {
+        isDefaultView = false;
         bookListPanel = new DetailedBookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+        bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+    }
+
+    /**
+     * Changes the view of books back to the default view.
+     */
+    private void resetView() {
+        if (!isDefaultView) {
+            bookListPanel = new BookListPanel(logic.getFilteredBookList());
+            bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+        }
+        isDefaultView = true;
     }
 
     public BookListPanel getBookListPanel() {
@@ -191,7 +208,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            handleView();
+            if (commandResult.isView()) {
+                handleView();
+            } else {
+                resetView();
+            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {

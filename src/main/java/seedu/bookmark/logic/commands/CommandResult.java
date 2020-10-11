@@ -50,6 +50,10 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isView() {
+        return view;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
