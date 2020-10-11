@@ -14,11 +14,11 @@ import seedu.bookmark.model.book.Book;
  * Panel containing the list of books.
  */
 public class BookListPanel extends UiPart<Region> {
-    private static final String FXML = "BookListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
+    private static final String FXML = "BookListPanel.fxml";
     @FXML
     protected ListView<Book> bookListView;
+    private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     /**
      * Creates a {@code BookListPanel} with the given {@code ObservableList}.

@@ -9,6 +9,9 @@ public class DetailedBookCard extends BookCard {
 
     private static final String FXML = "DetailedBookCard.fxml";
 
+    /**
+     * Creates a {@code DetailedBookCard} with the given {@code Book} and index to display.
+     */
     public DetailedBookCard(Book book, int displayedIndex) {
         super(book, FXML);
         initialize(book, displayedIndex);
