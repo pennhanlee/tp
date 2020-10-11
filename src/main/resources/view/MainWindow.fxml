@@ -33,11 +33,12 @@
           </Menu>
         </MenuBar>
 
-        <VBox fx:id="library" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="library" styleClass="pane-with-border"
+              minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="bookListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="bookListPanelPlaceholder" style="fx-background-color: transparent;" VBox.vgrow="ALWAYS"/>
         </VBox>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"

@@ -90,21 +90,26 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 5 0;
+    -fx-padding: 10 0;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: transparent;
 }
 
 .list-cell .label {
     -fx-text-fill: white;
+}
+
+.book-list {
+    -fx-background-color: transparent;
 }
 
 .cell_big_label {
@@ -124,9 +129,9 @@
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+    -fx-background-image: url("../images/bookshelf.png");
 }
 
 .status-bar {
@@ -297,7 +302,7 @@
     -fx-background-color:  #515658;
     -fx-background-radius: 15px;
     -fx-border-width: 0;
-    -fx-padding: 0, 2px;
+    -fx-padding: 0, 10px;
 }
 
 #commandTypeLabel {
@@ -316,7 +321,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #bookListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
