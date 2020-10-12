@@ -18,16 +18,16 @@ public class CommandResult {
     private final boolean exit;
 
     /** The application should change view. */
-    private final boolean view;
+    private final boolean detailedView;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean detailedView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.view = view;
+        this.detailedView = detailedView;
     }
 
     /**
@@ -50,8 +50,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isView() {
-        return view;
+    public boolean isDetailedView() {
+        return detailedView;
     }
 
     @Override

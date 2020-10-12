@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Side;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -176,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Changes the view of books to the detailed view.
      */
-    private void handleView() {
+    private void changeToDetailedView() {
         isDefaultView = false;
         bookListPanel = new DetailedBookListPanel(logic.getFilteredBookList());
         bookListPanelPlaceholder.getChildren().clear();
@@ -219,8 +218,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isView()) {
-                handleView();
+            if (commandResult.isDetailedView()) {
+                changeToDetailedView();
             } else {
                 resetView();
             }
