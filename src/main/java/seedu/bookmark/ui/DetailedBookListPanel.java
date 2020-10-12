@@ -15,13 +15,13 @@ public class DetailedBookListPanel extends BookListPanel {
     public DetailedBookListPanel(ObservableList<Book> bookList) {
         super();
         bookListView.setItems(bookList);
-        bookListView.setCellFactory(lv -> new BookListViewCell());
+        bookListView.setCellFactory(lv -> new DetailedBookListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code DetailedBookCard}.
      */
-    class BookListViewCell extends ListCell<Book> {
+    class DetailedBookListViewCell extends ListCell<Book> {
         @Override
         protected void updateItem(Book book, boolean empty) {
             super.updateItem(book, empty);
