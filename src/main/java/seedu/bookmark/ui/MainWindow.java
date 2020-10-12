@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private BookListPanel bookListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SidebarPanel sidebarPanel;
 
     private boolean isDefaultView = true;
 
@@ -45,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane bookListPanelPlaceholder;
+
+    @FXML
+    private StackPane sidebarPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,6 +119,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
         bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+
+        sidebarPanel = new SidebarPanel(logic.getFilteredBookList());
+        sidebarPanelPlaceholder.getChildren().add(sidebarPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
