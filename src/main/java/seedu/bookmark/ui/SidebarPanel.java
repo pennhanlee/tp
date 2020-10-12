@@ -22,6 +22,9 @@ public class SidebarPanel extends UiPart<Region> {
     @FXML
     private Label numPagesRead;
 
+    /**
+     * Initializes a {@code SidebarPanel} with the given list of books.
+     */
     public SidebarPanel(ObservableList<Book> books) {
         super(FXML);
         this.books = books;
@@ -29,7 +32,7 @@ public class SidebarPanel extends UiPart<Region> {
     }
 
     /**
-     * Update the sidebar's Label texts
+     * Update the sidebar's Label texts.
      */
     public void update(ObservableList<Book> books) {
         int length = books.size();
