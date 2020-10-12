@@ -24,45 +24,44 @@ public class HelpWindow extends UiPart<Stage> {
     private Image editImage = new Image(this.getClass().getResourceAsStream("/images/edit_command.png"));
     private Image deleteImage = new Image(this.getClass().getResourceAsStream("/images/delete_command.png"));
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f13-2.github.io/tp/";
     public static final String HEADER_MESSAGE = "Welcome to bookmark! These are the commands currently avaliable! \n"
-                                                + "(* means it is optional!) \n";
+                                                + "Click on the Copy URL button for the link to our Website!\n";
+
     public static final String HELP_ADD = "Add a book!: ";
     public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} t/{Tags}* t/{Tags}* "
                                             + "tp/{Total Pages} b/{Bookmarked Page} \n";
     public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 \n";
-    public static final String ADD_RESPONSE = "Response: New book added: Harry Potter Genre: Fiction Total Pages: 550"
+    public static final String ADD_RESPONSE = "Response: \nNew book added: Harry Potter Genre: Fiction Total Pages: 550 "
                                             + "Bookmarked at: 0 Tags: [Wizard]";
+
     public static final String HELP_DELETE = "Delete a book!: ";
     public static final String DELETE_COMMAND = "delete {Index} \n";
     public static final String DELETE_EXAMPLE = "eg. delete 3 \n";
-    public static final String DELETE_RESPONSE = "Response: Deleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
+    public static final String DELETE_RESPONSE = "Response: \nDeleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
                                             + "Bookmarked at: 3 Tags: [Japanese]";
+
     public static final String HELP_VIEW = "View a book!: ";
     public static final String VIEW_COMMAND = "view {Index} \n";
     public static final String VIEW_EXAMPLE = "eg. view 3 \n";
-    public static final String VIEW_RESPONSE = "Response: Viewing 3";
+    public static final String VIEW_RESPONSE = "Response: \nViewing 3";
+
     public static final String HELP_LIST = "List all books!: ";
     public static final String LIST_COMMAND = "list \n";
     public static final String LIST_EXAMPLE = "eg. list \n";
-    public static final String LIST_RESPONSE = "Response: Listing all books";
+    public static final String LIST_RESPONSE = "Response: \nListing all books";
+
     public static final String HELP_EDIT = "Edit a book!: ";
     public static final String EDIT_COMMAND = "edit {Index} *t/{Tags} *b/{Bookmarked Page} \n";
     public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 t/Anime \n";
-    public static final String EDIT_RESPONSE = "Edited Book: Haikyuu Genre: Manga Total Pages: 500"
+    public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
                                             + " Bookmarked at: 360 Tags: [Anime]";
-    public static final String LINE_BREAK = " _________________________________________________________________ \n";
 
-    //public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String HELP_MESSAGE = HEADER_MESSAGE + HELP_ADD + ADD_COMMAND + ADD_EXAMPLE
-                                              + LINE_BREAK
-                                              + HELP_LIST + LIST_COMMAND + LIST_EXAMPLE
-                                              + LINE_BREAK
-                                              + HELP_VIEW + VIEW_COMMAND + VIEW_EXAMPLE
-                                              + LINE_BREAK
-                                              + HELP_EDIT + EDIT_COMMAND + EDIT_EXAMPLE
-                                              + LINE_BREAK
-                                              + HELP_DELETE + DELETE_COMMAND + DELETE_EXAMPLE;
+    public static final String ADD_MESSAGE = HELP_ADD + ADD_COMMAND + ADD_EXAMPLE + ADD_RESPONSE;
+    public static final String LIST_MESSAGE = HELP_LIST + LIST_COMMAND + LIST_EXAMPLE + LIST_RESPONSE;
+    public static final String VIEW_MESSAGE = HELP_VIEW + VIEW_COMMAND + VIEW_EXAMPLE + VIEW_RESPONSE;
+    public static final String EDIT_MESSAGE = HELP_EDIT + EDIT_COMMAND + EDIT_EXAMPLE + EDIT_RESPONSE;
+    public static final String DELETE_MESSAGE = HELP_DELETE + DELETE_COMMAND + DELETE_EXAMPLE + DELETE_RESPONSE;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -90,11 +89,11 @@ public class HelpWindow extends UiPart<Stage> {
         welcomeHelp.setText(HEADER_MESSAGE);
         scrollPane.vvalueProperty().bind(helpContainer.heightProperty());
         helpContainer.getChildren().addAll(
-                HelpBox.getHelpBox("This text is just an example", addImage),
-                HelpBox.getHelpBox("This text is just an example", listImage),
-                HelpBox.getHelpBox("This text is just an example", viewImage),
-                HelpBox.getHelpBox("This text is just an example", editImage),
-                HelpBox.getHelpBox("This text is just an example", deleteImage)
+                HelpBox.getHelpBox(ADD_MESSAGE, addImage),
+                HelpBox.getHelpBox(LIST_MESSAGE, listImage),
+                HelpBox.getHelpBox(VIEW_MESSAGE, viewImage),
+                HelpBox.getHelpBox(EDIT_MESSAGE, editImage),
+                HelpBox.getHelpBox(DELETE_MESSAGE, deleteImage)
         );
     }
 
