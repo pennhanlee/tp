@@ -171,6 +171,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleView() {
         isDefaultView = false;
         bookListPanel = new DetailedBookListPanel(logic.getFilteredBookList());
+        bookListPanelPlaceholder.getChildren().clear();
         bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
     }
 

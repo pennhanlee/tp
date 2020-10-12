@@ -25,7 +25,6 @@ public class BookListPanel extends UiPart<Region> {
      */
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
-        System.out.println(bookList.get(0).getTotalPages());
         bookListView.setItems(bookList);
         bookListView.setCellFactory(lv -> new BookListViewCell());
     }
