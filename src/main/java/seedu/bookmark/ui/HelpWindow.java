@@ -18,12 +18,6 @@ import seedu.bookmark.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    private Image addImage = new Image(this.getClass().getResourceAsStream("/images/add_command.png"));
-    private Image listImage = new Image(this.getClass().getResourceAsStream("/images/list_command.png"));
-    private Image viewImage = new Image(this.getClass().getResourceAsStream("/images/view_command.png"));
-    private Image editImage = new Image(this.getClass().getResourceAsStream("/images/edit_command.png"));
-    private Image deleteImage = new Image(this.getClass().getResourceAsStream("/images/delete_command.png"));
-
     public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f13-2.github.io/tp/";
     public static final String HEADER_MESSAGE = "Welcome to bookmark! These are the commands currently avaliable! \n"
                                                 + "Click on the Copy URL button for the link to our Website!\n";
@@ -32,8 +26,8 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} t/{Tags}* t/{Tags}* "
                                             + "tp/{Total Pages} b/{Bookmarked Page} \n";
     public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 \n";
-    public static final String ADD_RESPONSE = "Response: \nNew book added: Harry Potter Genre: Fiction Total Pages: 550 "
-                                            + "Bookmarked at: 0 Tags: [Wizard]";
+    public static final String ADD_RESPONSE = "Response: \nNew book added: Harry Potter "
+                                            + "Genre: Fiction Total Pages: 550 Bookmarked at: 0 Tags: [Wizard]";
 
     public static final String HELP_DELETE = "Delete a book!: ";
     public static final String DELETE_COMMAND = "delete {Index} \n";
@@ -65,6 +59,12 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private Image addImage = new Image(this.getClass().getResourceAsStream("/images/add_command.png"));
+    private Image listImage = new Image(this.getClass().getResourceAsStream("/images/list_command.png"));
+    private Image viewImage = new Image(this.getClass().getResourceAsStream("/images/view_command.png"));
+    private Image editImage = new Image(this.getClass().getResourceAsStream("/images/edit_command.png"));
+    private Image deleteImage = new Image(this.getClass().getResourceAsStream("/images/delete_command.png"));
 
     @FXML
     private Button copyButton;
