@@ -18,7 +18,11 @@ import seedu.bookmark.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    private Image exampleImage = new Image(this.getClass().getResourceAsStream("/images/help_icon.png"));
+    private Image addImage = new Image(this.getClass().getResourceAsStream("/images/add_command.png"));
+    private Image listImage = new Image(this.getClass().getResourceAsStream("/images/list_command.png"));
+    private Image viewImage = new Image(this.getClass().getResourceAsStream("/images/view_command.png"));
+    private Image editImage = new Image(this.getClass().getResourceAsStream("/images/edit_command.png"));
+    private Image deleteImage = new Image(this.getClass().getResourceAsStream("/images/delete_command.png"));
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HEADER_MESSAGE = "Welcome to bookmark! These are the commands currently avaliable! \n"
@@ -67,6 +71,9 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
+    private Label welcomeHelp;
+
+    @FXML
     private ScrollPane scrollPane;
 
     @FXML
@@ -80,15 +87,14 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        welcomeHelp.setText(HEADER_MESSAGE);
         scrollPane.vvalueProperty().bind(helpContainer.heightProperty());
         helpContainer.getChildren().addAll(
-                HelpBox.getHelpBox("This text is just an example", exampleImage),
-                HelpBox.getHelpBox("This text is just an example", exampleImage),
-                HelpBox.getHelpBox("This text is just an example", exampleImage),
-                HelpBox.getHelpBox("This text is just an example", exampleImage),
-                HelpBox.getHelpBox("This text is just an example", exampleImage),
-                HelpBox.getHelpBox("This text is just an example", exampleImage)
-
+                HelpBox.getHelpBox("This text is just an example", addImage),
+                HelpBox.getHelpBox("This text is just an example", listImage),
+                HelpBox.getHelpBox("This text is just an example", viewImage),
+                HelpBox.getHelpBox("This text is just an example", editImage),
+                HelpBox.getHelpBox("This text is just an example", deleteImage)
         );
     }
 
