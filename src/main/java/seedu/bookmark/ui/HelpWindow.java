@@ -5,8 +5,11 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.bookmark.commons.core.LogsCenter;
 
@@ -14,6 +17,8 @@ import seedu.bookmark.commons.core.LogsCenter;
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
+
+    private Image exampleImage = new Image(this.getClass().getResourceAsStream("/images/help_icon.png"));
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HEADER_MESSAGE = "Welcome to bookmark! These are the commands currently avaliable! \n"
@@ -62,7 +67,11 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label helpMessage;
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox helpContainer;
+
 
     /**
      * Creates a new HelpWindow.
@@ -71,7 +80,16 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        scrollPane.vvalueProperty().bind(helpContainer.heightProperty());
+        helpContainer.getChildren().addAll(
+                HelpBox.getHelpBox("This text is just an example", exampleImage),
+                HelpBox.getHelpBox("This text is just an example", exampleImage),
+                HelpBox.getHelpBox("This text is just an example", exampleImage),
+                HelpBox.getHelpBox("This text is just an example", exampleImage),
+                HelpBox.getHelpBox("This text is just an example", exampleImage),
+                HelpBox.getHelpBox("This text is just an example", exampleImage)
+
+        );
     }
 
     /**
