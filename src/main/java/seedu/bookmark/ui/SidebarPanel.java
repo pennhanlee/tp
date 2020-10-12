@@ -25,6 +25,28 @@ public class SidebarPanel extends UiPart<Region> {
     public SidebarPanel(ObservableList<Book> books) {
         super(FXML);
         this.books = books;
+        update(books);
+    }
+
+    /**
+     * Update the sidebar's Label texts
+     */
+    public void update(ObservableList<Book> books) {
+        int length = books.size();
+        int bookmarkCount = (int) books.stream()
+                .filter(book -> !book.getBookmark().value.equals("0"))
+                .count();
+        int pagesReadCount = books.stream()
+                .map(book -> Integer.valueOf(book.getBookmark().value))
+                .reduce(0, Integer::sum);
+
+        String book = length == 1 ? " book" : " books";
+        String bookmark = bookmarkCount == 1 ? " bookmark placed" : " bookmarks placed";
+        String pagesRead = pagesReadCount == 1 ? " page read" : " pages read";
+
+        numBooks.setText(length + book);
+        numBookmarks.setText(bookmarkCount + bookmark);
+        numPagesRead.setText(pagesReadCount + pagesRead);
     }
 
 }
