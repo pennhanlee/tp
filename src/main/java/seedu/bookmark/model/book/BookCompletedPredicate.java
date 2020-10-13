@@ -15,6 +15,6 @@ public class BookCompletedPredicate implements Predicate<Book> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate); // instanceof handles nulls
+                || (other instanceof BookCompletedPredicate); // instanceof handles nulls
     }
 }

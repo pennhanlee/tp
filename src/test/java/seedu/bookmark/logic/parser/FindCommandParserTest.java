@@ -63,19 +63,19 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " " + PREFIX_TAG + "             " + " \n Happy \n \t Sad  \t", expectedFindCommand);
     }
 
-//    @Test
-//    public void parse_validBookCompletedArgs_returnsFindCommand() {
-//        // no leading and trailing whitespaces
-//        FindCommand expectedFindCommand =
-//                new FindCommand(new BookCompletedPredicate());
-//        assertParseSuccess(parser, " " + PREFIX_COMPLETED, expectedFindCommand);
-//    }
-//
-//    @Test
-//    public void parse_validBookNotCompletedArgs_returnsFindCommand() {
-//        // no leading and trailing whitespaces
-//        FindCommand expectedFindCommand =
-//                new FindCommand(new BookNotCompletedPredicate());
-//        assertParseSuccess(parser, " " + PREFIX_NOT_COMPLETED, expectedFindCommand);
-//    }
+    @Test
+    public void parse_validBookCompletedArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new BookCompletedPredicate());
+        assertParseSuccess(parser, " " + PREFIX_COMPLETED, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validBookNotCompletedArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new BookNotCompletedPredicate());
+        assertParseSuccess(parser, " " + PREFIX_NOT_COMPLETED, expectedFindCommand);
+    }
 }
