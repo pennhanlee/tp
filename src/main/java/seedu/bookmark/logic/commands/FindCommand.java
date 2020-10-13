@@ -5,9 +5,12 @@ import static java.util.Objects.requireNonNull;
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
+import seedu.bookmark.model.book.BookCompletedPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all books in bookmark whose specified property contains any of the argument keywords.
+ * Currently, supports finding in name, genre properties, as well as finding completed and non completed books.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -19,7 +22,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final GenreContainsKeywordsPredicate genrePredicate;
+    private final BookCompletedPredicate bookCompletedPredicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;

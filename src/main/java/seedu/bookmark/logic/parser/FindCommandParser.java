@@ -1,6 +1,10 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 
 import java.util.Arrays;
 
