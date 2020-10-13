@@ -90,10 +90,10 @@ public class Book {
     }
 
     /**
-     * Returns true if book is completed, i.e. bookmarked page is equal to total pages
+     * Returns true if book is completed, i.e. if bookmarked page is equal to total pages.
      */
     public boolean isCompleted() {
-        return bookmark.value == totalPages.value;
+        return bookmark.value.equals(totalPages.value);
     }
 
     /**
