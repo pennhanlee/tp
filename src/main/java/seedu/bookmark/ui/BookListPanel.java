@@ -14,25 +14,29 @@ import seedu.bookmark.model.book.Book;
  * Panel containing the list of books.
  */
 public class BookListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
+    private static final String FXML = "BookListPanel.fxml";
     @FXML
-    private ListView<Book> personListView;
+    protected ListView<Book> bookListView;
+    private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     /**
      * Creates a {@code BookListPanel} with the given {@code ObservableList}.
      */
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
-        personListView.setItems(bookList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        bookListView.setItems(bookList);
+        bookListView.setCellFactory(lv -> new BookListViewCell());
+    }
+
+    public BookListPanel() {
+        super(FXML);
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */
-    class PersonListViewCell extends ListCell<Book> {
+    class BookListViewCell extends ListCell<Book> {
         @Override
         protected void updateItem(Book book, boolean empty) {
             super.updateItem(book, empty);
