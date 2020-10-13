@@ -87,7 +87,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         welcomeHelp.setText(HEADER_MESSAGE);
-        scrollPane.vvalueProperty().bind(helpContainer.heightProperty());
+        scrollPane.setVvalue(0);
         helpContainer.getChildren().addAll(
                 HelpBox.getHelpBox(ADD_MESSAGE, addImage),
                 HelpBox.getHelpBox(LIST_MESSAGE, listImage),
