@@ -13,6 +13,7 @@ import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
 import seedu.bookmark.model.book.BookCompletedPredicate;
 import seedu.bookmark.model.book.BookNotCompletedPredicate;
+import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
 
 import java.util.Arrays;
 
@@ -35,7 +36,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
-                        PREFIX_NAME, PREFIX_GENRE, PREFIX_COMPLETED, PREFIX_NOT_COMPLETED);
+                        PREFIX_NAME, PREFIX_GENRE, PREFIX_COMPLETED, PREFIX_NOT_COMPLETED, PREFIX_TAG);
 
         //checking if user had input more than one prefix. put the input prefix in inputPrefix.
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -53,6 +54,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NOT_COMPLETED).isPresent()) {
             prefixCount += 1;
             inputPrefix = PREFIX_NOT_COMPLETED;
+        }
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            prefixCount += 1;
+            inputPrefix = PREFIX_TAG;
         }
         if (prefixCount != 1) { //if more than 1 input prefix, we throw an error.
             throw new ParseException(
@@ -74,6 +79,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicate = new BookCompletedPredicate();
         } else if (inputPrefix == PREFIX_NOT_COMPLETED) {
             predicate = new BookNotCompletedPredicate();
+        } else if (inputPrefix == PREFIX_TAG) {
+            predicate = new TagContainsKeywordsPredicate(Arrays.asList(keywords));
         }
 
         return new FindCommand(predicate);
