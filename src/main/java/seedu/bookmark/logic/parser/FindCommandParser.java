@@ -84,7 +84,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Returns a predicate based on the input prefix
-     * @return Predicate<Book> based on input prefix
+     * @return Predicate based on input prefix
      */
     public Predicate<Book> predicateGenerator(Prefix inputPrefix, String[] keywords) {
         Predicate<Book> predicate = null;
