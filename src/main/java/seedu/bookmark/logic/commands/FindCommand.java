@@ -2,11 +2,11 @@ package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
 import seedu.bookmark.commons.core.Messages;
+
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
-import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
-import seedu.bookmark.model.book.BookCompletedPredicate;
+import seedu.bookmark.model.book.Book;
 
 /**
  * Finds and lists all books in bookmark whose specified property contains any of the argument keywords.
@@ -22,11 +22,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate namePredicate;
-    private final GenreContainsKeywordsPredicate genrePredicate;
-    private final BookCompletedPredicate bookCompletedPredicate;
+    private final Predicate<Book> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(Predicate<Book> predicate) {
         this.predicate = predicate;
     }
 
