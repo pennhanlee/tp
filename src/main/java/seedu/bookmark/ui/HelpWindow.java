@@ -19,43 +19,43 @@ import seedu.bookmark.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f13-2.github.io/tp/";
-    public static final String HEADER_MESSAGE = "Welcome to bookmark! These are the commands currently avaliable! \n"
+    public static final String HEADER_MESSAGE = "Welcome to bookmark!\n"
                                                 + "Click on the Copy URL button for the link to our Website!\n";
 
-    public static final String HELP_ADD = "Add a book!: ";
+    public static final String ADD_INTRO = "You can now ADD a book! \n";
     public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} t/{Tags}* t/{Tags}* "
                                             + "tp/{Total Pages} b/{Bookmarked Page} \n";
     public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 \n";
     public static final String ADD_RESPONSE = "Response: \nNew book added: Harry Potter "
                                             + "Genre: Fiction Total Pages: 550 Bookmarked at: 0 Tags: [Wizard]";
 
-    public static final String HELP_DELETE = "Delete a book!: ";
+    public static final String DELETE_INTRO = "You can now DELETE a book! \n";
     public static final String DELETE_COMMAND = "delete {Index} \n";
     public static final String DELETE_EXAMPLE = "eg. delete 3 \n";
     public static final String DELETE_RESPONSE = "Response: \nDeleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
                                             + "Bookmarked at: 3 Tags: [Japanese]";
 
-    public static final String HELP_VIEW = "View a book!: ";
+    public static final String VIEW_INTRO = "You can now VIEW a book's contents! \n";
     public static final String VIEW_COMMAND = "view {Index} \n";
     public static final String VIEW_EXAMPLE = "eg. view 3 \n";
     public static final String VIEW_RESPONSE = "Response: \nViewing 3";
 
-    public static final String HELP_LIST = "List all books!: ";
+    public static final String LIST_INTRO = "You can now LIST all recorded books! \n";
     public static final String LIST_COMMAND = "list \n";
     public static final String LIST_EXAMPLE = "eg. list \n";
     public static final String LIST_RESPONSE = "Response: \nListing all books";
 
-    public static final String HELP_EDIT = "Edit a book!: ";
+    public static final String EDIT_INTRO = "You can now EDIT a book's contents! \n";
     public static final String EDIT_COMMAND = "edit {Index} *t/{Tags} *b/{Bookmarked Page} \n";
     public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 t/Anime \n";
     public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
                                             + " Bookmarked at: 360 Tags: [Anime]";
 
-    public static final String ADD_MESSAGE = HELP_ADD + ADD_COMMAND + ADD_EXAMPLE + ADD_RESPONSE;
-    public static final String LIST_MESSAGE = HELP_LIST + LIST_COMMAND + LIST_EXAMPLE + LIST_RESPONSE;
-    public static final String VIEW_MESSAGE = HELP_VIEW + VIEW_COMMAND + VIEW_EXAMPLE + VIEW_RESPONSE;
-    public static final String EDIT_MESSAGE = HELP_EDIT + EDIT_COMMAND + EDIT_EXAMPLE + EDIT_RESPONSE;
-    public static final String DELETE_MESSAGE = HELP_DELETE + DELETE_COMMAND + DELETE_EXAMPLE + DELETE_RESPONSE;
+    public static final String ADD_MESSAGE = ADD_INTRO + ADD_COMMAND + ADD_EXAMPLE + ADD_RESPONSE;
+    public static final String LIST_MESSAGE = LIST_INTRO + LIST_COMMAND + LIST_EXAMPLE + LIST_RESPONSE;
+    public static final String VIEW_MESSAGE = VIEW_INTRO + VIEW_COMMAND + VIEW_EXAMPLE + VIEW_RESPONSE;
+    public static final String EDIT_MESSAGE = EDIT_INTRO + EDIT_COMMAND + EDIT_EXAMPLE + EDIT_RESPONSE;
+    public static final String DELETE_MESSAGE = DELETE_INTRO + DELETE_COMMAND + DELETE_EXAMPLE + DELETE_RESPONSE;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
