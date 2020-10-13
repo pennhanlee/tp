@@ -24,7 +24,6 @@ import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private int prefixCount = 0;
     private Prefix inputPrefix;
 
     /**
@@ -33,11 +32,13 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        Predicate<Book> predicate;
+        int prefixCount = 0;
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
                         PREFIX_NAME, PREFIX_GENRE, PREFIX_COMPLETED, PREFIX_NOT_COMPLETED, PREFIX_TAG);
 
-        //checking if user had input more than one prefix. put the input prefix in inputPrefix.
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             prefixCount += 1;
             inputPrefix = PREFIX_NAME;
@@ -58,11 +59,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             prefixCount += 1;
             inputPrefix = PREFIX_TAG;
         }
-        if (prefixCount != 1) { //if more than 1 input prefix, we throw an error.
+        if (prefixCount != 1) { //if more than/ less than 1 input prefix, we throw an error.
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        prefixCount = 0; //set count back to 0
 
         String trimmedArgs = argMultimap.getValue(inputPrefix).get().trim();
         if (trimmedArgs.isEmpty() && inputPrefix != PREFIX_COMPLETED && inputPrefix != PREFIX_NOT_COMPLETED) {
@@ -77,8 +77,17 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
-        Predicate<Book> predicate = null;
+        predicate = predicateGenerator(inputPrefix, keywords);
 
+        return new FindCommand(predicate);
+    }
+
+    /**
+     * Returns a predicate based on the input prefix
+     * @return Predicate<Book> based on input prefix
+     */
+    public Predicate<Book> predicateGenerator(Prefix inputPrefix, String[] keywords) {
+        Predicate<Book> predicate = null;
         if (inputPrefix == PREFIX_NAME) {
             predicate = new NameContainsKeywordsPredicate(Arrays.asList(keywords));
         } else if (inputPrefix == PREFIX_GENRE) {
@@ -90,7 +99,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else if (inputPrefix == PREFIX_TAG) {
             predicate = new TagContainsKeywordsPredicate(Arrays.asList(keywords));
         }
-
-        return new FindCommand(predicate);
+        return predicate;
     }
 }
