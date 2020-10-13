@@ -327,7 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-    
+
 * 2a. The index given is invalid.
 
     * 3a1. bookmark returns an error message.
@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2c1. bookmark returns an error message
 
     Use case resumes at step 2.
-    
+
 **Use Case: UC05 - List all books**
 
 **MSS**
