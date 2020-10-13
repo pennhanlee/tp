@@ -36,16 +36,17 @@ public class TypicalBooks {
     public static final Book THE_HUNGER_GAMES = new BookBuilder().withName("The Hunger Games")
             .withGenre("Fiction")
             .withTotalPages("500")
-            .withBookmark("500").build();
-    public static final Book CRIME_AND_PUNISHMENT = new BookBuilder().withName("Crime and Punishment")
-            .withGenre("Crime").withTags("Bad")
-            .withTotalPages("1000")
             .withBookmark("20").build();
+    public static final Book CRIME_AND_PUNISHMENT = new BookBuilder().withName("Crime and Punishment")
+            .withGenre("Crime")
+            .withTags("Bad")
+            .withTotalPages("1000")
+            .withBookmark("1000").build();
     public static final Book LORD_OF_THE_FLIES = new BookBuilder().withName("Lord of the Flies")
-            .withGenre("Mystery").withTags("Exciting").withTotalPages("369")
-            .withBookmark("369").build();
+            .withGenre("Mystery").withTotalPages("369")
+            .withBookmark("123").build();
     public static final Book ENDERS_GAME = new BookBuilder().withName("Enders Game")
-            .withGenre("Thriller").withTags("Perfect").withTotalPages("123")
+            .withGenre("Thriller").withTotalPages("123")
             .withBookmark("23").build();
     public static final Book ON_THE_ROAD = new BookBuilder().withName("On the Road")
             .withGenre("Travel").withTotalPages("239")

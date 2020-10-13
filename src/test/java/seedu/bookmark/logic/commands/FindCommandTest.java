@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
+import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.LORD_OF_THE_FLIES;
-import static seedu.bookmark.testutil.TypicalBooks.THE_FAULT_IN_OUR_STARS;
 import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
+import static seedu.bookmark.testutil.TypicalBooks.CRIME_AND_PUNISHMENT;
+import static seedu.bookmark.testutil.TypicalBooks.ON_THE_ROAD;
+import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.util.Arrays;
@@ -165,32 +168,33 @@ public class FindCommandTest {
 
     @Test
     public void execute_tagMultipleKeywords_multipleBooksFound() {
-        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 2);
-        TagContainsKeywordsPredicate predicate = prepareTagPredicate("exciting perfect");
+        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 3);
+        TagContainsKeywordsPredicate predicate = prepareTagPredicate("good bad");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LORD_OF_THE_FLIES, ENDERS_GAME), model.getFilteredBookList());
+        assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, CRIME_AND_PUNISHMENT), model.getFilteredBookList());
     }
 
     @Test
     public void execute_findCompletedBooks() {
-        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 1);
         BookCompletedPredicate predicate = prepareCompletedBooksPredicate();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LORD_OF_THE_FLIES, THE_HUNGER_GAMES), model.getFilteredBookList());
+        assertEquals(Arrays.asList(CRIME_AND_PUNISHMENT), model.getFilteredBookList());
     }
 
     @Test
     public void execute_findNotCompletedBooks() {
-        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 6);
         BookNotCompletedPredicate predicate = prepareNotCompletedBooksPredicate();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LORD_OF_THE_FLIES, ENDERS_GAME), model.getFilteredBookList());
+        assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, THE_HUNGER_GAMES, LORD_OF_THE_FLIES,
+                ENDERS_GAME, ON_THE_ROAD), model.getFilteredBookList());
     }
 
     /**
