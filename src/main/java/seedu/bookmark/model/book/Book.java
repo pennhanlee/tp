@@ -2,6 +2,7 @@ package seedu.bookmark.model.book;
 
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -24,6 +25,7 @@ public class Book {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Bookmark bookmark;
+    private final ArrayList<Note> notes = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -50,6 +52,21 @@ public class Book {
         this.bookmark = bookmark;
     }
 
+    /**
+     * Overloaded constructor, to accommodate notes without having to refactor every command.
+     * Will update to this constructor once notes is up and fully functional.
+     */
+    public Book(Name name, Genre genre, Set<Tag> tags,
+                TotalPages totalPages, Bookmark bookmark, ArrayList<Note> notes) {
+        requireAllNonNull(name, genre, tags, totalPages, bookmark, notes);
+        this.name = name;
+        this.genre = genre;
+        this.tags.addAll(tags);
+        this.totalPages = totalPages;
+        this.bookmark = bookmark;
+        this.notes.addAll(notes);
+    }
+
     public Name getName() {
         return name;
     }
@@ -72,6 +89,10 @@ public class Book {
 
     public Bookmark getBookmark() {
         return bookmark;
+    }
+
+    public ArrayList<Note> getNotes() {
+        return notes;
     }
 
     /**
@@ -135,5 +156,6 @@ public class Book {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 
 }

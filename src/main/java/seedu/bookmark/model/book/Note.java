@@ -18,25 +18,26 @@ public class Note {
     /**
      * Constructs an {@code Note}.
      *
-     * @param note A valid note string.
+     * @param title A valid title string.
+     * @param text A valid text string.
      */
-    public Note(String title, String note) {
-        requireNonNull(note);
-        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
+    public Note(String title, String text) {
+        requireNonNull(text);
+        checkArgument(isValidNote(title, text), MESSAGE_CONSTRAINTS);
         this.title = title;
-        this.text = note;
+        this.text = text;
     }
 
     /**
-     * Returns if a given string is a valid note.
+     * Returns if a given title and text string is a valid note.
      */
-    public static boolean isValidNote(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidNote(String title, String text) {
+        return title.matches(VALIDATION_REGEX) && text.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return title + ":\n" + text;
+        return title + ":" + text;
     }
 
     @Override

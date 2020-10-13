@@ -14,6 +14,7 @@ import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -29,6 +30,7 @@ class JsonAdaptedBook {
     private final String totalPages;
     private final String bookmark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given book details.
@@ -38,7 +40,8 @@ class JsonAdaptedBook {
                            @JsonProperty("genre") String genre,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                            @JsonProperty("totalPages") String totalPages,
-                           @JsonProperty("bookmark") String bookmark) {
+                           @JsonProperty("bookmark") String bookmark,
+                           @JsonProperty("notes") List<JsonAdaptedNote> notes) {
         this.name = name;
         this.genre = genre;
         if (tagged != null) {
@@ -46,6 +49,9 @@ class JsonAdaptedBook {
         }
         this.totalPages = totalPages;
         this.bookmark = bookmark;
+        if (notes != null) {
+            this.notes.addAll(notes);
+        }
     }
 
     /**
@@ -59,6 +65,9 @@ class JsonAdaptedBook {
                 .collect(Collectors.toList()));
         totalPages = source.getTotalPages().value;
         bookmark = source.getBookmark().value;
+        notes.addAll(source.getNotes().stream()
+                              .map(note -> new JsonAdaptedNote(note.title, note.text))
+                              .collect(Collectors.toList()));
     }
 
     /**
@@ -70,6 +79,11 @@ class JsonAdaptedBook {
         final List<Tag> bookTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             bookTags.add(tag.toModelType());
+        }
+
+        final List<Note> bookNotes = new ArrayList<>();
+        for (JsonAdaptedNote note : notes) {
+            bookNotes.add(note.toModelType());
         }
 
         if (name == null) {
@@ -108,7 +122,10 @@ class JsonAdaptedBook {
         if (!Bookmark.isValidBookmark(modelBookmark, modelTotalPages)) {
             throw new IllegalValueException(Bookmark.MESSAGE_CONSTRAINTS);
         }
-        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
+
+        final ArrayList<Note> modelNotes = new ArrayList<>(bookNotes);
+
+        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark, modelNotes);
     }
 
 }
