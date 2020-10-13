@@ -66,6 +66,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         prefixCount = 0; //set count back to 0
 
         String trimmedArgs = argMultimap.getValue(inputPrefix).get().trim();
+        if (trimmedArgs.isEmpty() && inputPrefix != PREFIX_COMPLETED && inputPrefix != PREFIX_NOT_COMPLETED) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
         String[] keywords = trimmedArgs.split("\\s+");
 
