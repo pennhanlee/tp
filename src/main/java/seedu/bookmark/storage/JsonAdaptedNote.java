@@ -1,6 +1,7 @@
 package seedu.bookmark.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.bookmark.commons.exceptions.IllegalValueException;
@@ -19,7 +20,7 @@ class JsonAdaptedNote {
      * Constructs a {@code JsonAdaptedNote} with the given {@code title} and {@code text}.
      */
     @JsonCreator
-    public JsonAdaptedNote(String title, String text) {
+    public JsonAdaptedNote(@JsonProperty("title") String title, @JsonProperty("text") String text) {
         this.title = title;
         this.text = text;
     }

@@ -5,6 +5,7 @@ import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Book {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Bookmark bookmark;
-    private final ArrayList<Note> notes = new ArrayList<>();
+    private final List<Note> notes = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -57,7 +58,7 @@ public class Book {
      * Will update to this constructor once notes is up and fully functional.
      */
     public Book(Name name, Genre genre, Set<Tag> tags,
-                TotalPages totalPages, Bookmark bookmark, ArrayList<Note> notes) {
+                TotalPages totalPages, Bookmark bookmark, List<Note> notes) {
         requireAllNonNull(name, genre, tags, totalPages, bookmark, notes);
         this.name = name;
         this.genre = genre;
@@ -91,8 +92,8 @@ public class Book {
         return bookmark;
     }
 
-    public ArrayList<Note> getNotes() {
-        return notes;
+    public List<Note> getNotes() {
+        return Collections.unmodifiableList(notes);
     }
 
     /**
@@ -129,7 +130,8 @@ public class Book {
                 && otherBook.getGenre().equals(getGenre())
                 && otherBook.getTags().equals(getTags())
                 && otherBook.getTotalPages().equals(getTotalPages())
-                && otherBook.getBookmark().equals(getBookmark());
+                && otherBook.getBookmark().equals(getBookmark())
+                && otherBook.getNotes().equals(getNotes());
     }
 
     @Override
@@ -154,6 +156,8 @@ public class Book {
                 .append(bookmarkPage)
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("Notes: ");
+        getNotes().forEach(note -> builder.append(note.title));
         return builder.toString();
     }
 
