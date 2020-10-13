@@ -90,6 +90,13 @@ public class Book {
     }
 
     /**
+     * Returns true if book is completed, i.e. bookmarked page is equal to total pages
+     */
+    public boolean isCompleted() {
+        return bookmark.value == totalPages.value;
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
