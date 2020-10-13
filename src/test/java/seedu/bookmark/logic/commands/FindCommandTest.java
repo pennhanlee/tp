@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.bookmark.testutil.TypicalBooks.CRIME_AND_PUNISHMENT;
 import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.LORD_OF_THE_FLIES;
-import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
-import static seedu.bookmark.testutil.TypicalBooks.CRIME_AND_PUNISHMENT;
 import static seedu.bookmark.testutil.TypicalBooks.ON_THE_ROAD;
+import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
 import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
@@ -22,11 +22,11 @@ import org.junit.jupiter.api.Test;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
-import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
-import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
-import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
 import seedu.bookmark.model.book.BookCompletedPredicate;
 import seedu.bookmark.model.book.BookNotCompletedPredicate;
+import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
+import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -36,7 +36,7 @@ public class FindCommandTest {
     private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
 
     @Test
-    public void NamePredicateEquals() {
+    public void namePredicateEquals() {
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
@@ -63,7 +63,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void GenrePredicateEquals() {
+    public void genrePredicateEquals() {
         GenreContainsKeywordsPredicate firstPredicate =
                 new GenreContainsKeywordsPredicate(Collections.singletonList("first"));
         GenreContainsKeywordsPredicate secondPredicate =
@@ -90,7 +90,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void TagPredicateEquals() {
+    public void tagPredicateEquals() {
         TagContainsKeywordsPredicate firstPredicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("first"));
         TagContainsKeywordsPredicate secondPredicate =
@@ -173,7 +173,8 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, CRIME_AND_PUNISHMENT), model.getFilteredBookList());
+        assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, CRIME_AND_PUNISHMENT),
+                model.getFilteredBookList());
     }
 
     @Test

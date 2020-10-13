@@ -1,6 +1,11 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -9,17 +14,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.commands.FindCommand;
-import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
-import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
 import seedu.bookmark.model.book.BookCompletedPredicate;
 import seedu.bookmark.model.book.BookNotCompletedPredicate;
+import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
+import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
-
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
 
 public class FindCommandParserTest {
 
@@ -49,7 +48,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " " + PREFIX_GENRE + " " + "Fantasy Horror", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " " + PREFIX_GENRE + "          "+ " \n Fantasy \n \t Horror  \t", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_GENRE + "      " + " \n Fantasy \n \t Horror  \t", expectedFindCommand);
     }
 
     @Test

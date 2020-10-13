@@ -1,15 +1,15 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
 
 import java.util.function.Predicate;
-import seedu.bookmark.commons.core.Messages;
 
+import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 

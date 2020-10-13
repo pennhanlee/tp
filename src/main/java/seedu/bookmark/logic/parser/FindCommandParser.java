@@ -1,32 +1,31 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.function.Predicate;
-import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
-import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
-import seedu.bookmark.model.book.BookCompletedPredicate;
-import seedu.bookmark.model.book.BookNotCompletedPredicate;
-import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
-
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import seedu.bookmark.logic.commands.FindCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.BookCompletedPredicate;
+import seedu.bookmark.model.book.BookNotCompletedPredicate;
+import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
+import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    public int prefixCount = 0;
-    public Prefix inputPrefix;
+    private int prefixCount = 0;
+    private Prefix inputPrefix;
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

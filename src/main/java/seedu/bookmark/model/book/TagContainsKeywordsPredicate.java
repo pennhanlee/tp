@@ -20,11 +20,11 @@ public class TagContainsKeywordsPredicate implements Predicate<Book> {
     @Override
     public boolean test(Book book) {
         Set<Tag> bookTags = book.getTags();
-        String TagsString = "";
+        String tagsString = "";
         for (Tag tag : bookTags) {
-            TagsString = TagsString + tag.getTagName() + " ";
+            tagsString = tagsString + tag.getTagName() + " ";
         }
-        String finalTagsString = TagsString;
+        String finalTagsString = tagsString;
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(finalTagsString, keyword));
     }
