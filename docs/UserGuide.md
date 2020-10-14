@@ -89,7 +89,7 @@ Shows a list of all books in the Storage Library.
 
 Format: `list`
 
-### Locating books by name: `find` 
+### Locating books: `find` 
 
 Find books that adhere to the input filter.
 
