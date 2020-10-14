@@ -151,7 +151,7 @@ Format: `help`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous bookmark home folder.
 
 **Q**: How can I know more about the available commands that bookmark supports?<br>
-**A**: Type `help` to open up the Help Window where the available commands will be shown. 
+**A**: Type `help` to open up the Help Window where the available commands will be shown.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,4 +165,4 @@ Action | Format, Examples
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `view 3`
 **Edit** | `edit INDEX b/PAGE_NUMBER`
-**Help** | `help` 
+**Help** | `help`

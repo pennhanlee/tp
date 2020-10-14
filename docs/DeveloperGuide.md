@@ -397,7 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. bookmark returns a message informing user that book list is empty
 
     Use case ends
-    
+
 **Use Case: UC06 - Help**
 
 **MSS**
