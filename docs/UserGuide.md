@@ -61,7 +61,7 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
 Adds a book to the Storage Library.
 
-Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER`
+Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER g/GENRE`
 
 Examples:
 * `add n/Fifty Shades of Gray g/Romance tp/350 b/200`
@@ -110,7 +110,7 @@ Examples:
 
 Edits an existing book in the list.
 
-Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER]`
+Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE]`
 
 * Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
