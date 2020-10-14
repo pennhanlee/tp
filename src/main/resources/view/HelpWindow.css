@@ -1,0 +1,14 @@
+.headerbar {
+    -fx-background-color: #383838;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-font-size: 9pt;
+    -fx-font-family: "Segoe UI Semibold";
+}

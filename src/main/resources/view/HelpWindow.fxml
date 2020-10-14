@@ -17,7 +17,7 @@
   <scene>
     <Scene>
         <VBox prefHeight="535.0" prefWidth="520.0">
-            <HBox>
+            <HBox styleClass="headerbar" stylesheets="@HelpWindow.css">
                <children>
                   <Label fx:id="welcomeHelp" alignment="CENTER" minHeight="-Infinity" prefHeight="57.0" prefWidth="389.0" text="Label" wrapText="true" />
                <Button fx:id="copyButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
