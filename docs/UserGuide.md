@@ -100,7 +100,8 @@ Format: `find [n/BOOK_TITLE] KEYWORDS, find [c/COMPLETED_BOOKS]`
 * No keywords are required for finding completed & non-completed books.
 
 Examples:
-*  `find n/ dog cat` Returns a list of books that contain `dog` and/or `cat` in the "Name" field.
+*  `find n/ ant bear` Returns a list of books that contain `ant` and/or `bear` in the "Name" field.
+*  `find t/ dog cat` Returns a list of books that contain `dog` and/or `cat` in the "Tag" field.
 *  `find c/` Returns a list of completed books.
 
 ### Deleting a book : `delete`
