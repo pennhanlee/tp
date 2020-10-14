@@ -38,7 +38,7 @@ public class ViewCommand extends Command {
 
         Book bookToView = lastShownList.get(index.getZeroBased());
         model.updateFilteredBookList(b -> b.equals(bookToView));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, index.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, index.getOneBased()), false, false, true);
     }
 
     @Override

@@ -34,6 +34,9 @@ public class MainWindow extends UiPart<Stage> {
     private BookListPanel bookListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SidebarPanel sidebarPanel;
+
+    private boolean isDefaultView = true;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +45,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane bookListPanelPlaceholder;
+
+    @FXML
+    private StackPane sidebarPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +117,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+        bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+
+        sidebarPanel = new SidebarPanel(logic.getFilteredBookList());
+        sidebarPanelPlaceholder.getChildren().add(sidebarPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,7 +172,29 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public BookListPanel getPersonListPanel() {
+    /**
+     * Changes the view of books to the detailed view.
+     */
+    private void changeToDetailedView() {
+        isDefaultView = false;
+        bookListPanel = new DetailedBookListPanel(logic.getFilteredBookList());
+        bookListPanelPlaceholder.getChildren().clear();
+        bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+    }
+
+    /**
+     * Changes the view of books back to the default view.
+     */
+    private void resetView() {
+        if (!isDefaultView) {
+            bookListPanel = new BookListPanel(logic.getFilteredBookList());
+            bookListPanelPlaceholder.getChildren().clear();
+            bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+        }
+        isDefaultView = true;
+    }
+
+    public BookListPanel getBookListPanel() {
         return bookListPanel;
     }
 
@@ -177,6 +208,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            sidebarPanel.update(logic.getFilteredBookList());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -184,6 +216,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isDetailedView()) {
+                changeToDetailedView();
+            } else {
+                resetView();
             }
 
             return commandResult;
