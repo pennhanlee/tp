@@ -165,3 +165,4 @@ Action | Format, Examples
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `view 3`
 **Edit** | `edit INDEX b/PAGE_NUMBER`
+**Find** | `find n/PAGE_NUMBER KEYWORDS` <br> e.g., `find n/ Harry Hunger`
