@@ -397,6 +397,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. bookmark returns a message informing user that book list is empty
 
     Use case ends
+    
+**Use Case: UC06 - Help**
+
+**MSS**
+
+1. User requests to see the Help page
+2. bookmark returns the Help page
+
+    Use case ends
 
 ### Non-Functional Requirements
 
