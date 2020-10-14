@@ -37,10 +37,10 @@ public class SidebarPanel extends UiPart<Region> {
     public void update(ObservableList<Book> books) {
         int length = books.size();
         int bookmarkCount = (int) books.stream()
-                .filter(book -> !book.getBookmark().value.equals("0"))
+                .filter(Book::hasStartedReading)
                 .count();
         int pagesReadCount = books.stream()
-                .map(book -> Integer.valueOf(book.getBookmark().value))
+                .map(Book::getPagesRead)
                 .reduce(0, Integer::sum);
 
         String book = length == 1 ? " book" : " books";

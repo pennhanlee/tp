@@ -97,6 +97,13 @@ public class Book {
     }
 
     /**
+     * Returns the number of pages of this book read, according to its {@code Bookmark}'s value.
+     */
+    public int getPagesRead() {
+        return Integer.parseInt(bookmark.value);
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
