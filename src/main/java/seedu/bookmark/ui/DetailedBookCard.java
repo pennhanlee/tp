@@ -31,8 +31,8 @@ public class DetailedBookCard extends BookCard {
     }
 
     private int calculateCompletion(Book book) {
-        int pagesRead = book.getPagesRead();
-        int totalPages = book.getTotalPagesNumber();
-        return (int) (((float) pagesRead / totalPages) * 100);
+        float pagesRead = book.getPagesRead();
+        float totalPages = book.getTotalPagesNumber();
+        return (int) ((pagesRead / totalPages) * 100);
     }
 }
