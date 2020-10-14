@@ -1,5 +1,7 @@
 package seedu.bookmark.ui;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import seedu.bookmark.model.book.Book;
 
 /**
@@ -8,6 +10,9 @@ import seedu.bookmark.model.book.Book;
 public class DetailedBookCard extends BookCard {
 
     private static final String FXML = "DetailedBookCard.fxml";
+
+    @FXML
+    private Label percentageCompletion;
 
     /**
      * Creates a {@code DetailedBookCard} with the given {@code Book} and index to display.
@@ -20,5 +25,14 @@ public class DetailedBookCard extends BookCard {
     @Override
     protected void initialize(Book book, int displayedIndex) {
         super.initialize(book, displayedIndex);
+        int percentageCompleted = calculateCompletion(book);
+        String progressDisplay = "Progress: " + String.valueOf(percentageCompleted) + "%";
+        percentageCompletion.setText(progressDisplay);
+    }
+
+    private int calculateCompletion(Book book) {
+        float pagesRead = book.getPagesRead();
+        float totalPages = book.getTotalPagesNumber();
+        return (int) ((pagesRead / totalPages) * 100);
     }
 }

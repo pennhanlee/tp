@@ -1,5 +1,6 @@
 package seedu.bookmark.model.book;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_BOOKMARK_1984;
@@ -54,6 +55,25 @@ public class BookTest {
 
         // null -> returns false
         assertFalse(HARRY_POTTER.isSameBook(null));
+    }
+
+    @Test
+    public void getFieldValues_validFields_correctValues() {
+        final String totalPages = "1500";
+        final String bookmark = "50";
+        final int totalPagesValue = 1500;
+        final int bookmarkValue = 50;
+
+        Book testBook = new BookBuilder()
+                .withName("TEST")
+                .withGenre("FICTION")
+                .withTotalPages(totalPages)
+                .withBookmark(bookmark)
+                .build();
+
+        assertTrue(testBook.hasStartedReading());
+        assertEquals((bookmarkValue), testBook.getPagesRead());
+        assertEquals((totalPagesValue), testBook.getTotalPagesNumber());
     }
 
     @Test
