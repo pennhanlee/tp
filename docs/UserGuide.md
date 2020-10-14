@@ -89,9 +89,20 @@ Shows a list of all books in the Storage Library.
 
 Format: `list`
 
-### Locating books by name: `find` [coming soon]
+### Locating books: `find` 
 
-Find books whose names contain any of the given keywords.
+Find books that adhere to the input filter.
+
+Format: `find [n/BOOK_TITLE] KEYWORDS, find [c/COMPLETED_BOOKS]`
+
+* Finds books whose specified field contains any of the input keywords. 
+* Can also find completed books & non-completed books using "c/" and "nc/" prefixes. 
+* No keywords are required for finding completed & non-completed books.
+
+Examples:
+*  `find n/ ant bear` Returns a list of books that contain `ant` and/or `bear` in the "Name" field.
+*  `find t/ dog cat` Returns a list of books that contain `dog` and/or `cat` in the "Tag" field.
+*  `find c/` Returns a list of completed books.
 
 ### Deleting a book : `delete`
 
@@ -165,4 +176,5 @@ Action | Format, Examples
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `view 3`
 **Edit** | `edit INDEX b/PAGE_NUMBER`
+**Find** | `find n/ KEYWORDS` <br> e.g., `find n/ Harry Hunger`
 **Help** | `help`
