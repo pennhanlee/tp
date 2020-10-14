@@ -61,11 +61,11 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
 
 Adds a book to the Storage Library.
 
-Format: `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER`
+Format: `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
 
 Examples:
 * `add n/Fifty Shades of Gray g/Romance tp/350 b/200`
-* `add n/Harry Potter and the Chamber of Secrets g/Fiction tp/1500 b/25`
+* `add n/Harry Potter and the Chamber of Secrets g/Fiction t/Wizards tp/1500 b/25`
 
 ### Viewing details of a book : `View`
 
@@ -146,6 +146,14 @@ Format: `exit`
 
 bookmark data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+### Accessing Help : `help`
+
+Opens the Help Window where the available commands are shown with examples and images
+
+Format: `help`
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -153,16 +161,20 @@ bookmark data will be saved in the hard disk automatically after any command tha
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous bookmark home folder.
 
+**Q**: How can I know more about the available commands that bookmark supports?<br>
+**A**: Type `help` to open up the Help Window where the available commands will be shown.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/BOOK_TITLE tp/TOTAL_PAGES b/PAGE_NUMBER` <br> e.g., `add n/Harry Potter and the Chamber of Secrets tp/1500 b/25`
+**Add** | `add n/BOOK_TITLE g/GENRE tp/TOTAL_PAGES b/PAGE_NUMBER` <br> e.g., `add n/Harry Potter and the Chamber of Secrets g/Fantasy tp/1500 b/25`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `view 3`
 **Edit** | `edit INDEX b/PAGE_NUMBER`
 **Find** | `find n/ KEYWORDS` <br> e.g., `find n/ Harry Hunger`
+**Help** | `help`
