@@ -23,11 +23,11 @@ public class HelpWindow extends UiPart<Stage> {
                                                 + "Click on the Copy URL button for the link to our Website!\n";
 
     public static final String ADD_INTRO = "You can now ADD a book! \n";
-    public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} t/{Tags}* t/{Tags}* "
-                                            + "tp/{Total Pages} b/{Bookmarked Page} \n";
-    public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 \n";
+    public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} tp/{Total Pages} b/{Bookmarked Page} \n";
+    public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 b/20\n";
     public static final String ADD_RESPONSE = "Response: \nNew book added: Harry Potter "
-                                            + "Genre: Fiction Total Pages: 550 Bookmarked at: 0 Tags: [Wizard]";
+                                            + "Genre: Fiction Total Pages: 550 Bookmarked at: 20\n";
+    public static final String ADD_REMARK = "Note: Adding Tags (t/) and Bookmarks (b/) are optional! \n";
 
     public static final String DELETE_INTRO = "You can now DELETE a book! \n";
     public static final String DELETE_COMMAND = "delete {Index} \n";
@@ -46,10 +46,10 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String LIST_RESPONSE = "Response: \nListing all books";
 
     public static final String EDIT_INTRO = "You can now EDIT a book's contents! \n";
-    public static final String EDIT_COMMAND = "edit {Index} *t/{Tags} *b/{Bookmarked Page} \n";
-    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 t/Anime \n";
+    public static final String EDIT_COMMAND = "edit {Index} *b/{Bookmarked Page} \n";
+    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 \n";
     public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
-                                            + " Bookmarked at: 360 Tags: [Anime]";
+                                            + " Bookmarked at: 360";
 
     public static final String ADD_MESSAGE = ADD_INTRO + ADD_COMMAND + ADD_EXAMPLE + ADD_RESPONSE;
     public static final String LIST_MESSAGE = LIST_INTRO + LIST_COMMAND + LIST_EXAMPLE + LIST_RESPONSE;
