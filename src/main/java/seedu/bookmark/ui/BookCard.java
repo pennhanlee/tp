@@ -70,7 +70,7 @@ public class BookCard extends UiPart<Region> {
         name.setText(book.getName().fullName);
         genre.setText(book.getGenre().value);
         totalPages.setText(book.getTotalPages().value + " pages");
-        if (!book.hasStartedReading()) {
+        if (book.hasStartedReading()) {
             bookmark.setText("Bookmarked @ page " + book.getBookmark().value);
             Image image = new Image(MainApp.class.getResourceAsStream(BOOKMARK_ICON_PATH));
             bookmarkIcon.setImage(image);

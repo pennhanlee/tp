@@ -104,6 +104,13 @@ public class Book {
     }
 
     /**
+     * Returns the total number of pages in this book, according to its {@code TotalPages}'s value.
+     */
+    public int getTotalPagesNumber() {
+        return Integer.parseInt(totalPages.value);
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
