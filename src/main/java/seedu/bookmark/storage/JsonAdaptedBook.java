@@ -31,7 +31,7 @@ class JsonAdaptedBook {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given book details.
+     * Constructs a {@code JsonAdaptedBook} with the given book details.
      */
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("name") String name,
@@ -62,7 +62,7 @@ class JsonAdaptedBook {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Book} object.
+     * Converts this Jackson-friendly adapted book object into the model's {@code Book} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted book.
      */
