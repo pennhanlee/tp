@@ -26,20 +26,7 @@ public class Book {
     private final Bookmark bookmark;
 
     /**
-     * Every field must be present and not null.
-     */
-    public Book(Name name, Genre genre, Set<Tag> tags) {
-        requireAllNonNull(name, genre, tags);
-        this.name = name;
-        this.genre = genre;
-        this.tags.addAll(tags);
-        this.totalPages = new TotalPages("500");
-        this.bookmark = new Bookmark();
-    }
-
-    /**
-     * Overloaded constructor, to accommodate totalPages and bookmark, remove the other constructor when integration
-     * is completed.
+     * Fields must be present, valid and not null.
      */
     public Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark) {
         requireAllNonNull(name, genre, tags, totalPages, bookmark);
