@@ -90,6 +90,13 @@ public class Book {
     }
 
     /**
+     * Checks if this {@code Book} has started being read based on its {@code Bookmark}'s value.
+     */
+    public boolean hasStartedReading() {
+        return !bookmark.value.equals("0");
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
