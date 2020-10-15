@@ -86,4 +86,9 @@ public class Goal {
         return String.format("Page %s by %s", page, deadline);
     }
 
+    @Override
+    public int hashCode() {
+        return String.format("%s %s", page, deadline).hashCode();
+    }
+
 }
