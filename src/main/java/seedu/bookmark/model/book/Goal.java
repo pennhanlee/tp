@@ -25,6 +25,16 @@ public class Goal {
         this.deadline = deadline;
     }
 
+    /**
+     * Overloaded constructor to construct {@code Goal} object
+     * @param goal
+     */
+    public Goal(String goal) {
+        String[] parts = goal.split("\\s+");
+        this.page = parts[0];
+        this.deadline = parts[1];
+    }
+
     public static Goal defaultGoal() { // constructor for default goal
         return new Goal("0", "31/12/9999");
     }
@@ -38,11 +48,11 @@ public class Goal {
         return LocalDate.of(year, month, day);
     }
 
-    private LocalDate getDeadline() {
+    public LocalDate getDeadline() {
         return parseDeadline(deadline);
     }
 
-    private int getPage() {
+    public int getPage() {
         return Integer.parseInt(page);
     }
 
@@ -73,7 +83,7 @@ public class Goal {
 
     @Override
     public String toString() {
-        return String.format("%s %s", page, deadline);
+        return String.format("Page %s by %s", page, deadline);
     }
 
 }

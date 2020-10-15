@@ -114,6 +114,14 @@ public class Book {
     }
 
     /**
+     * Returns true if user has set a goal for this book.
+     */
+    public boolean hasGoal() {
+        int pageGoal = goal.getPage();
+        return pageGoal > 0;
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
@@ -157,6 +165,9 @@ public class Book {
                 .append(bookmarkPage)
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
+        builder.append(" Goal: ")
+                .append(getGoal().toString());
         return builder.toString();
     }
 
