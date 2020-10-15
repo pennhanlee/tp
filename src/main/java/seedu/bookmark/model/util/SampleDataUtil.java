@@ -22,7 +22,7 @@ public class SampleDataUtil {
             new Book(new Name("MIPS Book"), new Genre("Educational"),
                 getTagSet("Good"), new TotalPages("500"), new Bookmark("50")),
             new Book(new Name("Algorithms"), new Genre("Educational"),
-                getTagSet("Not Good", "Lengthy"), new TotalPages("5050"), new Bookmark()),
+                getTagSet("Bad", "Lengthy"), new TotalPages("5050"), new Bookmark()),
             new Book(new Name("Barney"), new Genre("Children"),
                 getTagSet("Funny"), new TotalPages("25"), new Bookmark("5")),
             new Book(new Name("The Book"), new Genre("Fiction"),
@@ -30,7 +30,7 @@ public class SampleDataUtil {
             new Book(new Name("The Bible"), new Genre("Religion"),
                 getTagSet("Holy"), new TotalPages("10000"), new Bookmark("25")),
             new Book(new Name("The Girl with the Dragon Tatoo"), new Genre("Novel"),
-                getTagSet("colleagues"), new TotalPages("1500"), new Bookmark("222"))
+                getTagSet("Classic"), new TotalPages("1500"), new Bookmark("222"))
         };
     }
 
