@@ -11,7 +11,8 @@ public class Goal {
         Deadline must be specified as dd/mm/yyyy
         Both fields must not be empty.
      */
-    public static final String VALIDATION_REGEX = "[\\d+] [\\d{2}/\\d{2}/\\d{4}]";
+    public static final String VALIDATION_REGEX = "\\d+\\s\\d{2}/\\d{2}/\\d{4}";
+    public static final String DEADLINE_REGEX = "\\d{2}/\\d{2}/\\d{4}";
 
     public final String page;
     public final String deadline;
@@ -24,7 +25,11 @@ public class Goal {
         this.deadline = deadline;
     }
 
-    private static LocalDate parseDeadline(String deadline) {
+    public static Goal defaultGoal() { // constructor for default goal
+        return new Goal("0", "31/12/9999");
+    }
+
+    public static LocalDate parseDeadline(String deadline) {
         String[] parts = deadline.split("/");
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
@@ -33,13 +38,24 @@ public class Goal {
         return LocalDate.of(year, month, day);
     }
 
-    public static boolean isOverdue(String deadline) {
-        LocalDate now = LocalDate.now();
-        return now.isBefore(parseDeadline(deadline));
+    private LocalDate getDeadline() {
+        return parseDeadline(deadline);
     }
 
+    private int getPage() {
+        return Integer.parseInt(page);
+    }
+
+    public boolean isOverdue() {
+        LocalDate now = LocalDate.now();
+        return parseDeadline(deadline).isBefore(now); // apparently this returns the wrong thing...
+    }
+
+    /**
+     * Returns if a given string is a valid genre.
+     */
     public static boolean isValidGoal(String test) {
-        return test.matches(VALIDATION_REGEX) && !isOverdue(test);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -53,6 +69,11 @@ public class Goal {
             return deadline.equals(otherDeadline) && page.equals(otherPage);
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", page, deadline);
     }
 
 }

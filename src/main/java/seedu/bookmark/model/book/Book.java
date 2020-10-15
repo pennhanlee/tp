@@ -24,6 +24,7 @@ public class Book {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Bookmark bookmark;
+    private final Goal goal;
 
     /**
      * Fields must be present, valid and not null.
@@ -35,6 +36,7 @@ public class Book {
         this.tags.addAll(tags);
         this.totalPages = totalPages;
         this.bookmark = bookmark;
+        this.goal = Goal.defaultGoal();
     }
 
     public Name getName() {
@@ -59,6 +61,13 @@ public class Book {
 
     public Bookmark getBookmark() {
         return bookmark;
+    }
+
+    /**
+     * Returns the current Goal of this book, according to its {@code Goal}.
+     */
+    public Goal getGoal() {
+        return goal;
     }
 
     /**
