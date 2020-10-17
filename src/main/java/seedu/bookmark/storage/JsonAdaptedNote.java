@@ -2,7 +2,6 @@ package seedu.bookmark.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.model.book.Note;
@@ -31,16 +30,6 @@ class JsonAdaptedNote {
     public JsonAdaptedNote(Note source) {
         title = source.title;
         text = source.text;
-    }
-
-    @JsonValue
-    public String getTitle() {
-        return title;
-    }
-
-    @JsonValue
-    public String getText() {
-        return text;
     }
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.

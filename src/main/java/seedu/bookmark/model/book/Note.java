@@ -5,7 +5,7 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 
 public class Note {
     public static final String MESSAGE_CONSTRAINTS =
-            "Notes should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Note title and text should only contain alphanumeric characters and spaces, and it should not be blank";
     /*
      * The first character of the note must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -22,6 +22,7 @@ public class Note {
      * @param text A valid text string.
      */
     public Note(String title, String text) {
+        requireNonNull(title);
         requireNonNull(text);
         checkArgument(isValidNote(title, text), MESSAGE_CONSTRAINTS);
         this.title = title;

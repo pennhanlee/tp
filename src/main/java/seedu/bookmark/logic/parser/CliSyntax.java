@@ -11,5 +11,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_TOTAL_PAGES = new Prefix("tp/");
     public static final Prefix PREFIX_BOOKMARK = new Prefix("b/");
+    public static final Prefix PREFIX_NOTE_TEXT = new Prefix("txt/");
 
 }

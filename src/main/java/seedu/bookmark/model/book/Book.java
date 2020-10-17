@@ -157,7 +157,7 @@ public class Book {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append("Notes: ");
-        getNotes().forEach(note -> builder.append(note.title));
+        getNotes().forEach(note -> builder.append(note.title + ","));
         return builder.toString();
     }
 
