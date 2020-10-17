@@ -15,5 +15,4 @@ BookListPanel -right-> "*" BookCard : renders >
 DetailedBookListPanel -up-|> BookListPanel
 DetailedBookCard -up-|> BookCard
 
-
 @enduml
