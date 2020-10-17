@@ -39,6 +39,7 @@
                     </ImageView>
                 </graphic>
             </Label>
+            <Label fx:id="percentageCompletion" styleClass="cell_small_label" text="\$ %completed" />
         </VBox>
     </GridPane>
 </HBox>

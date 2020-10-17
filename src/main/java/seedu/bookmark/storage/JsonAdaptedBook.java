@@ -33,7 +33,6 @@ class JsonAdaptedBook {
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
-     * Overloaded constructor that includes notes.
      * Constructs a {@code JsonAdaptedBook} with the given book details.
      */
     @JsonCreator

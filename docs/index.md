@@ -14,7 +14,7 @@ Fret no more, **bookmark** is here to save the day!<br>
 **bookmark** (not your regular bookmark!) is a desktop app for tracking reading progress and book loans. It allows you to centralise all your
 reading progress into one place.
 Example usages:
-* Adding a book and its current bookmark and library due date (optional)
+* Adding a book and its current bookmark
 * View a specific book and its details
 * Update the details of a specified book
 * Delete a specified book

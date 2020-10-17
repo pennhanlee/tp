@@ -45,6 +45,14 @@ public class Tag {
     }
 
     /**
+     * Returns the Tag Name in String
+     * @return Tag Name
+     */
+    public String getTagName() {
+        return tagName;
+    }
+
+    /**
      * Format state as text for viewing.
      */
     public String toString() {
