@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":DetailedBookListPanel" as DetailedBookListPanel UI_COLOR
+participant ":DetailedBookCard" as DetailedBookCard UI_COLOR
+end box
+
+[-> MainWindow : executeCommand(command)]
+activate MainWindow
+
+MainWindow -> LogicManager : execute()
+activate LogicManager
+
+create CommandResult
+LogicManager -> CommandResult
+activate CommandResult
+
+CommandResult -> LogicManager : result
+deactivate CommandResult
+
+LogicManager -> MainWindow : result
+deactivate LogicManager
+
+MainWindow -> CommandResult : isDetailedView()
+activate CommandResult
+
+CommandResult -> MainWindow : true
+deactivate CommandResult
+
+MainWindow -> MainWindow : changeToDetailedView()
+activate MainWindow
+
+create DetailedBookListPanel
+MainWindow -> DetailedBookListPanel
+activate DetailedBookListPanel
+
+loop for all books to display
+    create DetailedBookCard
+    DetailedBookListPanel -> DetailedBookCard
+    activate DetailedBookCard
+    DetailedBookCard -> DetailedBookListPanel
+    deactivate DetailedBookCard
+end
+
+DetailedBookListPanel -> MainWindow
+deactivate DetailedBookListPanel
+
+@enduml
