@@ -134,6 +134,23 @@ Classes used by multiple components are in the `seedu.bookmark.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Changing Ui view
+
+#### Implementation
+
+*bookmark's* Ui supports two types of views: the default, **summarised view** which displays summarised information 
+regarding the books stored, and the **detailed view** which displays all relevant information regarding a particular book.
+
+`BookListPanel` `BookCard` as well as its corresponding subclasses `DetailedBookListPanel` and `DetailedBookCard` facilitates
+the display of book information.
+When in the summarised view, `MainWindow` renders `BookListPanel` which renders the book information using `BookCard`, 
+while in the detailed view, `DetailedBookListPanel` is rendered which renders the book information using 
+`DetailedBookCard`.
+
+The class diagram below shows the relevant classes involved:
+
+![Ui view class diagram](images/UiViewClassDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
