@@ -45,12 +45,12 @@ public class GoalTest {
 
     @Test
     public void test_validGoal() {
-        String valid = "10 20/10/2024";
+        String valid = "20-10-2024";
         String invalid_alpha = "akjdhfkafhl";
         String invalid_day = "10 19183109823/11/2024";
         String invalid_year = "10 20/11/1";
 
-        assertTrue(valid.matches("\\d+\\s\\d{2}/\\d{2}/\\d{4}"));
+        assertTrue(valid.matches(Goal.DEADLINE_REGEX));
         assertTrue(Goal.isValidGoal(valid));
         assertFalse(Goal.isValidGoal(invalid_alpha));
         assertFalse(Goal.isValidGoal(invalid_day));

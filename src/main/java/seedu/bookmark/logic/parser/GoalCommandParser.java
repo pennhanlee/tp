@@ -1,7 +1,6 @@
 package seedu.bookmark.logic.parser;
 
 import seedu.bookmark.commons.core.index.Index;
-import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Goal;
@@ -33,6 +32,9 @@ public class GoalCommandParser implements Parser<GoalCommand> {
         // Check page and date
         if (!(argMultimap.getValue(PREFIX_PAGE).isPresent() && argMultimap.getValue(PREFIX_DEADLINE).isPresent())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
+        } else if (!argMultimap.getValue(PREFIX_DEADLINE).get().matches(Goal.DEADLINE_REGEX)) {
+            throw new ParseException(String.format("%s does not match format DD-MM-YYYY",
+                    argMultimap.getValue(PREFIX_DEADLINE).get()));
         }
 
         // Both Page and Date should be present

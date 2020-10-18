@@ -17,7 +17,7 @@ public class GoalCommand extends Command {
             + "Example: "
             + COMMAND_WORD + " 2 "
             + PREFIX_PAGE + "102 "
-            + PREFIX_DEADLINE + "21-12-2024 \n";
+            + PREFIX_DEADLINE + "21-12-2024\n";
 
     public static final String MESSAGE_ADD_GOAL_SUCCESS = "Added Goal: %1$s";
 
