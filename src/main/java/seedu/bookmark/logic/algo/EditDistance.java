@@ -5,7 +5,6 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.book.Book;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 
 /**
@@ -13,13 +12,14 @@ import java.util.Hashtable;
  * misspelled words
  */
 public class EditDistance {
-
+    private final String DELETE = "delete";
+    private final String ADD = "add";
     private final Library library;
-    private final Hashtable<String, Integer> wordList;
+    private final ArrayList<WordStore> wordList;
 
     public EditDistance(Library library) {
         this.library = library;
-        this.wordList = new Hashtable<>();
+        this.wordList = new ArrayList<>();
     }
 
     /**
@@ -31,7 +31,7 @@ public class EditDistance {
         for (Book book : library) {
             String bookName = book.getName().fullName;
             String[] words = bookName.split("\\s+"); //split into individual words
-            addWords(words, this.wordList);
+            handleBookName(words, ADD);
         }
     }
 
@@ -43,7 +43,14 @@ public class EditDistance {
     public void updateWordList(Book book) {
         String bookName = book.getName().fullName;
         String[] words = bookName.split("\\s+");
-        addWords(words, this.wordList);
+        handleBookName(words, ADD);
+    }
+
+
+    public void deleteFromWordList(Book book) {
+        String bookName = book.getName().fullName;
+        String[] words = bookName.split("\\s+");
+        handleBookName(words, DELETE);
     }
 
     /**
@@ -56,7 +63,7 @@ public class EditDistance {
         ArrayList<String> suggestions = new ArrayList<>();
         while (suggestionCount < 4 && wordCount < wordList.size()) {
             wordCount++;
-            String targetWord = wordList.get(wordCount);
+            String targetWord = wordList.get(wordCount).getWord();
             int wordDistance = calculateDistance(sourceWord, targetWord);
             if (wordDistance <= 3) {
                 suggestions.add(targetWord);
@@ -114,26 +121,53 @@ public class EditDistance {
     }
 
     /**
-     * Checks if the word being added already exists in the list
+     * Check if a word exists already and AddCount if yes
      * @param word String object to be added
-     * @return true if word exists, else false
      */
-    private boolean alreadyExist(String word) {
-        return wordList.contains(word);
+    private void addWord(String word) {
+        boolean added = false;
+        for (WordStore wordstore : wordList) {
+            if (wordstore.getWord().equals(word)) {
+                wordstore.addCount();
+                added = true;
+                break;
+            }
+        }
+        if (!added) {
+            WordStore newWord = new WordStore(word);
+            wordList.add(newWord);
+        }
+    }
+
+    private void deleteWord(String word) {
+        WordStore targetWord = null;
+        for (WordStore wordStore : wordList) {
+            if (wordStore.getWord().equals(word)) {
+                targetWord = wordStore;
+                break;
+            }
+        }
+        assert targetWord != null;
+        if (targetWord.getCount() == 0) {
+            wordList.remove(targetWord);
+        } else {
+            targetWord.minusCount();
+        }
     }
 
     /**
      * Adds words into the list
      * @param bookWords String Array of words
-     * @param wordList ArrayList of String
      */
-    private void addWords(String[] bookWords, ArrayList<String> wordList) {
-        for (String word : bookWords) {
-            if (alreadyExist(word)) {
-                continue;
+    private void handleBookName(String[] bookWords, String action) {
+        if (action.equals(ADD)) {
+            for (String word : bookWords) {
+                addWord(word);
             }
-            wordList.add(word);
+        } else if (action.equals(DELETE)) {
+            for (String word : bookWords) {
+                deleteWord(word);
+            }
         }
     }
-
 }
