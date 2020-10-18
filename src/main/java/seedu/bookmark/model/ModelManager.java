@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
+import seedu.bookmark.logic.algo.EditDistance;
 import seedu.bookmark.model.book.Book;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final Library library;
     private final UserPrefs userPrefs;
     private final FilteredList<Book> filteredBooks;
+    private final EditDistance editDistance;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredBooks = new FilteredList<>(this.library.getBookList());
+        this.editDistance = new EditDistance(library);
     }
 
     public ModelManager() {
@@ -97,19 +100,22 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
+        editDistance.deleteFromWordList(target);
+
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
+        editDistance.addToWordList(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
     }
 
     @Override
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
-
         library.setBook(target, editedBook);
+        editDistance.updateWordList(target, editedBook);
     }
 
     //=========== Filtered Book List Accessors =============================================================

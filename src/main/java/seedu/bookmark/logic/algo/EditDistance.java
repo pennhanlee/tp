@@ -20,6 +20,7 @@ public class EditDistance {
     public EditDistance(ReadOnlyLibrary library) {
         this.library = library;
         this.wordList = new ArrayList<>();
+        initWordList();
     }
 
     /**
@@ -27,6 +28,7 @@ public class EditDistance {
      * in preparation for Usage by the EditDistance algorithm.
      */
     public void initWordList() {
+        ArrayList<WordStore> wordStore = new ArrayList<>();
         ObservableList<Book> library = this.library.getBookList();
         for (Book book : library) {
             String bookName = book.getName().fullName;
@@ -36,17 +38,35 @@ public class EditDistance {
     }
 
     /**
+     * Deletes old words and adds new words into the
+     * list
+     * @param oldBook Book Object that is deleted.
+     * @param newBook Book Object that is added.
+     */
+    public void updateWordList(Book oldBook, Book newBook) {
+        String oldBookName = oldBook.getName().fullName;
+        String[] oldWords = oldBookName.split("\\s+");
+        handleBookName(oldWords, DELETE);
+        String newBookName = newBook.getName().fullName;
+        String[] newWords = newBookName.split("\\s+");
+        handleBookName(newWords, ADD);
+    }
+
+    /**
      * Adds unique words from a newly added book into
      * the list.
-     * @param book Book Object that is added.
+     * @param book
      */
-    public void updateWordList(Book book) {
+    public void addToWordList(Book book) {
         String bookName = book.getName().fullName;
         String[] words = bookName.split("\\s+");
         handleBookName(words, ADD);
     }
 
-
+    /**
+     * Deletes old words from the list
+     * @param book
+     */
     public void deleteFromWordList(Book book) {
         String bookName = book.getName().fullName;
         String[] words = bookName.split("\\s+");
