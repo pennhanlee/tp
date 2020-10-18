@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.bookmark.testutil.BookBuilder;
 
 import java.time.LocalDate;
 
@@ -31,11 +32,15 @@ public class GoalTest {
 
     @Test
     public void test_overdueDeadline() {
+        Book defaultBook = new BookBuilder().build();
+        // Book overdueBook = new BookBuilder().withGoal("10 20/10/1999").build(); // withGoal() seems to have problem
         Goal gOverdue = new Goal(VALID_PAGE, BEFORE_NOW);
         Goal gNotDue = new Goal(VALID_PAGE, AFTER_NOW);
 
         assertTrue(gOverdue.isOverdue());
         assertFalse(gNotDue.isOverdue());
+        assertFalse(defaultBook.getGoal().isOverdue());
+        // assertTrue(overdueBook.getGoal().isOverdue());
     }
 
     @Test
