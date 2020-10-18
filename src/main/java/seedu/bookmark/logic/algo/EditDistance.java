@@ -1,7 +1,7 @@
 package seedu.bookmark.logic.algo;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.model.Library;
+import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class EditDistance {
     private final String DELETE = "delete";
     private final String ADD = "add";
-    private final Library library;
+    private final ReadOnlyLibrary library;
     private final ArrayList<WordStore> wordList;
 
-    public EditDistance(Library library) {
+    public EditDistance(ReadOnlyLibrary library) {
         this.library = library;
         this.wordList = new ArrayList<>();
     }
