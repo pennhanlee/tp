@@ -33,13 +33,19 @@ public class GoalCommandParser implements Parser<GoalCommand> {
         if (!(argMultimap.getValue(PREFIX_PAGE).isPresent() && argMultimap.getValue(PREFIX_DEADLINE).isPresent())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
         } else if (!argMultimap.getValue(PREFIX_DEADLINE).get().matches(Goal.DEADLINE_REGEX)) {
-            throw new ParseException(String.format("%s does not match format DD-MM-YYYY",
+            throw new ParseException(String.format(GoalCommand.MESSAGE_WRONG_FORMAT_DATE,
                     argMultimap.getValue(PREFIX_DEADLINE).get()));
         }
 
         // Both Page and Date should be present
         String page = argMultimap.getValue(PREFIX_PAGE).get();
         String deadline = argMultimap.getValue(PREFIX_DEADLINE).get();
+        Goal newGoal = new Goal(page, deadline);
+
+        // Check if Goal is overdue
+        if (newGoal.isOverdue()) {
+            throw new ParseException(String.format(GoalCommand.MESSAGE_DEADLINE_OVERDUE, deadline));
+        }
 
         return new GoalCommand(index, new Goal(page, deadline));
     }

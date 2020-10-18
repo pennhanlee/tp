@@ -1,9 +1,15 @@
 package seedu.bookmark.logic.commands;
 
+import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.commands.exceptions.CommandException;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.Model;
 
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_PAGE;
 
@@ -19,7 +25,9 @@ public class GoalCommand extends Command {
             + PREFIX_PAGE + "102 "
             + PREFIX_DEADLINE + "21-12-2024\n";
 
-    public static final String MESSAGE_ADD_GOAL_SUCCESS = "Added Goal: %1$s";
+    public static final String MESSAGE_WRONG_FORMAT_DATE = "%s does not match format DD-MM-YYYY";
+    public static final String MESSAGE_DEADLINE_OVERDUE = "%s has already passed. Please choose a deadline later than today.";
+    public static final String MESSAGE_ADD_GOAL_SUCCESS = "New goal for %s: %s";
 
     private final Index targetIndex;
     private final Goal goal;
@@ -30,9 +38,20 @@ public class GoalCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
-        return new CommandResult("Hello from Goal command! Goal is now not operating yet, " +
-                "please try again later!");
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Book> allBooks = model.getFilteredBookList();
+
+        if (targetIndex.getZeroBased() >= allBooks.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+        }
+
+        Book bookWithoutGoal = allBooks.get(targetIndex.getZeroBased());
+        Book bookWithGoal = Book.setGoal(bookWithoutGoal, goal);
+
+        model.setBook(bookWithoutGoal, bookWithGoal);
+
+        return new CommandResult(String.format(MESSAGE_ADD_GOAL_SUCCESS, bookWithGoal.getName(), goal.toString()));
     }
 
     @Override

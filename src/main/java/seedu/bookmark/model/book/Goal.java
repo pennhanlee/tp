@@ -58,7 +58,7 @@ public class Goal {
 
     public boolean isOverdue() {
         LocalDate now = LocalDate.now();
-        return parseDeadline(deadline).isBefore(now); // apparently this returns the wrong thing...
+        return parseDeadline(deadline).isBefore(now);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Goal {
 
     @Override
     public String toString() {
-        return String.format("Page %s by %s", page, deadline);
+        return String.format("finish page %s before %s", page, deadline);
     }
 
     @Override
