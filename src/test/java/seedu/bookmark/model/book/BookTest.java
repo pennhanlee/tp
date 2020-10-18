@@ -69,8 +69,9 @@ public class BookTest {
                 .withGenre("FICTION")
                 .withTotalPages(totalPages)
                 .withBookmark(bookmark)
-                .withGoal("5 15/12/2024") // need help with this`
                 .build();
+
+        testBook = Book.setGoal(testBook, new Goal("5 15/12/2024"));
 
         assertTrue(testBook.hasStartedReading());
         assertTrue(testBook.hasGoal());
