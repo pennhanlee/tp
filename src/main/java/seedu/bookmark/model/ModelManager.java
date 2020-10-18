@@ -91,6 +91,8 @@ public class ModelManager implements Model {
         return library;
     }
 
+    public EditDistance getEditDistance() { return editDistance; }
+
     @Override
     public boolean hasBook(Book book) {
         requireNonNull(book);

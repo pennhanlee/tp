@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
+import seedu.bookmark.logic.algo.EditDistance;
 import seedu.bookmark.model.book.Book;
 
 /**
@@ -51,6 +52,9 @@ public interface Model {
 
     /** Returns the Library */
     ReadOnlyLibrary getLibrary();
+
+    /** Returns the EditDistance 8 */
+    EditDistance getEditDistance();
 
     /**
      * Returns true if a book with the same identity as {@code book} exists in the Library.

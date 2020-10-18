@@ -7,6 +7,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
@@ -34,15 +35,25 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " g/ fantasy horror";
 
     private final Predicate<Book> predicate;
+    private final String[] keywords;
 
-    public FindCommand(Predicate<Book> predicate) {
+    public FindCommand(Predicate<Book> predicate, String[] keywords) {
         this.predicate = predicate;
+        this.keywords = keywords;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        ArrayList<String> wordSuggestion = new ArrayList<>();
         model.updateFilteredBookList(predicate);
+        if (model.getFilteredBookList().size() == 0) {
+            for (String word : keywords) {
+                wordSuggestion = model.getEditDistance().findSuggestion(word);
+            }
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_WORD_SUGGESTION, wordSuggestion.get(0)));
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
     }
