@@ -39,6 +39,30 @@ public class Book {
         this.goal = Goal.defaultGoal();
     }
 
+    /**
+     * Overloaded method to create a {@code Book} with goal. Will be called through static method {@code setGoal()}.
+     */
+    private Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark, Goal goal) {
+        requireAllNonNull(name, genre, tags, totalPages, bookmark);
+        this.name = name;
+        this.genre = genre;
+        this.tags.addAll(tags);
+        this.totalPages = totalPages;
+        this.bookmark = bookmark;
+        this.goal = goal;
+    }
+
+    /**
+     * Static method to create {@code Book} with a non-default {@code Goal} object from an existing book.
+     * @param b: Existing book with default goal.
+     * @param g: Goal to be set.
+     * @return a {@code Book} object with {@code Goal} g.
+     */
+    public static Book setGoal(Book b, Goal g) {
+        return new Book(b.getName(), b.getGenre(), b.getTags(), b.getTotalPages(), b.getBookmark(), g);
+    }
+
+
     public Name getName() {
         return name;
     }
