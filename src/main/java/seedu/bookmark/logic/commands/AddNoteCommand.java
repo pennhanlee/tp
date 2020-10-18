@@ -29,12 +29,13 @@ public class AddNoteCommand extends Command {
     public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the book. \n"
-                                                       + "Parameters: "
+                                                       + "Parameters: INDEX (must be a positive integer) "
                                                        + PREFIX_NAME + "TITLE "
                                                        + PREFIX_NOTE_TEXT + "TEXT";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added Note to Book: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
+    public static final String MESSAGE_DUPLICATE_NOTE = "This note already exists for the book.";
 
     private final Index index;
     private final Note note;
@@ -52,7 +53,7 @@ public class AddNoteCommand extends Command {
      * Creates and returns a {@code Book} with the details of {@code bookToEdit}
      * edited with {@code editBookDescriptor}.
      */
-    protected static Book createEditedBook(Book bookToEdit, Note note) {
+    protected static Book createEditedBook(Book bookToEdit, Note note) throws CommandException {
         assert bookToEdit != null;
 
         Name updatedName = bookToEdit.getName();
@@ -61,6 +62,9 @@ public class AddNoteCommand extends Command {
         TotalPages updatedTotalPages = bookToEdit.getTotalPages();
         Bookmark updatedBookmark = bookToEdit.getBookmark();
         List<Note> updatedNotes = new ArrayList<>(bookToEdit.getNotes());
+        if (bookToEdit.containsNote(note)) {
+            throw new CommandException(MESSAGE_DUPLICATE_NOTE);
+        }
         updatedNotes.add(note);
 
         return new Book(updatedName, updatedGenre, updatedTags, updatedTotalPages, updatedBookmark, updatedNotes);

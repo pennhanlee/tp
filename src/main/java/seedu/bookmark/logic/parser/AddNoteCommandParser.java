@@ -7,7 +7,6 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TEXT;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.AddNoteCommand;
-import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Note;
 
@@ -33,13 +32,16 @@ public class AddNoteCommandParser implements Parser<AddNoteCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()
                     && argMultimap.getValue(PREFIX_NOTE_TEXT).isPresent()) {
             note = ParserUtil.parseNote(
                     argMultimap.getValue(PREFIX_NAME).get(), argMultimap.getValue(PREFIX_NOTE_TEXT).get());
+        }
+        if (note == null) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
         }
 
         return new AddNoteCommand(index, note);

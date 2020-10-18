@@ -112,6 +112,19 @@ public class Book {
     }
 
     /**
+     * Returns true if the exact same note is present in the note list of the book.
+     */
+    public boolean containsNote(Note note) {
+        for (Note n : this.notes) {
+            if (n.equals(note)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TEXT;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 import static seedu.bookmark.testutil.Assert.assertThrows;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_TOTAL_PAGES = "1";
     public static final String VALID_BOOKMARK_1984 = "239";
     public static final String VALID_BOOKMARK_JANE_EYRE = "123";
+    public static final String VALID_NOTE_TITLE = "Chapter 1";
+    public static final String VALID_NOTE_TEXT = "Awesome read";
 
     public static final String NAME_DESC_1984 = " " + PREFIX_NAME + VALID_NAME_1984;
     public static final String NAME_DESC_JANE_EYRE = " " + PREFIX_NAME + VALID_NAME_JANE_EYRE;
@@ -48,12 +51,14 @@ public class CommandTestUtil {
     public static final String TOTAL_PAGES_DESC_JANE_EYRE = " " + PREFIX_TOTAL_PAGES + VALID_TOTAL_PAGES_JANE_EYRE;
     public static final String BOOKMARK_DESC_1984 = " " + PREFIX_BOOKMARK + VALID_BOOKMARK_1984;
     public static final String BOOKMARK_DESC_JANE_EYRE = " " + PREFIX_BOOKMARK + VALID_BOOKMARK_JANE_EYRE;
+    public static final String NOTE_TEXT = " " + PREFIX_NOTE_TEXT + "Awesome read";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "@@@@"; // '@' not allowed in genres
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TOTAL_PAGES_DESC = " " + PREFIX_TOTAL_PAGES + "cnw"; // "alphabets not allowed"
     public static final String INVALID_BOOKMARK_DESC = " " + PREFIX_BOOKMARK + "-12"; // "negative numbers not allowed"
+    public static final String INVALID_NOTE_TEXT = " " + PREFIX_NOTE_TEXT + "bobo!"; //'!' not allowed in note text
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
