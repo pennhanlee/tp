@@ -25,7 +25,6 @@ public class GoalCommand extends Command {
             + PREFIX_PAGE + "102 "
             + PREFIX_DEADLINE + "21-12-2024\n";
 
-    public static final String MESSAGE_WRONG_FORMAT_DATE = "%s does not match format DD-MM-YYYY";
     public static final String MESSAGE_DEADLINE_OVERDUE = "%s has already passed. Please choose a deadline later than today.";
     public static final String MESSAGE_ADD_GOAL_SUCCESS = "New goal for %s: %s";
 
@@ -44,6 +43,10 @@ public class GoalCommand extends Command {
 
         if (targetIndex.getZeroBased() >= allBooks.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+        }
+
+        if (goal.isOverdue()) {
+            throw new CommandException(String.format(MESSAGE_DEADLINE_OVERDUE, goal.deadline));
         }
 
         Book bookWithoutGoal = allBooks.get(targetIndex.getZeroBased());

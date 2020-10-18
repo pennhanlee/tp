@@ -8,6 +8,7 @@ import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Goal;
+import seedu.bookmark.testutil.BookBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,7 +22,7 @@ public class GoalCommandTest {
     private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
     private Goal validGoal = new Goal("10", "15-10-2024");
-    private String overdueGoal = "10 15-10-1999";
+    private Goal overdueGoal = new Goal("10 15-10-1999");
 
     @Test
     public void execute_validIndex_success() {
@@ -36,10 +37,18 @@ public class GoalCommandTest {
     }
 
     @Test
-    public void execute_invalidDeadline_throwsCommandException() {
-        GoalCommand goalCommand = new GoalCommand(outOfBoundIndex, validGoal);
+    public void constructBook_defaultGoal_success() {
+        Goal defGoal = Goal.defaultGoal();
+        Book newBook = new BookBuilder().build();
 
-        assertCommandFailure(goalCommand, model, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+        assertTrue(defGoal.equals(newBook.getGoal()));
+    }
+
+    @Test
+    public void execute_overdueDeadline_throwsCommandException() {
+        GoalCommand goalCommand = new GoalCommand(INDEX_FIRST_BOOK, overdueGoal);
+
+        assertCommandFailure(goalCommand, model, String.format(GoalCommand.MESSAGE_DEADLINE_OVERDUE, overdueGoal.deadline));
     }
 
     @Test
@@ -52,24 +61,24 @@ public class GoalCommandTest {
 
     @Test
     public void equals() {
-        ViewCommand viewFirstCommand = new ViewCommand(INDEX_FIRST_BOOK);
-        ViewCommand viewSecondCommand = new ViewCommand(INDEX_SECOND_BOOK);
+        GoalCommand goalFirstCommand = new GoalCommand(INDEX_FIRST_BOOK, validGoal);
+        GoalCommand goalSecondCommand = new GoalCommand(INDEX_SECOND_BOOK, validGoal);
 
         // same object -> returns true
-        assertTrue(viewFirstCommand.equals(viewFirstCommand));
+        assertTrue(goalFirstCommand.equals(goalFirstCommand));
 
         // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(INDEX_FIRST_BOOK);
-        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
+        GoalCommand goalFirstCommandCopy = new GoalCommand(INDEX_FIRST_BOOK, validGoal);
+        assertTrue(goalFirstCommand.equals(goalFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(viewFirstCommand.equals(1));
+        assertFalse(goalFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(viewFirstCommand.equals(null));
+        assertFalse(goalFirstCommand.equals(null));
 
         // different book -> returns false
-        assertFalse(viewFirstCommand.equals(viewSecondCommand));
+        assertFalse(goalFirstCommand.equals(goalSecondCommand));
     }
 
 }

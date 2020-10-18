@@ -11,8 +11,8 @@ public class Goal {
         Deadline must be specified as dd-mm-yyyy
         Both fields must not be empty.
      */
-    public static final String VALIDATION_REGEX = "\\d+\\s\\d{2}-\\d{2}-\\d{4}";
     public static final String DEADLINE_REGEX = "\\d{2}-\\d{2}-\\d{4}";
+    public static final String PAGE_REGEX = "^\\d+";
 
     public final String page;
     public final String deadline;
@@ -39,7 +39,7 @@ public class Goal {
         return new Goal("0", "31-12-9999");
     }
 
-    public static LocalDate parseDeadline(String deadline) {
+    private static LocalDate parseDeadline(String deadline) {
         String[] parts = deadline.split("-");
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
@@ -48,8 +48,8 @@ public class Goal {
         return LocalDate.of(year, month, day);
     }
 
-    public LocalDate getDeadline() {
-        return parseDeadline(deadline);
+    public String getDeadline() {
+        return deadline;
     }
 
     public int getPage() {
@@ -64,8 +64,8 @@ public class Goal {
     /**
      * Returns if a given string is a valid genre.
      */
-    public static boolean isValidGoal(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidGoal(String page, String deadline) {
+        return page.matches(PAGE_REGEX) && deadline.matches(DEADLINE_REGEX);
     }
 
     @Override
