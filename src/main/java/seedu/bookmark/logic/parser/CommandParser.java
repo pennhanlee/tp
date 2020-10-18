@@ -13,6 +13,7 @@ import seedu.bookmark.logic.commands.DeleteCommand;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.ExitCommand;
 import seedu.bookmark.logic.commands.FindCommand;
+import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.logic.commands.HelpCommand;
 import seedu.bookmark.logic.commands.ListCommand;
 import seedu.bookmark.logic.commands.ViewCommand;
@@ -72,6 +73,8 @@ public class CommandParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
+        case GoalCommand.COMMAND_WORD:
+            return new GoalCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

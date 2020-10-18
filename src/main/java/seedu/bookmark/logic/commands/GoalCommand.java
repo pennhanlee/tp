@@ -15,17 +15,17 @@ public class GoalCommand extends Command {
             + PREFIX_PAGE + "PAGE NUMBER "
             + PREFIX_DEADLINE + "DEADLINE (DD/MM/YYYY) \n"
             + "Example: "
-            + COMMAND_WORD + " 2"
+            + COMMAND_WORD + " 2 "
             + PREFIX_PAGE + "102 "
             + PREFIX_DEADLINE + "21/12/2024 \n";
 
-    public static final String MESSAGE_ADD_GLOAL_SUCCESS = "Added Goal: %s";
+    public static final String MESSAGE_ADD_GOAL_SUCCESS = "Added Goal: %s";
 
-    private final Index targeIndex;
+    private final Index targetIndex;
     private final Goal goal;
 
     public GoalCommand(Index targetIndex, Goal goal) {
-        this.targeIndex = targetIndex;
+        this.targetIndex = targetIndex;
         this.goal = goal;
     }
 
@@ -39,7 +39,7 @@ public class GoalCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GoalCommand // instanceof handles nulls
-                && targeIndex.equals(((GoalCommand) other).targeIndex) // same index
+                && targetIndex.equals(((GoalCommand) other).targetIndex) // same index
                 && goal.equals(((GoalCommand) other).goal)); // same goal
     }
 }
