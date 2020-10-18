@@ -5,6 +5,7 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.book.Book;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 
 /**
@@ -14,11 +15,11 @@ import java.util.ArrayList;
 public class EditDistance {
 
     private final Library library;
-    private final ArrayList<String> wordList;
+    private final Hashtable<String, Integer> wordList;
 
     public EditDistance(Library library) {
         this.library = library;
-        this.wordList = new ArrayList<>();
+        this.wordList = new Hashtable<>();
     }
 
     /**
