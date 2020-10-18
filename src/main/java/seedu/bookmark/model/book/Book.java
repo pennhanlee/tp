@@ -54,8 +54,8 @@ public class Book {
 
     /**
      * Static method to create {@code Book} with a non-default {@code Goal} object from an existing book.
-     * @param b: Existing book with default goal.
-     * @param g: Goal to be set.
+     * @param b Existing book with default goal.
+     * @param g Goal to be set.
      * @return a {@code Book} object with {@code Goal} g.
      */
     public static Book setGoal(Book b, Goal g) {

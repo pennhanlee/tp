@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
-            "Goals should only contain numeric characters for page, and Date format DD-MM-YYYY for a deadline" +
-                    ", and it should not be blank";
+            "Goals should only contain numeric characters for page, and Date format DD-MM-YYYY for a deadline"
+                    + ", and it should not be blank";
     /*
         Goal must be in the format: [page] [deadline]
         Deadline must be specified as dd-mm-yyyy
@@ -56,6 +56,10 @@ public class Goal {
         return Integer.parseInt(page);
     }
 
+    /**
+     * Checks if a {@code Goal} object is overdue compared to today's date.
+     * @return true if a goal is already overdue.
+     */
     public boolean isOverdue() {
         LocalDate now = LocalDate.now();
         return parseDeadline(deadline).isBefore(now);

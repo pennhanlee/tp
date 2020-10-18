@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import seedu.bookmark.testutil.BookBuilder;
 
-import java.time.LocalDate;
+import seedu.bookmark.testutil.BookBuilder;
 
 public class GoalTest {
     public static final String BEFORE_NOW = "10-10-1999";
@@ -41,16 +40,16 @@ public class GoalTest {
 
     @Test
     public void test_validGoal() {
-        String valid_date = "20-10-2024";
-        String invalid_date = "19183109823/11/2024";
-        String valid_page = "10";
-        String invalid_page = "10b";
-        String invalid_year = "20/11/1";
+        String validDate = "20-10-2024";
+        String invalidDate = "19183109823/11/2024";
+        String validPage = "10";
+        String invalidPage = "10b";
+        String invalidYear = "20/11/1";
 
-        assertTrue(valid_date.matches(Goal.DEADLINE_REGEX));
-        assertTrue(Goal.isValidGoal(valid_page, valid_date));
-        assertFalse(Goal.isValidGoal(invalid_page, valid_date));
-        assertFalse(Goal.isValidGoal(valid_page, invalid_date));
-        assertFalse(Goal.isValidGoal(valid_page, invalid_year));
+        assertTrue(validDate.matches(Goal.DEADLINE_REGEX));
+        assertTrue(Goal.isValidGoal(validPage, validDate));
+        assertFalse(Goal.isValidGoal(invalidPage, validDate));
+        assertFalse(Goal.isValidGoal(validPage, invalidDate));
+        assertFalse(Goal.isValidGoal(validPage, invalidYear));
     }
 }

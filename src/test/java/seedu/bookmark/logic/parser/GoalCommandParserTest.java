@@ -1,47 +1,22 @@
 package seedu.bookmark.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.commons.core.index.Index;
-import seedu.bookmark.logic.commands.EditCommand;
-import seedu.bookmark.logic.commands.GoalCommand;
-import seedu.bookmark.model.book.Genre;
-import seedu.bookmark.model.book.Goal;
-import seedu.bookmark.model.book.Name;
-import seedu.bookmark.model.tag.Tag;
-import seedu.bookmark.testutil.EditBookDescriptorBuilder;
-
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_JANE_EYRE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.bookmark.logic.commands.CommandTestUtil.NAME_DESC_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_BAD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.TAG_DESC_GOOD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_JANE_EYRE;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_PAGE;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_THIRD_BOOK;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.commands.GoalCommand;
+import seedu.bookmark.model.book.Goal;
 
 public class GoalCommandParserTest {
-    private static final String PAGE_EMPTY = " " + PREFIX_PAGE;
-    private static final String DEADLINE_EMPTY = " " + PREFIX_DEADLINE;
-
     private static final String VALID_PAGE = " p/10";
     private static final String VALID_DEADLINE = " d/20-12-2040";
     private static final String INVALID_PAGE = " p/10bawj";
     private static final String INVALID_DEADLINE = " d/20/12/20240";
     private static final String VALID_GOAL_COMMAND = " p/10 d/20-12-2040";
-    private static final String VALID_GOAL_COMMAND_WITH_INDEX = "2 p/10 d/20-12-2040";
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE);

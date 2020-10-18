@@ -1,17 +1,17 @@
 package seedu.bookmark.logic.commands;
 
-import seedu.bookmark.commons.core.Messages;
-import seedu.bookmark.commons.core.index.Index;
-import seedu.bookmark.logic.commands.exceptions.CommandException;
-import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.Goal;
-import seedu.bookmark.model.Model;
-
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_PAGE;
+
+import java.util.List;
+
+import seedu.bookmark.commons.core.Messages;
+import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.commands.exceptions.CommandException;
+import seedu.bookmark.model.Model;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Goal;
 
 public class GoalCommand extends Command {
     public static final String COMMAND_WORD = "goal";
@@ -25,12 +25,18 @@ public class GoalCommand extends Command {
             + PREFIX_PAGE + "102 "
             + PREFIX_DEADLINE + "21-12-2024\n";
 
-    public static final String MESSAGE_DEADLINE_OVERDUE = "%s has already passed. Please choose a deadline later than today.";
+    public static final String MESSAGE_DEADLINE_OVERDUE = "%s has already passed. "
+            + "Please choose a deadline later than today.";
     public static final String MESSAGE_ADD_GOAL_SUCCESS = "New goal for %s: %s";
 
     private final Index targetIndex;
     private final Goal goal;
 
+    /**
+     * Constructor for {@code GoalCommand} object with index and goal.
+     * @param targetIndex index of book in List view.
+     * @param goal to be set for the book.
+     */
     public GoalCommand(Index targetIndex, Goal goal) {
         this.targetIndex = targetIndex;
         this.goal = goal;

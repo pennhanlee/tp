@@ -1,6 +1,15 @@
 package seedu.bookmark.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.model.Model;
@@ -9,14 +18,6 @@ import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.testutil.BookBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
-import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
 public class GoalCommandTest {
     private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
@@ -30,7 +31,8 @@ public class GoalCommandTest {
         Book bookToSetGoal = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         Book bookWithGoal = Book.setGoal(bookToSetGoal, validGoal);
 
-        String expectedMessage = String.format(GoalCommand.MESSAGE_ADD_GOAL_SUCCESS, bookToSetGoal.getName(), validGoal.toString());
+        String expectedMessage = String.format(GoalCommand.MESSAGE_ADD_GOAL_SUCCESS,
+                bookToSetGoal.getName(), validGoal.toString());
         expectedModel.setBook(bookToSetGoal, bookWithGoal);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -48,7 +50,8 @@ public class GoalCommandTest {
     public void execute_overdueDeadline_throwsCommandException() {
         GoalCommand goalCommand = new GoalCommand(INDEX_FIRST_BOOK, overdueGoal);
 
-        assertCommandFailure(goalCommand, model, String.format(GoalCommand.MESSAGE_DEADLINE_OVERDUE, overdueGoal.deadline));
+        assertCommandFailure(goalCommand, model,
+                String.format(GoalCommand.MESSAGE_DEADLINE_OVERDUE, overdueGoal.deadline));
     }
 
     @Test

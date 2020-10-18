@@ -92,11 +92,6 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder withGoal(String goal) {
-        this.goal = new Goal(goal);
-        return this;
-    }
-
     public Book build() {
         return new Book(name, genre, tags, totalPages, bookmark);
     }
