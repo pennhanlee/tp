@@ -188,6 +188,4 @@ public class Book {
         getNotes().forEach(note -> builder.append(note.title + ","));
         return builder.toString();
     }
-
-
 }

@@ -81,5 +81,4 @@ public class JsonAdaptedBookTest {
                         VALID_TOTAL_PAGES, VALID_BOOKMARK, VALID_NOTES);
         assertThrows(IllegalValueException.class, book::toModelType);
     }
-
 }
