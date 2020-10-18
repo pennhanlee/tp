@@ -56,7 +56,7 @@ public class EditDistance {
         while (suggestionCount < 4 && wordCount < wordList.size()) {
             wordCount++;
             String targetWord = wordList.get(wordCount);
-            int wordDistance = calculateDistance(sourceWord, targetWord));
+            int wordDistance = calculateDistance(sourceWord, targetWord);
             if (wordDistance <= 3) {
                 suggestions.add(targetWord);
                 suggestionCount++;
