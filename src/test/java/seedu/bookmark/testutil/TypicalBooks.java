@@ -39,9 +39,10 @@ public class TypicalBooks {
             .withTotalPages("500")
             .withBookmark("20").build();
     public static final Book CRIME_AND_PUNISHMENT = new BookBuilder().withName("Crime and Punishment")
-            .withGenre("Crime").withTags("Bad")
+            .withGenre("Crime")
+            .withTags("Bad")
             .withTotalPages("1000")
-            .withBookmark("20").build();
+            .withBookmark("1000").build();
     public static final Book LORD_OF_THE_FLIES = new BookBuilder().withName("Lord of the Flies")
             .withGenre("Mystery").withTotalPages("369")
             .withBookmark("123").build();

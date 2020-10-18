@@ -29,20 +29,7 @@ public class Book {
     private final List<Note> notes = new ArrayList<>();
 
     /**
-     * Every field must be present and not null.
-     */
-    public Book(Name name, Genre genre, Set<Tag> tags) {
-        requireAllNonNull(name, genre, tags);
-        this.name = name;
-        this.genre = genre;
-        this.tags.addAll(tags);
-        this.totalPages = new TotalPages("500");
-        this.bookmark = new Bookmark();
-    }
-
-    /**
-     * Overloaded constructor, to accommodate totalPages and bookmark, remove the other constructor when integration
-     * is completed.
+     * Fields must be present, valid and not null.
      */
     public Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark) {
         requireAllNonNull(name, genre, tags, totalPages, bookmark);
@@ -109,6 +96,34 @@ public class Book {
                 && otherBook.getName().equals(getName())
                 && otherBook.getGenre().equals(getGenre())
                 && otherBook.getTotalPages().equals(getTotalPages());
+    }
+
+    /**
+     * Checks if this {@code Book} has started being read based on its {@code Bookmark}'s value.
+     */
+    public boolean hasStartedReading() {
+        return getPagesRead() > 0;
+    }
+
+    /**
+     * Returns the number of pages of this book read, according to its {@code Bookmark}'s value.
+     */
+    public int getPagesRead() {
+        return Integer.parseInt(bookmark.value);
+    }
+
+    /**
+     * Returns the total number of pages in this book, according to its {@code TotalPages}'s value.
+     */
+    public int getTotalPagesNumber() {
+        return Integer.parseInt(totalPages.value);
+    }
+
+    /**
+     * Returns true if book is completed, i.e. if bookmarked page is equal to total pages.
+     */
+    public boolean isCompleted() {
+        return bookmark.value.equals(totalPages.value);
     }
 
     /**

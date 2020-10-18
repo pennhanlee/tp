@@ -8,38 +8,40 @@ import java.util.stream.Collectors;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.book.Note;
+import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Library} with sample data.
  */
 public class SampleDataUtil {
     public static Book[] getSampleBooks() {
         return new Book[] {
-            new Book(new Name("Harry Potter"), new Genre("Fiction"),
-                getTagSet("Good")),
-            new Book(new Name("To Kill a Mockingbird"), new Genre("Fiction"),
-                getTagSet("Good", "Lengthy")),
-            new Book(new Name("The Hunger Games"), new Genre("Fiction"),
-                getTagSet("Exciting")),
-            new Book(new Name("Crime And Punishment"), new Genre("Crime"),
-                getTagSet("Action")),
-            new Book(new Name("Lord Of The Flies"), new Genre("Mystery"),
-                getTagSet("Horror")),
-            new Book(new Name("Enders Game"), new Genre("Thriller"),
-                getTagSet("Interesting"))
+            new Book(new Name("MIPS Book"), new Genre("Educational"),
+                getTagSet("Good"), new TotalPages("500"), new Bookmark("50")),
+            new Book(new Name("Algorithms"), new Genre("Educational"),
+                getTagSet("Bad", "Lengthy"), new TotalPages("5050"), new Bookmark()),
+            new Book(new Name("Barney"), new Genre("Children"),
+                getTagSet("Funny"), new TotalPages("25"), new Bookmark("5")),
+            new Book(new Name("The Book"), new Genre("Fiction"),
+                getTagSet("Lame"), new TotalPages("333"), new Bookmark()),
+            new Book(new Name("The Bible"), new Genre("Religion"),
+                getTagSet("Holy"), new TotalPages("10000"), new Bookmark("25")),
+            new Book(new Name("The Girl with the Dragon Tatoo"), new Genre("Novel"),
+                getTagSet("Classic"), new TotalPages("1500"), new Bookmark("222"))
         };
     }
 
     public static ReadOnlyLibrary getSampleLibrary() {
-        Library sampleAb = new Library();
+        Library sampleLibrary = new Library();
         for (Book sampleBook : getSampleBooks()) {
-            sampleAb.addBook(sampleBook);
+            sampleLibrary.addBook(sampleBook);
         }
-        return sampleAb;
+        return sampleLibrary;
     }
 
     /**
