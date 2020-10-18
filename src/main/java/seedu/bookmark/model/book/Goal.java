@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
-            "Goals should only contain numeric characters for page, and Date format DD/MM/YYYY for a deadline" +
+            "Goals should only contain numeric characters for page, and Date format DD-MM-YYYY for a deadline" +
                     ", and it should not be blank";
     /*
         Goal must be in the format: [page] [deadline]
-        Deadline must be specified as dd/mm/yyyy
+        Deadline must be specified as dd-mm-yyyy
         Both fields must not be empty.
      */
-    public static final String VALIDATION_REGEX = "\\d+\\s\\d{2}/\\d{2}/\\d{4}";
-    public static final String DEADLINE_REGEX = "\\d{2}/\\d{2}/\\d{4}";
+    public static final String VALIDATION_REGEX = "\\d+\\s\\d{2}-\\d{2}-\\d{4}";
+    public static final String DEADLINE_REGEX = "\\d{2}-\\d{2}-\\d{4}";
 
     public final String page;
     public final String deadline;
@@ -36,11 +36,11 @@ public class Goal {
     }
 
     public static Goal defaultGoal() { // constructor for default goal
-        return new Goal("0", "31/12/9999");
+        return new Goal("0", "31-12-9999");
     }
 
     public static LocalDate parseDeadline(String deadline) {
-        String[] parts = deadline.split("/");
+        String[] parts = deadline.split("-");
         int day = Integer.parseInt(parts[0]);
         int month = Integer.parseInt(parts[1]);
         int year = Integer.parseInt(parts[2]);

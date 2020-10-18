@@ -13,13 +13,13 @@ public class GoalCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets a goal for a specified book. \n"
             + "Parameters: INDEX (positive integer) "
             + PREFIX_PAGE + "PAGE NUMBER "
-            + PREFIX_DEADLINE + "DEADLINE (DD/MM/YYYY) \n"
+            + PREFIX_DEADLINE + "DEADLINE (DD-MM-YYYY) \n"
             + "Example: "
             + COMMAND_WORD + " 2 "
             + PREFIX_PAGE + "102 "
-            + PREFIX_DEADLINE + "21/12/2024 \n";
+            + PREFIX_DEADLINE + "21-12-2024 \n";
 
-    public static final String MESSAGE_ADD_GOAL_SUCCESS = "Added Goal: %s";
+    public static final String MESSAGE_ADD_GOAL_SUCCESS = "Added Goal: %1$s";
 
     private final Index targetIndex;
     private final Goal goal;
