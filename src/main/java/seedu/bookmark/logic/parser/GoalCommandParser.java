@@ -33,9 +33,10 @@ public class GoalCommandParser implements Parser<GoalCommand> {
         // Check page and date
         if (!(argMultimap.getValue(PREFIX_PAGE).isPresent() && argMultimap.getValue(PREFIX_DEADLINE).isPresent())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
-        // Check if matches page and deadline regex. Fix later.
-        } else if (!argMultimap.getValue(PREFIX_DEADLINE).get().matches(Goal.DEADLINE_REGEX)) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, args));
+        // Check if page and deadline provided matches page and deadline regex.
+        } else if (!argMultimap.getValue(PREFIX_DEADLINE).get().matches(Goal.DEADLINE_REGEX) ||
+                    !argMultimap.getValue(PREFIX_PAGE).get().matches(Goal.PAGE_REGEX)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
         }
 
         // Both Page and Date should be present
