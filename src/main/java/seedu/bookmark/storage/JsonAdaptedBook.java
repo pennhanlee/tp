@@ -66,10 +66,10 @@ class JsonAdaptedBook {
                 .collect(Collectors.toList()));
         totalPages = source.getTotalPages().value;
         bookmark = source.getBookmark().value;
-        List<JsonAdaptedNote> jsonNotes = source.getNotes().stream()
-                                                  .map(note -> new JsonAdaptedNote(note.title, note.text))
-                                                  .collect(Collectors.toList());
-        notes.addAll(jsonNotes);
+        notes.addAll(source.getNotes().stream()
+                .map(note -> new JsonAdaptedNote(note.title, note.text))
+                .collect(Collectors.toList()));
+
     }
 
     /**

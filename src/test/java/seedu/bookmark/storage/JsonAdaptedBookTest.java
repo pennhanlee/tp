@@ -27,6 +27,10 @@ public class JsonAdaptedBookTest {
             .collect(Collectors.toList());
     private static final String VALID_TOTAL_PAGES = "190";
     private static final String VALID_BOOKMARK = "120";
+    private static final List<JsonAdaptedNote> VALID_NOTES =
+            TO_KILL_A_MOCKINGBIRD.getNotes().stream()
+                    .map(note -> new JsonAdaptedNote(note.title, note.text))
+                    .collect(Collectors.toList());
 
     @Test
     public void toModelType_validBookDetails_returnsBook() throws Exception {
@@ -37,7 +41,8 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedBook book =
-                new JsonAdaptedBook(INVALID_NAME, VALID_GENRE, VALID_TAGS, VALID_TOTAL_PAGES, VALID_BOOKMARK);
+                new JsonAdaptedBook(INVALID_NAME, VALID_GENRE, VALID_TAGS,
+                        VALID_TOTAL_PAGES, VALID_BOOKMARK, VALID_NOTES);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
@@ -45,7 +50,7 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedBook book = new JsonAdaptedBook(null, VALID_GENRE, VALID_TAGS,
-                VALID_TOTAL_PAGES, VALID_BOOKMARK);
+                VALID_TOTAL_PAGES, VALID_BOOKMARK, VALID_NOTES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
@@ -53,7 +58,8 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_invalidGenre_throwsIllegalValueException() {
         JsonAdaptedBook book =
-                new JsonAdaptedBook(VALID_NAME, INVALID_GENRE, VALID_TAGS, VALID_TOTAL_PAGES, VALID_BOOKMARK);
+                new JsonAdaptedBook(VALID_NAME, INVALID_GENRE, VALID_TAGS,
+                        VALID_TOTAL_PAGES, VALID_BOOKMARK, VALID_NOTES);
         String expectedMessage = Genre.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
@@ -61,7 +67,7 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_nullGenre_throwsIllegalValueException() {
         JsonAdaptedBook book = new JsonAdaptedBook(VALID_NAME, null, VALID_TAGS, VALID_TOTAL_PAGES,
-                VALID_BOOKMARK);
+                VALID_BOOKMARK, VALID_NOTES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Genre.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
@@ -71,7 +77,8 @@ public class JsonAdaptedBookTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedBook book =
-                new JsonAdaptedBook(VALID_NAME, VALID_GENRE, invalidTags, VALID_TOTAL_PAGES, VALID_BOOKMARK);
+                new JsonAdaptedBook(VALID_NAME, VALID_GENRE, invalidTags,
+                        VALID_TOTAL_PAGES, VALID_BOOKMARK, VALID_NOTES);
         assertThrows(IllegalValueException.class, book::toModelType);
     }
 
