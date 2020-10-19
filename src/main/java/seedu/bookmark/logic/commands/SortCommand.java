@@ -14,7 +14,7 @@ import seedu.bookmark.model.book.Book;
 /**
  * Sorts books in bookmark based on the input prefix.
  * Currently supports sorting in lexicographical order for Name and Genre properties
- * and ascending order of Reading Progress.
+ * and ascending order of pages read.
  */
 public class SortCommand extends Command {
 
