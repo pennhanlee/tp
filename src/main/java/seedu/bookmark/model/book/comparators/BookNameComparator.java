@@ -16,6 +16,12 @@ public class BookNameComparator implements Comparator<Book>{
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof BookNameComparator); // instanceof handles nulls
+    }
+
+    @Override
     public String toString() {
         return "Name";
     }

@@ -18,6 +18,12 @@ public class BookPagesReadComparator implements Comparator<Book>{
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof BookPagesReadComparator); // instanceof handles nulls
+    }
+
+    @Override
     public String toString() {
         return "Pages Read (Bookmark)";
     }

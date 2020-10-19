@@ -39,7 +39,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortFilteredBookList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_BOOKS_SORTED, comparator.toString()));
+                String.format(Messages.MESSAGE_BOOKS_SORTED + comparator.toString()));
     }
 
     @Override
