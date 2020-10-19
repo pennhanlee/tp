@@ -2,6 +2,8 @@ package seedu.bookmark.model;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.exceptions.RedoException;
+import seedu.bookmark.model.exceptions.UndoException;
 
 public class VersionedLibrary extends Library {
 
@@ -13,40 +15,49 @@ public class VersionedLibrary extends Library {
     }
 
     private void save() {
-        ReadOnlyLibrary copiedLibrary = new Library(this);
-        historyManager = historyManager.addNewState(copiedLibrary);
+        historyManager = historyManager.addNewState(copy());
     }
 
-    public void undo() {
-        historyManager.undo();
+    /**
+     * Copy the underlying {@code UniqueBookList} to generate a {@code ReadOnlyLibrary} to be saved as state.
+     */
+    private ReadOnlyLibrary copy() {
+        Library copied = new Library();
+        copied.setBooks(super.getBookList());
+        return copied;
     }
 
-    public void redo() {
-        historyManager.redo();
+    public void undo() throws UndoException {
+        this.historyManager = historyManager.undo();
+    }
+
+    public void redo() throws RedoException {
+        this.historyManager = historyManager.redo();
     }
 
     // ============================= Versioned Library Modifiers ============================================= //
-    // These methods modify the state of the library and hence need to save the current state before modifying
+    // These methods modify the state of the library and hence need to initiate saving of state.
 
     @Override
     public void addBook(Book book) {
-        save();
         super.addBook(book);
+        save();
     }
 
     @Override
     public void setBook(Book target, Book editedBook) {
-        save();
         super.setBook(target, editedBook);
+        save();
     }
 
     @Override
     public void removeBook(Book key) {
-        save();
         super.removeBook(key);
+        save();
     }
 
-    // ===================================== Util Methods =======================================================//
+    // ===================================== Util Methods ======================================================//
+
     @Override
     public ObservableList<Book> getBookList() {
         ReadOnlyLibrary currentState = historyManager.getCurrentState();

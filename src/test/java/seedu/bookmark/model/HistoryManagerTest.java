@@ -18,8 +18,8 @@ import seedu.bookmark.testutil.TypicalBooks;
 
 public class HistoryManagerTest {
 
-    public static final List<Book> BOOKS = TypicalBooks.getTypicalBooks();
-    public static final Book TO_ADD = TypicalBooks.HAMLET;
+    private static final List<Book> BOOKS = TypicalBooks.getTypicalBooks();
+    private static final Book TO_ADD = TypicalBooks.HAMLET;
 
     @Test
     public void equalsTest() {
@@ -49,7 +49,7 @@ public class HistoryManagerTest {
     }
 
     @Test
-    public void addThenUndo_validActions_success() {
+    public void changeThenUndo_validActions_success() {
         List<Book> editedBooks = new ArrayList<>(BOOKS);
         editedBooks.add(TO_ADD);
 
@@ -61,7 +61,7 @@ public class HistoryManagerTest {
     }
 
     @Test
-    public void addThenUndoThenRedo_validActions_success() {
+    public void changeThenUndoThenRedo_validActions_success() {
         List<Book> editedBooks = new ArrayList<>(BOOKS);
         editedBooks.add(TO_ADD);
 
@@ -85,30 +85,28 @@ public class HistoryManagerTest {
         assertThrows(RedoException.class, historyA::redo);
     }
 
-}
+    static class LibraryStub implements ReadOnlyLibrary {
 
+        private final List<Book> books;
 
-
-
-class LibraryStub implements ReadOnlyLibrary {
-
-    private final List<Book> books;
-
-    public LibraryStub(List<Book> books) {
-        this.books = books;
-    }
-
-    @Override
-    public ObservableList<Book> getBookList() {
-        return FXCollections.observableArrayList(books);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        else if (other instanceof LibraryStub) {
-            return getBookList().equals(((LibraryStub) other).getBookList());
+        public LibraryStub(List<Book> books) {
+            this.books = books;
         }
-        return false;
+
+        @Override
+        public ObservableList<Book> getBookList() {
+            return FXCollections.observableArrayList(books);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) return true;
+            else if (other instanceof LibraryStub) {
+                return getBookList().equals(((LibraryStub) other).getBookList());
+            }
+            return false;
+        }
     }
 }
+
+
