@@ -8,12 +8,15 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.logic.algo.WordStore;
 import seedu.bookmark.logic.algo.WordStoreComparator;
+import seedu.bookmark.logic.commands.exceptions.CommandException;
+import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 
@@ -39,27 +42,35 @@ public class FindCommand extends Command {
 
     private final Predicate<Book> predicate;
     private final String[] keywords;
+    private final Prefix prefix;
 
-    public FindCommand(Predicate<Book> predicate, String[] keywords) {
+    public FindCommand(Predicate<Book> predicate, Prefix prefix, String[] keywords) {
         this.predicate = predicate;
+        this.prefix = prefix;
         this.keywords = keywords;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         PriorityQueue<WordStore> finalSuggestion = new PriorityQueue<>(new WordStoreComparator());
         ArrayList<WordStore> wordSuggestions;
         model.updateFilteredBookList(predicate);
-        if (model.getFilteredBookList().size() == 0) { //need to have 1 more guard here.
+
+        if (model.getFilteredBookList().size() == 0 &&
+                !prefix.equals(PREFIX_COMPLETED) &&
+                !prefix.equals(PREFIX_NOT_COMPLETED)) {
+            System.out.println(Arrays.toString(keywords));
             for (String word : keywords) {
                 wordSuggestions = model.getEditDistance().findSuggestion(word);
                 finalSuggestion.addAll(wordSuggestions);
             }
             String suggestedWord = finalSuggestion.poll().getWord();
+
             return new CommandResult(
                     String.format(Messages.MESSAGE_WORD_SUGGESTION, suggestedWord));
         }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
     }
