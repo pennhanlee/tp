@@ -62,7 +62,7 @@ public class FindCommand extends Command {
                 !prefix.equals(PREFIX_NOT_COMPLETED)) {
             System.out.println(Arrays.toString(keywords));
             for (String word : keywords) {
-                wordSuggestions = model.getEditDistance().findSuggestion(word);
+                wordSuggestions = model.getEditDistance().findSuggestion(word, prefix);
                 finalSuggestion.addAll(wordSuggestions);
             }
             String suggestedWord = finalSuggestion.poll().getWord();

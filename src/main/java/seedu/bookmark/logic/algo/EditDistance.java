@@ -83,11 +83,11 @@ public class EditDistance {
      */
     public ArrayList<WordStore> findSuggestion(String sourceWord, Prefix prefix) {
         ArrayList<WordStore> wordBank = null;
-        if (prefix.getPrefix().equals(PREFIX_NAME)) {
+        if (prefix.equals(PREFIX_NAME)) {
             wordBank = nameWordBank;
-        } else if (prefix.getPrefix().equals(PREFIX_GENRE)) {
+        } else if (prefix.equals(PREFIX_GENRE)) {
             wordBank = genreWordBank;
-        } else if (prefix.getPrefix().equals(PREFIX_TAG)) {
+        } else if (prefix.equals(PREFIX_TAG)) {
             wordBank = tagWordBank;
         }
         assert wordBank != null;
