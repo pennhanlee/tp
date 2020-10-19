@@ -5,8 +5,6 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 
-import java.util.Arrays;
-
 import java.util.Comparator;
 import seedu.bookmark.logic.commands.SortCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
