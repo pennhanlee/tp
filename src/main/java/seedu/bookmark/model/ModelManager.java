@@ -22,7 +22,7 @@ public class ModelManager implements Model {
 
     private final Library library;
     private final UserPrefs userPrefs;
-    private final FilteredList<Book> filteredBooks;
+    private FilteredList<Book> filteredBooks;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
