@@ -89,14 +89,14 @@ Shows a list of all books in the Storage Library.
 
 Format: `list`
 
-### Locating books: `find` 
+### Locating books: `find`
 
 Find books that adhere to the input filter.
 
 Format: `find [n/BOOK_TITLE] KEYWORDS, find [c/COMPLETED_BOOKS]`
 
-* Finds books whose specified field contains any of the input keywords. 
-* Can also find completed books & non-completed books using "c/" and "nc/" prefixes. 
+* Finds books whose specified field contains any of the input keywords.
+* Can also find completed books & non-completed books using "c/" and "nc/" prefixes.
 * No keywords are required for finding completed & non-completed books.
 
 Examples:

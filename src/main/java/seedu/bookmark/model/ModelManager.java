@@ -76,7 +76,7 @@ public class ModelManager implements Model {
         userPrefs.setBookmarkFilePath(bookMarkFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Library ================================================================================
 
     @Override
     public void setLibrary(ReadOnlyLibrary library) {
