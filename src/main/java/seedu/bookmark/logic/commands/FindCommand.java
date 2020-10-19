@@ -65,10 +65,15 @@ public class FindCommand extends Command {
                 wordSuggestions = model.getEditDistance().findSuggestion(word, prefix);
                 finalSuggestion.addAll(wordSuggestions);
             }
-            String suggestedWord = finalSuggestion.poll().getWord();
+            String searchedWord = String.join(" ", keywords);
+            if (finalSuggestion.isEmpty()) {
+                return new CommandResult(String.format(
+                        Messages.MESSAGE_WORD_NOT_UNDERSTOOD, searchedWord));
+            }
 
+            String suggestedWord = finalSuggestion.poll().getWord();
             return new CommandResult(
-                    String.format(Messages.MESSAGE_WORD_SUGGESTION, suggestedWord));
+                    String.format(Messages.MESSAGE_WORD_SUGGESTION, searchedWord, suggestedWord));
         }
 
         return new CommandResult(
