@@ -8,9 +8,12 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
+import seedu.bookmark.logic.algo.WordStore;
+import seedu.bookmark.logic.algo.WordStoreComparator;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 
@@ -45,14 +48,16 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        ArrayList<String> wordSuggestion = new ArrayList<>();
+        PriorityQueue<WordStore> finalSuggestion = new PriorityQueue<>(new WordStoreComparator());
+        ArrayList<WordStore> wordSuggestions;
         model.updateFilteredBookList(predicate);
         if (model.getFilteredBookList().size() == 0) {
             for (String word : keywords) {
-                wordSuggestion = model.getEditDistance().findSuggestion(word);
+                wordSuggestions = model.getEditDistance().findSuggestion(word);
+                finalSuggestion.addAll(wordSuggestions);
             }
             return new CommandResult(
-                    String.format(Messages.MESSAGE_WORD_SUGGESTION, wordSuggestion.get(0)));
+                    String.format(Messages.MESSAGE_WORD_SUGGESTION, finalSuggestion.poll()));
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));

@@ -82,14 +82,14 @@ public class EditDistance {
      * Finds 3 words that are close to the misspelled word.
      * @param sourceWord mispelled word to find suggestion for
      */
-    public PriorityQueue<WordStore> findSuggestion(String sourceWord) {
+    public ArrayList<WordStore> findSuggestion(String sourceWord) {
         int wordCount = 0;
         int suggestionCount = 0;
-        PriorityQueue<WordStore> suggestions = new PriorityQueue<>(new WordComparator());
+        ArrayList<WordStore> suggestions = new ArrayList<>();
         while (suggestionCount < SUGGESTION_LIMIT && wordCount < wordList.size()) {
             WordStore targetWord = wordList.get(wordCount);
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
-            if (wordDistance <= DISTANCE_TOLERANCE) {
+            if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
                 suggestions.add(targetWord);
                 suggestionCount++;
             }
@@ -198,18 +198,6 @@ public class EditDistance {
             for (String word : bookWords) {
                 deleteWord(word);
             }
-        }
-    }
-
-    /**
-     * Used in ordering suggestions in findSuggestion method
-     */
-    private static class WordComparator implements Comparator<WordStore> {
-        @Override
-        public int compare(WordStore firstWord, WordStore secondWord) {
-            int firstWordDistance = firstWord.getCount();
-            int secondWordDistance = secondWord.getCount();
-            return Integer.compare(firstWordDistance, secondWordDistance);
         }
     }
 }
