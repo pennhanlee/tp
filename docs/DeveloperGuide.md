@@ -187,6 +187,64 @@ detailed view:
 * **Alternative 2:** Use other JavaFX layouts
   * Pros: More in-line with the purpose of the detailed view of showing only one book
   * Cons: More work has to be done to sync up the UI with the model.
+  
+
+### Add book
+
+####Implementation
+
+
+
+
+### Did you mean? feature
+
+#### Implementation
+
+*bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the 
+user-input Word and the words in the application Library.
+
+This feature is facilitated by mainly by `EditDistance` and `WordStore` and has coupling with `ModelManager` and `FindCommand`.
+
+The class diagram below shows the relevant classes involved.
+
+*Class diagram to be added*
+
+Given below is an example usage scenario and how a Did you mean? mechanism behaves at each step. 
+
+Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in their names. <br> 
+*harry is deliberately mispelled* <br>
+`FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty. 
+
+Step 2: `FindCommand` will call on `EditDistance#findSuggestions()` to find the closest matching word
+in the `nameWordBank` in `EditDistance` class. 
+
+Step 3: `EditDistance#calculateDistance` will be implemented to calculate the EditDistance of `h@rry` and the words in `nameWordBank` 
+and store words that are within the set `DISTANCE_LIMIT`. 
+
+Step 4: `FindCommand#execute()` will add each word into a `PriorityQueue` and poll out the word with the smallest distance
+to be used as the Did you mean? recommended word. 
+
+Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
+will return a Standard Message for no suggestion. 
+
+*Activity Diagram to be added*
+
+Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
+
+*Sequence Diagram to be added*
+
+ ####Design Considerations
+ 
+ Aspect: Which Algorithm to use to produce suggestions
+ 
+ * **Alternative 1 (current choice):** Damerau-Levenshtein algorithm 
+    * Pros:
+    * Cons:
+    
+ * **Alternative 2:** 
+    * Pros:
+    * Cons:
+ 
 
 ### \[Proposed\] Undo/redo feature
 
