@@ -5,6 +5,8 @@ import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 
 /**
@@ -12,6 +14,9 @@ import java.util.ArrayList;
  * misspelled words
  */
 public class EditDistance {
+
+    private final int SUGGESTION_LIMIT = 4;
+    private final int DISTANCE_TOLERANCE = 3;
     private final String DELETE = "delete";
     private final String ADD = "add";
     private final ReadOnlyLibrary library;
@@ -77,14 +82,14 @@ public class EditDistance {
      * Finds 3 words that are close to the misspelled word.
      * @param sourceWord mispelled word to find suggestion for
      */
-    public ArrayList<String> findSuggestion(String sourceWord) {
+    public PriorityQueue<WordStore> findSuggestion(String sourceWord) {
         int wordCount = 0;
         int suggestionCount = 0;
-        ArrayList<String> suggestions = new ArrayList<>();
-        while (suggestionCount < 4 && wordCount < wordList.size()) {
-            String targetWord = wordList.get(wordCount).getWord();
-            int wordDistance = calculateDistance(sourceWord, targetWord);
-            if (wordDistance <= 3) {
+        PriorityQueue<WordStore> suggestions = new PriorityQueue<>(new WordComparator());
+        while (suggestionCount < SUGGESTION_LIMIT && wordCount < wordList.size()) {
+            WordStore targetWord = wordList.get(wordCount);
+            int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
+            if (wordDistance <= DISTANCE_TOLERANCE) {
                 suggestions.add(targetWord);
                 suggestionCount++;
             }
@@ -159,6 +164,11 @@ public class EditDistance {
         }
     }
 
+    /**
+     * Minuses the count of the word in the
+     * word list and removes the word if count is 1
+     * @param word
+     */
     private void deleteWord(String word) {
         WordStore targetWord = null;
         for (WordStore wordStore : wordList) {
@@ -168,7 +178,7 @@ public class EditDistance {
             }
         }
         assert targetWord != null;
-        if (targetWord.getCount() == 0) {
+        if (targetWord.getCount() == 1) {  //only got 1 instance which is the deleted book
             wordList.remove(targetWord);
         } else {
             targetWord.minusCount();
@@ -188,6 +198,18 @@ public class EditDistance {
             for (String word : bookWords) {
                 deleteWord(word);
             }
+        }
+    }
+
+    /**
+     * Used in ordering suggestions in findSuggestion method
+     */
+    private static class WordComparator implements Comparator<WordStore> {
+        @Override
+        public int compare(WordStore firstWord, WordStore secondWord) {
+            int firstWordDistance = firstWord.getCount();
+            int secondWordDistance = secondWord.getCount();
+            return Integer.compare(firstWordDistance, secondWordDistance);
         }
     }
 }
