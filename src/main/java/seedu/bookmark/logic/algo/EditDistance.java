@@ -1,7 +1,9 @@
 package seedu.bookmark.logic.algo;
 
 import javafx.collections.ObservableList;
+import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.logic.parser.Prefix;
+import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
@@ -82,7 +84,7 @@ public class EditDistance {
      * @param sourceWord mispelled word to find suggestion for
      */
     public ArrayList<WordStore> findSuggestion(String sourceWord, Prefix prefix) {
-        ArrayList<WordStore> wordBank = null;
+        ArrayList<WordStore> wordBank = nameWordBank; //by default to prevent unknown prefix
         if (prefix.equals(PREFIX_NAME)) {
             wordBank = nameWordBank;
         } else if (prefix.equals(PREFIX_GENRE)) {
