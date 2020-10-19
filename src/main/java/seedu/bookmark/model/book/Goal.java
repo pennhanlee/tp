@@ -87,6 +87,9 @@ public class Goal {
 
     @Override
     public String toString() {
+        if (this.equals(Goal.defaultGoal())) {
+            return "Currently no goal";
+        }
         return String.format("Finish page %s before %s", page, deadline);
     }
 
