@@ -1,13 +1,17 @@
 package seedu.bookmark.logic.algo;
 
 import javafx.collections.ObservableList;
+import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
+
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
 
 /**
@@ -17,7 +21,7 @@ import java.util.List;
 public class EditDistance {
 
     private final int SUGGESTION_LIMIT = 4;
-    private final int DISTANCE_TOLERANCE = 2;
+    private final int DISTANCE_TOLERANCE = 3;
     private final String DELETE = "delete";
     private final String ADD = "add";
     private final ReadOnlyLibrary library;
@@ -41,19 +45,7 @@ public class EditDistance {
         ArrayList<WordStore> wordStore = new ArrayList<>();
         ObservableList<Book> library = this.library.getBookList();
         for (Book book : library) {
-            String bookName = book.getName().fullName;
-            List<String> names = Arrays.asList(bookName.split("\\s+")); //split into individual words
-            String genre = book.getGenre().value;
-            List<String> genres = new ArrayList<>();
-            genres.add(genre);
-            List<String> tags = new ArrayList<>();
-            for(Tag tag : book.getTags()) {
-                String tagName = tag.getTagName();
-                tags.add(tagName);
-            }
-            handleBook(nameWordBank, names, ADD);
-            handleBook(genreWordBank, genres, ADD);
-            handleBook(tagWordBank, tags, ADD);
+            handleBook(book, ADD);
         }
     }
 
@@ -63,51 +55,52 @@ public class EditDistance {
      * @param oldBook Book Object that is deleted.
      * @param newBook Book Object that is added.
      */
-    public void updateWordList(Book oldBook, Book newBook) {
-        String oldBookName = oldBook.getName().fullName;
-        String[] oldWords = oldBookName.split("\\s+");
-        handleBook(oldWords, DELETE);
-        String newBookName = newBook.getName().fullName;
-        String[] newWords = newBookName.split("\\s+");
-        handleBook(newWords, ADD);
+    public void updateWordBank(Book oldBook, Book newBook) {
+        handleBook(oldBook, DELETE);
+        handleBook(newBook, ADD);
     }
 
     /**
      * Adds unique words from a newly added book into
      * the list.
-     * @param book
+     * @param book book to be added
      */
-    public void addToWordList(Book book) {
-        String bookName = book.getName().fullName;
-        String[] words = bookName.split("\\s+");
-        handleBook(words, ADD);
+    public void addToWordBank(Book book) {
+        handleBook(book, ADD);
     }
 
     /**
      * Deletes old words from the list
-     * @param book
+     * @param book book to be deleted
      */
-    public void deleteFromWordList(Book book) {
-        String bookName = book.getName().fullName;
-        String[] words = bookName.split("\\s+");
-        handleBook(words, DELETE);
+    public void deleteFromWordBank(Book book) {
+        handleBook(book, DELETE);
     }
 
     /**
      * Finds 3 words that are close to the misspelled word.
      * @param sourceWord mispelled word to find suggestion for
      */
-    public ArrayList<WordStore> findSuggestion(String sourceWord) {
+    public ArrayList<WordStore> findSuggestion(String sourceWord, Prefix prefix) {
+        ArrayList<WordStore> wordBank = null;
+        if (prefix.getPrefix().equals(PREFIX_NAME)) {
+            wordBank = nameWordBank;
+        } else if (prefix.getPrefix().equals(PREFIX_GENRE)) {
+            wordBank = genreWordBank;
+        } else if (prefix.getPrefix().equals(PREFIX_TAG)) {
+            wordBank = tagWordBank;
+        }
+        assert wordBank != null;
         int wordCount = 0;
         int suggestionCount = 0;
         ArrayList<WordStore> suggestions = new ArrayList<>();
-        while (suggestionCount < SUGGESTION_LIMIT && wordCount < nameWordBank.size()) {
-            WordStore targetWord = nameWordBank.get(wordCount);
+        while (suggestionCount < SUGGESTION_LIMIT && wordCount < wordBank.size()) {
+            WordStore targetWord = wordBank.get(wordCount);
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
             if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
                 System.out.println("Word: " + targetWord.getWord() + " Distance: " + wordDistance);
                 WordStore wordCopy = new WordStore(targetWord.getWord(), wordDistance);
-                suggestions.add(targetWord);
+                suggestions.add(wordCopy);
                 suggestionCount++;
             }
             wordCount++;
@@ -163,10 +156,43 @@ public class EditDistance {
     }
 
     /**
-     * Check if a word exists already and AddCount if yes
-     * @param word String object to be added
+     * Adds words into the list
+     * @param book book to be processed
      */
-    private void addWord(String word, ArrayList<WordStore> wordBank) {
+    private void handleBook(Book book, String action) {
+        String bookName = book.getName().fullName;
+        String genre = book.getGenre().value;
+        Set<Tag> tags = book.getTags();
+        if (action.equals(ADD)) {
+            addWords(bookName, genre, tags);
+        } else if (action.equals(DELETE)) {
+            deleteWords(bookName, genre, tags);
+        }
+    }
+
+    private void addWords(String name, String genre, Set<Tag> tags) {
+        String[] nameWords = name.split("\\s+"); //split into individual words
+        for (String word : nameWords) {
+            wordAdder(nameWordBank, word);
+        }
+        wordAdder(genreWordBank, genre);
+        for (Tag tag : tags) {
+            wordAdder(tagWordBank, tag.getTagName());
+        }
+    }
+
+    private void deleteWords(String name, String genre, Set<Tag> tags) {
+        String[] nameWords = name.split("\\s+"); //split into individual words
+        for (String word : nameWords) {
+            wordDeleter(nameWordBank, word);
+        }
+        wordDeleter(genreWordBank, genre);
+        for (Tag tag : tags) {
+            wordDeleter(tagWordBank, tag.getTagName());
+        }
+    }
+
+    private void wordAdder(ArrayList<WordStore> wordBank, String word) {
         boolean added = false;
         for (WordStore wordstore : wordBank) {
             if (wordstore.getWord().equals(word)) {
@@ -177,16 +203,11 @@ public class EditDistance {
         }
         if (!added) {
             WordStore newWord = new WordStore(word);
-            nameWordBank.add(newWord);
+            wordBank.add(newWord);
         }
     }
 
-    /**
-     * Minuses the count of the word in the
-     * word list and removes the word if count is 1
-     * @param word
-     */
-    private void deleteWord(String word, ArrayList<WordStore> wordBank) {
+    private void wordDeleter(ArrayList<WordStore> wordBank, String word) {
         WordStore targetWord = null;
         for (WordStore wordStore : wordBank) {
             if (wordStore.getWord().equals(word)) {
@@ -199,22 +220,6 @@ public class EditDistance {
             wordBank.remove(targetWord);
         } else {
             targetWord.minusCount();
-        }
-    }
-
-    /**
-     * Adds words into the list
-     * @param bookWords String Array of words
-     */
-    private void handleBook(ArrayList<WordStore> wordBank, List<String> bookWords, String action) {
-        if (action.equals(ADD)) {
-            for (String word : bookWords) {
-                addWord(word, wordBank);
-            }
-        } else if (action.equals(DELETE)) {
-            for (String word : bookWords) {
-                deleteWord(word, wordBank);
-            }
         }
     }
 }

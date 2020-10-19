@@ -102,14 +102,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
-        editDistance.deleteFromWordList(target);
+        editDistance.deleteFromWordBank(target);
 
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
-        editDistance.addToWordList(book);
+        editDistance.addToWordBank(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
     }
 
@@ -117,7 +117,7 @@ public class ModelManager implements Model {
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
         library.setBook(target, editedBook);
-        editDistance.updateWordList(target, editedBook);
+        editDistance.updateWordBank(target, editedBook);
     }
 
     //=========== Filtered Book List Accessors =============================================================
