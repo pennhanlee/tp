@@ -18,7 +18,7 @@ import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.predicates.NameContainsKeywordsPredicate;
 import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 
 /**
