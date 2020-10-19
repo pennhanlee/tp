@@ -3,6 +3,9 @@ package seedu.bookmark.model.book.comparators;
 import java.util.Comparator;
 import seedu.bookmark.model.book.Book;
 
+/**
+ * Sorts {@code Book}s based on {@code ReadingProgress} in ascending order.
+ */
 public class BookReadingProgressComparator implements Comparator<Book>{
 
     @Override

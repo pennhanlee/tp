@@ -3,6 +3,9 @@ package seedu.bookmark.model.book.comparators;
 import java.util.Comparator;
 import seedu.bookmark.model.book.Book;
 
+/**
+ * Sorts {@code Book}s based on {@code Name} in lexicographical order.
+ */
 public class BookNameComparator implements Comparator<Book>{
 
     @Override
