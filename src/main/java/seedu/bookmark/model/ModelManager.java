@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.exceptions.RedoException;
+import seedu.bookmark.model.exceptions.UndoException;
 
 /**
  * Represents the in-memory model of the bookmark data.
@@ -19,7 +21,7 @@ import seedu.bookmark.model.book.Book;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final Library library;
+    private final VersionedLibrary library;
     private final UserPrefs userPrefs;
     private final FilteredList<Book> filteredBooks;
 
@@ -32,7 +34,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with library: " + library + " and user prefs " + userPrefs);
 
-        this.library = new Library(library);
+        this.library = new VersionedLibrary(library);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredBooks = new FilteredList<>(this.library.getBookList());
     }
@@ -121,6 +123,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Book> getFilteredBookList() {
         return filteredBooks;
+    }
+
+    @Override
+    public void undo() throws UndoException {
+        library.undo();
+    }
+
+    @Override
+    public void redo() throws RedoException {
+        library.redo();
     }
 
     @Override

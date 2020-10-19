@@ -1,10 +1,12 @@
 package seedu.bookmark.model;
 
-import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
 
+/**
+ * Represents a {@code Library} that stores different iterations of itself and can move between these iterations.
+ */
 public class VersionedLibrary extends Library {
 
     private HistoryManager historyManager;
@@ -27,15 +29,25 @@ public class VersionedLibrary extends Library {
         return copied;
     }
 
+    /**
+     * Undo the most recent change.
+     * @throws UndoException if there is no changes to undo
+     */
     public void undo() throws UndoException {
         this.historyManager = historyManager.undo();
+        resetData(historyManager.getCurrentState());
     }
 
+    /**
+     * Redo the most recent undone change.
+     * @throws RedoException if there is no undone changes to redo
+     */
     public void redo() throws RedoException {
         this.historyManager = historyManager.redo();
+        resetData(historyManager.getCurrentState());
     }
 
-    // ============================= Versioned Library Modifiers ============================================= //
+    // ================================ Versioned Library Modifiers ============================================= //
     // These methods modify the state of the library and hence need to initiate saving of state.
 
     @Override
@@ -54,13 +66,5 @@ public class VersionedLibrary extends Library {
     public void removeBook(Book key) {
         super.removeBook(key);
         save();
-    }
-
-    // ===================================== Util Methods ======================================================//
-
-    @Override
-    public ObservableList<Book> getBookList() {
-        ReadOnlyLibrary currentState = historyManager.getCurrentState();
-        return currentState.getBookList();
     }
 }
