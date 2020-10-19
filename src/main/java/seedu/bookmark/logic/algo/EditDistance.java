@@ -5,8 +5,6 @@ import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 
 /**
@@ -16,7 +14,7 @@ import java.util.PriorityQueue;
 public class EditDistance {
 
     private final int SUGGESTION_LIMIT = 4;
-    private final int DISTANCE_TOLERANCE = 3;
+    private final int DISTANCE_TOLERANCE = 2;
     private final String DELETE = "delete";
     private final String ADD = "add";
     private final ReadOnlyLibrary library;
@@ -90,6 +88,8 @@ public class EditDistance {
             WordStore targetWord = wordList.get(wordCount);
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
             if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
+                System.out.println("Word: " + targetWord.getWord() + " Distance: " + wordDistance);
+                WordStore wordCopy = new WordStore(targetWord.getWord(), wordDistance);
                 suggestions.add(targetWord);
                 suggestionCount++;
             }

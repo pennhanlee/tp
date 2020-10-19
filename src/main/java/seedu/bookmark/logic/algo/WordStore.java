@@ -4,11 +4,18 @@ public class WordStore {
     private final int STARTING_COUNT = 1;
     private String word;
     private int count;
+    private int distance;
 
     public WordStore(String word) {
         this.word = word;
         this.count = STARTING_COUNT;
     };
+
+    public WordStore(String word, int distance) {
+        this.word = word;
+        this.count = STARTING_COUNT;
+        this.distance = distance;
+    }
 
     /**
      * Returns the word
@@ -44,4 +51,7 @@ public class WordStore {
         return count;
     }
 
+    public int getDistance() {
+        return this.distance;
+    }
 }

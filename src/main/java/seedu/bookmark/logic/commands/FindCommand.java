@@ -51,13 +51,14 @@ public class FindCommand extends Command {
         PriorityQueue<WordStore> finalSuggestion = new PriorityQueue<>(new WordStoreComparator());
         ArrayList<WordStore> wordSuggestions;
         model.updateFilteredBookList(predicate);
-        if (model.getFilteredBookList().size() == 0) {
+        if (model.getFilteredBookList().size() == 0) { //need to have 1 more guard here.
             for (String word : keywords) {
                 wordSuggestions = model.getEditDistance().findSuggestion(word);
                 finalSuggestion.addAll(wordSuggestions);
             }
+            String suggestedWord = finalSuggestion.poll().getWord();
             return new CommandResult(
-                    String.format(Messages.MESSAGE_WORD_SUGGESTION, finalSuggestion.poll()));
+                    String.format(Messages.MESSAGE_WORD_SUGGESTION, suggestedWord));
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
