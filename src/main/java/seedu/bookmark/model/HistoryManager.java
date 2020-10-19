@@ -1,6 +1,7 @@
 package seedu.bookmark.model;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 public class HistoryManager {
 
@@ -62,5 +63,25 @@ public class HistoryManager {
         }
         undoDeque.add(state);
         assert(undoDeque.size() <= MAX_UNDO_COUNT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        else if (other instanceof HistoryManager) {
+            HistoryManager otherHistory = (HistoryManager) other;
+            return currentState.equals(otherHistory.currentState)
+                    && compareHistory(otherHistory);
+        }
+        return false;
+    }
+
+    /**
+     * Helper method to compare the undoDeque and redoDeque as {@code equals()} is not overridden in java's ArrayDeque.
+     */
+    private boolean compareHistory(HistoryManager otherHistory) {
+        boolean undoEquals = new ArrayList<>(undoDeque).equals(new ArrayList<>(otherHistory.undoDeque));
+        boolean redoEquals = new ArrayList<>(redoDeque).equals(new ArrayList<>(otherHistory.redoDeque));
+        return undoEquals && redoEquals;
     }
 }
