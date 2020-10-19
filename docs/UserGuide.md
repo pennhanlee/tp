@@ -130,6 +130,15 @@ Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE]`
 Examples:
 *  `edit 1 b/101` Edits the bookmark of the 1st book to be `101`.
 
+### Set goal for your book: `goal`
+
+Set a reading goal to finish a certain page by a deadline for a book in the list.
+
+Format: `goal INDEX p/PAGE d/DEADLINE`
+
+* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* Page number and deadline must be provided.
+
 ### Clearing all books : `clear` [coming soon]
 
 Clears all books from the Storage Library.
