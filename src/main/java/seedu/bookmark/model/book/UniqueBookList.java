@@ -3,6 +3,7 @@ package seedu.bookmark.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +96,13 @@ public class UniqueBookList implements Iterable<Book> {
         }
 
         internalList.setAll(books);
+    }
+
+    /**
+     * Sorts the book list according to the input {@code comparator}.
+     */
+    public void sortBookList(Comparator<Book> comparator) {
+        FXCollections.sort(internalList, comparator);
     }
 
     /**

@@ -14,4 +14,9 @@ public class BookNameComparator implements Comparator<Book>{
         String b2name = b2.getName().toString();
         return b1name.compareTo(b2name);
     }
+
+    @Override
+    public String toString() {
+        return "Name";
+    }
 }

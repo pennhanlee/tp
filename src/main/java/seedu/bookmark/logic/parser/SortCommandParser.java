@@ -3,7 +3,7 @@ package seedu.bookmark.logic.parser;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 
 import java.util.Comparator;
 import seedu.bookmark.logic.commands.SortCommand;
@@ -11,7 +11,7 @@ import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.comparators.BookGenreComparator;
 import seedu.bookmark.model.book.comparators.BookNameComparator;
-import seedu.bookmark.model.book.comparators.BookReadingProgressComparator;
+import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -31,7 +31,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
-                        PREFIX_NAME, PREFIX_GENRE, PREFIX_READING_PROGRESS);
+                        PREFIX_NAME, PREFIX_GENRE, PREFIX_BOOKMARK);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             prefixCount += 1;
@@ -41,9 +41,9 @@ public class SortCommandParser implements Parser<SortCommand> {
             prefixCount += 1;
             inputPrefix = PREFIX_GENRE;
         }
-        if (argMultimap.getValue(PREFIX_READING_PROGRESS).isPresent()) {
+        if (argMultimap.getValue(PREFIX_BOOKMARK).isPresent()) {
             prefixCount += 1;
-            inputPrefix = PREFIX_READING_PROGRESS;
+            inputPrefix = PREFIX_BOOKMARK;
         }
         if (prefixCount != 1) { //if more than/ less than 1 input prefix, we throw an error.
             throw new ParseException(
@@ -71,8 +71,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             comparator = new BookNameComparator();
         } else if (inputPrefix == PREFIX_GENRE) {
             comparator = new BookGenreComparator();
-        } else if (inputPrefix == PREFIX_READING_PROGRESS) {
-            comparator = new BookReadingProgressComparator();
+        } else if (inputPrefix == PREFIX_BOOKMARK) {
+            comparator = new BookPagesReadComparator();
         }
         return comparator;
     }

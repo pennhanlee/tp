@@ -22,7 +22,7 @@ public class ModelManager implements Model {
 
     private final Library library;
     private final UserPrefs userPrefs;
-    private final FilteredList<Book> filteredBooks;
+    private final FilteredList<Book> filteredBooks; //This might be a cause of concern because not final
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -132,8 +132,7 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredBookList(Comparator<Book> comparator) {
-        requireNonNull(comparator);
-        filteredBooks.sort(comparator);
+        this.library.sortBooks(comparator);
     }
 
     @Override

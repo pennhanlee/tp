@@ -3,7 +3,7 @@ package seedu.bookmark.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 
 import java.util.Comparator;
 
@@ -25,7 +25,7 @@ public class SortCommand extends Command {
             + "Parameters: ONE Prefix Specifier\n"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_GENRE + "GENRE] "
-            + "[" + PREFIX_READING_PROGRESS + "READING PROGRESS]... "
+            + "[" + PREFIX_BOOKMARK + "PAGES READ (BOOKMARK)]... "
             + "Example: " + COMMAND_WORD + " g/ ";
 
     private final Comparator<Book> comparator;
@@ -39,7 +39,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortFilteredBookList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
+                String.format(Messages.MESSAGE_BOOKS_SORTED, comparator.toString()));
     }
 
     @Override

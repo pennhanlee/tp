@@ -14,4 +14,9 @@ public class BookGenreComparator implements Comparator<Book>{
         String b2genre = b2.getGenre().toString();
         return b1genre.compareTo(b2genre);
     }
+
+    @Override
+    public String toString() {
+        return "Genre";
+    }
 }
