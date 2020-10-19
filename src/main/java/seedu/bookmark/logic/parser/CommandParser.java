@@ -15,6 +15,7 @@ import seedu.bookmark.logic.commands.ExitCommand;
 import seedu.bookmark.logic.commands.FindCommand;
 import seedu.bookmark.logic.commands.HelpCommand;
 import seedu.bookmark.logic.commands.ListCommand;
+import seedu.bookmark.logic.commands.RedoCommand;
 import seedu.bookmark.logic.commands.UndoCommand;
 import seedu.bookmark.logic.commands.ViewCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
@@ -75,6 +76,9 @@ public class CommandParser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

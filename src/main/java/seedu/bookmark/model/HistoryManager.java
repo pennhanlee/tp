@@ -8,6 +8,7 @@ import seedu.bookmark.model.exceptions.UndoException;
 
 /**
  * Represents the history of a Library.
+ * Guarantees: Immutable
  */
 public class HistoryManager {
 
