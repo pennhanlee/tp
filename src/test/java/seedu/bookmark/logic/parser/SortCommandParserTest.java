@@ -24,35 +24,35 @@ public class SortCommandParserTest {
     }
 
     @Test
-    public void parse_validNamePrefixArgs_returnsFindCommand() {
+    public void parse_validNamePrefixArgs_returnsSortCommand() {
         // no leading and trailing whitespaces
         SortCommand expectedSortCommand =
                 new SortCommand(new BookNameComparator());
         assertParseSuccess(parser, " " + PREFIX_NAME, expectedSortCommand);
 
-        // multiple whitespaces between keywords
+        // multiple whitespaces in command
         assertParseSuccess(parser, " " + PREFIX_NAME + "           ", expectedSortCommand);
     }
 
     @Test
-    public void parse_validGenrePrefixArgs_returnsFindCommand() {
+    public void parse_validGenrePrefixArgs_returnsSortCommand() {
         // no leading and trailing whitespaces
         SortCommand expectedSortCommand =
                 new SortCommand(new BookGenreComparator());
         assertParseSuccess(parser, " " + PREFIX_GENRE, expectedSortCommand);
 
-        // multiple whitespaces between keywords
+        // multiple whitespaces in command
         assertParseSuccess(parser, " " + PREFIX_GENRE + "      ", expectedSortCommand);
     }
 
     @Test
-    public void parse_validBookmarkPrefixArgs_returnsFindCommand() {
+    public void parse_validBookmarkPrefixArgs_returnsSortCommand() {
         // no leading and trailing whitespaces
         SortCommand expectedSortCommand =
                 new SortCommand(new BookPagesReadComparator());
         assertParseSuccess(parser, " " + PREFIX_BOOKMARK, expectedSortCommand);
 
-        // multiple whitespaces between keywords
+        // multiple whitespaces in command
         assertParseSuccess(parser, " " + PREFIX_BOOKMARK + "             ", expectedSortCommand);
     }
 
