@@ -5,42 +5,49 @@
     "genre" : "Fiction",
     "tagged" : [ "Good" ],
     "totalPages" : "1000",
-    "bookmark" : "500"
+    "bookmark" : "500",
+    "goal" : "10 20-12-2024"
   }, {
     "name" : "To Kill a Mockingbird",
     "genre" : "Fiction",
     "tagged" : [ "Good", "Lengthy" ],
     "totalPages" : "1500",
-    "bookmark" : "269"
+    "bookmark" : "269",
+    "goal" : "10 20-12-2024"
   }, {
     "name" : "The Hunger Games",
     "genre" : "Fiction",
     "tagged" : [ ],
     "totalPages" : "500",
-    "bookmark": "20"
+    "bookmark": "20",
+    "goal" : "10 20-12-2024"
   }, {
     "name" : "Crime and Punishment",
     "genre" : "Crime",
     "tagged" : [ "Bad" ],
     "totalPages" : "1000",
-    "bookmark": "1000"
+    "bookmark": "1000",
+    "goal" : "10 20-12-2024"
   }, {
     "name" : "Lord of the Flies",
     "genre" : "Mystery",
     "tagged" : [ ],
     "totalPages" : "369",
-    "bookmark" : "123"
+    "bookmark" : "123",
+    "goal" : "10 20-12-2024"
   }, {
     "name" : "Enders Game",
     "genre" : "Thriller",
     "tagged" : [ ],
     "totalPages" : "123",
-    "bookmark" : "23"
+    "bookmark" : "23",
+    "goal" : "10 20-12-2024"
   }, {
     "name" : "On the Road",
     "genre" : "Travel",
     "tagged" : [ ],
     "totalPages" : "239",
-    "bookmark" : "111"
+    "bookmark" : "111",
+    "goal" : "10 20-12-2024"
   } ]
 }

@@ -13,6 +13,7 @@ import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
@@ -28,11 +29,14 @@ class JsonAdaptedBook {
     private final String genre;
     private final String totalPages;
     private final String bookmark;
+    private final String goal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
-    /**
-     * Constructs a {@code JsonAdaptedBook} with the given book details.
+
+    /*
+      Constructs a {@code JsonAdaptedBook} with the given book details.
      */
+    /*
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("name") String name,
                            @JsonProperty("genre") String genre,
@@ -46,7 +50,30 @@ class JsonAdaptedBook {
         }
         this.totalPages = totalPages;
         this.bookmark = bookmark;
+        this.goal = String.format("%s %s",
+                Goal.defaultGoal().page, Goal.defaultGoal().deadline);
     }
+    */
+    /**
+     * Overloaded Constructor for {@code JsonAdaptedBook}.
+     */
+    @JsonCreator
+    public JsonAdaptedBook(@JsonProperty("name") String name,
+                           @JsonProperty("genre") String genre,
+                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                           @JsonProperty("totalPages") String totalPages,
+                           @JsonProperty("bookmark") String bookmark,
+                           @JsonProperty("goal") String goal) {
+        this.name = name;
+        this.genre = genre;
+        if (tagged != null) {
+            this.tagged.addAll(tagged);
+        }
+        this.totalPages = totalPages;
+        this.bookmark = bookmark;
+        this.goal = goal;
+    }
+
 
     /**
      * Converts a given {@code Book} into this class for Jackson use.
@@ -59,6 +86,8 @@ class JsonAdaptedBook {
                 .collect(Collectors.toList()));
         totalPages = source.getTotalPages().value;
         bookmark = source.getBookmark().value;
+        goal = String.format("%s %s",
+                source.getGoal().page, source.getGoal().deadline);
     }
 
     /**
@@ -108,7 +137,10 @@ class JsonAdaptedBook {
         if (!Bookmark.isValidBookmark(modelBookmark, modelTotalPages)) {
             throw new IllegalValueException(Bookmark.MESSAGE_CONSTRAINTS);
         }
-        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
+
+        final Goal modelGoal = new Goal(goal);
+
+        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark, modelGoal);
     }
 
 }

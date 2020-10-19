@@ -87,7 +87,7 @@ public class Goal {
 
     @Override
     public String toString() {
-        return String.format("finish page %s before %s", page, deadline);
+        return String.format("Finish page %s before %s", page, deadline);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class Book {
     /**
      * Overloaded method to create a {@code Book} with goal. Will be called through static method {@code setGoal()}.
      */
-    private Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark, Goal goal) {
+    public Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark, Goal goal) {
         requireAllNonNull(name, genre, tags, totalPages, bookmark);
         this.name = name;
         this.genre = genre;

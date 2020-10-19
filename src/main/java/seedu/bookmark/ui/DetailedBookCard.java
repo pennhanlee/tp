@@ -14,6 +14,9 @@ public class DetailedBookCard extends BookCard {
     @FXML
     private Label percentageCompletion;
 
+    @FXML
+    private Label goal;
+
     /**
      * Creates a {@code DetailedBookCard} with the given {@code Book} and index to display.
      */
@@ -27,7 +30,9 @@ public class DetailedBookCard extends BookCard {
         super.initialize(book, displayedIndex);
         int percentageCompleted = calculateCompletion(book);
         String progressDisplay = "Progress: " + String.valueOf(percentageCompleted) + "%";
+        String goalText = "Goal: " + book.getGoal().toString();
         percentageCompletion.setText(progressDisplay);
+        goal.setText(goalText);
     }
 
     private int calculateCompletion(Book book) {
