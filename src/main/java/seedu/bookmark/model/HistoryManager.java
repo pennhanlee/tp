@@ -1,8 +1,14 @@
 package seedu.bookmark.model;
 
+import seedu.bookmark.model.exceptions.RedoException;
+import seedu.bookmark.model.exceptions.UndoException;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+/**
+ * Represents the history of a Library.
+ */
 public class HistoryManager {
 
     private static final int MAX_UNDO_COUNT = 10;
@@ -21,6 +27,9 @@ public class HistoryManager {
         this.redoDeque = new ArrayDeque<>();
     }
 
+    /**
+     * Private constructor to facilitate the immutable nature of {@code HistoryManager}
+     */
     private HistoryManager(ReadOnlyLibrary currentState, ArrayDeque<ReadOnlyLibrary> undoDeque,
             ArrayDeque<ReadOnlyLibrary> redoDeque) {
         this.currentState = currentState;
@@ -43,20 +52,40 @@ public class HistoryManager {
     }
 
     /**
-     * Undos the currentState, adding it to the redoDeque and sets the top of the undoDeque as the currentState.
+     * Undoes the currentState, adding it to the redoDeque and sets the top of the undoDeque as the currentState.
      */
-    public HistoryManager undo() {
+    public HistoryManager undo() throws UndoException {
+        if (!canUndo()) {
+            throw new UndoException();
+        }
         redoDeque.add(currentState);
         ReadOnlyLibrary newCurrentState = undoDeque.pop();
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
 
+    /**
+     * Redoes the state at the top of the redoDeque, adding the currentState back into the top of the undoDeque.
+     */
     public HistoryManager redo() {
+        if (!canRedo()) {
+            throw new RedoException();
+        }
         ReadOnlyLibrary newCurrentState = redoDeque.pop();
         addToUndo(currentState);
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
 
+    private boolean canUndo() {
+        return undoDeque.size() > 0;
+    }
+
+    private boolean canRedo() {
+        return redoDeque.size() > 0;
+    }
+
+    /**
+     * Add a state to the undo deque, removes the oldest states to make space if necessary.
+     */
     private void addToUndo(ReadOnlyLibrary state) {
         while (undoDeque.size() >= MAX_UNDO_COUNT) {
             undoDeque.removeFirst();

@@ -25,7 +25,7 @@ public class VersionedLibrary extends Library {
         historyManager.redo();
     }
 
-    // ============================= Versioned Library Modifiers ========================================= //
+    // ============================= Versioned Library Modifiers ============================================= //
     // These methods modify the state of the library and hence need to save the current state before modifying
 
     @Override
