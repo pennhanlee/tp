@@ -1,13 +1,13 @@
 package seedu.bookmark.model.book.comparators;
 
 import java.util.Comparator;
+
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.predicates.BookCompletedPredicate;
 
 /**
  * Sorts {@code Book}s based on {@code Genre} in lexicographical order.
  */
-public class BookGenreComparator implements Comparator<Book>{
+public class BookGenreComparator implements Comparator<Book> {
 
     @Override
     public int compare(Book b1, Book b2) {

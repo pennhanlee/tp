@@ -10,9 +10,9 @@ import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSucce
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.logic.commands.SortCommand;
-import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
 import seedu.bookmark.model.book.comparators.BookGenreComparator;
 import seedu.bookmark.model.book.comparators.BookNameComparator;
+import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
 
 public class SortCommandParserTest {
 

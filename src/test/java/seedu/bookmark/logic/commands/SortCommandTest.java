@@ -13,16 +13,15 @@ import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
-import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
 import seedu.bookmark.model.book.comparators.BookGenreComparator;
 import seedu.bookmark.model.book.comparators.BookNameComparator;
+import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.

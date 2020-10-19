@@ -1,9 +1,9 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 
 import java.util.Comparator;
 
