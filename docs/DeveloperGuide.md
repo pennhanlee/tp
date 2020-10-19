@@ -193,7 +193,23 @@ detailed view:
 
 ####Implementation
 
+*bookmark* allows Users to add books into the application. 
 
+This feature is faciltated by 
+
+The class diagram below shows the releant classes involved.
+
+*Class diagram to be Added*
+
+Given below is an example usage scenario and how a AddCommand mechanism behaves at each step.
+
+Step 1: 
+Step 2:
+Step 3:
+
+Activity Diagram to be added
+
+Sequence diagram to be added
 
 
 ### Did you mean? feature
