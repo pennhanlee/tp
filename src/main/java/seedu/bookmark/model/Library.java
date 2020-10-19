@@ -14,7 +14,7 @@ import seedu.bookmark.model.book.UniqueBookList;
  */
 public class Library implements ReadOnlyLibrary {
 
-    private final UniqueBookList books;
+    protected final UniqueBookList books;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -43,7 +43,7 @@ public class Library implements ReadOnlyLibrary {
      * Replaces the contents of the book list with {@code books}.
      * {@code books} must not contain duplicate books.
      */
-    public void setBooks(List<Book> books) {
+    protected void setBooks(List<Book> books) {
         this.books.setBooks(books);
     }
 
@@ -70,8 +70,8 @@ public class Library implements ReadOnlyLibrary {
      * Adds a book to the library.
      * The book must not already exist in the library.
      */
-    public void addBook(Book p) {
-        books.add(p);
+    public void addBook(Book book) {
+        books.add(book);
     }
 
     /**

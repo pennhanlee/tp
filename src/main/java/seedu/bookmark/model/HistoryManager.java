@@ -11,8 +11,8 @@ public class HistoryManager {
     private final ArrayDeque<ReadOnlyLibrary> redoDeque;
 
     /**
-     * Initializes a new {@code HistoryManager} with the given {@code ReadOnlyLibrary} as the currentState and
-     * empty undoDeque and redoDeque.
+     * Initializes a new {@code HistoryManager} with the given {@code ReadOnlyLibrary} as the current state and
+     * an empty undo deque and redo deque.
      */
     public HistoryManager(ReadOnlyLibrary currentState) {
         this.currentState = currentState;
@@ -47,6 +47,12 @@ public class HistoryManager {
     public HistoryManager undo() {
         redoDeque.add(currentState);
         ReadOnlyLibrary newCurrentState = undoDeque.pop();
+        return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
+    }
+
+    public HistoryManager redo() {
+        ReadOnlyLibrary newCurrentState = redoDeque.pop();
+        addToUndo(currentState);
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
 
