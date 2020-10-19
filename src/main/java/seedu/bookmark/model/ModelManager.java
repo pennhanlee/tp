@@ -132,7 +132,8 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredBookList(Comparator<Book> comparator) {
-
+        requireNonNull(comparator);
+        filteredBooks.sort(comparator);
     }
 
     @Override
