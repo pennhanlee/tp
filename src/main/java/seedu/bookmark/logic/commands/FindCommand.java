@@ -51,7 +51,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         PriorityQueue<WordStore> finalSuggestion = new PriorityQueue<>(new WordStoreComparator());
         ArrayList<WordStore> wordSuggestions;
