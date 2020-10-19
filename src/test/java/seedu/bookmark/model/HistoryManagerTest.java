@@ -100,8 +100,9 @@ public class HistoryManagerTest {
 
         @Override
         public boolean equals(Object other) {
-            if (this == other) return true;
-            else if (other instanceof LibraryStub) {
+            if (this == other) {
+                return true;
+            } else if (other instanceof LibraryStub) {
                 return getBookList().equals(((LibraryStub) other).getBookList());
             }
             return false;

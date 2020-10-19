@@ -1,10 +1,10 @@
 package seedu.bookmark.model;
 
-import seedu.bookmark.model.exceptions.RedoException;
-import seedu.bookmark.model.exceptions.UndoException;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+
+import seedu.bookmark.model.exceptions.RedoException;
+import seedu.bookmark.model.exceptions.UndoException;
 
 /**
  * Represents the history of a Library.
@@ -96,8 +96,9 @@ public class HistoryManager {
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) return true;
-        else if (other instanceof HistoryManager) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof HistoryManager) {
             HistoryManager otherHistory = (HistoryManager) other;
             return currentState.equals(otherHistory.currentState)
                     && compareHistory(otherHistory);

@@ -7,15 +7,14 @@ import static seedu.bookmark.testutil.TypicalBooks.HAMLET;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalBooks;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Integration tests of VersionedLibrary with {@code HistoryManager}

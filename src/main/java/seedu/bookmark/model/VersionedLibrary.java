@@ -5,12 +5,15 @@ import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
 
 /**
- * Represents a {@code Library} that stores different iterations of itself and can move between these iterations.
+ * Represents a {@code Library} that stores different states of itself and can move between these states.
  */
 public class VersionedLibrary extends Library {
 
     private HistoryManager historyManager;
 
+    /**
+     * Constructs a {@code VersionedLibrary} with the {@code ReadOnlyLibrary} as the initial state.
+     */
     public VersionedLibrary(ReadOnlyLibrary initialState) {
         super(initialState);
         this.historyManager = new HistoryManager(initialState);
