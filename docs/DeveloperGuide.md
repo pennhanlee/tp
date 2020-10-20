@@ -249,11 +249,11 @@ to be used as the Did you mean? recommended word.
 Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
 will return a Standard Message for no suggestion. 
 
-*Activity Diagram to be added*
+![Did you mean? flow of events](images/DidyoumeanActivityDiagram.png)
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
-*Sequence Diagram to be added*
+![Interactions inside logic component and Algo component for Didyoumean feature](images/DidyoumeanSequenceDiagram.png)
  
 
 ### \[Proposed\] Undo/redo feature

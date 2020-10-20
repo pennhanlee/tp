@@ -55,13 +55,3 @@ deactivate CommandResult
 deactivate FindCommand
 
 @enduml
-
-
-
-
-
-
-
-
-
-@enduml
