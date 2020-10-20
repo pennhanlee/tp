@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Algo ALGO_COLOR_T1
+participant ":EditDistance" as EditDistance ALGO_COLOR
+end box
+
+[-> FindCommandParser : parse("find n/h@arry")
+activate FindCommandParser
+
+create FindCommand
+FindCommandParser -> FindCommand : new FindCommand(predicate, inputPrefix, keyWords)
+activate FindCommand
+
+FindCommand --> FindCommandParser :
+deactivate FindCommand
+
+[<--FindCommandParser
+deactivate FindCommandParser
+
+[-> FindCommand : execute()
+activate FindCommand
+
+loop for each keyword
+
+    FindCommand -> EditDistance : findSuggestions()
+    activate EditDistance
+
+    loop for each word in wordbank
+        EditDistance -> EditDistance : CalculateDistance()
+        activate EditDistance
+        EditDistance --> EditDistance
+        deactivate EditDistance
+
+        EditDistance --> FindCommand :
+        deactivate EditDistance
+    end
+
+end
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+
+[<-- FindCommand : result
+deactivate FindCommand
+
+@enduml
+
+
+
+
+
+
+
+
+
+@enduml
