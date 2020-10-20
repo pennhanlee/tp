@@ -106,7 +106,7 @@ Examples:
 
 ### Sorting books: `sort` 
 
-Sort books according to the input filter.
+Sort books according to the condition inputted.
 
 Format: `sort [n/BOOK_TITLE] `
 
