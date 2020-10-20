@@ -30,7 +30,7 @@ CommandParser -> AddCommandParser : parse("n/Harry Potter g/Fiction \n tp/1000 b
 activate AddCommandParser
 
 create AddCommand
-AddCommandParser -> AddCommand
+AddCommandParser -> AddCommand : book
 activate AddCommand
 
 AddCommand --> AddCommandParser :
