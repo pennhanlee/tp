@@ -75,7 +75,7 @@ public class SuggestionAlgorithm {
             distanceArray[0][j] = j;
         }
 
-        //setting up 2D array for cost calculation
+        //setting up 2D array for cost calculation --> Deliberate double forloop.
         for (int i = 1; i < sourceLength + 1; i++) {
             for (int j = 1; j < targetLength + 1; j++) {
                 int cost = source.charAt(i - 1) == target.charAt(j - 1) ? 0 : 1;  //testing if char are same
