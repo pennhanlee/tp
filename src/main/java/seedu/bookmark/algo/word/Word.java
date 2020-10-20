@@ -51,4 +51,11 @@ public class Word {
     public int getDistance() {
         return this.distance;
     }
+
+    public void setDistance(int distance) { this.distance = distance; }
+
+    @Override
+    public String toString() {
+        return this.word;
+    }
 }
