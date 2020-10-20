@@ -91,6 +91,10 @@ public class ModelManager implements Model {
         return library;
     }
 
+    @Override
+    public void setWordBank(ReadOnlyLibrary library) { this.wordBank.resetWordBank(library); }
+
+    @Override
     public WordBank getWordBank() { return wordBank; }
 
     @Override

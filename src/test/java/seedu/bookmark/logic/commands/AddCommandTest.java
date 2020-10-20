@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.bookmark.algo.WordBank;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Library;
@@ -122,6 +123,12 @@ public class AddCommandTest {
         public ReadOnlyLibrary getLibrary() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setWordBank(ReadOnlyLibrary library) { throw new AssertionError("This method should not be called."); }
+
+        @Override
+        public WordBank getWordBank() { throw new AssertionError("This method should not be called."); }
 
         @Override
         public boolean hasBook(Book book) {

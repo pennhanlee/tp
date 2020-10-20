@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
@@ -30,16 +31,16 @@ public class WordBank {
         this.nameWordStore = new NameWordStore();
         this.genreWordStore = new GenreWordStore();
         this.tagWordStore = new TagWordStore();
-        initWordBanks();
+        initWordBank(library);
     }
 
     /**
      * Initialises a List that stores unique words
      * in preparation for Usage by the EditDistance algorithm.
      */
-    public void initWordBanks() {
-        ObservableList<Book> library = this.library.getBookList();
-        for (Book book : library) {
+    public void initWordBank(ReadOnlyLibrary library) {
+        ObservableList<Book> librarylist = library.getBookList();
+        for (Book book : librarylist) {
             handleNewBook(book);
         }
     }
@@ -125,6 +126,11 @@ public class WordBank {
         } else {
             return this.nameWordStore; //by default
         }
+    }
+
+    public void resetWordBank(ReadOnlyLibrary library) {
+        requireNonNull(library);
+        initWordBank(library);
     }
 
 }
