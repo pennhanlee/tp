@@ -254,18 +254,6 @@ will return a Standard Message for no suggestion.
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
 *Sequence Diagram to be added*
-
- ####Design Considerations
- 
- Aspect: Which Algorithm to use to produce suggestions
- 
- * **Alternative 1 (current choice):** Damerau-Levenshtein algorithm 
-    * Pros:
-    * Cons:
-    
- * **Alternative 2:** 
-    * Pros:
-    * Cons:
  
 
 ### \[Proposed\] Undo/redo feature
