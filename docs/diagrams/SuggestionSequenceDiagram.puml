@@ -8,7 +8,7 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Algo ALGO_COLOR_T1
-participant ":EditDistance" as EditDistance ALGO_COLOR
+participant ":SuggestionAlgorithm" as SuggestionAlgorithm ALGO_COLOR
 end box
 
 [-> FindCommandParser : parse("find n/h@arry")
@@ -29,17 +29,17 @@ activate FindCommand
 
 loop for each keyword
 
-    FindCommand -> EditDistance : findSuggestions()
-    activate EditDistance
+    FindCommand -> SuggestionAlgorithm : findSuggestions()
+    activate SuggestionAlgorithm
 
     loop for each word in wordbank
-        EditDistance -> EditDistance : calculateDistance()
-        activate EditDistance
-        EditDistance --> EditDistance
-        deactivate EditDistance
+        SuggestionAlgorithm -> SuggestionAlgorithm : calculateDistance()
+        activate SuggestionAlgorithm
+        SuggestionAlgorithm --> SuggestionAlgorithm
+        deactivate SuggestionAlgorithm
 
-        EditDistance --> FindCommand :
-        deactivate EditDistance
+        SuggestionAlgorithm --> FindCommand :
+        deactivate SuggestionAlgorithm
     end
 
 end

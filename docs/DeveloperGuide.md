@@ -41,7 +41,7 @@ The rest of the App consists of five components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 * [**`Algo`**](#algo-component): The algorithms used in the App.
 
-Each of the five components,
+UI, Logic, Model and Algo components,
 
 * defines its *API* in an `interface` with the same name as the Component.
 * exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
@@ -105,6 +105,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
 * stores the library data.
+* stores a `WordBank` that contains instances of words in Library.
 * exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -127,13 +128,14 @@ The `Storage` component,
 
 ### Algo component
 
-*class diagram to be inserted*
+![Structure of the Algo Component](images/AlgorithmClassDiagram.png)
+
+Due to the wide requirements of different algorithm, there is no `Algo` interface or `Manager` defined.
 
 API: Algo.java
 
 The `Algo` component,
-* Can perform algorithmic operation to parse commands
-* Construct data structures to best fit the required algorithm
+* Can perform algorithmic operation to activate special functions during parsing of  commands.
 
 ### Common classes
 
@@ -211,12 +213,12 @@ This feature is faciltated mainly by `LogicManager`, `AddCommandParser` and `Add
 ![Classes involved in the Add Command](images/LogicClassDiagram.png)
 
 `LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs. 
-`AddCommandParser#parse(String args)` tokenizes each prefix to create a `Book` object. This `Book` object will be
+`AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. This `Book` object will be
 passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
 *If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
 
-`LogicManager#execute()` will call `AddCommand#execute(Model model)` to add the `Book` attribute into
-the `Model`to return a `CommandResult(String feedbackToUser)` as a feedback to the user. 
+`LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` attribute into
+the `Model`to return a `CommandResult` as a feedback to the user. 
 *If there is an existing book with the same name, an exception will be thrown with a message to the User*
 
 Below is an activity diagram which illustrates the flow of events for adding a book
@@ -229,42 +231,43 @@ Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
 ![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png)
 
 
-### Did you mean? feature
+### Suggestion feature
 
 #### Implementation
 
 *bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the 
-user-input Word and the words in the application Library.
+user-input word and the words in the application Library.
 
-This feature is facilitated by mainly by `EditDistance` and `WordStore` and has coupling with `ModelManager` and `FindCommand`.
+This feature is facilitated by mainly by `SuggestionAlgorithm` and `WordBank` and has coupling with 
+`ModelManager` and `FindCommand`.
 
 The class diagram below shows the relevant classes involved.
 
-*Class diagram to be added*
+![Suggestion Algorithm and the Classes involved](images/AlgorithmClassDiagram.png)
 
-Given below is an example usage scenario and how a Did you mean? mechanism behaves at each step. 
+Given below is an example usage scenario and how a Suggestion mechanism behaves at each step. 
 
 Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in their names. <br> 
 *harry is deliberately mispelled* <br>
 `FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty. 
 
-Step 2: `FindCommand` will call on `EditDistance#findSuggestions()` to find the closest matching word
-in the `nameWordBank` in `EditDistance` class. 
+Step 2: `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
+in the appropriate `WordStore` of `WordBank`.
 
-Step 3: `EditDistance#calculateDistance` will be implemented to calculate the EditDistance of `h@rry` and the words in `nameWordBank` 
-and store words that are within the set `DISTANCE_LIMIT`. 
+Step 3: `SuggestionAlgorithm#calculateDistance()` will be implemented to calculate the edit distance of `h@rry` and the words in `nameWordBank` 
+and store words that are within the predefined `DISTANCE_LIMIT`. 
 
 Step 4: `FindCommand#execute()` will add each word into a `PriorityQueue` and poll out the word with the smallest distance
-to be used as the Did you mean? recommended word. 
+to be used as the suggested word. 
 
 Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
 will return a Standard Message for no suggestion. 
 
-![Did you mean? flow of events](images/DidyoumeanActivityDiagram.png)
+![Did you mean? flow of events](images/SuggestionActivityDiagram.png)
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
-![Interactions inside logic component and Algo component for Didyoumean feature](images/DidyoumeanSequenceDiagram.png)
+![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
  
 
 ### \[Proposed\] Undo/redo feature
