@@ -33,7 +33,7 @@ loop for each keyword
     activate EditDistance
 
     loop for each word in wordbank
-        EditDistance -> EditDistance : CalculateDistance()
+        EditDistance -> EditDistance : calculateDistance()
         activate EditDistance
         EditDistance --> EditDistance
         deactivate EditDistance
