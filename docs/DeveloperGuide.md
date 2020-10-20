@@ -151,14 +151,14 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-*bookmark's* UI supports two types of views: the default, **summarised view** which displays summarised information 
+*bookmark's* UI supports two types of views: the default, **summarised view** which displays summarised information
 regarding the books stored, and the **detailed view** which displays detailed information about a particular book.
 
 `BookListPanel` `BookCard` as well as its corresponding subclasses `DetailedBookListPanel` and `DetailedBookCard` facilitates
 the display of book information.
-When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`, 
-while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using 
-`DetailedBookCard`. 
+When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
+while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
+`DetailedBookCard`.
 
 Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the
 list of `BookCard` or `DetailedBookCard` respectively.
@@ -169,21 +169,21 @@ The class diagram below shows the relevant classes involved:
 
 ##### Switching between the two views
 
-`MainWindow` and `CommandResult` facilitates the switching between the two views. 
+`MainWindow` and `CommandResult` facilitates the switching between the two views.
 
-`MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()` 
+`MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()`
 which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
-From the returned `CommandResult`, `CommandResult#isDetailedView()` indicates whether the UI should be in the detailed view, 
-or the default summarised view. 
+From the returned `CommandResult`, `CommandResult#isDetailedView()` indicates whether the UI should be in the detailed view,
+or the default summarised view.
 
-Based on the value returned by `CommandResult#isDetailedView()`, either `MainWindow#changeToDetailedView()` or 
+Based on the value returned by `CommandResult#isDetailedView()`, either `MainWindow#changeToDetailedView()` or
 `MainWindow#resetView()` is called accordingly.
 
 The activity diagram below illustrates the flow of execution when the UI decides which view to use:
 
 ![View switching flow of execution](images/ViewSwitchingActivityDiagram.png)
 
-Below is a sequence diagram that shows a scenario whereby the UI switches from the default summarised view to the 
+Below is a sequence diagram that shows a scenario whereby the UI switches from the default summarised view to the
 detailed view:
 
 ![Switching to detailed view sequence diagram](images/ViewSwitchingSequenceDiagram.png)
@@ -196,29 +196,29 @@ detailed view:
   * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
   * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is currently only meant to show
   one book
-  
+
 * **Alternative 2:** Use other JavaFX layouts
   * Pros: More in-line with the purpose of the detailed view of showing only one book
   * Cons: More work has to be done to sync up the UI with the model.
-  
+
 
 ### Add book
 
 ####Implementation
 
-*bookmark* allows Users to add books into the application. 
+*bookmark* allows Users to add books into the application.
 
-This feature is faciltated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`. 
+This feature is faciltated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`.
 
 ![Classes involved in the Add Command](images/LogicClassDiagram.png)
 
-`LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs. 
+`LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs.
 `AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. This `Book` object will be
 passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
 *If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
 
 `LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` attribute into
-the `Model`to return a `CommandResult` as a feedback to the user. 
+the `Model`to return a `CommandResult` as a feedback to the user.
 *If there is an existing book with the same name, an exception will be thrown with a message to the User*
 
 Below is an activity diagram which illustrates the flow of events for adding a book
@@ -235,40 +235,40 @@ Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
 
 #### Implementation
 
-*bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the 
+*bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the
 user-input word and the words in the application Library.
 
-This feature is facilitated by mainly by `SuggestionAlgorithm` and `WordBank` and has coupling with 
+This feature is facilitated by mainly by `SuggestionAlgorithm` and `WordBank` and has coupling with
 `ModelManager` and `FindCommand`.
 
 The class diagram below shows the relevant classes involved.
 
 ![Suggestion Algorithm and the Classes involved](images/AlgorithmClassDiagram.png)
 
-Given below is an example usage scenario and how a Suggestion mechanism behaves at each step. 
+Given below is an example usage scenario and how a Suggestion mechanism behaves at each step.
 
-Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in their names. <br> 
+Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in their names. <br>
 *harry is deliberately mispelled* <br>
-`FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty. 
+`FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty.
 
 Step 2: `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
 in the appropriate `WordStore` of `WordBank`.
 
-Step 3: `SuggestionAlgorithm#calculateDistance()` will be implemented to calculate the edit distance of `h@rry` and the words in `nameWordBank` 
-and store words that are within the predefined `DISTANCE_LIMIT`. 
+Step 3: `SuggestionAlgorithm#calculateDistance()` will be implemented to calculate the edit distance of `h@rry` and the words in `nameWordBank`
+and store words that are within the predefined `DISTANCE_LIMIT`.
 
 Step 4: `FindCommand#execute()` will add each word into a `PriorityQueue` and poll out the word with the smallest distance
-to be used as the suggested word. 
+to be used as the suggested word.
 
 Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
-will return a Standard Message for no suggestion. 
+will return a Standard Message for no suggestion.
 
 ![Did you mean? flow of events](images/SuggestionActivityDiagram.png)
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
 ![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
- 
+
 
 ### \[Proposed\] Undo/redo feature
 
