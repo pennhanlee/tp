@@ -1,13 +1,9 @@
 package seedu.bookmark.algo.wordbank;
 
-import javafx.collections.ObservableList;
 import seedu.bookmark.algo.word.Word;
-import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.tag.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public abstract class WordStore {
 

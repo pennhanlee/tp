@@ -39,7 +39,7 @@ public class GenreWordStore extends WordStore {
     }
 
     @Override
-    protected ArrayList<Word> getWordStore() {
+    public ArrayList<Word> getWordStore() {
         return this.genreWordStore;
     }
 

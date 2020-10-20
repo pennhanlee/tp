@@ -1,7 +1,6 @@
 package seedu.bookmark.algo;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.algo.word.Word;
 import seedu.bookmark.algo.wordbank.GenreWordStore;
 import seedu.bookmark.algo.wordbank.NameWordStore;
 import seedu.bookmark.algo.wordbank.TagWordStore;
