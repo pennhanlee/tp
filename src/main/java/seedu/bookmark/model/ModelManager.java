@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.bookmark.algo.WordBank;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
-import seedu.bookmark.algo.didyoumean.EditDistance;
 import seedu.bookmark.model.book.Book;
 
 /**
@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final Library library;
     private final UserPrefs userPrefs;
     private final FilteredList<Book> filteredBooks;
-    private final EditDistance editDistance;
+    private final WordBank wordBank;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredBooks = new FilteredList<>(this.library.getBookList());
-        this.editDistance = new EditDistance(library);
+        this.wordBank = new WordBank(library);
     }
 
     public ModelManager() {
@@ -91,7 +91,7 @@ public class ModelManager implements Model {
         return library;
     }
 
-    public EditDistance getEditDistance() { return editDistance; }
+    public WordBank getWordBank() { return wordBank; }
 
     @Override
     public boolean hasBook(Book book) {
@@ -102,14 +102,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
-        editDistance.deleteFromWordBank(target);
+        wordBank.deleteFromWordBank(target);
 
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
-        editDistance.addToWordBank(book);
+        wordBank.addToWordBank(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
     }
 
@@ -117,7 +117,7 @@ public class ModelManager implements Model {
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
         library.setBook(target, editedBook);
-        editDistance.updateWordBank(target, editedBook);
+        wordBank.updateWordBank(target, editedBook);
     }
 
     //=========== Filtered Book List Accessors =============================================================

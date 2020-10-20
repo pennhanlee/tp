@@ -12,9 +12,10 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
-import seedu.bookmark.algo.wordbank.WordBank;
+import seedu.bookmark.algo.algorithm.SuggestionAlgorithm;
+import seedu.bookmark.algo.word.Word;
 import seedu.bookmark.commons.core.Messages;
-import seedu.bookmark.algo.wordbank.WordBankComparator;
+import seedu.bookmark.algo.word.WordComparator;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -52,16 +53,16 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        PriorityQueue<WordBank> finalSuggestion = new PriorityQueue<>(new WordBankComparator());
-        ArrayList<WordBank> wordSuggestions;
+        PriorityQueue<Word> finalSuggestion = new PriorityQueue<>(new WordComparator());
+        ArrayList<Word> wordSuggestions;
         model.updateFilteredBookList(predicate);
 
         if (model.getFilteredBookList().size() == 0 &&
                 !prefix.equals(PREFIX_COMPLETED) &&
                 !prefix.equals(PREFIX_NOT_COMPLETED)) {
-            System.out.println(Arrays.toString(keywords));
+            SuggestionAlgorithm suggestionAlgorithm = new SuggestionAlgorithm(model.getWordBank());
             for (String word : keywords) {
-                wordSuggestions = model.getEditDistance().findSuggestion(word, prefix);
+                wordSuggestions = suggestionAlgorithm.findSuggestion(word, prefix);
                 finalSuggestion.addAll(wordSuggestions);
             }
             String searchedWord = String.join(" ", keywords);

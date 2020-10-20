@@ -1,17 +1,18 @@
-package seedu.bookmark.algo.wordbank;
+package seedu.bookmark.algo.word;
 
-public class WordBank {
+public class Word {
     private final int STARTING_COUNT = 1;
     private String word;
     private int count;
     private int distance;
 
-    public WordBank(String word) {
+    public Word(String word) {
         this.word = word;
         this.count = STARTING_COUNT;
+        this.distance = 0;
     };
 
-    public WordBank(String word, int distance) {
+    public Word(String word, int distance) {
         this.word = word;
         this.count = STARTING_COUNT;
         this.distance = distance;
@@ -35,20 +36,16 @@ public class WordBank {
 
     /**
      * Increases the count by 1
-     * @return count
      */
-    public int addCount() {
+    public void addCount() {
         count++;
-        return count;
     }
 
     /**
      * Decrease the count by 1
-     * @return count
      */
-    public int minusCount() {
+    public void minusCount() {
         count--;
-        return count;
     }
 
     public int getDistance() {

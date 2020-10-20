@@ -1,11 +1,11 @@
-package seedu.bookmark.algo.wordbank;
+package seedu.bookmark.algo.word;
 
 import java.util.Comparator;
 
-public class WordBankComparator implements Comparator<WordBank> {
+public class WordComparator implements Comparator<Word> {
 
     @Override
-    public int compare(WordBank firstWord, WordBank secondWord) {
+    public int compare(Word firstWord, Word secondWord) {
         int firstWordDistance = firstWord.getDistance();
         int secondWordDistance = secondWord.getDistance();
         if (firstWordDistance < secondWordDistance) {
