@@ -60,6 +60,12 @@ activate Model
 Model --> AddNoteCommand
 deactivate Model
 
+AddNoteCommand -> Model : updateFilteredBookList()
+activate Model
+
+Model --> AddNoteCommand
+deactivate Model
+
 create CommandResult
 AddNoteCommand -> CommandResult
 activate CommandResult
