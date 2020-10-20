@@ -62,11 +62,12 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
+The exception to this is `DetailedBookListPanel`, which shares the same `.fxml` file as `BookListPanel`.
 
 The `UI` component,
 
@@ -133,12 +134,65 @@ Classes used by multiple components are in the `seedu.bookmark.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Changing Ui view
+
+#### Implementation
+
+*bookmark's* UI supports two types of views: the default, **summarised view** which displays summarised information 
+regarding the books stored, and the **detailed view** which displays detailed information about a particular book.
+
+`BookListPanel` `BookCard` as well as its corresponding subclasses `DetailedBookListPanel` and `DetailedBookCard` facilitates
+the display of book information.
+When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`, 
+while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using 
+`DetailedBookCard`. 
+
+Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the
+list of `BookCard` or `DetailedBookCard` respectively.
+
+The class diagram below shows the relevant classes involved:
+
+![Ui view class diagram](images/UiViewClassDiagram.png)
+
+##### Switching between the two views
+
+`MainWindow` and `CommandResult` facilitates the switching between the two views. 
+
+`MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()` 
+which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
+From the returned `CommandResult`, `CommandResult#isDetailedView()` indicates whether the UI should be in the detailed view, 
+or the default summarised view. 
+
+Based on the value returned by `CommandResult#isDetailedView()`, either `MainWindow#changeToDetailedView()` or 
+`MainWindow#resetView()` is called accordingly.
+
+The activity diagram below illustrates the flow of execution when the UI decides which view to use:
+
+![View switching flow of execution](images/ViewSwitchingActivityDiagram.png)
+
+Below is a sequence diagram that shows a scenario whereby the UI switches from the default summarised view to the 
+detailed view:
+
+![Switching to detailed view sequence diagram](images/ViewSwitchingSequenceDiagram.png)
+
+#### Design considerations
+
+##### Aspect: What to display DetailedBookCard with
+
+* **Alternative 1 (current choice):** Use JavaFX ListView
+  * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
+  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is currently only meant to show
+  one book
+  
+* **Alternative 2:** Use other JavaFX layouts
+  * Pros: More in-line with the purpose of the detailed view of showing only one book
+  * Cons: More work has to be done to sync up the UI with the model.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
