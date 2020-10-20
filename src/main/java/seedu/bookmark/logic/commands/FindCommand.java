@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
+import seedu.bookmark.algo.wordbank.WordBank;
 import seedu.bookmark.commons.core.Messages;
-import seedu.bookmark.algo.didyoumean.WordStore;
-import seedu.bookmark.algo.didyoumean.WordStoreComparator;
+import seedu.bookmark.algo.wordbank.WordBankComparator;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -52,8 +52,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        PriorityQueue<WordStore> finalSuggestion = new PriorityQueue<>(new WordStoreComparator());
-        ArrayList<WordStore> wordSuggestions;
+        PriorityQueue<WordBank> finalSuggestion = new PriorityQueue<>(new WordBankComparator());
+        ArrayList<WordBank> wordSuggestions;
         model.updateFilteredBookList(predicate);
 
         if (model.getFilteredBookList().size() == 0 &&

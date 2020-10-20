@@ -1,6 +1,7 @@
 package seedu.bookmark.algo.didyoumean;
 
 import javafx.collections.ObservableList;
+import seedu.bookmark.algo.wordbank.WordBank;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
@@ -25,9 +26,9 @@ public class EditDistance {
     private final String DELETE = "delete";
     private final String ADD = "add";
     private final ReadOnlyLibrary library;
-    private final ArrayList<WordStore> nameWordBank;
-    private final ArrayList<WordStore> genreWordBank;
-    private final ArrayList<WordStore> tagWordBank;
+    private final ArrayList<WordBank> nameWordBank;
+    private final ArrayList<WordBank> genreWordBank;
+    private final ArrayList<WordBank> tagWordBank;
 
     public EditDistance(ReadOnlyLibrary library) {
         this.library = library;
@@ -42,7 +43,7 @@ public class EditDistance {
      * in preparation for Usage by the EditDistance algorithm.
      */
     public void initWordList() {
-        ArrayList<WordStore> wordStore = new ArrayList<>();
+        ArrayList<WordBank> wordStore = new ArrayList<>();
         ObservableList<Book> library = this.library.getBookList();
         for (Book book : library) {
             handleBook(book, ADD);
@@ -81,8 +82,8 @@ public class EditDistance {
      * Finds 3 words that are close to the misspelled word.
      * @param sourceWord mispelled word to find suggestion for
      */
-    public ArrayList<WordStore> findSuggestion(String sourceWord, Prefix prefix) {
-        ArrayList<WordStore> wordBank = nameWordBank; //by default to prevent unknown prefix
+    public ArrayList<WordBank> findSuggestion(String sourceWord, Prefix prefix) {
+        ArrayList<WordBank> wordBank = nameWordBank; //by default to prevent unknown prefix
         if (prefix.equals(PREFIX_NAME)) {
             wordBank = nameWordBank;
         } else if (prefix.equals(PREFIX_GENRE)) {
@@ -93,13 +94,13 @@ public class EditDistance {
         assert wordBank != null;
         int wordCount = 0;
         int suggestionCount = 0;
-        ArrayList<WordStore> suggestions = new ArrayList<>();
+        ArrayList<WordBank> suggestions = new ArrayList<>();
         while (suggestionCount < SUGGESTION_LIMIT && wordCount < wordBank.size()) {
-            WordStore targetWord = wordBank.get(wordCount);
+            WordBank targetWord = wordBank.get(wordCount);
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
             if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
                 System.out.println("Word: " + targetWord.getWord() + " Distance: " + wordDistance);
-                WordStore wordCopy = new WordStore(targetWord.getWord(), wordDistance);
+                WordBank wordCopy = new WordBank(targetWord.getWord(), wordDistance);
                 suggestions.add(wordCopy);
                 suggestionCount++;
             }
@@ -192,9 +193,9 @@ public class EditDistance {
         }
     }
 
-    private void wordAdder(ArrayList<WordStore> wordBank, String word) {
+    private void wordAdder(ArrayList<WordBank> wordBank, String word) {
         boolean added = false;
-        for (WordStore wordstore : wordBank) {
+        for (WordBank wordstore : wordBank) {
             if (wordstore.getWord().equals(word)) {
                 wordstore.addCount();
                 added = true;
@@ -202,14 +203,14 @@ public class EditDistance {
             }
         }
         if (!added) {
-            WordStore newWord = new WordStore(word);
+            WordBank newWord = new WordBank(word);
             wordBank.add(newWord);
         }
     }
 
-    private void wordDeleter(ArrayList<WordStore> wordBank, String word) {
-        WordStore targetWord = null;
-        for (WordStore wordStore : wordBank) {
+    private void wordDeleter(ArrayList<WordBank> wordBank, String word) {
+        WordBank targetWord = null;
+        for (WordBank wordStore : wordBank) {
             if (wordStore.getWord().equals(word)) {
                 targetWord = wordStore;
                 break;

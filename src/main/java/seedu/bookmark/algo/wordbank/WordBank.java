@@ -1,17 +1,17 @@
-package seedu.bookmark.algo.didyoumean;
+package seedu.bookmark.algo.wordbank;
 
-public class WordStore {
+public class WordBank {
     private final int STARTING_COUNT = 1;
     private String word;
     private int count;
     private int distance;
 
-    public WordStore(String word) {
+    public WordBank(String word) {
         this.word = word;
         this.count = STARTING_COUNT;
     };
 
-    public WordStore(String word, int distance) {
+    public WordBank(String word, int distance) {
         this.word = word;
         this.count = STARTING_COUNT;
         this.distance = distance;

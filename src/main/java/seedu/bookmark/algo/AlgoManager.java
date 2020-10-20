@@ -1,4 +1,6 @@
 package seedu.bookmark.algo;
 
-public class AlgoManager {
+public class AlgoManager implements Algo {
+
+
 }
