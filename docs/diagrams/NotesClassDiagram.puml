@@ -1,0 +1,26 @@
+@startuml
+package Logic {
+
+package Parser {
+Interface Parser <<Interface>>
+Class AddNoteCommandParser
+Class CommandParser
+}
+
+package Command {
+Class AddNoteCommand
+Class CommandResult
+Class "{abstract}\nCommand" as Command
+}
+
+CommandParser .left.> AddNoteCommandParser: creates >
+
+AddNoteCommandParser ..> AddNoteCommand : creates >
+AddNoteCommandParser ..|> Parser
+
+AddNoteCommand ..|> Command
+AddNoteCommand ..> CommandResult : creates >
+
+
+
+@enduml
