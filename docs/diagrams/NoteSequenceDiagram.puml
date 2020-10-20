@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CommandParser" as CommandParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":AddNoteCommandParser" as AddNoteCommandParser LOGIC_COLOR
+participant "n:AddNoteCommand" as AddNoteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +13,62 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("note 1 n/Thoughts txt/Something")
 activate LogicManager
 
-LogicManager -> CommandParser : parseCommand("delete 1")
+LogicManager -> CommandParser : parseCommand("note 1 n/Thoughts txt/Something")
 activate CommandParser
 
-create DeleteCommandParser
-CommandParser -> DeleteCommandParser
-activate DeleteCommandParser
+create AddNoteCommandParser
+CommandParser -> AddNoteCommandParser
+activate AddNoteCommandParser
 
-DeleteCommandParser --> CommandParser
-deactivate DeleteCommandParser
+AddNoteCommandParser --> CommandParser
+deactivate AddNoteCommandParser
 
-CommandParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+CommandParser -> AddNoteCommandParser : parse("1 n/Thoughts txt/Something")
+activate AddNoteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create AddNoteCommand
+AddNoteCommandParser -> AddNoteCommand
+activate AddNoteCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+AddNoteCommand --> AddNoteCommandParser : n
+deactivate AddNoteCommand
 
-DeleteCommandParser --> CommandParser : d
-deactivate DeleteCommandParser
+AddNoteCommandParser --> CommandParser : n
+deactivate AddNoteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> CommandParser
-destroy DeleteCommandParser
+AddNoteCommandParser -[hidden]-> CommandParser
+destroy AddNoteCommandParser
 
-CommandParser --> LogicManager : d
+CommandParser --> LogicManager : n
 deactivate CommandParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> AddNoteCommand : n.execute()
+activate AddNoteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+AddNoteCommand -> AddNoteCommand : createEditedBook()
+activate AddNoteCommand
+
+AddNoteCommand --> AddNoteCommand
+deactivate AddNoteCommand
+
+AddNoteCommand -> Model : setBook()
 activate Model
 
-Model --> DeleteCommand
+Model --> AddNoteCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+AddNoteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> AddNoteCommand : result
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+AddNoteCommand --> LogicManager : result
+deactivate AddNoteCommand
 
 [<--LogicManager
 deactivate LogicManager
