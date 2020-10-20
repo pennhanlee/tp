@@ -30,12 +30,12 @@ public class TagWordStore extends WordStore {
 
     @Override
     public void addWord(Word word) {
-
+        this.tagWordStore.add(word);
     }
 
     @Override
     public void deleteWord(Word word) {
-
+        this.tagWordStore.remove(word);
     }
 
     public ArrayList<Word> getWordStore() {

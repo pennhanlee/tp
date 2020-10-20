@@ -30,12 +30,12 @@ public class GenreWordStore extends WordStore {
 
     @Override
     public void addWord(Word word) {
-
+        this.genreWordStore.add(word);
     }
 
     @Override
     public void deleteWord(Word word) {
-
+        this.genreWordStore.remove(word);
     }
 
     @Override
