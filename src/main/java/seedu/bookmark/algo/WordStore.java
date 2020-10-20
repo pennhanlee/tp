@@ -1,4 +1,4 @@
-package seedu.bookmark.logic.algo;
+package seedu.bookmark.algo;
 
 public class WordStore {
     private final int STARTING_COUNT = 1;

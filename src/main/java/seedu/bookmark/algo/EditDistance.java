@@ -1,9 +1,7 @@
-package seedu.bookmark.logic.algo;
+package seedu.bookmark.algo;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.logic.parser.Prefix;
-import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;

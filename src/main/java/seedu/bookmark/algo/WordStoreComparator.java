@@ -1,4 +1,4 @@
-package seedu.bookmark.logic.algo;
+package seedu.bookmark.algo;
 
 import java.util.Comparator;
 

@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
-import seedu.bookmark.logic.algo.EditDistance;
+import seedu.bookmark.algo.EditDistance;
 import seedu.bookmark.model.book.Book;
 
 /**
