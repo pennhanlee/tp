@@ -31,7 +31,7 @@ public class SortCommandTest {
     private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
 
     @Test
-    public void execute_sortName() {
+    public void execute_sortByName_success() {
         BookNameComparator comparator = prepareBookNameComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
         SortCommand command = new SortCommand(comparator);
@@ -42,7 +42,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_sortGenre() {
+    public void execute_sortByGenre_success() {
         BookGenreComparator comparator = prepareBookGenreComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
         SortCommand command = new SortCommand(comparator);
@@ -53,7 +53,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_sortPagesRead() {
+    public void execute_sortByPagesRead_success() {
         BookPagesReadComparator comparator = prepareBookPagesReadComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
         SortCommand command = new SortCommand(comparator);
