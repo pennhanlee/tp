@@ -33,14 +33,15 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Algo`**](#algo-component): The algorithms used in the App.
 
-Each of the four components,
+Each of the five components,
 
 * defines its *API* in an `interface` with the same name as the Component.
 * exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
@@ -123,6 +124,16 @@ The `Model`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the library data in json format and read it back.
+
+### Algo component
+
+*class diagram to be inserted*
+
+API: Algo.java
+
+The `Algo` component,
+* Can perform algorithmic operation to parse commands
+* Construct data structures to best fit the required algorithm
 
 ### Common classes
 
