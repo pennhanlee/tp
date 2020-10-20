@@ -28,9 +28,8 @@ HiddenOutside ..> WordBank
 XYZAlgorithm -> "1" WordBank
 note bottom of XYZAlgorithm: XYZAlgorithm = SuggestionAlgorithm etc
 WordBank "*" -down-> "1" WordStore
-
 XYZWordStore .up.|> WordStore
 note bottom of XYZWordStore: XYZWordStore = NameWordStore, GenreWordStore etc
-XYZWordStore "0" -> "*" Word
+XYZWordStore "1" -> "*" Word
 
 @enduml
