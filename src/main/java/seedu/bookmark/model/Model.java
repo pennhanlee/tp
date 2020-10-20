@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
-import seedu.bookmark.algo.EditDistance;
+import seedu.bookmark.algo.didyoumean.EditDistance;
 import seedu.bookmark.model.book.Book;
 
 /**

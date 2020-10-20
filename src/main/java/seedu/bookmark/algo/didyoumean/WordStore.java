@@ -1,4 +1,4 @@
-package seedu.bookmark.algo;
+package seedu.bookmark.algo.didyoumean;
 
 public class WordStore {
     private final int STARTING_COUNT = 1;

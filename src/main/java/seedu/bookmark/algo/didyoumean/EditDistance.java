@@ -1,4 +1,4 @@
-package seedu.bookmark.algo;
+package seedu.bookmark.algo.didyoumean;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.logic.parser.Prefix;

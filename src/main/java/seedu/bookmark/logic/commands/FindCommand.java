@@ -13,8 +13,8 @@ import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
-import seedu.bookmark.algo.WordStore;
-import seedu.bookmark.algo.WordStoreComparator;
+import seedu.bookmark.algo.didyoumean.WordStore;
+import seedu.bookmark.algo.didyoumean.WordStoreComparator;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
