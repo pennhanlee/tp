@@ -195,21 +195,27 @@ detailed view:
 
 *bookmark* allows Users to add books into the application. 
 
-This feature is faciltated by 
+This feature is faciltated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`. 
 
-The class diagram below shows the releant classes involved.
+![Classes involved in the Add Command](images/LogicClassDiagram.png)
 
-*Class diagram to be Added*
+`LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs. 
+`AddCommandParser#parse(String args)` tokenizes each prefix to create a `Book` object. This `Book` object will be
+passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
+*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
 
-Given below is an example usage scenario and how a AddCommand mechanism behaves at each step.
+`LogicManager#execute()` will call `AddCommand#execute(Model model)` to add the `Book` attribute into
+the `Model`to return a `CommandResult(String feedbackToUser)` as a feedback to the user. 
+*If there is an existing book with the same name, an exception will be thrown with a message to the User*
 
-Step 1: 
-Step 2:
-Step 3:
+Below is an activity diagram which illustrates the flow of events for adding a book
 
-Activity Diagram to be added
+![Add command flow of execution](images/AddActivityDiagram.png)
 
-Sequence diagram to be added
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
+Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
+
+![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png)
 
 
 ### Did you mean? feature
