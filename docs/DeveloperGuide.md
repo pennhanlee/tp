@@ -254,7 +254,7 @@ Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in
 Step 2: `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
 in the appropriate `WordStore` of `WordBank`.
 
-Step 3: `SuggestionAlgorithm#calculateDistance()` will be implemented to calculate the edit distance of `h@rry` and the words in `nameWordBank`
+Step 3: `SuggestionAlgorithm#calculateDistance()` will be called to calculate the edit distance of `h@rry` and the words in `nameWordBank`
 and store words that are within the predefined `DISTANCE_LIMIT`.
 
 Step 4: `FindCommand#execute()` will add each word into a `PriorityQueue` and poll out the word with the smallest distance
