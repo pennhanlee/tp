@@ -1,0 +1,10 @@
+@startuml
+start
+:User executes find command;
+
+:Generate predicate based on input prefix;
+
+:Apply predicate to FilteredList;
+
+stop
+@enduml
