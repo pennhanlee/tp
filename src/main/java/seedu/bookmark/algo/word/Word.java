@@ -1,7 +1,7 @@
 package seedu.bookmark.algo.word;
 
 public class Word {
-    private final int STARTING_COUNT = 1;
+    private int STARTING_COUNT = 1;
     private String word;
     private int count;
     private int distance;
@@ -23,7 +23,7 @@ public class Word {
      * @return word
      */
     public String getWord() {
-        return word;
+        return this.word;
     }
 
     /**
@@ -31,22 +31,20 @@ public class Word {
      * @return count
      */
     public int getCount() {
-        return count;
+        return this.count;
     }
 
     /**
      * Increases the count by 1
      */
     public void addCount() {
-        count++;
+        this.count++;
     }
 
     /**
      * Decrease the count by 1
      */
-    public void minusCount() {
-        count--;
-    }
+    public void minusCount() { this.count--; }
 
     public int getDistance() {
         return this.distance;

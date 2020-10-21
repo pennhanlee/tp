@@ -10,6 +10,7 @@ import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailu
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,8 +33,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_validNameArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        String[] keywords = {"Alice", "Bob"};
+        List<String> keywordList = Arrays.asList(keywords);
+        Prefix namePrefix = PREFIX_NAME;
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindCommand(new NameContainsKeywordsPredicate(keywordList), namePrefix, keywords);
         assertParseSuccess(parser, " " + PREFIX_NAME + " " + "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -43,8 +47,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_validGenreArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        String[] keywords = {"Fantasy", "Horror"};
+        List<String> keywordList = Arrays.asList(keywords);
+        Prefix genrePrefix = PREFIX_GENRE;
         FindCommand expectedFindCommand =
-                new FindCommand(new GenreContainsKeywordsPredicate(Arrays.asList("Fantasy", "Horror")));
+                new FindCommand(new GenreContainsKeywordsPredicate(keywordList), genrePrefix, keywords);
         assertParseSuccess(parser, " " + PREFIX_GENRE + " " + "Fantasy Horror", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -54,8 +61,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_validTagArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        String[] keywords = {"Happy", "Sad"};
+        List<String> keywordList = Arrays.asList(keywords);
+        Prefix tagPrefix = PREFIX_TAG;
         FindCommand expectedFindCommand =
-                new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("Happy", "Sad")));
+                new FindCommand(new TagContainsKeywordsPredicate(keywordList), tagPrefix, keywords);
         assertParseSuccess(parser, " " + PREFIX_TAG + " " + "Happy Sad", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -65,16 +75,22 @@ public class FindCommandParserTest {
     @Test
     public void parse_validBookCompletedArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        String[] keywords = {""};
+        List<String> keywordList = Arrays.asList(keywords);
+        Prefix completedPrefix = PREFIX_COMPLETED;
         FindCommand expectedFindCommand =
-                new FindCommand(new BookCompletedPredicate());
+                new FindCommand(new BookCompletedPredicate(), completedPrefix, keywords);
         assertParseSuccess(parser, " " + PREFIX_COMPLETED, expectedFindCommand);
     }
 
     @Test
     public void parse_validBookNotCompletedArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        String[] keywords = {""};
+        List<String> keywordList = Arrays.asList(keywords);
+        Prefix notCompletedPrefix = PREFIX_NOT_COMPLETED;
         FindCommand expectedFindCommand =
-                new FindCommand(new BookNotCompletedPredicate());
+                new FindCommand(new BookNotCompletedPredicate(), notCompletedPrefix, keywords);
         assertParseSuccess(parser, " " + PREFIX_NOT_COMPLETED, expectedFindCommand);
     }
 }

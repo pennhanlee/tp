@@ -4,7 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_WORD_NOT_UNDERSTOOD;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.testutil.TypicalBooks.CRIME_AND_PUNISHMENT;
 import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
@@ -19,6 +25,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -41,15 +48,18 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        Prefix namePrefix = PREFIX_NAME;
+        String[] firstKeyword = {"first"};
+        String[] secondKeyword = {"second"};
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate, namePrefix, firstKeyword);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, namePrefix, secondKeyword);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, namePrefix, firstKeyword);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -68,15 +78,18 @@ public class FindCommandTest {
                 new GenreContainsKeywordsPredicate(Collections.singletonList("first"));
         GenreContainsKeywordsPredicate secondPredicate =
                 new GenreContainsKeywordsPredicate(Collections.singletonList("second"));
+        Prefix genrePrefix = PREFIX_GENRE;
+        String[] firstKeyword = {"first"};
+        String[] secondKeyword = {"second"};
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate, genrePrefix, firstKeyword);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, genrePrefix, secondKeyword);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, genrePrefix, firstKeyword);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -95,15 +108,18 @@ public class FindCommandTest {
                 new TagContainsKeywordsPredicate(Collections.singletonList("first"));
         TagContainsKeywordsPredicate secondPredicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("second"));
+        Prefix tagPrefix = PREFIX_TAG;
+        String[] firstKeyword = {"first"};
+        String[] secondKeyword = {"second"};
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate, tagPrefix, firstKeyword);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, tagPrefix, secondKeyword);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, tagPrefix, firstKeyword);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -118,9 +134,11 @@ public class FindCommandTest {
 
     @Test
     public void execute_nameZeroKeywords_noBookFound() {
-        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        Prefix namePrefix = PREFIX_NAME;
+        String[] keywords = prepareKeywords(" ");
+        String expectedMessage = String.format(MESSAGE_WORD_NOT_UNDERSTOOD, "");
+        FindCommand command = new FindCommand(predicate, namePrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredBookList());
@@ -130,7 +148,9 @@ public class FindCommandTest {
     public void execute_nameMultipleKeywords_multipleBooksFound() {
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("hunger flies enders");
-        FindCommand command = new FindCommand(predicate);
+        Prefix namePrefix = PREFIX_NAME;
+        String[] keywords = prepareKeywords("hunger flies enders");
+        FindCommand command = new FindCommand(predicate, namePrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(THE_HUNGER_GAMES, LORD_OF_THE_FLIES, ENDERS_GAME), model.getFilteredBookList());
@@ -138,9 +158,11 @@ public class FindCommandTest {
 
     @Test
     public void execute_genreZeroKeywords_noBookFound() {
-        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 0);
         GenreContainsKeywordsPredicate predicate = prepareGenrePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        Prefix genrePrefix = PREFIX_GENRE;
+        String[] keywords = prepareKeywords(" ");
+        String expectedMessage = String.format(MESSAGE_WORD_NOT_UNDERSTOOD, "");
+        FindCommand command = new FindCommand(predicate, genrePrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredBookList());
@@ -150,7 +172,9 @@ public class FindCommandTest {
     public void execute_genreMultipleKeywords_multipleBooksFound() {
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 2);
         GenreContainsKeywordsPredicate predicate = prepareGenrePredicate("thriller mystery");
-        FindCommand command = new FindCommand(predicate);
+        Prefix genrePrefix = PREFIX_GENRE;
+        String[] keywords = prepareKeywords("thriller mystery");
+        FindCommand command = new FindCommand(predicate, genrePrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(LORD_OF_THE_FLIES, ENDERS_GAME), model.getFilteredBookList());
@@ -158,9 +182,11 @@ public class FindCommandTest {
 
     @Test
     public void execute_tagZeroKeywords_noBookFound() {
-        String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 0);
         TagContainsKeywordsPredicate predicate = prepareTagPredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        Prefix tagPrefix = PREFIX_TAG;
+        String[] keywords = prepareKeywords(" ");
+        String expectedMessage = String.format(MESSAGE_WORD_NOT_UNDERSTOOD, "");
+        FindCommand command = new FindCommand(predicate, tagPrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredBookList());
@@ -170,7 +196,9 @@ public class FindCommandTest {
     public void execute_tagMultipleKeywords_multipleBooksFound() {
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 3);
         TagContainsKeywordsPredicate predicate = prepareTagPredicate("good bad");
-        FindCommand command = new FindCommand(predicate);
+        Prefix tagPrefix = PREFIX_TAG;
+        String[] keywords = prepareKeywords("good bad");
+        FindCommand command = new FindCommand(predicate, tagPrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, CRIME_AND_PUNISHMENT),
@@ -181,7 +209,9 @@ public class FindCommandTest {
     public void execute_findCompletedBooks() {
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 1);
         BookCompletedPredicate predicate = prepareCompletedBooksPredicate();
-        FindCommand command = new FindCommand(predicate);
+        Prefix completedPrefix = PREFIX_COMPLETED;
+        String[] keywords = prepareKeywords("");
+        FindCommand command = new FindCommand(predicate, completedPrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CRIME_AND_PUNISHMENT), model.getFilteredBookList());
@@ -191,7 +221,9 @@ public class FindCommandTest {
     public void execute_findNotCompletedBooks() {
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 6);
         BookNotCompletedPredicate predicate = prepareNotCompletedBooksPredicate();
-        FindCommand command = new FindCommand(predicate);
+        Prefix notCompletedPrefix = PREFIX_NOT_COMPLETED;
+        String[] keywords = prepareKeywords("");
+        FindCommand command = new FindCommand(predicate, notCompletedPrefix, keywords);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, THE_HUNGER_GAMES, LORD_OF_THE_FLIES,
@@ -231,5 +263,13 @@ public class FindCommandTest {
      */
     private BookNotCompletedPredicate prepareNotCompletedBooksPredicate() {
         return new BookNotCompletedPredicate();
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code String[]}.
+     */
+    private String[] prepareKeywords(String userInput) {
+       String[] arr = userInput.split("\\s+");
+       return arr;
     }
 }

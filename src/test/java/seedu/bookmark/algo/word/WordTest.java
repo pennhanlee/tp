@@ -6,58 +6,52 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordTest {
 
-    public static final Word VALID_WORD_DISTANCESET = new Word("Word", 3);
-    public static final Word VALID_WORD_NODISTANCESET = new Word("Word");
-
     @Test
     public void getFieldValues_validFields_correctValues_DistanceSet() {
+        Word validWordWithDistance = new Word("Word", 4);
         final String word = "Word";
         final int count = 1;
-        final int distance = 3;
+        final int distance = 4;
 
-        assertEquals(VALID_WORD_DISTANCESET.getWord(), word);
-        assertEquals(VALID_WORD_DISTANCESET.getCount(), count);
-        assertEquals(VALID_WORD_DISTANCESET.getDistance(), distance);
+        assertEquals(validWordWithDistance.getWord(), word);
+        assertEquals(validWordWithDistance.getCount(), count);
+        assertEquals(validWordWithDistance.getDistance(), distance);
     }
 
     @Test
     public void getFieldValues_validFields_correctValues_NoDistanceSet() {
+        Word validWord = new Word("Word");
         final String word = "Word";
         final int count = 1;
         final int distance = 0;
-
-        assertEquals(VALID_WORD_NODISTANCESET.getWord(), word);
-        assertEquals(VALID_WORD_NODISTANCESET.getCount(), count);
-        assertEquals(VALID_WORD_NODISTANCESET.getDistance(), distance);
+        assertEquals(validWord.getWord(), word);
+        assertEquals(validWord.getCount(), count);
+        assertEquals(validWord.getDistance(), distance);
     }
 
     @Test
     public void addCount() {
-        Word word = VALID_WORD_DISTANCESET;
+        Word validWord = new Word("Word");
         int counter = 1;
-        word.addCount();
-        assertEquals(word.getCount(), counter++);
-        assertEquals(word.getCount(), counter++);
-        assertEquals(word.getCount(), counter++);
-        assertEquals(word.getCount(), counter);
+        counter++;
+        validWord.addCount();
+        assertEquals(validWord.getCount(), counter);
     }
 
     @Test
     public void minusCount() {
-        Word word = VALID_WORD_DISTANCESET;
+        Word validWord = new Word("Word");
         int counter = 1;
-        word.minusCount();
-        assertEquals(word.getCount(), counter--);
-        assertEquals(word.getCount(), counter--);
-        assertEquals(word.getCount(), counter--);
-        assertEquals(word.getCount(), counter);
+        counter--;
+        validWord.minusCount();
+        assertEquals(validWord.getCount(), counter);
     }
 
     @Test
     public void setDistance() {
-        Word word = VALID_WORD_NODISTANCESET;
+        Word validWord = new Word("Word");
         int distance = 3;
-        word.setDistance(3);
-        assertEquals(word.getDistance(), distance);
+        validWord.setDistance(3);
+        assertEquals(validWord.getDistance(), distance);
     }
 }
