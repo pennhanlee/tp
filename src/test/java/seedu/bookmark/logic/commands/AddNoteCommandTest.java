@@ -24,7 +24,7 @@ import seedu.bookmark.model.book.Note;
 import seedu.bookmark.testutil.BookBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
+ * Contains unit tests for AddNoteCommand.
  */
 
 public class AddNoteCommandTest {

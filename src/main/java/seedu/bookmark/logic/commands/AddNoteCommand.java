@@ -1,8 +1,8 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TEXT;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
 import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
 /**
- * Adds a Book into a Library.
+ * Adds a Note to a Book.
  */
 public class AddNoteCommand extends Command {
 
@@ -30,17 +30,16 @@ public class AddNoteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the book. \n"
                                                        + "Parameters: INDEX (must be a positive integer) "
-                                                       + PREFIX_NAME + "TITLE "
+                                                       + PREFIX_NOTE_TITLE + "TITLE "
                                                        + PREFIX_NOTE_TEXT + "TEXT";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added Note to Book: %1$s";
-    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
     public static final String MESSAGE_DUPLICATE_NOTE = "This note already exists for the book.";
 
     private final Index index;
     private final Note note;
     /**
-     * Creates a NoteCommand to add a {@code note} to the specified {@code book}
+     * Creates an AddNoteCommand to add a {@code note} to the specified book at {@code index}
      */
     public AddNoteCommand(Index index, Note note) {
         requireNonNull(index);
@@ -50,8 +49,7 @@ public class AddNoteCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Book} with the details of {@code bookToEdit}
-     * edited with {@code editBookDescriptor}.
+     * Creates and returns a {@code Book} with the updated details of {@code bookToEdit} with the added note.
      */
     protected static Book createEditedBook(Book bookToEdit, Note note) throws CommandException {
         assert bookToEdit != null;
@@ -80,12 +78,7 @@ public class AddNoteCommand extends Command {
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         Book editedBook = createEditedBook(bookToEdit, note);
-        if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
-            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
-        }
-        if (!Bookmark.isValidBookmark(editedBook.getBookmark(), editedBook.getTotalPages())) {
-            throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
-        }
+
         model.setBook(bookToEdit, editedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS, editedBook));

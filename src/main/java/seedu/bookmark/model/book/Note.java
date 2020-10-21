@@ -5,12 +5,14 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 
 public class Note {
     public static final String MESSAGE_CONSTRAINTS =
-            "Note title and text should only contain alphanumeric characters and spaces, and it should not be blank";
-    /*
+            "Note title and text should not start with a whitespace.\n"
+            + "Note title should have 1 to 120 characters. Note text should have 1 to 1000 characters.";
+    /**
      * The first character of the note must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TITLE_VALIDATION_REGEX = "^[^ ].{0,120}$";
+    public static final String TEXT_VALIDATION_REGEX = "^[^ ].{0,1000}$";
 
     public final String title;
     public final String text;
@@ -33,7 +35,7 @@ public class Note {
      * Returns if a given title and text string is a valid note.
      */
     public static boolean isValidNote(String title, String text) {
-        return title.matches(VALIDATION_REGEX) && text.matches(VALIDATION_REGEX);
+        return title.matches(TITLE_VALIDATION_REGEX) && text.matches(TEXT_VALIDATION_REGEX);
     }
 
     @Override

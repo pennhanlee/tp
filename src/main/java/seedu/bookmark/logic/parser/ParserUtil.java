@@ -131,10 +131,11 @@ public class ParserUtil {
         requireNonNull(title);
         requireNonNull(text);
         String trimmedTitle = title.trim();
+        String trimmedText = text.trim();
 
-        if (!Note.isValidNote(trimmedTitle, text)) {
+        if (!Note.isValidNote(trimmedTitle, trimmedText)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
-        return new Note(trimmedTitle, text);
+        return new Note(trimmedTitle, trimmedText);
     }
 }

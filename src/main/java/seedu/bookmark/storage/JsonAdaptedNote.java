@@ -8,7 +8,7 @@ import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Note}.
  */
 class JsonAdaptedNote {
 
@@ -32,9 +32,9 @@ class JsonAdaptedNote {
         text = source.text;
     }
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted note object into the model's {@code Note} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the note.
      */
     public Note toModelType() throws IllegalValueException {
         if (!Note.isValidNote(title, text)) {

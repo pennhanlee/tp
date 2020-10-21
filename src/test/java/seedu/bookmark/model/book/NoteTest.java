@@ -16,9 +16,15 @@ public class NoteTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    public void constructor_invalidTitle_throwsIllegalArgumentException() {
+        String invalidTitle = "";
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidTitle, "Valid Text."));
+    }
+
+    @Test
+    public void constructor_invalidText_throwsIllegalArgumentException() {
+        String invalidText = "";
+        assertThrows(IllegalArgumentException.class, () -> new Note("Valid Title.", invalidText));
     }
 
     @Test
@@ -33,8 +39,6 @@ public class NoteTest {
         // invalid note
         assertFalse(Note.isValidNote("", "")); // empty string
         assertFalse(Note.isValidNote(" ", " ")); // spaces only
-        assertFalse(Note.isValidNote("^", "^")); // only non-alphanumeric characters
-        assertFalse(Note.isValidNote("peter*", "peter*")); // contains non-alphanumeric characters
 
         // valid note
         assertTrue(Note.isValidNote("peter jack", "peter jack")); // alphabets only
@@ -42,5 +46,7 @@ public class NoteTest {
         assertTrue(Note.isValidNote("peter the 2nd", "peter the 2nd")); // alphanumeric characters
         assertTrue(Note.isValidNote("Capital Tan", "Capital Tan")); // with capital letters
         assertTrue(Note.isValidNote("David Roger Jackson Ray Jr 2nd", "David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Note.isValidNote("^", "^")); // only non-alphanumeric characters
+        assertTrue(Note.isValidNote("peter*", "peter*")); // contains non-alphanumeric characters
     }
 }
