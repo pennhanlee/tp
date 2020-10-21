@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+
+package Model {
+Interface Model <<Interface>>
+Class ModelManager
+Class Library
+Interface ReadOnlyLibrary<<Interface>>
+Class VersionedLibrary
+Class HistoryManager
+}
+
+Model : undo()
+Model : redo()
+show Model members
+
+HistoryManager : addNewState()
+HistoryManager : undo()
+HistoryManager : redo()
+show HistoryManager members
+
+VersionedLibrary : addBook()
+VersionedLibrary : removeBook()
+VersionedLibrary : setBook()
+show VersionedLibrary members
+
+ModelManager .up.|> Model
+ModelManager *-down-> VersionedLibrary
+
+Library .up.|> ReadOnlyLibrary
+VersionedLibrary -up-|> Library
+VersionedLibrary *-right-> HistoryManager
+HistoryManager --up-> "1..*" ReadOnlyLibrary : > Contains
+
+@enduml

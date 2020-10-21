@@ -67,7 +67,7 @@ public class HistoryManager {
     /**
      * Redoes the state at the top of the redoDeque, adding the currentState back into the top of the undoDeque.
      */
-    public HistoryManager redo() {
+    public HistoryManager redo() throws RedoException {
         if (!canRedo()) {
             throw new RedoException();
         }

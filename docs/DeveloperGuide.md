@@ -194,8 +194,8 @@ detailed view:
 
 The proposed undo/redo mechanism is facilitated by `VersionedLibrary`. It extends `Library` with an undo/redo history, 
 that is stored and maintained by `HistoryManager`. `HistoryManager` manages the current library state as well as the
-undo and redo history. It does so by storing instances of type`ReadOnlyLibrary`. Henceforth, state shall refer to 
-instances of `ReadOnlyLibrary`. 
+undo and redo history. It does so by storing copies of `ReadOnlyLibrary`. Henceforth, state shall refer to an object of
+type `ReadOnlyLibrary`. 
 
 * `HistoryManager#addNewState()` — Add a new state to be used as the current state
 * `HistoryManager#undo()` — Restores the most recent previous state from its history.
@@ -203,10 +203,14 @@ instances of `ReadOnlyLibrary`.
 
 The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
 Whenever there are changes that add, modify or delete the books stored in the `VersionedLibrary`, the previous state
-will be stored before the changes are made. This is done in the exposed modification methods 
-`VersionedLibrary#addBook()`, `VersionedLibrary#removeBook()` and `VersionedLibrary#setBook()`.
+will be saved and a new state created by calling `HistoryMangeer#addNewState()`. 
+This occurs whenever the methods exposed to modify the library: `VersionedLibrary#addBook()`, `VersionedLibrary#removeBook()` 
+and `VersionedLibrary#setBook()` are called. The class diagram below illustrates the classes that facilitates the undo and redo
+feature.
 
-##### How state is managed
+![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
+
+#### How state is managed
 
 `HistoryManager` manages state by keeping a current state variable as well as two deques, an undo deque and a redo deque.
 The undo deque stores the states to be recovered via an undo command, while the redo deque stores previously undone states 
@@ -268,27 +272,39 @@ This design choice of clearing the redo deque when a new state is added was made
 cannot be represented in a linear, sequential path together with the newly added state. Hence, it will be confusing
 to allow users to redo to these states. 
 
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
+Furthermore, to prevent excessive memory usage, a cap on the number of states stored by `HistoryManager`'s undo deque
+can be set in `HistoryManager#MAX_UNDO_COUNT`. If a new state is added but the undo deque is already at max capacity,
+then the oldest state in the undo deque will be deleted to make room. The activity diagram below explains the flow of
+execution when a new state is added.
+
+![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
 #### Design consideration:
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire library.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the book being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the implementation of each individual command are correct, complexity builds up as more
+  commands are added.
 
-_{more aspects and alternatives to be added}_
+##### Aspect: How to decide which actions should create and save state
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 1 (current choice):** The methods exposed by `VersionedLibrary` to modify the library also creates and 
+    save state.
+  * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
+    and thus warrants the creation and saving of state.
+  * Cons: The creation and saving of state becomes a side effect, not immediately clear that it occurs.
+  
+* **Alternative 2:** Expose a method in the `Model` interface that when called creates and saves state.
+  * Pros: More declarative, easier to see when the model will create and save state.
+  * Cons: Worse separation of concerns, the responsibility of deciding when to create and save state is moved away 
+    from the model and to all the components that interact with the model. 
 
 --------------------------------------------------------------------------------------------------------------------
 
