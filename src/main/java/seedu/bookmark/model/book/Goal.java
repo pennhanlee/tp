@@ -1,6 +1,9 @@
 package seedu.bookmark.model.book;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import static java.util.Objects.requireNonNull;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
@@ -21,6 +24,7 @@ public class Goal {
      * Construct a {@code Goal}.
      */
     public Goal(String page, String deadline) {
+        requireNonNull(page, deadline);
         this.page = page;
         this.deadline = deadline;
     }
@@ -30,6 +34,7 @@ public class Goal {
      * @param goal
      */
     public Goal(String goal) {
+        requireNonNull(goal);
         String[] parts = goal.split("\\s+");
         this.page = parts[0];
         this.deadline = parts[1];
@@ -39,21 +44,12 @@ public class Goal {
         return new Goal("0", "31-12-9999");
     }
 
-    private static LocalDate parseDeadline(String deadline) {
-        String[] parts = deadline.split("-");
-        int day = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]);
-        int year = Integer.parseInt(parts[2]);
-
-        return LocalDate.of(year, month, day);
-    }
-
     public String getDeadline() {
         return deadline;
     }
 
-    public int getPage() {
-        return Integer.parseInt(page);
+    public String getPage() {
+        return page;
     }
 
     /**
@@ -69,7 +65,7 @@ public class Goal {
      * Returns if a given string is a valid genre.
      */
     public static boolean isValidGoal(String page, String deadline) {
-        return page.matches(PAGE_REGEX) && deadline.matches(DEADLINE_REGEX);
+        return page.matches(PAGE_REGEX) && isValidDeadline(deadline);
     }
 
     @Override
@@ -97,5 +93,36 @@ public class Goal {
     public int hashCode() {
         return String.format("%s %s", page, deadline).hashCode();
     }
+
+    /**
+     * Returns true if deadline has the correct format and valid date and time
+     * @param deadline string deadline provided
+     * @return boolean
+     */
+    private static boolean isValidDeadline(String deadline) {
+        if (!deadline.matches(DEADLINE_REGEX)) {
+            return false;
+        } else {
+            try {
+                parseDeadline(deadline);
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static LocalDate parseDeadline(String deadline) throws DateTimeParseException {
+        requireNonNull(deadline);
+        String[] parts = deadline.split("-");
+        String day = parts[0];
+        String month = parts[1];
+        String year = parts[2];
+
+        String deadlineLocalDateFormat = String.format("%s-%s-%s", year, month, day);
+
+        return LocalDate.parse(deadlineLocalDateFormat);
+    }
+
 
 }

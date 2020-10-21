@@ -141,7 +141,7 @@ public class Book {
      * Returns true if user has set a goal for this book.
      */
     public boolean hasGoal() {
-        int pageGoal = goal.getPage();
+        int pageGoal = Integer.parseInt(goal.getPage());
         return pageGoal > 0;
     }
 
