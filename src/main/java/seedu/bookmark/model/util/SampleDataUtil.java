@@ -58,8 +58,8 @@ public class SampleDataUtil {
      */
     public static List<Note> getNoteList(String... strings) {
         return Arrays.stream(strings)
-                                     .map(string -> new Note(string, string))
-                                     .collect(Collectors.toList());
+                       .map(string -> new Note(string, string))
+                       .collect(Collectors.toList());
     }
 
 }
