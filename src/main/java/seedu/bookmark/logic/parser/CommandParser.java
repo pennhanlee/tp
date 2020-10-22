@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.bookmark.logic.commands.AddCommand;
+import seedu.bookmark.logic.commands.AddNoteCommand;
 import seedu.bookmark.logic.commands.ClearCommand;
 import seedu.bookmark.logic.commands.Command;
 import seedu.bookmark.logic.commands.DeleteCommand;
@@ -75,6 +76,9 @@ public class CommandParser {
 
         case GoalCommand.COMMAND_WORD:
             return new GoalCommandParser().parse(arguments);
+
+        case AddNoteCommand.COMMAND_WORD:
+            return new AddNoteCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -2,8 +2,10 @@ package seedu.bookmark.model.book;
 
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -25,6 +27,7 @@ public class Book {
     private final Set<Tag> tags = new HashSet<>();
     private final Bookmark bookmark;
     private final Goal goal;
+    private final List<Note> notes = new ArrayList<>();
 
     /**
      * Fields must be present, valid and not null.
@@ -40,16 +43,20 @@ public class Book {
     }
 
     /**
-     * Overloaded method to create a {@code Book} with goal. Will be called through static method {@code setGoal()}.
+     * Overloaded method to create a {@code Book} with goal. Accommodate to notes
+     * without having to refactor every command.
+     * Will update to this constructor once notes is up and fully functional.
      */
-    public Book(Name name, Genre genre, Set<Tag> tags, TotalPages totalPages, Bookmark bookmark, Goal goal) {
-        requireAllNonNull(name, genre, tags, totalPages, bookmark);
+    public Book(Name name, Genre genre, Set<Tag> tags,
+                TotalPages totalPages, Bookmark bookmark, Goal goal, List<Note> notes) {
+        requireAllNonNull(name, genre, tags, totalPages, bookmark, notes);
         this.name = name;
         this.genre = genre;
         this.tags.addAll(tags);
         this.totalPages = totalPages;
         this.bookmark = bookmark;
         this.goal = goal;
+        this.notes.addAll(notes);
     }
 
     /**
@@ -59,8 +66,9 @@ public class Book {
      * @return a {@code Book} object with {@code Goal} g.
      */
     public static Book setGoal(Book b, Goal g) {
-        return new Book(b.getName(), b.getGenre(), b.getTags(), b.getTotalPages(), b.getBookmark(), g);
+        return new Book(b.getName(), b.getGenre(), b.getTags(), b.getTotalPages(), b.getBookmark(), g, b.getNotes());
     }
+
 
 
     public Name getName() {
@@ -85,6 +93,10 @@ public class Book {
 
     public Bookmark getBookmark() {
         return bookmark;
+    }
+
+    public List<Note> getNotes() {
+        return Collections.unmodifiableList(notes);
     }
 
     /**
@@ -146,6 +158,18 @@ public class Book {
     }
 
     /**
+     * Returns true if the exact same note is present in the note list of the book.
+     */
+    public boolean containsNote(Note note) {
+        for (Note n : this.notes) {
+            if (n.equals(note)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
@@ -164,7 +188,8 @@ public class Book {
                 && otherBook.getGenre().equals(getGenre())
                 && otherBook.getTags().equals(getTags())
                 && otherBook.getTotalPages().equals(getTotalPages())
-                && otherBook.getBookmark().equals(getBookmark());
+                && otherBook.getBookmark().equals(getBookmark())
+                && otherBook.getNotes().equals(getNotes());
     }
 
     @Override
@@ -189,10 +214,10 @@ public class Book {
                 .append(bookmarkPage)
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-
         builder.append(" Goal: ")
-                .append(getGoal().toString());
+                .append(getGoal().toString())
+                .append(" Notes: ");
+        getNotes().forEach(note -> builder.append(note.title + ","));
         return builder.toString();
     }
-
 }

@@ -15,6 +15,7 @@ public class Goal {
         Both fields must not be empty.
      */
     public static final String DEADLINE_REGEX = "\\d{2}-\\d{2}-\\d{4}";
+    public static final String DEFAULT_GOAL_STRING = "0 31-12-9999";
     public static final String PAGE_REGEX = "^\\d+";
 
     public final String page;

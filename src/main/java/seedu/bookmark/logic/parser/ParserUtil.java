@@ -16,6 +16,7 @@ import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -142,5 +143,20 @@ public class ParserUtil {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
         }
         return new Goal(trimmedPage, trimmedDeadline);
+    }
+
+    /**
+     * Parses {@code String title} and {@code String text} into a {@code Note}
+     */
+    public static Note parseNote(String title, String text) throws ParseException {
+        requireNonNull(title);
+        requireNonNull(text);
+        String trimmedTitle = title.trim();
+        String trimmedText = text.trim();
+
+        if (!Note.isValidNote(trimmedTitle, trimmedText)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return new Note(trimmedTitle, trimmedText);
     }
 }
