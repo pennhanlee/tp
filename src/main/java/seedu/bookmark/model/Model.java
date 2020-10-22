@@ -52,11 +52,6 @@ public interface Model {
     /** Returns the Library */
     ReadOnlyLibrary getLibrary();
 
-    /**
-     * Replaces bookmark data with the data in {@code wordBank}.
-     */
-    void setWordBank(ReadOnlyLibrary library);
-
     /** Returns the EditDistance */
     WordBank getWordBank();
 

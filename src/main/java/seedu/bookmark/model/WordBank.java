@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.bookmark.model.wordstore.GenreWordStore;
 import seedu.bookmark.model.wordstore.NameWordStore;
 import seedu.bookmark.model.wordstore.TagWordStore;
+import seedu.bookmark.model.wordstore.Word;
 import seedu.bookmark.model.wordstore.WordStore;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
@@ -24,6 +25,7 @@ public class WordBank {
     private final WordStore nameWordStore;
     private final WordStore genreWordStore;
     private final WordStore tagWordStore;
+
 
     public WordBank(ReadOnlyLibrary library) {
         this.library = library;
@@ -51,8 +53,9 @@ public class WordBank {
      * @param newBook Book Object that is added.
      */
     public void updateWordBank(Book oldBook, Book newBook) {
-        handleNewBook(oldBook);
-        handleOldBook(newBook);
+        handleOldBook(oldBook);
+        handleNewBook(newBook);
+
     }
 
     /**
@@ -76,7 +79,8 @@ public class WordBank {
      * Adds words into the list
      * @param book book to be processed
      */
-    private void handleNewBook(Book book) {
+    public void handleNewBook(Book book) {
+        requireNonNull(book);
         String bookName = book.getName().fullName;
         String[] nameSplit = bookName.split("\\s+");
         List<String> nameWords = Arrays.asList(nameSplit);
@@ -98,7 +102,8 @@ public class WordBank {
      * Adds words into the list
      * @param book book to be processed
      */
-    private void handleOldBook(Book book) {
+    public void handleOldBook(Book book) {
+        requireNonNull(book);
         String bookName = book.getName().fullName;
         String[] nameSplit = bookName.split("\\s+");
         List<String> nameWords = Arrays.asList(nameSplit);
@@ -125,11 +130,6 @@ public class WordBank {
         } else {
             return this.nameWordStore; //by default
         }
-    }
-
-    public void resetWordBank(ReadOnlyLibrary library) {
-        requireNonNull(library);
-        initWordBank(library);
     }
 
 }

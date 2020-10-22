@@ -51,12 +51,14 @@ public class TagWordStore extends WordStore {
     @Override
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
-        Word existingWord = tagWordStore.stream().filter(word -> word.getWord()
-                .equals(targetWord)).findFirst().get();
-        if (existingWord.getCount() == 1) {  //only got 1 instance which is the deleted book
-            this.deleteWord(existingWord);
-        } else {
-            existingWord.minusCount();
+        if (!tagWordStore.isEmpty()) {
+            Word existingWord = tagWordStore.stream().filter(word -> word.getWord()
+                    .equals(targetWord)).findFirst().get();
+            if (existingWord.getCount() == 1) {  //only got 1 instance which is the deleted book
+                this.deleteWord(existingWord);
+            } else {
+                existingWord.minusCount();
+            }
         }
     }
 

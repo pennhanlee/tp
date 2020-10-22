@@ -125,9 +125,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setWordBank(ReadOnlyLibrary library) { throw new AssertionError("This method should not be called."); }
-
-        @Override
         public WordBank getWordBank() { throw new AssertionError("This method should not be called."); }
 
         @Override

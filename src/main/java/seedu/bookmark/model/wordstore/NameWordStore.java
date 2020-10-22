@@ -1,6 +1,7 @@
 package seedu.bookmark.model.wordstore;
 
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

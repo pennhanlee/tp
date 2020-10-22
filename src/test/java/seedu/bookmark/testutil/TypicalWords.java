@@ -1,5 +1,6 @@
 package seedu.bookmark.testutil;
 
+import javafx.scene.LightBase;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.book.Book;
@@ -44,11 +45,16 @@ public class TypicalWords {
      * Returns an {@code WordBank} with all the typical books converted into words.
      */
     public static WordBank getTypicalWordBank() {
-        Library ab = new Library();
+        Library lib = new Library();
         for (Book book : TypicalBooks.getTypicalBooks()) {
-            ab.addBook(book);
+            lib.addBook(book);
         }
-        return new WordBank(ab);
+        return new WordBank(lib);
+    }
+
+    public static WordBank getEmptyWordBank() {
+        Library lib = new Library();
+        return new WordBank(lib);
     }
 
     public static List<Word> getTypicalWords() {
