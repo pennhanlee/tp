@@ -109,7 +109,7 @@ The `Model`,
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Library`, which `Person` references. This allows `Library` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Library`, which `Person` references. This allows `Library` to only require one `Tag` object per unique `Tag`, instead of each `Book` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -192,8 +192,8 @@ detailed view:
 ### Find feature
 
 #### Implementation
-The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList` method. 
-`ModelManager#updateFilteredBookList` takes in a single parameter, a `predicate`, and applies the `predicate` 
+The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList()` method. 
+`ModelManager#updateFilteredBookList()` takes in a single parameter, a `predicate`, and applies the `predicate` 
 on all elements of the observable book list. Elements that satisfy the `predicate` remain in the 
 list, while elements that do not are removed and omitted from the user's view. Currently, the `find` command 
 supports finding by name, genre and tag fields, and can also filter completed & non-completed books.
@@ -209,11 +209,11 @@ and used as a filter in this scenario.
 
 ![FindState2](images/FindState2.png)
 
-####Filtering the FilteredList 
-The `FindCommandParser#parse` parses the `find` command input, and checks for input errors for which if found,
-an error would be thrown. Subsequently, `FindCommandParser#predicateGenerator` generates a predicate based on the 
+#### Filtering the FilteredList
+The `FindCommandParser#parse()` parses the `find` command input, and checks for input errors for which if found,
+an error would be thrown. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
 user's input filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
-and when `FindCommand#execute` is called, the `predicate` is passed on to `ModelManager#updateFilteredBookList`,
+and when `FindCommand#execute()` is called, the `predicate` is passed on to `ModelManager#updateFilteredBookList()`,
 where the filtering of the observable book list based on the `predicate` occurs. 
 
 The activity diagram below illustrates the flow of execution when the user inputs a `find` command.
@@ -275,8 +275,23 @@ Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
 *bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the
 user-input word and the words in the application Library.
 
-This feature is facilitated by mainly by `SuggestionAlgorithm` and `WordBank` and has coupling with
-`ModelManager` and `FindCommand`.
+The `Edit Distance` refers to the number of steps needed to change difference between two words. 
+This mechanism is implemented through 3 operations: 
+1. Addition
+2. Deletion
+3. Transposition (Swapping)
+
+For example: 
+* Hbrry -> Harry (Edit Distance: 1)
+* Hrry -> Harry (Edit Distance: 1)
+* Hrary -> Harry (Edit Distance 1)
+* Haarry -> Harry (Edit Distance 1)
+
+The suggestion mechanism is facilitated by `Logic` Component through `FindCommand` which calls on `SuggestionAlgorithm`.
+`SuggestionAlgorithm` will call on `WordBank` in `Model` for the stored words required to complete the mechanism.
+`SuggestionAlgorithm` will implement the following operations:
+* `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion
+* `SuggestionAlgorithm#calculateDistance()` — Calculate the EditDistance of the source word and words in the WordBank
 
 The class diagram below shows the relevant classes involved.
 
