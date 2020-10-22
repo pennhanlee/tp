@@ -45,7 +45,7 @@ destroy AddNoteCommandParser
 CommandParser --> LogicManager : n
 deactivate CommandParser
 
-LogicManager -> AddNoteCommand : n.execute()
+LogicManager -> AddNoteCommand : execute()
 activate AddNoteCommand
 
 AddNoteCommand -> AddNoteCommand : createEditedBook()
