@@ -126,6 +126,14 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Checks input, throws ParseException if any argument does not match the requirements
+     * Else, return a valid Goal object.
+     * @param page page in goal
+     * @param deadline deadline in goal
+     * @return new Goal object
+     * @throws ParseException with MESSAGE_USAGE message
+     */
     public static Goal parseGoal(String page, String deadline) throws ParseException {
         requireNonNull(page, deadline);
         String trimmedPage = page.trim();

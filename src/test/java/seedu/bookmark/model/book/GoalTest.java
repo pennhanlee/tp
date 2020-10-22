@@ -16,11 +16,6 @@ public class GoalTest {
     public static final String NULL_DEADLINE_GOAL = "10";
 
     @Test
-    public void test_constructor() {
-        
-    }
-
-    @Test
     public void test_isSameGoal() {
         Goal g1 = new Goal("10", "15-10-2021");
         Goal g2 = new Goal("10", "15-10-2021");

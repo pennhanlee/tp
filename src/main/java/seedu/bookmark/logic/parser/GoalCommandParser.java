@@ -5,13 +5,12 @@ import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_PAGE;
 
-import seedu.bookmark.commons.core.Messages;
+import java.util.stream.Stream;
+
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Goal;
-
-import java.util.stream.Stream;
 
 
 public class GoalCommandParser implements Parser<GoalCommand> {

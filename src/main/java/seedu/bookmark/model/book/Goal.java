@@ -1,9 +1,9 @@
 package seedu.bookmark.model.book;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
