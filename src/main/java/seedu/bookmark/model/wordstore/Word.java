@@ -1,5 +1,9 @@
 package seedu.bookmark.model.wordstore;
 
+import seedu.bookmark.model.book.Book;
+
+import java.util.Objects;
+
 public class Word {
     private int STARTING_COUNT = 1;
     private String word;
@@ -51,6 +55,43 @@ public class Word {
     }
 
     public void setDistance(int distance) { this.distance = distance; }
+
+    /**
+     * Returns true if both books of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two books.
+     */
+    public boolean isSameWord(Word otherWord) {
+        if (otherWord == this) {
+            return true;
+        }
+
+        return otherWord != null
+                && otherWord.getWord().equals(this.getWord())
+                && otherWord.getCount() == this.getCount()
+                && otherWord.getDistance() == this.getDistance();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Word)) {
+            return false;
+        }
+
+        Word otherWord = (Word) other;
+        return otherWord.getWord().equals(this.getWord())
+                && otherWord.getCount() == this.getCount()
+                && otherWord.getDistance() == this.getDistance();
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(word, count, distance);
+    }
 
     @Override
     public String toString() {
