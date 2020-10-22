@@ -1,12 +1,15 @@
 package seedu.bookmark.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 import seedu.bookmark.model.util.SampleDataUtil;
@@ -25,6 +28,7 @@ public class BookBuilder {
     private Set<Tag> tags;
     private TotalPages totalPages;
     private Bookmark bookmark;
+    private List<Note> notes;
 
     /**
      * Creates a {@code BookBuilder} with the default details.
@@ -35,6 +39,7 @@ public class BookBuilder {
         totalPages = new TotalPages(DEFAULT_TOTAL_PAGES);
         bookmark = new Bookmark();
         tags = new HashSet<>();
+        notes = new ArrayList<>();
     }
 
     /**
@@ -46,6 +51,7 @@ public class BookBuilder {
         totalPages = bookToCopy.getTotalPages();
         bookmark = bookToCopy.getBookmark();
         tags = new HashSet<>(bookToCopy.getTags());
+        notes = new ArrayList<>(bookToCopy.getNotes());
     }
 
     /**
@@ -88,8 +94,16 @@ public class BookBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code notes} into a {@code List<Note>} and set it to the {@code Book} that we are building.
+     */
+    public BookBuilder withNotes(String... notes) {
+        this.notes = SampleDataUtil.getNoteList(notes);
+        return this;
+    }
+
     public Book build() {
-        return new Book(name, genre, tags, totalPages, bookmark);
+        return new Book(name, genre, tags, totalPages, bookmark, notes);
     }
 
 }

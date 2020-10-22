@@ -1,6 +1,7 @@
 package seedu.bookmark.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -49,6 +51,15 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a list containing notes with the same title and text provided by the list of strings given.
+     */
+    public static List<Note> getNoteList(String... strings) {
+        return Arrays.stream(strings)
+                       .map(string -> new Note(string, string))
+                       .collect(Collectors.toList());
     }
 
 }

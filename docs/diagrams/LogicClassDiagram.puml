@@ -1,4 +1,9 @@
 @startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
 package Logic {
 
 package Parser {
@@ -10,6 +15,10 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+}
+
+package Algorithm {
+Class XYZAlgorithm
 }
 
 package Command {
@@ -37,6 +46,7 @@ XYZCommandParser ..> XYZCommand : creates >
 XYZCommandParser ..|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
+XYZCommandParser ..> XYZAlgorithm
 ArgumentTokenizer .left.> ArgumentMultimap
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
