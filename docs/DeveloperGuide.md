@@ -27,7 +27,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,11 +62,12 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
+The exception to this is `DetailedBookListPanel`, which shares the same `.fxml` file as `BookListPanel`.
 
 The `UI` component,
 
@@ -78,7 +79,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/logic/Logic.java)
 
 1. `Logic` uses the `CommandParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -97,17 +98,18 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
+* stores the library data.
+* stores a `WordBank` that contains instances of words in Library.
 * exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Library`, which `Person` references. This allows `Library` to only require one `Tag` object per unique `Tag`, instead of each `Book` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -117,11 +119,11 @@ The `Model`,
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save the library data in json format and read it back.
 
 ### Common classes
 
@@ -133,12 +135,198 @@ Classes used by multiple components are in the `seedu.bookmark.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Changing Ui view
+
+#### Implementation
+
+*bookmark's* UI supports two types of views: the default, **summarised view** which displays summarised information
+regarding the books stored, and the **detailed view** which displays detailed information about a particular book.
+
+`BookListPanel` `BookCard` as well as its corresponding subclasses `DetailedBookListPanel` and `DetailedBookCard` facilitates
+the display of book information.
+When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
+while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
+`DetailedBookCard`.
+
+Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the
+list of `BookCard` or `DetailedBookCard` respectively.
+
+The class diagram below shows the relevant classes involved:
+
+![Ui view class diagram](images/UiViewClassDiagram.png)
+
+##### Switching between the two views
+
+`MainWindow` and `CommandResult` facilitates the switching between the two views.
+
+`MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()`
+which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
+From the returned `CommandResult`, `CommandResult#isDetailedView()` indicates whether the UI should be in the detailed view,
+or the default summarised view.
+
+Based on the value returned by `CommandResult#isDetailedView()`, either `MainWindow#changeToDetailedView()` or
+`MainWindow#resetView()` is called accordingly.
+
+The activity diagram below illustrates the flow of execution when the UI decides which view to use:
+
+![View switching flow of execution](images/ViewSwitchingActivityDiagram.png)
+
+Below is a sequence diagram that shows a scenario whereby the UI switches from the default summarised view to the
+detailed view:
+
+![Switching to detailed view sequence diagram](images/ViewSwitchingSequenceDiagram.png)
+
+#### Design considerations
+
+##### Aspect: What to display DetailedBookCard with
+
+* **Alternative 1 (current choice):** Use JavaFX ListView
+  * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
+  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is currently only meant to show
+  one book
+
+* **Alternative 2:** Use other JavaFX layouts
+  * Pros: More in-line with the purpose of the detailed view of showing only one book
+  * Cons: More work has to be done to sync up the UI with the model.
+  
+### Find feature
+
+#### Implementation
+The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList()` method. 
+`ModelManager#updateFilteredBookList()` takes in a single parameter, a `predicate`, and applies the `predicate` 
+on all elements of the observable book list. Elements that satisfy the `predicate` remain in the 
+list, while elements that do not are removed and omitted from the user's view. Currently, the `find` command 
+supports finding by name, genre and tag fields, and can also filter completed & non-completed books.
+
+Given below is an example usage scenario and how the find mechanism alters `FilteredList` at each step.
+
+Step 1. The user launches the application for the first time. `FilteredList` is initialised with the user's book data.
+
+![FindState1](images/FindState1.png)
+
+Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The `NameContainsKeywordsPredicate` predicate is generated
+and used as a filter in this scenario.
+
+![FindState2](images/FindState2.png)
+
+#### Filtering the FilteredList
+The `FindCommandParser#parse()` parses the `find` command input, and checks for input errors for which if found,
+an error would be thrown. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
+user's input filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
+and when `FindCommand#execute()` is called, the `predicate` is passed on to `ModelManager#updateFilteredBookList()`,
+where the filtering of the observable book list based on the `predicate` occurs. 
+
+The activity diagram below illustrates the flow of execution when the user inputs a `find` command.
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+Below is a sequence diagram that shows a scenario whereby the user decides to find keywords in the book name field:
+Command : `find n/ Harry`
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+#### Design considerations
+
+##### Aspect: Finding within user specified field or in all fields
+
+* **Alternative 1 (current choice):** Finding keywords within specified field
+  * Pros: Allows the user to streamline their search and find their desired book quicker.
+  * Cons: Could be a drawback if the user forgets which field he used the keyword in.
+  
+* **Alternative 2:** Finding keywords in all fields
+  * Pros: Allows the user to find all books with the keyword in any input field, which could be an advantage if 
+  the user uses the keyword for multiple fields.
+  * Cons: Might not be easy to find specific books, i.e. cannot streamline the search as well.
+
+
+### Add book
+
+#### Implementation
+
+*bookmark* allows Users to add books into the application.
+
+This feature is faciltated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`.
+
+![Classes involved in the Add Command](images/LogicClassDiagram.png)
+
+`LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs.
+`AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. This `Book` object will be
+passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
+*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
+
+`LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` attribute into
+the `Model`to return a `CommandResult` as a feedback to the user.
+*If there is an existing book with the same name, an exception will be thrown with a message to the User*
+
+Below is an activity diagram which illustrates the flow of events for adding a book
+
+![Add command flow of execution](images/AddActivityDiagram.png)
+
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
+Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
+
+![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png)
+
+
+### Suggestion feature
+
+#### Implementation
+
+*bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the
+user-input word and the words in the application Library.
+
+The `Edit Distance` refers to the number of steps needed to change difference between two words. 
+This mechanism is implemented through 3 operations: 
+1. Addition
+2. Deletion
+3. Transposition (Swapping)
+
+For example: 
+* Hbrry -> Harry (Edit Distance: 1)
+* Hrry -> Harry (Edit Distance: 1)
+* Hrary -> Harry (Edit Distance 1)
+* Haarry -> Harry (Edit Distance 1)
+
+The suggestion mechanism is facilitated by `Logic` Component through `FindCommand` which calls on `SuggestionAlgorithm`.
+`SuggestionAlgorithm` will call on `WordBank` in `Model` for the stored words required to complete the mechanism.
+`SuggestionAlgorithm` will implement the following operations:
+* `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion
+* `SuggestionAlgorithm#calculateDistance()` — Calculate the EditDistance of the source word and words in the WordBank
+
+The class diagram below shows the relevant classes involved.
+
+![Suggestion Algorithm and the Classes involved](images/SuggestionAlgorithmClassDiagram.png)
+
+Given below is an example usage scenario and how a Suggestion mechanism behaves at each step.
+
+Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in their names. <br>
+*harry is deliberately mispelled* <br>
+`FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty.
+
+Step 2: `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
+in the appropriate `WordStore` of `WordBank`.
+
+Step 3: `SuggestionAlgorithm#calculateDistance()` will be called to calculate the edit distance of `h@rry` and the words in `nameWordBank`
+and store words that are within the predefined `DISTANCE_LIMIT`.
+
+Step 4: `FindCommand#execute()` will add each word into a `PriorityQueue` and poll out the word with the smallest distance
+to be used as the suggested word.
+
+Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
+will return a Standard Message for no suggestion.
+
+![Did you mean? flow of events](images/SuggestionActivityDiagram.png)
+
+Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
+
+![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
