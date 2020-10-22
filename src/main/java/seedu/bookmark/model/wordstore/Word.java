@@ -61,7 +61,7 @@ public class Word {
     public void setDistance(int distance) { this.distance = distance; }
 
     /**
-     * Returns true if both books of the same name have at least one other identity field that is the same.
+     * Returns true if both words have the same {@code String word}
      * This defines a weaker notion of equality between two books.
      */
     public boolean isSameWord(Word otherWord) {
@@ -70,9 +70,7 @@ public class Word {
         }
 
         return otherWord != null
-                && otherWord.getWord().equals(this.getWord())
-                && otherWord.getCount() == this.getCount()
-                && otherWord.getDistance() == this.getDistance();
+                && otherWord.getWord().equals(this.getWord());
     }
 
     @Override

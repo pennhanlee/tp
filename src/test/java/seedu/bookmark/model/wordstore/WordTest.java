@@ -80,14 +80,14 @@ public class WordTest {
         // same word with typo -> return false
         assertFalse(CORRECT_HARRY.isSameWord(INCORRECT_HARRY));
 
-        // different distance -> returns false
-        assertFalse(CORRECT_HARRY.isSameWord(DISTANCE_HARRY));
+        // same word with different distance -> returns true
+        assertTrue(CORRECT_HARRY.isSameWord(DISTANCE_HARRY));
 
-        // different count -> returns false
+        // same word with different count -> returns false
         String harry = CORRECT_HARRY.getWord();
         Word countChangedHarry = new Word(harry);
         countChangedHarry.addCount();
-        assertFalse(CORRECT_HARRY.isSameWord(countChangedHarry));
+        assertTrue(CORRECT_HARRY.isSameWord(countChangedHarry));
 
         // null -> returns false
         assertFalse(HARRY_POTTER.isSameBook(null));

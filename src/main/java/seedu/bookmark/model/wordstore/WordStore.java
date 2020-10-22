@@ -29,49 +29,27 @@ public abstract class WordStore {
 
     /**
      *
-     * @param wordStore
-     * @param targetWord
-     */
-    protected void wordAdder(WordStore wordStore, String targetWord) {
-        boolean added = false;
-        for (Word existingWord : wordStore.getWordStore()) {
-            if (existingWord.getWord().equals(targetWord)) {
-                existingWord.addCount();
-                added = true;
-                break;
-            }
-        }
-        if (!added) {
-            Word newWord = new Word(targetWord);
-            wordStore.addWord(newWord);
-        }
-    }
-
-    /**
-     *
-     * @param wordStore
-     * @param targetWord
-     */
-    protected void wordDeleter(WordStore wordStore, String targetWord) {
-        Word word = null;
-        for (Word existingWord : wordStore.getWordStore()) {
-            if (existingWord.getWord().equals(targetWord)) {
-                word = existingWord;
-                break;
-            }
-        }
-        assert word != null;
-        if (word.getCount() == 1) {  //only got 1 instance which is the deleted book
-            wordStore.deleteWord(word);
-        } else {
-            word.minusCount();
-        }
-    }
-
-    /**
-     *
      * @return
      */
     public abstract ArrayList<Word> getWordStore();
+
+    /**
+     * Returns true if the list contains an equivalent word as the given argument.
+     */
+    public abstract boolean contains(String toCheck);
+
+    /**
+     *
+     * @param wordStore
+     * @param targetWord
+     */
+    public abstract void wordAdder(WordStore wordStore, String targetWord);
+
+    /**
+     *
+     * @param wordStore
+     * @param targetWord
+     */
+    public abstract void wordDeleter(WordStore wordStore, String targetWord);
 
 }
