@@ -17,6 +17,10 @@ Class ArgumentTokenizer
 Class Prefix
 }
 
+package Algorithm {
+Class XYZAlgorithm
+}
+
 package Command {
 Class XYZCommand
 Class CommandResult
@@ -42,6 +46,7 @@ XYZCommandParser ..> XYZCommand : creates >
 XYZCommandParser ..|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
+XYZCommandParser ..> XYZAlgorithm
 ArgumentTokenizer .left.> ArgumentMultimap
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
