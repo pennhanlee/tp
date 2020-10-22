@@ -4,6 +4,8 @@ import seedu.bookmark.model.book.Book;
 
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 public class Word {
     private int STARTING_COUNT = 1;
     private String word;
@@ -11,12 +13,14 @@ public class Word {
     private int distance;
 
     public Word(String word) {
+        requireNonNull(word);
         this.word = word;
         this.count = STARTING_COUNT;
         this.distance = 0;
     };
 
     public Word(String word, int distance) {
+        requireNonNull(word);
         this.word = word;
         this.count = STARTING_COUNT;
         this.distance = distance;
