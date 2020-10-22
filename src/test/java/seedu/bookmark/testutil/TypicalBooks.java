@@ -32,7 +32,8 @@ public class TypicalBooks {
             .withGenre("Fiction")
             .withTags("Good", "Lengthy")
             .withTotalPages("1500")
-            .withBookmark("269").build();
+            .withBookmark("269")
+            .withNotes("Chapter 1", "Chapter 2", "Chapter 3").build();
     public static final Book THE_HUNGER_GAMES = new BookBuilder().withName("The Hunger Games")
             .withGenre("Fiction")
             .withTotalPages("500")

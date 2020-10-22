@@ -187,6 +187,55 @@ detailed view:
 * **Alternative 2:** Use other JavaFX layouts
   * Pros: More in-line with the purpose of the detailed view of showing only one book
   * Cons: More work has to be done to sync up the UI with the model.
+  
+### Find feature
+
+#### Implementation
+The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList` method. 
+`ModelManager#updateFilteredBookList` takes in a single parameter, a `predicate`, and applies the `predicate` 
+on all elements of the observable book list. Elements that satisfy the `predicate` remain in the 
+list, while elements that do not are removed and omitted from the user's view. Currently, the `find` command 
+supports finding by name, genre and tag fields, and can also filter completed & non-completed books.
+
+Given below is an example usage scenario and how the find mechanism alters `FilteredList` at each step.
+
+Step 1. The user launches the application for the first time. `FilteredList` is initialised with the user's book data.
+
+![FindState1](images/FindState1.png)
+
+Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The `NameContainsKeywordsPredicate` predicate is generated
+and used as a filter in this scenario.
+
+![FindState2](images/FindState2.png)
+
+####Filtering the FilteredList 
+The `FindCommandParser#parse` parses the `find` command input, and checks for input errors for which if found,
+an error would be thrown. Subsequently, `FindCommandParser#predicateGenerator` generates a predicate based on the 
+user's input filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
+and when `FindCommand#execute` is called, the `predicate` is passed on to `ModelManager#updateFilteredBookList`,
+where the filtering of the observable book list based on the `predicate` occurs. 
+
+The activity diagram below illustrates the flow of execution when the user inputs a `find` command.
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+Below is a sequence diagram that shows a scenario whereby the user decides to find keywords in the book name field:
+Command : `find n/ Harry`
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+#### Design considerations
+
+##### Aspect: Finding within user specified field or in all fields
+
+* **Alternative 1 (current choice):** Finding keywords within specified field
+  * Pros: Allows the user to streamline their search and find their desired book quicker.
+  * Cons: Could be a drawback if the user forgets which field he used the keyword in.
+  
+* **Alternative 2:** Finding keywords in all fields
+  * Pros: Allows the user to find all books with the keyword in any input field, which could be an advantage if 
+  the user uses the keyword for multiple fields.
+  * Cons: Might not be easy to find specific books, i.e. cannot streamline the search as well.
 
 ### Undo/redo feature
 
@@ -292,6 +341,10 @@ execution when a new state is added.
   * Pros: Will use less memory (e.g. for `delete`, just save the book being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct, complexity builds up as more
   commands are added.
+  
+Alternative 1 was eventually chosen as there was no noticable performance degradation during testing with a reasonable 
+cap (10) on the number of states stored. It is also much more scalable and less prone to breaking upon addition
+or modification of commands. 
 
 ##### Aspect: How to decide which actions should create and save state
 
@@ -304,7 +357,11 @@ execution when a new state is added.
 * **Alternative 2:** Expose a method in the `Model` interface that when called creates and saves state.
   * Pros: More declarative, easier to see when the model will create and save state.
   * Cons: Worse separation of concerns, the responsibility of deciding when to create and save state is moved away 
-    from the model and to all the components that interact with the model. 
+    from the model and to all the components that interact with the model.
+    
+Alternative 1 was eventually chosen as we liked the clear separation of concerns it provides. We also feel that it is 
+less prone to errors such as forgetting to call the hypothetical "save" method that would exist in alternative 2, 
+or calling it in the wrong places, especially when more commands are added.
 
 --------------------------------------------------------------------------------------------------------------------
 
