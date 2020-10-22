@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
-import static seedu.bookmark.testutil.TypicalWords.getTypicalStrings;
-import static seedu.bookmark.testutil.TypicalWords.getTypicalWords;
+import static seedu.bookmark.testutil.TypicalWords.HARRY;
 
 public class NameWordStoreTest {
 
@@ -27,12 +26,12 @@ public class NameWordStoreTest {
 
     @Test
     public void contains_wordNotInList_returnsFalse() {
-        assertFalse(nameWordStore.contains("Harry"));
+        assertFalse(nameWordStore.contains(HARRY));
     }
 
     @Test
     public void contains_wordInList_returnsTrue() {
-        nameWordStore.wordAdder("Harry");
+        nameWordStore.wordAdder(HARRY);
         String harry = CORRECT_HARRY.getWord();
         assertTrue(nameWordStore.contains(harry));
     }
@@ -46,18 +45,18 @@ public class NameWordStoreTest {
 
     @Test
     public void add_newWord_countOne() {
-        nameWordStore.wordAdder("Harry");
+        nameWordStore.wordAdder(HARRY);
         Word harry = nameWordStore.getWordStore().stream()
-                .filter(n -> n.getWord().equals("Harry")).findFirst().get();
+                .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
         assertEquals(1, harry.getCount());
     }
 
     @Test
     public void add_existingWord_increaseCount() {
-        nameWordStore.wordAdder("Harry");
-        nameWordStore.wordAdder("Harry");
+        nameWordStore.wordAdder(HARRY);
+        nameWordStore.wordAdder(HARRY);
         Word harry = nameWordStore.getWordStore().stream()
-                .filter(n -> n.getWord().equals("Harry")).findFirst().get();
+                .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
         assertEquals(2, harry.getCount());
 
     }
@@ -71,22 +70,22 @@ public class NameWordStoreTest {
 
     @Test
     public void delete_bookDoesNotExist_throwsWordNotFoundException() {
-        assertThrows(WordNotFoundException.class, () -> nameWordStore.wordDeleter("Harry"));
+        assertThrows(WordNotFoundException.class, () -> nameWordStore.wordDeleter(HARRY));
     }
 
     @Test
     public void delete_existingWord_countZero() {
-        nameWordStore.wordAdder("Harry");
-        nameWordStore.wordDeleter("Harry");
-        assertFalse(nameWordStore.contains("Harry"));
+        nameWordStore.wordAdder(HARRY);
+        nameWordStore.wordDeleter(HARRY);
+        assertFalse(nameWordStore.contains(HARRY));
     }
     @Test
     public void delete_existingBook_countNonZero() {
-        nameWordStore.wordAdder("Harry");
-        nameWordStore.wordAdder("Harry");  //increase count to 2
-        nameWordStore.wordDeleter("Harry");
+        nameWordStore.wordAdder(HARRY);
+        nameWordStore.wordAdder(HARRY);  //increase count to 2
+        nameWordStore.wordDeleter(HARRY);
         Word harry = nameWordStore.getWordStore().stream()
-                            .filter(n -> n.getWord().equals("Harry")).findFirst().get();
+                            .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
         assertEquals(1, harry.getCount());
     }
 
