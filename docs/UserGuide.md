@@ -172,7 +172,12 @@ Opens the Help Window where the available commands are shown with examples and i
 
 Format: `help`
 
+### Suggestions for Typing Error
 
+When a typing error is made while trying to find a book <br>
+eg. `find n/Hsrry` instead of `find n/Harry`
+
+bookmark will recommend the likely word that has been misspelled.
 
 --------------------------------------------------------------------------------------------------------------------
 
