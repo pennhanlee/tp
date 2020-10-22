@@ -1,11 +1,10 @@
-package seedu.bookmark.algo;
+package seedu.bookmark.model;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.algo.wordbank.GenreWordStore;
-import seedu.bookmark.algo.wordbank.NameWordStore;
-import seedu.bookmark.algo.wordbank.TagWordStore;
-import seedu.bookmark.algo.wordbank.WordStore;
-import seedu.bookmark.model.ReadOnlyLibrary;
+import seedu.bookmark.model.wordstore.GenreWordStore;
+import seedu.bookmark.model.wordstore.NameWordStore;
+import seedu.bookmark.model.wordstore.TagWordStore;
+import seedu.bookmark.model.wordstore.WordStore;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
 

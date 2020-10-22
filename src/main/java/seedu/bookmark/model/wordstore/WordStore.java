@@ -1,6 +1,4 @@
-package seedu.bookmark.algo.wordbank;
-
-import seedu.bookmark.algo.word.Word;
+package seedu.bookmark.model.wordstore;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package seedu.bookmark.algo.word;
+package seedu.bookmark.model.wordstore;
 
 public class Word {
     private int STARTING_COUNT = 1;

@@ -1,6 +1,8 @@
-package seedu.bookmark.algo.word;
+package seedu.bookmark.model.wordstore;
 
 import org.junit.jupiter.api.Test;
+import seedu.bookmark.model.wordstore.Word;
+import seedu.bookmark.model.wordstore.WordComparator;
 
 import java.util.PriorityQueue;
 

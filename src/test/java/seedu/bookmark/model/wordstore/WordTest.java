@@ -1,6 +1,7 @@
-package seedu.bookmark.algo.word;
+package seedu.bookmark.model.wordstore;
 
 import org.junit.jupiter.api.Test;
+import seedu.bookmark.model.wordstore.Word;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

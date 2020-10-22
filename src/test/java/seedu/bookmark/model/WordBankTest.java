@@ -1,4 +1,4 @@
-package seedu.bookmark.algo;
+package seedu.bookmark.model;
 
 public class WordBankTest {
 

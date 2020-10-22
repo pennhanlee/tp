@@ -1,7 +1,7 @@
-package seedu.bookmark.algo.algorithm;
+package seedu.bookmark.logic.algorithm;
 
-import seedu.bookmark.algo.WordBank;
-import seedu.bookmark.algo.word.Word;
+import seedu.bookmark.model.WordBank;
+import seedu.bookmark.model.wordstore.Word;
 import seedu.bookmark.logic.parser.Prefix;
 
 import java.util.ArrayList;

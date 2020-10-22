@@ -8,14 +8,13 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOT_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
-import seedu.bookmark.algo.algorithm.SuggestionAlgorithm;
-import seedu.bookmark.algo.word.Word;
+import seedu.bookmark.logic.algorithm.SuggestionAlgorithm;
+import seedu.bookmark.model.wordstore.Word;
 import seedu.bookmark.commons.core.Messages;
-import seedu.bookmark.algo.word.WordComparator;
+import seedu.bookmark.model.wordstore.WordComparator;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;

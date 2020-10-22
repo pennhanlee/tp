@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.bookmark.algo.WordBank;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.model.book.Book;
 

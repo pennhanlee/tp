@@ -1,4 +1,4 @@
-package seedu.bookmark.algo.word;
+package seedu.bookmark.model.wordstore;
 
 import java.util.Comparator;
 

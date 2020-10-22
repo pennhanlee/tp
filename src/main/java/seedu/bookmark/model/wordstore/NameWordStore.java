@@ -1,16 +1,14 @@
-package seedu.bookmark.algo.wordbank;
-
-import seedu.bookmark.algo.word.Word;
+package seedu.bookmark.model.wordstore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreWordStore extends WordStore {
+public class NameWordStore extends WordStore {
 
-    ArrayList<Word> genreWordStore;
+    ArrayList<Word> nameWordStore;
 
-    public GenreWordStore() {
-        this.genreWordStore = new ArrayList<>();
+    public NameWordStore() {
+        this.nameWordStore = new ArrayList<>();
     }
 
 
@@ -30,18 +28,16 @@ public class GenreWordStore extends WordStore {
 
     @Override
     public void addWord(Word word) {
-        this.genreWordStore.add(word);
+        this.nameWordStore.add(word);
     }
 
     @Override
     public void deleteWord(Word word) {
-        this.genreWordStore.remove(word);
+        this.nameWordStore.remove(word);
     }
 
-    @Override
+
     public ArrayList<Word> getWordStore() {
-        return this.genreWordStore;
+        return this.nameWordStore;
     }
-
-
 }

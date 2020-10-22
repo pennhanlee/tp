@@ -1,4 +1,4 @@
-package seedu.bookmark.algo.algorithm;
+package seedu.bookmark.logic.algorithm;
 
 public class SuggestionAlgorithmTest {
 }
