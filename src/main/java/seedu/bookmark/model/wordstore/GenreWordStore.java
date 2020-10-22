@@ -22,25 +22,15 @@ public class GenreWordStore extends WordStore {
     @Override
     public void addWords(List<String> words) {
         for (String word : words) {
-            wordAdder(this, word);
+            wordAdder(word);
         }
     }
 
     @Override
     public void deleteWords(List<String> words) {
         for (String word : words) {
-            wordDeleter( this, word);
+            wordDeleter(word);
         }
-    }
-
-    @Override
-    public void addWord(Word word) {
-        this.genreWordStore.add(word);
-    }
-
-    @Override
-    public void deleteWord(Word word) {
-        this.genreWordStore.remove(word);
     }
 
     @Override
@@ -49,26 +39,36 @@ public class GenreWordStore extends WordStore {
     }
 
     @Override
-    public void wordAdder(WordStore wordStore, String targetWord) {
+    public void wordAdder(String targetWord) {
+        requireNonNull(targetWord);
         boolean added = contains(targetWord);
         if (added) {
             genreWordStore.stream().filter(word -> word.getWord()
                     .equals(targetWord)).findFirst().get().addCount();
         } else {
             Word newWord = new Word(targetWord);
-            wordStore.addWord(newWord);
+            this.addWord(newWord);
         }
     }
 
     @Override
-    public void wordDeleter(WordStore wordStore, String targetWord) {
+    public void wordDeleter(String targetWord) {
+        requireNonNull(targetWord);
         Word existingWord = genreWordStore.stream().filter(word -> word.getWord()
                 .equals(targetWord)).findFirst().get();
         if (existingWord.getCount() == 1) {  //only got 1 instance which is the deleted book
-            wordStore.deleteWord(existingWord);
+            this.deleteWord(existingWord);
         } else {
             existingWord.minusCount();
         }
+    }
+
+    private void addWord(Word word) {
+        this.genreWordStore.add(word);
+    }
+
+    private void deleteWord(Word word) {
+        this.genreWordStore.remove(word);
     }
 
 

@@ -24,25 +24,40 @@ public class NameWordStore extends WordStore {
     @Override
     public void addWords(List<String> words) {
         for (String word : words) {
-            wordAdder(this, word);
+            wordAdder(word);
         }
     }
 
     @Override
     public void deleteWords(List<String> words) {
         for (String word : words) {
-            wordDeleter( this, word);
+            wordDeleter(word);
         }
     }
 
     @Override
-    public void addWord(Word word) {
-        this.nameWordStore.add(word);
+    public void wordAdder(String targetWord) {
+        requireNonNull(targetWord);
+        boolean added = contains(targetWord);
+        if (added) {
+            nameWordStore.stream().filter(word -> word.getWord()
+                    .equals(targetWord)).findFirst().get().addCount();
+        } else {
+            Word newWord = new Word(targetWord);
+            this.addWord(newWord);
+        }
     }
 
     @Override
-    public void deleteWord(Word word) {
-        this.nameWordStore.remove(word);
+    public void wordDeleter(String targetWord) {
+        requireNonNull(targetWord);
+        Word existingWord = nameWordStore.stream().filter(word -> word.getWord()
+                .equals(targetWord)).findFirst().get();
+        if (existingWord.getCount() == 1) {  //only got 1 instance which is the deleted book
+            this.deleteWord(existingWord);
+        } else {
+            existingWord.minusCount();
+        }
     }
 
     @Override
@@ -50,26 +65,11 @@ public class NameWordStore extends WordStore {
         return this.nameWordStore;
     }
 
-    @Override
-    public void wordAdder(WordStore wordStore, String targetWord) {
-        boolean added = contains(targetWord);
-        if (added) {
-            nameWordStore.stream().filter(word -> word.getWord()
-                    .equals(targetWord)).findFirst().get().addCount();
-        } else {
-            Word newWord = new Word(targetWord);
-            wordStore.addWord(newWord);
-        }
+    private void addWord(Word word) {
+        this.nameWordStore.add(word);
     }
 
-    @Override
-    public void wordDeleter(WordStore wordStore, String targetWord) {
-        Word existingWord = nameWordStore.stream().filter(word -> word.getWord()
-                .equals(targetWord)).findFirst().get();
-        if (existingWord.getCount() == 1) {  //only got 1 instance which is the deleted book
-            wordStore.deleteWord(existingWord);
-        } else {
-            existingWord.minusCount();
-        }
+    private void deleteWord(Word word) {
+        this.nameWordStore.remove(word);
     }
 }

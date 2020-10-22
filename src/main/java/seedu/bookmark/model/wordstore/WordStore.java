@@ -19,16 +19,6 @@ public abstract class WordStore {
 
     /**
      *
-     */
-    public abstract void addWord(Word word);
-
-    /**
-     *
-     */
-    public abstract void deleteWord(Word word);
-
-    /**
-     *
      * @return
      */
     public abstract ArrayList<Word> getWordStore();
@@ -40,16 +30,14 @@ public abstract class WordStore {
 
     /**
      *
-     * @param wordStore
      * @param targetWord
      */
-    public abstract void wordAdder(WordStore wordStore, String targetWord);
+    public abstract void wordAdder(String targetWord);
 
     /**
      *
-     * @param wordStore
      * @param targetWord
      */
-    public abstract void wordDeleter(WordStore wordStore, String targetWord);
+    public abstract void wordDeleter(String targetWord);
 
 }

@@ -5,7 +5,17 @@ import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.wordstore.Word;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class TypicalWords {
+    public static final String HARRY = "harry";
+    public static final String POTTER = "potter";
+    public static final String AND = "and";
+    public static final String CHAMBER = "chamber";
+    public static final String SECRETS = "secrets";
+
 
     //correctly spelt
     public static final Word CORRECT_HARRY = new Word("harry");
@@ -31,7 +41,7 @@ public class TypicalWords {
     private TypicalWords() {} //prevents instantiation
 
     /**
-     * Returns an {@code Library} with all the typical books converted into words.
+     * Returns an {@code WordBank} with all the typical books converted into words.
      */
     public static WordBank getTypicalWordBank() {
         Library ab = new Library();
@@ -39,6 +49,16 @@ public class TypicalWords {
             ab.addBook(book);
         }
         return new WordBank(ab);
+    }
+
+    public static List<Word> getTypicalWords() {
+        return new ArrayList<>(Arrays.asList(CORRECT_HARRY, CORRECT_POTTER, CORRECT_AND,
+                CORRECT_CHAMBER, CORRECT_SECRETS));
+    }
+
+    public static List<String> getTypicalStrings() {
+        return new ArrayList<>(Arrays.asList(HARRY, POTTER, AND,
+                CHAMBER, SECRETS));
     }
 
 
