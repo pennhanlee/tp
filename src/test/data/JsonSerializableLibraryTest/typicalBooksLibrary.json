@@ -11,7 +11,21 @@
     "genre" : "Fiction",
     "tagged" : [ "Good", "Lengthy" ],
     "totalPages" : "1500",
-    "bookmark" : "269"
+    "bookmark" : "269",
+    "notes" : [
+      {
+        "title" : "Chapter 1",
+        "text" : "Chapter 1"
+      },
+      {
+        "title" : "Chapter 2",
+        "text" : "Chapter 2"
+      },
+      {
+        "title" : "Chapter 3",
+        "text" : "Chapter 3"
+      }
+    ]
   }, {
     "name" : "The Hunger Games",
     "genre" : "Fiction",
