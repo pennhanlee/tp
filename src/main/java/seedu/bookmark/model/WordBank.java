@@ -71,7 +71,7 @@ public class WordBank {
     }
 
     /**
-     * Deletes old words from the list
+     * Deletes old words of an oldbook from the list
      * @param book book to be deleted
      */
     public void deleteFromWordBank(Book book) {

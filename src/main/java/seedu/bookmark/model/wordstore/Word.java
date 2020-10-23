@@ -79,7 +79,7 @@ public class Word {
 
     /**
      * Returns true if both words have the same {@code String word}
-     * This defines a weaker notion of equality between two books.
+     * This defines a weaker notion of equality between two words.
      */
     public boolean isSameWord(Word otherWord) {
         if (otherWord == this) {
