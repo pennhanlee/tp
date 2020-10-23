@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.GuiSettings;
-import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.predicates.NameContainsKeywordsPredicate;
 import seedu.bookmark.testutil.LibraryBuilder;
 
 public class ModelManagerTest {

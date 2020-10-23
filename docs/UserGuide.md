@@ -111,6 +111,20 @@ Example Command | Result
 `find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in the "Tag" field.
 `find c/` | Returns a list of completed books.
 
+### Sorting books: `sort` 
+
+Sort books according to the condition inputted.
+
+Format: `sort [n/BOOK_TITLE] `
+
+* Sorts books in descending order according to the input filter.
+* Supports sorting by Name, Genre and Bookmark fields.
+
+Examples:
+*  `sort n/` Returns a list of books sorted by name lexicographical order.
+*  `sort g/` Returns a list of books sorted by genre lexicographical order.
+*  `sort b/` Returns a list of books sorted by ascending number of pages read (bookmark)
+
 ### Deleting a book : `delete`
 
 Deletes the specified book from the book list.
@@ -145,6 +159,16 @@ Example Command | Result
 -----------------|--------
 `edit 1 b/101` | Edits the bookmark of the 1st book to be `101`.
 
+<<<<<<< HEAD
+### Set goal for your book: `goal`
+
+Set a reading goal to finish a certain page by a deadline for a book in the list.
+
+Format: `goal INDEX p/PAGE d/DEADLINE`
+
+* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* Page number and deadline must be provided.
+=======
 ### Adding a note to a book : `note`
 
 Adds a note to an existing book in the list.
@@ -164,6 +188,7 @@ Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
 
+>>>>>>> 254f1595b3e4abc258496f948fc2f7eb7e0101f8
 
 ### Clearing all books : `clear` [coming soon]
 
@@ -218,4 +243,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX b/PAGE_NUMBER`
 **Note** | `note INDEX n/TITLE txt/TEXT` <br> e.g., `note 1 n/Thoughts txt/My thoughts`
 **Find** | `find n/ KEYWORDS` <br> e.g., `find n/ Harry Hunger`
+**Sort** | `sort n/BOOK_TITLE ` <br> e.g., `sort n/`
 **Help** | `help`

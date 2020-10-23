@@ -1,9 +1,10 @@
-package seedu.bookmark.model.book;
+package seedu.bookmark.model.book.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.util.StringUtil;
+import seedu.bookmark.model.book.Book;
 
 /**
  * Tests that a {@code Book}'s {@code Genre} matches any of the keywords given.
