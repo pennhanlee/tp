@@ -38,6 +38,7 @@ public abstract class WordStore {
     /**
      * Processes the provided word out of wordStore by either removing the word or minusing the count based on
      * whether the word count > 1
+     * If there are no words found, the deletion is ignored
      * @param targetWord
      */
     public abstract void wordDeleter(String targetWord);
