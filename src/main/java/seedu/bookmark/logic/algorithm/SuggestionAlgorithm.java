@@ -3,7 +3,8 @@ package seedu.bookmark.logic.algorithm;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.WordBank;
@@ -15,7 +16,6 @@ import seedu.bookmark.model.wordstore.Word;
  */
 public class SuggestionAlgorithm {
 
-    private static final int SUGGESTION_LIMIT = 4;
     private static final int DISTANCE_TOLERANCE = 3;
     private final WordBank wordBank;
 
@@ -36,19 +36,15 @@ public class SuggestionAlgorithm {
         requireNonNull(sourceWord);
         requireNonNull(prefix);
         String prefixName = prefix.getPrefix();
-        List<Word> wordStore = wordBank.getWordStore(prefixName).getWordStore();
-        int wordCount = 0;
-        int suggestionCount = 0;
+        HashMap<Integer, Word> wordStore = wordBank.getWordStore(prefixName).getWordStore();
         ArrayList<Word> suggestions = new ArrayList<>();
-        while (suggestionCount < SUGGESTION_LIMIT && wordCount < wordStore.size()) {
-            Word targetWord = wordStore.get(wordCount);
+        for (Map.Entry<Integer, Word> word : wordStore.entrySet()) {
+            Word targetWord = word.getValue();
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
             if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
                 Word wordCopy = new Word(targetWord.getWord(), wordDistance);
                 suggestions.add(wordCopy);
-                suggestionCount++;
             }
-            wordCount++;
         }
         return suggestions;
     }

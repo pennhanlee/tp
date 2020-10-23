@@ -268,15 +268,13 @@ public class WordBankTest {
         for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
 
-            Word targetWord = nameStore.getWordStore().stream()
-                                .filter(word -> word.getWord().equals(name)).findFirst().get();
+            Word targetWord = nameStore.getWord(name);
             assertEquals(1, targetWord.getCount());
         }
         for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
 
-            Word targetWord = genreStore.getWordStore().stream()
-                    .filter(word -> word.getWord().equals(genre)).findFirst().get();
+            Word targetWord = genreStore.getWord(genre);
             assertEquals(1, targetWord.getCount());
         }
         for (String tag : tagWords) {
@@ -292,22 +290,19 @@ public class WordBankTest {
         for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
 
-            Word targetWord = nameStore.getWordStore().stream()
-                    .filter(word -> word.getWord().equals(name)).findFirst().get();
+            Word targetWord = nameStore.getWord(name);
             assertEquals(1, targetWord.getCount());
         }
         for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
 
-            Word targetWord = genreStore.getWordStore().stream()
-                    .filter(word -> word.getWord().equals(genre)).findFirst().get();
+            Word targetWord = genreStore.getWord(genre);
             assertEquals(1, targetWord.getCount());
         }
         for (String tag : tagWords) {
             assertTrue(tagStore.contains(tag));
 
-            Word targetWord = tagStore.getWordStore().stream()
-                    .filter(word -> word.getWord().equals(tag)).findFirst().get();
+            Word targetWord = tagStore.getWord(tag);
             assertEquals(1, targetWord.getCount());
         }
 

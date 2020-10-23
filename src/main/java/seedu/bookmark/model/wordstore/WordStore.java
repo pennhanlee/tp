@@ -2,24 +2,20 @@ package seedu.bookmark.model.wordstore;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 
 public class WordStore {
 
-    private ArrayList<Word> wordStoreList;
-    private HashMap<Integer, String> wordHashMap;
+    private HashMap<Integer, Word> wordStore;
 
     /**
      * Creates a WordStore object
      */
     public WordStore() {
-        this.wordStoreList = new ArrayList<>();
-        this.wordHashMap = new HashMap<>();
+        this.wordStore = new HashMap<>();
     }
 
     /**
@@ -28,7 +24,7 @@ public class WordStore {
     public boolean contains(String toCheck) {
         requireNonNull(toCheck);
         Integer hashedWord = toCheck.hashCode();
-        return wordHashMap.containsKey(hashedWord);
+        return wordStore.containsKey(hashedWord);
     }
 
     /**
@@ -60,8 +56,8 @@ public class WordStore {
         requireNonNull(targetWord);
         boolean added = contains(targetWord);
         if (added) {
-            wordStoreList.stream().filter(word -> word.getWord()
-                    .equals(targetWord)).findFirst().get().addCount();
+            Word targetWordObj = wordStore.get(targetWord.hashCode());
+            targetWordObj.addCount();
         } else {
             Word newWord = new Word(targetWord);
             this.addWord(newWord);
@@ -76,16 +72,14 @@ public class WordStore {
      */
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
-        Optional<Word> storedWord = wordStoreList.stream().filter(word -> word.getWord()
-                .equals(targetWord)).findFirst();
-        if (storedWord.isEmpty()) {
+        Word targetWordObj = wordStore.get(targetWord.hashCode());
+        if (targetWordObj == null) {
             throw new WordNotFoundException();
         }
-        Word existingWord = storedWord.get();
-        if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
-            this.deleteWord(existingWord);
+        if (targetWordObj.getCount() == 1) { //only got 1 instance which is the deleted book
+            this.deleteWord(targetWordObj);
         } else {
-            existingWord.minusCount();
+            targetWordObj.minusCount();
         }
     }
 
@@ -93,22 +87,27 @@ public class WordStore {
      * Returns the wordStore
      * @return wordStore
      */
-    public ArrayList<Word> getWordStore() {
-        return this.wordStoreList;
+    public HashMap<Integer, Word> getWordStore() {
+        return this.wordStore;
+    }
+
+    /**
+     * Returns the Word object
+     * @return Word
+     */
+    public Word getWord(String word) {
+        Integer wordHash = word.hashCode();
+        return this.wordStore.get(wordHash);
     }
 
 
     private void addWord(Word word) {
-        String wordValue = word.getWord();
-        this.wordHashMap.put(wordValue.hashCode(), wordValue);
-        this.wordStoreList.add(word);
+        this.wordStore.put(word.hashCode(), word);
 
     }
 
     private void deleteWord(Word word) {
-        String wordValue = word.getWord();
-        this.wordHashMap.remove(wordValue.hashCode(), wordValue);
-        this.wordStoreList.remove(word);
+        this.wordStore.remove(word.hashCode(), word);
     }
 
 }

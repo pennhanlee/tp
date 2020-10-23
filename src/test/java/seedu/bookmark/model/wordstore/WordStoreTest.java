@@ -48,8 +48,7 @@ public class WordStoreTest {
     @Test
     public void add_newWord_countOne() {
         wordStore.wordAdder(HARRY);
-        Word harry = wordStore.getWordStore().stream()
-                .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
+        Word harry = wordStore.getWord(HARRY);
         assertEquals(1, harry.getCount());
     }
 
@@ -57,8 +56,7 @@ public class WordStoreTest {
     public void add_existingWord_increaseCount() {
         wordStore.wordAdder(HARRY);
         wordStore.wordAdder(HARRY);
-        Word harry = wordStore.getWordStore().stream()
-                .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
+        Word harry = wordStore.getWord(HARRY);
         assertEquals(2, harry.getCount());
 
     }
@@ -87,8 +85,7 @@ public class WordStoreTest {
         wordStore.wordAdder(HARRY);
         wordStore.wordAdder(HARRY); //increase count to 2
         wordStore.wordDeleter(HARRY);
-        Word harry = wordStore.getWordStore().stream()
-                            .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
+        Word harry = wordStore.getWord(HARRY);
         assertEquals(1, harry.getCount());
     }
 
@@ -110,8 +107,7 @@ public class WordStoreTest {
         wordStore.addWords(listOfWords);
         for (String word : listOfWords) {
             assertTrue(wordStore.contains(word));
-            Word targetWord = wordStore.getWordStore().stream()
-                    .filter(n -> n.getWord().equals(word)).findFirst().get();
+            Word targetWord = wordStore.getWord(word);
             assertEquals(2, targetWord.getCount());
         }
     }
@@ -136,8 +132,7 @@ public class WordStoreTest {
         wordStore.deleteWords(listOfWords);
         for (String word : listOfWords) {
             assertTrue(wordStore.contains(word));
-            Word targetWord = wordStore.getWordStore().stream()
-                    .filter(n -> n.getWord().equals(word)).findFirst().get();
+            Word targetWord = wordStore.getWord(word);
             assertEquals(1, targetWord.getCount());
         }
     }
@@ -149,8 +144,9 @@ public class WordStoreTest {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         List<Word> listOfWordObjs = TypicalWords.getTypicalWords();
         wordStore.addWords(listOfWords);
-        List<Word> wordStoreList = wordStore.getWordStore();
-        assertEquals(listOfWordObjs, wordStoreList);
+        for (Word word : listOfWordObjs) {
+            assertEquals(word, wordStore.getWord(word.getWord()));
+        }
     }
 }
 
