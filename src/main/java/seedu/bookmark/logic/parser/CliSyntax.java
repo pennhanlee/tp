@@ -18,4 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_TEXT = new Prefix("txt/");
     public static final Prefix PREFIX_COMPLETED = new Prefix("c/");
     public static final Prefix PREFIX_NOT_COMPLETED = new Prefix("nc/");
+    public static final Prefix PREFIX_DUMMY = new Prefix("dummy/");
 }

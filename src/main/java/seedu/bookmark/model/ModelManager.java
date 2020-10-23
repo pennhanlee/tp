@@ -16,6 +16,7 @@ import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.book.Book;
 
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DUMMY;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
@@ -138,7 +139,9 @@ public class ModelManager implements Model {
 
     @Override
     public void sortByDefaultComparator() {
-        sortFilteredBookList(this.comparator);
+        if (this.comparator != null) { //should be removed, should sort by date added field
+            sortFilteredBookList(this.comparator);
+        }
     }
 
     //=========== Filtered Book List Accessors =============================================================
@@ -211,7 +214,7 @@ public class ModelManager implements Model {
             result = PREFIX_READING_PROGRESS;
             break;
         default:
-            return PREFIX_NAME;
+            return PREFIX_DUMMY;
         }
         return result;
     }
