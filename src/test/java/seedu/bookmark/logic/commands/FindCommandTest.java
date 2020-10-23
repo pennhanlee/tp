@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_WORD_NOT_UNDERSTOOD;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_WORD_SUGGESTION;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_COMPLETED;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
@@ -206,7 +208,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findCompletedBooks() {
+    public void execute_findCompletedBooks() {  //findSuggestion will not be activated for finding CompletedBook
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 1);
         BookCompletedPredicate predicate = prepareCompletedBooksPredicate();
         Prefix completedPrefix = PREFIX_COMPLETED;
@@ -218,7 +220,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findNotCompletedBooks() {
+    public void execute_findNotCompletedBooks() {  //findSuggestion will not be activated for finding NotCompletedBook
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 6);
         BookNotCompletedPredicate predicate = prepareNotCompletedBooksPredicate();
         Prefix notCompletedPrefix = PREFIX_NOT_COMPLETED;
@@ -228,6 +230,30 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(HARRY_POTTER, TO_KILL_A_MOCKINGBIRD, THE_HUNGER_GAMES, LORD_OF_THE_FLIES,
                 ENDERS_GAME, ON_THE_ROAD), model.getFilteredBookList());
+    }
+
+    @Test
+    public void execute_findSuggestionCorrectPrefix() {
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("Hbrry");
+        Prefix namePrefix = PREFIX_NAME;
+        String[] keywords = prepareKeywords("Hbrry");
+        String expectedMessage = String.format(MESSAGE_WORD_SUGGESTION, "Hbrry", "Harry");
+        FindCommand command = new FindCommand(predicate, namePrefix, keywords);
+        expectedModel.updateFilteredBookList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredBookList());
+    }
+
+    @Test
+    public void execute_findSuggestionInvalidPrefix() {  //default on Stored NameWords
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("Hbrry");
+        Prefix invalidPrefix = PREFIX_BOOKMARK;  //invalid prefix for findSuggestion
+        String[] keywords = prepareKeywords("Hbrry");
+        String expectedMessage = String.format(MESSAGE_WORD_SUGGESTION, "Hbrry", "Harry");
+        FindCommand command = new FindCommand(predicate, invalidPrefix, keywords);
+        expectedModel.updateFilteredBookList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredBookList());
     }
 
     /**
