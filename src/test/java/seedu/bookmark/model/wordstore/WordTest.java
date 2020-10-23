@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 public class WordTest {
 
     @Test
-    public void getFieldValues_validFields_correctValues_DistanceSet() {
+    public void getFieldValues_validFields_distanceSet() {
         Word validWordWithDistance = new Word("Word", 4);
         final String word = "Word";
         final int count = 1;
@@ -28,7 +28,7 @@ public class WordTest {
     }
 
     @Test
-    public void getFieldValues_validFields_correctValues_NoDistanceSet() {
+    public void getFieldValues_validFields_noDistanceSet() {
         Word validWord = new Word("Word");
         final String word = "Word";
         final int count = 1;

@@ -24,12 +24,12 @@ public class SuggestionAlgorithmTest {
     //------------------------- instantiate Object ---------------------//
 
     @Test
-    public void create_suggestionAlgo_object_nullPointerException() {
+    public void create_suggestionAlgo_nullPointerException() {
         assertThrows(NullPointerException.class, () -> new SuggestionAlgorithm(null));
     }
 
     @Test
-    public void create_suggestionAlgo_object_correctValue() {
+    public void create_suggestionAlgo_correctValue() {
         WordBank wb = TypicalWords.getTypicalWordBank();
         SuggestionAlgorithm sa = new SuggestionAlgorithm(wb);
 
@@ -42,12 +42,13 @@ public class SuggestionAlgorithmTest {
     @Test
     public void findSuggestion_sourceWordnull() {
         assertThrows(NullPointerException.class, () -> suggestionAlgorithm
-                                                        .findSuggestion(null, PREFIX_NAME));
+                                                            .findSuggestion(null, PREFIX_NAME));
     }
 
     @Test
     public void findSuggestion_prefixNull() {
-        assertThrows(NullPointerException.class, () -> suggestionAlgorithm.findSuggestion(HARRY,null));
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm
+                                                            .findSuggestion(HARRY, null));
     }
 
 
@@ -79,12 +80,14 @@ public class SuggestionAlgorithmTest {
 
     @Test
     public void calculateDistance_sourceWordNull() {
-        assertThrows(NullPointerException.class, () -> suggestionAlgorithm.calculateDistance(HARRY,null));
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm
+                                                            .calculateDistance(HARRY, null));
     }
 
     @Test
     public void calculateDistance_targetWordNull() {
-        assertThrows(NullPointerException.class, () -> suggestionAlgorithm.calculateDistance(null,HARRY));
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm
+                                                            .calculateDistance(null, HARRY));
     }
 
     @Test

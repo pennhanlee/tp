@@ -19,7 +19,7 @@ public class WordComparatorTest {
     private static final PriorityQueue<Word> differentWordsPQ = new PriorityQueue<>(new WordComparator());
 
     @Test
-    public void CompareWord_ByDistance() {
+    public void compareWord_byDistance() {
         differentDistancePQ.add(FOO);
         differentDistancePQ.add(BOO);
         differentDistancePQ.add(POO);
@@ -33,7 +33,7 @@ public class WordComparatorTest {
     }
 
     @Test
-    public void CompareWord_ByWord() {
+    public void compareWord_byWord() {
         differentWordsPQ.add(CHERRY);
         differentWordsPQ.add(DURIAN);
         differentWordsPQ.add(APPLE);
