@@ -13,9 +13,6 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
-import seedu.bookmark.model.wordstore.GenreWordStore;
-import seedu.bookmark.model.wordstore.NameWordStore;
-import seedu.bookmark.model.wordstore.TagWordStore;
 import seedu.bookmark.model.wordstore.WordStore;
 
 
@@ -32,9 +29,9 @@ public class WordBank {
      */
     public WordBank(ReadOnlyLibrary library) {
         this.library = library;
-        this.nameWordStore = new NameWordStore();
-        this.genreWordStore = new GenreWordStore();
-        this.tagWordStore = new TagWordStore();
+        this.nameWordStore = new WordStore();
+        this.genreWordStore = new WordStore();
+        this.tagWordStore = new WordStore();
         initWordBank(library);
     }
 

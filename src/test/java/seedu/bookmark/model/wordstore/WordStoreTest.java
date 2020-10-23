@@ -14,49 +14,49 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.testutil.TypicalWords;
 
-public class NameWordStoreTest {
+public class WordStoreTest {
 
-    private NameWordStore nameWordStore = new NameWordStore();
+    private WordStore wordStore = new WordStore();
 
     //------------------- contains() ------------------------------//
 
     @Test
     public void contains_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> nameWordStore.contains(null));
+        assertThrows(NullPointerException.class, () -> wordStore.contains(null));
     }
 
     @Test
     public void contains_wordNotInList_returnsFalse() {
-        assertFalse(nameWordStore.contains(HARRY));
+        assertFalse(wordStore.contains(HARRY));
     }
 
     @Test
     public void contains_wordInList_returnsTrue() {
-        nameWordStore.wordAdder(HARRY);
+        wordStore.wordAdder(HARRY);
         String harry = CORRECT_HARRY.getWord();
-        assertTrue(nameWordStore.contains(harry));
+        assertTrue(wordStore.contains(harry));
     }
 
     //--------------------- wordAdder() ---------------------------//
 
     @Test
     public void add_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> nameWordStore.wordAdder(null));
+        assertThrows(NullPointerException.class, () -> wordStore.wordAdder(null));
     }
 
     @Test
     public void add_newWord_countOne() {
-        nameWordStore.wordAdder(HARRY);
-        Word harry = nameWordStore.getWordStore().stream()
+        wordStore.wordAdder(HARRY);
+        Word harry = wordStore.getWordStore().stream()
                 .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
         assertEquals(1, harry.getCount());
     }
 
     @Test
     public void add_existingWord_increaseCount() {
-        nameWordStore.wordAdder(HARRY);
-        nameWordStore.wordAdder(HARRY);
-        Word harry = nameWordStore.getWordStore().stream()
+        wordStore.wordAdder(HARRY);
+        wordStore.wordAdder(HARRY);
+        Word harry = wordStore.getWordStore().stream()
                 .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
         assertEquals(2, harry.getCount());
 
@@ -66,29 +66,29 @@ public class NameWordStoreTest {
 
     @Test
     public void delete_nullBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> nameWordStore.wordDeleter(null));
+        assertThrows(NullPointerException.class, () -> wordStore.wordDeleter(null));
     }
 
     @Test
     public void delete_bookDoesNotExist() {
-        nameWordStore.wordAdder(HARRY);
-        nameWordStore.wordDeleter(CHAMBER); // word not present in book so just ignore deletion
-        assertTrue(nameWordStore.contains(HARRY));
-        assertFalse(nameWordStore.contains(CHAMBER));
+        wordStore.wordAdder(HARRY);
+        wordStore.wordDeleter(CHAMBER); // word not present in book so just ignore deletion
+        assertTrue(wordStore.contains(HARRY));
+        assertFalse(wordStore.contains(CHAMBER));
     }
 
     @Test
     public void delete_existingWord_countZero() {
-        nameWordStore.wordAdder(HARRY);
-        nameWordStore.wordDeleter(HARRY);
-        assertFalse(nameWordStore.contains(HARRY));
+        wordStore.wordAdder(HARRY);
+        wordStore.wordDeleter(HARRY);
+        assertFalse(wordStore.contains(HARRY));
     }
     @Test
     public void delete_existingBook_countNonZero() {
-        nameWordStore.wordAdder(HARRY);
-        nameWordStore.wordAdder(HARRY); //increase count to 2
-        nameWordStore.wordDeleter(HARRY);
-        Word harry = nameWordStore.getWordStore().stream()
+        wordStore.wordAdder(HARRY);
+        wordStore.wordAdder(HARRY); //increase count to 2
+        wordStore.wordDeleter(HARRY);
+        Word harry = wordStore.getWordStore().stream()
                             .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
         assertEquals(1, harry.getCount());
     }
@@ -98,20 +98,20 @@ public class NameWordStoreTest {
     @Test
     public void addWords() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
-        nameWordStore.addWords(listOfWords);
+        wordStore.addWords(listOfWords);
         for (String word : listOfWords) {
-            assertTrue(nameWordStore.contains(word));
+            assertTrue(wordStore.contains(word));
         }
     }
 
     @Test
     public void add_existingWords() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
-        nameWordStore.addWords(listOfWords);
-        nameWordStore.addWords(listOfWords);
+        wordStore.addWords(listOfWords);
+        wordStore.addWords(listOfWords);
         for (String word : listOfWords) {
-            assertTrue(nameWordStore.contains(word));
-            Word targetWord = nameWordStore.getWordStore().stream()
+            assertTrue(wordStore.contains(word));
+            Word targetWord = wordStore.getWordStore().stream()
                     .filter(n -> n.getWord().equals(word)).findFirst().get();
             assertEquals(2, targetWord.getCount());
         }
@@ -122,22 +122,22 @@ public class NameWordStoreTest {
     @Test
     public void deleteWords_countOne() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
-        nameWordStore.addWords(listOfWords);
-        nameWordStore.deleteWords(listOfWords);
+        wordStore.addWords(listOfWords);
+        wordStore.deleteWords(listOfWords);
         for (String word : listOfWords) {
-            assertFalse(nameWordStore.contains(word));
+            assertFalse(wordStore.contains(word));
         }
     }
 
     @Test
     public void deleteWords_countBiggerThanOne() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
-        nameWordStore.addWords(listOfWords);
-        nameWordStore.addWords(listOfWords);
-        nameWordStore.deleteWords(listOfWords);
+        wordStore.addWords(listOfWords);
+        wordStore.addWords(listOfWords);
+        wordStore.deleteWords(listOfWords);
         for (String word : listOfWords) {
-            assertTrue(nameWordStore.contains(word));
-            Word targetWord = nameWordStore.getWordStore().stream()
+            assertTrue(wordStore.contains(word));
+            Word targetWord = wordStore.getWordStore().stream()
                     .filter(n -> n.getWord().equals(word)).findFirst().get();
             assertEquals(1, targetWord.getCount());
         }
@@ -149,9 +149,9 @@ public class NameWordStoreTest {
     public void getWordStore() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         List<Word> listOfWordObjs = TypicalWords.getTypicalWords();
-        nameWordStore.addWords(listOfWords);
-        List<Word> nameWordStoreList = nameWordStore.getWordStore();
-        assertEquals(listOfWordObjs, nameWordStoreList);
+        wordStore.addWords(listOfWords);
+        List<Word> wordStoreList = wordStore.getWordStore();
+        assertEquals(listOfWordObjs, wordStoreList);
     }
 }
 

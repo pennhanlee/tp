@@ -29,7 +29,7 @@ public class SuggestionAlgorithm {
     }
 
     /**
-     * Finds 3 words that are close to the misspelled word.
+     * Finds words that are close to the misspelled word.
      * @param sourceWord mispelled word to find suggestion for
      */
     public ArrayList<Word> findSuggestion(String sourceWord, Prefix prefix) {
@@ -44,7 +44,6 @@ public class SuggestionAlgorithm {
             Word targetWord = wordStore.get(wordCount);
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
             if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
-                System.out.println("Word: " + targetWord.getWord() + " Distance: " + wordDistance);
                 Word wordCopy = new Word(targetWord.getWord(), wordDistance);
                 suggestions.add(wordCopy);
                 suggestionCount++;
