@@ -27,8 +27,12 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
    * **`list`** : Lists all books.
 
    * **`add`**`n/Fifty Shades of Gray g/Romance tp/350 b/200` : Adds a book titled `Fifty Shades of Grey` to the Storage Library.
+   
+   * **`edit`**`1 b/300` : Edits the bookmark of the first book shown to page `300`.
 
    * **`delete`**`3` : Deletes the 3rd book shown in the current list.
+   
+   * **`note`**`2 n/Thoughts txt/The dog is the killer` : Adds a note to the second book shown titled `Thoughts` with the content `The dog is the killer`.
 
    * **`exit`** : Exits the app.
 
@@ -89,14 +93,14 @@ Shows a list of all books in the Storage Library.
 
 Format: `list`
 
-### Locating books: `find` 
+### Locating books: `find`
 
 Find books that adhere to the input filter.
 
 Format: `find [n/BOOK_TITLE] KEYWORDS, find [c/COMPLETED_BOOKS]`
 
-* Finds books whose specified field contains any of the input keywords. 
-* Can also find completed books & non-completed books using "c/" and "nc/" prefixes. 
+* Finds books whose specified field contains any of the input keywords.
+* Can also find completed books & non-completed books using "c/" and "nc/" prefixes.
 * No keywords are required for finding completed & non-completed books.
 
 Examples:
@@ -135,14 +139,41 @@ Examples:
 
 Edits an existing book in the list.
 
-Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE]`
+Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
 
-* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the book at the specified `INDEX`.
+* The index refers to the index number shown in the displayed book list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 b/101` Edits the bookmark of the 1st book to be `101`.
+
+<<<<<<< HEAD
+### Set goal for your book: `goal`
+
+Set a reading goal to finish a certain page by a deadline for a book in the list.
+
+Format: `goal INDEX p/PAGE d/DEADLINE`
+
+* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* Page number and deadline must be provided.
+=======
+### Adding a note to a book : `note`
+
+Adds a note to an existing book in the list.
+
+Format: `note INDEX n/TITLE txt/TEXT`
+
+* Edits the book at the specified `INDEX`.
+* The index refers to the index number shown in the displayed book list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `note 1 n/Thoughts txt/What is the protagonist thinking` Adds a note to the first book shown with the title `Thoughts` and text `What is the protagonist thinking`
+
+>>>>>>> 254f1595b3e4abc258496f948fc2f7eb7e0101f8
 
 ### Clearing all books : `clear` [coming soon]
 
@@ -166,7 +197,12 @@ Opens the Help Window where the available commands are shown with examples and i
 
 Format: `help`
 
+### Suggestions for Typing Error
 
+When a typing error is made while trying to find a book <br>
+eg. `find n/Hsrry` instead of `find n/Harry`
+
+bookmark will recommend the likely word that has been misspelled.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,6 +226,7 @@ Action | Format, Examples
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `view 3`
 **Edit** | `edit INDEX b/PAGE_NUMBER`
+**Note** | `note INDEX n/TITLE txt/TEXT` <br> e.g., `note 1 n/Thoughts txt/My thoughts`
 **Find** | `find n/ KEYWORDS` <br> e.g., `find n/ Harry Hunger`
 **Sort** | `sort n/BOOK_TITLE ` <br> e.g., `sort n/`
 **Help** | `help`

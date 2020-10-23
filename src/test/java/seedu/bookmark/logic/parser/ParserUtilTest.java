@@ -18,6 +18,7 @@ import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -27,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TOTAL_PAGES = "-500";
     private static final String INVALID_BOOKMARK = "-100";
+    private static final String INVALID_NOTE_TITLE = " ";
+    private static final String INVALID_NOTE_TEXT = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_GENRE = "Fiction";
@@ -34,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_TOTAL_PAGES = "500";
     private static final String VALID_BOOKMARK = "1";
+    private static final String VALID_NOTE_TITLE = "Hello!";
+    private static final String VALID_NOTE_TEXT = "World!";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -195,4 +200,27 @@ public class ParserUtilTest {
         assertEquals(expectedBookmark, ParserUtil.parseBookmark(Optional.of(bookmarkWithWhitespace)));
     }
 
+    @Test
+    public void parseNote_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNote(null, null));
+    }
+
+    @Test
+    public void parseNote_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNote(INVALID_NOTE_TITLE, INVALID_NOTE_TEXT));
+    }
+
+    @Test
+    public void parseNote_validValueWithoutWhitespace_returnsNote() throws Exception {
+        Note expectedNote = new Note(VALID_NOTE_TITLE, VALID_NOTE_TEXT);
+        assertEquals(expectedNote, ParserUtil.parseNote(VALID_NOTE_TITLE, VALID_NOTE_TEXT));
+    }
+
+    @Test
+    public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
+        String noteTitleWithWhitespace = WHITESPACE + VALID_NOTE_TITLE + WHITESPACE;
+        String noteTextWithWhitespace = WHITESPACE + VALID_NOTE_TEXT + WHITESPACE;
+        Note expectedNote = new Note(VALID_NOTE_TITLE, VALID_NOTE_TEXT);
+        assertEquals(expectedNote, ParserUtil.parseNote(noteTitleWithWhitespace, noteTextWithWhitespace));
+    }
 }

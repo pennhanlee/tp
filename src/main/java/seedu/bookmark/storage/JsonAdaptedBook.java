@@ -13,7 +13,9 @@ import seedu.bookmark.commons.exceptions.IllegalValueException;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -28,7 +30,9 @@ class JsonAdaptedBook {
     private final String genre;
     private final String totalPages;
     private final String bookmark;
+    private final String goal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedBook} with the given book details.
@@ -38,7 +42,9 @@ class JsonAdaptedBook {
                            @JsonProperty("genre") String genre,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                            @JsonProperty("totalPages") String totalPages,
-                           @JsonProperty("bookmark") String bookmark) {
+                           @JsonProperty("bookmark") String bookmark,
+                           @JsonProperty("goal") String goal,
+                           @JsonProperty("notes") List<JsonAdaptedNote> notes) {
         this.name = name;
         this.genre = genre;
         if (tagged != null) {
@@ -46,7 +52,13 @@ class JsonAdaptedBook {
         }
         this.totalPages = totalPages;
         this.bookmark = bookmark;
+        this.goal = goal != null ? goal
+                                 : Goal.DEFAULT_GOAL_STRING;
+        if (notes != null) {
+            this.notes.addAll(notes);
+        }
     }
+
 
     /**
      * Converts a given {@code Book} into this class for Jackson use.
@@ -59,6 +71,11 @@ class JsonAdaptedBook {
                 .collect(Collectors.toList()));
         totalPages = source.getTotalPages().value;
         bookmark = source.getBookmark().value;
+        goal = String.format("%s %s",
+                source.getGoal().page, source.getGoal().deadline);
+        notes.addAll(source.getNotes().stream()
+                .map(note -> new JsonAdaptedNote(note.title, note.text))
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -71,7 +88,6 @@ class JsonAdaptedBook {
         for (JsonAdaptedTag tag : tagged) {
             bookTags.add(tag.toModelType());
         }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -108,7 +124,17 @@ class JsonAdaptedBook {
         if (!Bookmark.isValidBookmark(modelBookmark, modelTotalPages)) {
             throw new IllegalValueException(Bookmark.MESSAGE_CONSTRAINTS);
         }
-        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark);
+
+        final Goal modelGoal = new Goal(goal);
+
+        final List<Note> bookNotes = new ArrayList<>();
+        for (JsonAdaptedNote note : notes) {
+            bookNotes.add(note.toModelType());
+        }
+
+        final List<Note> modelNotes = new ArrayList<>(bookNotes);
+
+        return new Book(modelName, modelGenre, modelTags, modelTotalPages, modelBookmark, modelGoal, modelNotes);
     }
 
 }
