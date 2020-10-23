@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GenreWordStore extends WordStore {
 
@@ -54,12 +55,15 @@ public class GenreWordStore extends WordStore {
     @Override
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
-        Word existingWord = genreWordStore.stream().filter(word -> word.getWord()
-                .equals(targetWord)).findFirst().get();
-        if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
-            this.deleteWord(existingWord);
-        } else {
-            existingWord.minusCount();
+        Optional<Word> storedWord = genreWordStore.stream().filter(word -> word.getWord()
+                .equals(targetWord)).findFirst();
+        if (!storedWord.isEmpty()) {
+            Word existingWord = storedWord.get();
+            if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
+                this.deleteWord(existingWord);
+            } else {
+                existingWord.minusCount();
+            }
         }
     }
 

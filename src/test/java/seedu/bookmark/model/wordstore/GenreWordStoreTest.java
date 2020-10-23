@@ -4,15 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.testutil.Assert.assertThrows;
+import static seedu.bookmark.testutil.TypicalWords.CHAMBER;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
 import static seedu.bookmark.testutil.TypicalWords.HARRY;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 import seedu.bookmark.testutil.TypicalWords;
 
 public class GenreWordStoreTest {
@@ -70,10 +69,12 @@ public class GenreWordStoreTest {
         assertThrows(NullPointerException.class, () -> genreWordStore.wordDeleter(null));
     }
 
-    @Disabled
     @Test
-    public void delete_bookDoesNotExist_throwsWordNotFoundException() {
-        assertThrows(WordNotFoundException.class, () -> genreWordStore.wordDeleter(HARRY));
+    public void delete_bookDoesNotExist() {
+        genreWordStore.wordAdder(HARRY);
+        genreWordStore.wordDeleter(CHAMBER); // word not present in book so just ignore deletion
+        assertTrue(genreWordStore.contains(HARRY));
+        assertFalse(genreWordStore.contains(CHAMBER));
     }
 
     @Test

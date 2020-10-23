@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TagWordStore extends WordStore {
 
@@ -51,9 +52,10 @@ public class TagWordStore extends WordStore {
     @Override
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
-        if (!tagWordStore.isEmpty()) {
-            Word existingWord = tagWordStore.stream().filter(word -> word.getWord()
-                    .equals(targetWord)).findFirst().get();
+        Optional<Word> storedWord = tagWordStore.stream().filter(word -> word.getWord()
+                .equals(targetWord)).findFirst();
+        if (!storedWord.isEmpty()) {
+            Word existingWord = storedWord.get();
             if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
                 this.deleteWord(existingWord);
             } else {
