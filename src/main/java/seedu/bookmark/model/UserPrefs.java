@@ -61,7 +61,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.bookmarkFilePath = bookmarkFilePath;
     }
 
-    @Override
     public String getSortingPreference() {
         return sortingPreference;
     }

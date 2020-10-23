@@ -191,6 +191,10 @@ public class ModelManager implements Model {
         return comparator;
     }
 
+    /**
+     * Returns a prefix based on the input string.
+     * @return Prefix based on the input string.
+     */
     public Prefix prefixGenerator(String prefix) {
         Prefix result;
         switch (prefix) {
