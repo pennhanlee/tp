@@ -63,6 +63,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public void setSortingPreference(String newSortingPreference) {
+        requireNonNull(newSortingPreference);
         this.sortingPreference = newSortingPreference;
     }
 
