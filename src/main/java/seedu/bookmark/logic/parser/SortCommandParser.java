@@ -4,6 +4,7 @@ import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 
 import java.util.Comparator;
 
@@ -13,6 +14,7 @@ import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.comparators.BookGenreComparator;
 import seedu.bookmark.model.book.comparators.BookNameComparator;
 import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
+import seedu.bookmark.model.book.comparators.BookReadingProgressComparator;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -46,6 +48,10 @@ public class SortCommandParser implements Parser<SortCommand> {
             prefixCount += 1;
             inputPrefix = PREFIX_BOOKMARK;
         }
+        if (argMultimap.getValue(PREFIX_READING_PROGRESS).isPresent()) {
+            prefixCount += 1;
+            inputPrefix = PREFIX_READING_PROGRESS;
+        }
         if (prefixCount != 1) { //if more than/ less than 1 input prefix, we throw an error.
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
@@ -74,6 +80,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             comparator = new BookGenreComparator();
         } else if (inputPrefix == PREFIX_BOOKMARK) {
             comparator = new BookPagesReadComparator();
+        } else if (inputPrefix == PREFIX_READING_PROGRESS) {
+            comparator = new BookReadingProgressComparator();
         }
         return comparator;
     }
