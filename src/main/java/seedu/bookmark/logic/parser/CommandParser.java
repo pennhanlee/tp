@@ -80,10 +80,10 @@ public class CommandParser {
 
         case GoalCommand.COMMAND_WORD:
             return new GoalCommandParser().parse(arguments);
-            
+
         case AddNoteCommand.COMMAND_WORD:
             return new AddNoteCommandParser().parse(arguments);
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
