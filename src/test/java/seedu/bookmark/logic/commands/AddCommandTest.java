@@ -111,12 +111,12 @@ public class AddCommandTest {
 
         @Override
         public void setSortingPreference(String newSortingPreference) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public String getSortingPreference() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -166,7 +166,7 @@ public class AddCommandTest {
 
         @Override
         public void sortByDefaultComparator() {
-
+            //will be called, but we do nothing here
         }
     }
 
