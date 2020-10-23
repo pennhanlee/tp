@@ -13,25 +13,24 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
+import seedu.bookmark.model.wordstore.Word;
 import seedu.bookmark.model.wordstore.WordStore;
+import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 
 
 public class WordBank {
 
-    private final ReadOnlyLibrary library;
-    private final WordStore nameWordStore;
-    private final WordStore genreWordStore;
-    private final WordStore tagWordStore;
+    private ReadOnlyLibrary library;
+    private WordStore nameWordStore;
+    private WordStore genreWordStore;
+    private WordStore tagWordStore;
 
     /**
      * Creates a WordBank object
      * @param library library
      */
     public WordBank(ReadOnlyLibrary library) {
-        this.library = library;
-        this.nameWordStore = new WordStore();
-        this.genreWordStore = new WordStore();
-        this.tagWordStore = new WordStore();
+        requireNonNull(library);
         initWordBank(library);
     }
 
@@ -40,6 +39,11 @@ public class WordBank {
      * in preparation for Usage by the EditDistance algorithm.
      */
     public void initWordBank(ReadOnlyLibrary library) {
+        requireNonNull(library);
+        this.library = library;
+        this.nameWordStore = new WordStore();
+        this.genreWordStore = new WordStore();
+        this.tagWordStore = new WordStore();
         ObservableList<Book> librarylist = library.getBookList();
         for (Book book : librarylist) {
             handleNewBook(book);
@@ -133,8 +137,16 @@ public class WordBank {
         } else if (type.equals(PREFIX_TAG.getPrefix())) {
             return this.tagWordStore;
         } else {
-            return this.nameWordStore; //by default
+            throw new WordStoreNotFoundException();
         }
+    }
+
+    /**
+     * resets WordBank object to accept a fresh library
+     */
+    public void resetWordBank(ReadOnlyLibrary library) {
+        requireNonNull(library);
+        this.initWordBank(library);
     }
 
 }

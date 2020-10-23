@@ -1,5 +1,7 @@
 package seedu.bookmark.model.wordstore;
 
+import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,22 +50,35 @@ public class WordStore {
         }
     }
 
-    public void wordDeleter(String targetWord) {
+    public void wordDeleter(String targetWord){
         requireNonNull(targetWord);
         Optional<Word> storedWord = wordStoreList.stream().filter(word -> word.getWord()
                 .equals(targetWord)).findFirst();
-        if (!storedWord.isEmpty()) {
-            Word existingWord = storedWord.get();
-            if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
-                this.deleteWord(existingWord);
-            } else {
-                existingWord.minusCount();
-            }
+        if (storedWord.isEmpty()) {
+            throw new WordNotFoundException();
+        }
+        Word existingWord = storedWord.get();
+        if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
+            this.deleteWord(existingWord);
+        } else {
+            existingWord.minusCount();
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Word> getWordStore() {
         return this.wordStoreList;
+    }
+
+    /**
+     *
+     */
+    public void clearStore() {
+        this.wordStoreList.clear();
+        this.wordHashMap.clear();
     }
 
     private void addWord(Word word) {

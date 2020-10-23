@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 import seedu.bookmark.testutil.TypicalWords;
 
 public class WordStoreTest {
@@ -72,9 +73,7 @@ public class WordStoreTest {
     @Test
     public void delete_bookDoesNotExist() {
         wordStore.wordAdder(HARRY);
-        wordStore.wordDeleter(CHAMBER); // word not present in book so just ignore deletion
-        assertTrue(wordStore.contains(HARRY));
-        assertFalse(wordStore.contains(CHAMBER));
+        assertThrows(WordNotFoundException.class, () -> wordStore.wordDeleter(CHAMBER)); // word not present in book so just ignore deletion
     }
 
     @Test

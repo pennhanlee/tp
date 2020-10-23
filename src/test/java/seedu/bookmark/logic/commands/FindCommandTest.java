@@ -2,6 +2,7 @@ package seedu.bookmark.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_WORD_NOT_UNDERSTOOD;
@@ -36,6 +37,8 @@ import seedu.bookmark.model.book.BookNotCompletedPredicate;
 import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
+import seedu.bookmark.model.wordstore.WordStore;
+import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -251,9 +254,7 @@ public class FindCommandTest {
         String[] keywords = prepareKeywords("Hbrry");
         String expectedMessage = String.format(MESSAGE_WORD_SUGGESTION, "Hbrry", "Harry");
         FindCommand command = new FindCommand(predicate, invalidPrefix, keywords);
-        expectedModel.updateFilteredBookList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredBookList());
+        assertThrows(WordStoreNotFoundException.class, () -> command.execute(model));
     }
 
     /**

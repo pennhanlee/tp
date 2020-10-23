@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.wordstore.Word;
+import seedu.bookmark.model.wordstore.WordStore;
+import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 import seedu.bookmark.testutil.TypicalWords;
 
 public class SuggestionAlgorithmTest {
@@ -56,7 +58,8 @@ public class SuggestionAlgorithmTest {
     //default wordstore is Name as it has a larger collection (do not want to throw exception for this feature)
     @Test
     public void findSuggestion_prefixInvalid() {
-        ArrayList<Word> suggestions = suggestionAlgorithm.findSuggestion(MISSPELT_HARRY, PREFIX_BOOKMARK);
+        assertThrows(WordStoreNotFoundException.class, () -> suggestionAlgorithm
+                                                                .findSuggestion(MISSPELT_HARRY, PREFIX_BOOKMARK));
 
     }
 

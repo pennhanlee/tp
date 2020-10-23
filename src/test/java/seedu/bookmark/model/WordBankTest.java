@@ -29,11 +29,87 @@ public class WordBankTest {
 
     //-------------------- initWordBank() ------------------------//
 
-    //    @Test
-    //    public void initWordBank() {
-    //        wordBank.initWordBank(TypicalBooks.getTypicalLibrary());
-    //
-    //    }
+    @Test
+    public void initWordBank_NullPointerException() {
+        assertThrows(NullPointerException.class, () -> wordBank.initWordBank(null));
+    }
+
+    @Test
+    public void initWordBank_validLibrary() {
+        Library testLibrary = new Library();
+        Book testBook = TypicalBooks.FULL_JANE_EYRE;
+        testLibrary.addBook(testBook);
+        wordBank.initWordBank(testLibrary);
+
+        String bookName = testBook.getName().fullName;
+        String[] nameSplit = bookName.split("\\s+");
+        List<String> nameWords = Arrays.asList(nameSplit);
+        String bookGenre = testBook.getGenre().value;
+        String[] genreSplit = bookGenre.split("\\s+");
+        List<String> genreWords = Arrays.asList(genreSplit);
+        Set<Tag> tags = testBook.getTags();
+        List<String> tagWords = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagWords.add(tag.getTagName());
+        }
+
+        WordStore nameStore = wordBank.getWordStore(PREFIX_NAME.getPrefix());
+        WordStore genreStore = wordBank.getWordStore(PREFIX_GENRE.getPrefix());
+        WordStore tagStore = wordBank.getWordStore(PREFIX_TAG.getPrefix());
+        for (String name : nameWords) {
+            assertTrue(nameStore.contains(name));
+        }
+        for (String genre : genreWords) {
+            assertTrue(genreStore.contains(genre));
+        }
+        for (String tag : tagWords) {
+            assertTrue(tagStore.contains(tag));
+        }
+    }
+
+    //------------------- resetWordBank() ------------------------//
+
+    @Test
+    public void resetWordBank_nullPointerException() {
+        assertThrows(NullPointerException.class, () -> wordBank.resetWordBank(null));
+    }
+
+    @Test
+    public void resetWordBank_validLibrary() {
+        Library oldLibrary = new Library();
+        Library newLibrary = new Library();
+        Book oldBook = TypicalBooks.FULL_JANE_EYRE;
+        Book newBook = TypicalBooks.FULL_NINETEEN_EIGHTY_FOUR;
+        oldLibrary.addBook(oldBook);
+        newLibrary.addBook(newBook);
+        wordBank.initWordBank(oldLibrary);
+        wordBank.resetWordBank(newLibrary);
+
+        String bookName = newBook.getName().fullName;
+        String[] nameSplit = bookName.split("\\s+");
+        List<String> nameWords = Arrays.asList(nameSplit);
+        String bookGenre = newBook.getGenre().value;
+        String[] genreSplit = bookGenre.split("\\s+");
+        List<String> genreWords = Arrays.asList(genreSplit);
+        Set<Tag> tags = newBook.getTags();
+        List<String> tagWords = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagWords.add(tag.getTagName());
+        }
+
+        WordStore nameStore = wordBank.getWordStore(PREFIX_NAME.getPrefix());
+        WordStore genreStore = wordBank.getWordStore(PREFIX_GENRE.getPrefix());
+        WordStore tagStore = wordBank.getWordStore(PREFIX_TAG.getPrefix());
+        for (String name : nameWords) {
+            assertTrue(nameStore.contains(name));
+        }
+        for (String genre : genreWords) {
+            assertTrue(genreStore.contains(genre));
+        }
+        for (String tag : tagWords) {
+            assertTrue(tagStore.contains(tag));
+        }
+    }
 
     //--------------------- handleNewBook() -----------------------//
 
