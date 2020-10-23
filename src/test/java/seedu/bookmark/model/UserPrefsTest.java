@@ -19,9 +19,9 @@ public class UserPrefsTest {
     }
 
     @Test
-    public void setSortingPreferences_nullSortingPreferences_throwsNullPointerException() {
+    public void setSortingPreferences_nullSortingPreferences_throwsAssertionError() {
         UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setSortingPreference(null));
+        assertThrows(AssertionError.class, () -> userPrefs.setSortingPreference(null));
     }
 
 }
