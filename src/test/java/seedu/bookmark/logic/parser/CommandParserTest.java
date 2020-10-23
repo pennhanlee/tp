@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 
@@ -71,10 +72,12 @@ public class CommandParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String[] keywords = {"foo", "bar", "baz"};
+        List<String> keywordList = Arrays.asList(keywords);
+        Prefix namePrefix = PREFIX_NAME;
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " n/ " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " n/ " + keywordList.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywordList), namePrefix, keywords), command);
     }
 
     @Test
@@ -91,7 +94,7 @@ public class CommandParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " n/ " );
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " n/ ");
         assertEquals(new SortCommand(new BookNameComparator()), command);
     }
 
