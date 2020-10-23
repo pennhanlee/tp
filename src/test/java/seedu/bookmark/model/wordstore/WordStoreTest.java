@@ -73,7 +73,7 @@ public class WordStoreTest {
     @Test
     public void delete_bookDoesNotExist() {
         wordStore.wordAdder(HARRY);
-        assertThrows(WordNotFoundException.class, () -> wordStore.wordDeleter(CHAMBER)); // word not present in book so just ignore deletion
+        assertThrows(WordNotFoundException.class, () -> wordStore.wordDeleter(CHAMBER));
     }
 
     @Test

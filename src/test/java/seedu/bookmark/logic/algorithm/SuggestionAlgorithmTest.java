@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.wordstore.Word;
-import seedu.bookmark.model.wordstore.WordStore;
 import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 import seedu.bookmark.testutil.TypicalWords;
 

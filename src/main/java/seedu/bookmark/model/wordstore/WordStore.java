@@ -1,43 +1,61 @@
 package seedu.bookmark.model.wordstore;
 
-import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
+import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 
 public class WordStore {
 
     private ArrayList<Word> wordStoreList;
     private HashMap<Integer, String> wordHashMap;
 
+    /**
+     * Creates a WordStore object
+     */
     public WordStore() {
         this.wordStoreList = new ArrayList<>();
         this.wordHashMap = new HashMap<>();
     }
 
-
+    /**
+     * Returns true if the list contains an String which matches a word in the wordStore
+     */
     public boolean contains(String toCheck) {
         requireNonNull(toCheck);
         Integer hashedWord = toCheck.hashCode();
         return wordHashMap.containsKey(hashedWord);
     }
 
+    /**
+     * Adds words from a given list into the Store
+     * @param words
+     */
     public void addWords(List<String> words) {
         for (String word : words) {
             wordAdder(word);
         }
     }
 
+    /**
+     * Deletes words from a given list out of the Store
+     * @param words
+     */
     public void deleteWords(List<String> words) {
         for (String word : words) {
             wordDeleter(word);
         }
     }
 
+    /**
+     * Processes the provided word into wordStore by either creating a new Word or incrementing the count based on
+     * whether the word already exists
+     * @param targetWord
+     */
     public void wordAdder(String targetWord) {
         requireNonNull(targetWord);
         boolean added = contains(targetWord);
@@ -50,7 +68,13 @@ public class WordStore {
         }
     }
 
-    public void wordDeleter(String targetWord){
+    /**
+     * Processes the provided word out of wordStore by either removing the word or minusing the count based on
+     * whether the word count > 1
+     * If there are no words found, the deletion is ignored
+     * @param targetWord
+     */
+    public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
         Optional<Word> storedWord = wordStoreList.stream().filter(word -> word.getWord()
                 .equals(targetWord)).findFirst();
@@ -66,20 +90,13 @@ public class WordStore {
     }
 
     /**
-     *
-     * @return
+     * Returns the wordStore
+     * @return wordStore
      */
     public ArrayList<Word> getWordStore() {
         return this.wordStoreList;
     }
 
-    /**
-     *
-     */
-    public void clearStore() {
-        this.wordStoreList.clear();
-        this.wordHashMap.clear();
-    }
 
     private void addWord(Word word) {
         String wordValue = word.getWord();

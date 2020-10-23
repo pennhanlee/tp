@@ -37,7 +37,6 @@ import seedu.bookmark.model.book.BookNotCompletedPredicate;
 import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
-import seedu.bookmark.model.wordstore.WordStore;
 import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 
 /**

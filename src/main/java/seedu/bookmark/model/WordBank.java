@@ -13,7 +13,6 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
-import seedu.bookmark.model.wordstore.Word;
 import seedu.bookmark.model.wordstore.WordStore;
 import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 

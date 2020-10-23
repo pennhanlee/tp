@@ -30,7 +30,7 @@ public class WordBankTest {
     //-------------------- initWordBank() ------------------------//
 
     @Test
-    public void initWordBank_NullPointerException() {
+    public void initWordBank_nullPointerException() {
         assertThrows(NullPointerException.class, () -> wordBank.initWordBank(null));
     }
 
