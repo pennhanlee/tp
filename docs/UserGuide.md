@@ -108,6 +108,20 @@ Examples:
 *  `find t/ dog cat` Returns a list of books that contain `dog` and/or `cat` in the "Tag" field.
 *  `find c/` Returns a list of completed books.
 
+### Sorting books: `sort` 
+
+Sort books according to the condition inputted.
+
+Format: `sort [n/BOOK_TITLE] `
+
+* Sorts books in descending order according to the input filter.
+* Supports sorting by Name, Genre and Bookmark fields.
+
+Examples:
+*  `sort n/` Returns a list of books sorted by name lexicographical order.
+*  `sort g/` Returns a list of books sorted by genre lexicographical order.
+*  `sort b/` Returns a list of books sorted by ascending number of pages read (bookmark)
+
 ### Deleting a book : `delete`
 
 Deletes the specified book from the book list.
@@ -214,4 +228,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX b/PAGE_NUMBER`
 **Note** | `note INDEX n/TITLE txt/TEXT` <br> e.g., `note 1 n/Thoughts txt/My thoughts`
 **Find** | `find n/ KEYWORDS` <br> e.g., `find n/ Harry Hunger`
+**Sort** | `sort n/BOOK_TITLE ` <br> e.g., `sort n/`
 **Help** | `help`

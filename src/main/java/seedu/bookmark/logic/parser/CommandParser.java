@@ -17,6 +17,7 @@ import seedu.bookmark.logic.commands.FindCommand;
 import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.logic.commands.HelpCommand;
 import seedu.bookmark.logic.commands.ListCommand;
+import seedu.bookmark.logic.commands.SortCommand;
 import seedu.bookmark.logic.commands.ViewCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 
@@ -70,6 +71,9 @@ public class CommandParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
