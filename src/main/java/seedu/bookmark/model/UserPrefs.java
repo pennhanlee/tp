@@ -14,7 +14,7 @@ import seedu.bookmark.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path bookmarkFilePath = Paths.get("data" , "addressbook.json");
+    private Path bookmarkFilePath = Paths.get("data" , "library.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
