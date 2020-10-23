@@ -210,7 +210,7 @@ bookmark will recommend the likely word that has been misspelled.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/BOOK_TITLE g/GENRE tp/TOTAL_PAGES b/PAGE_NUMBER` <br> e.g., `add n/Harry Potter and the Chamber of Secrets g/Fantasy tp/1500 b/25`
+**Add** | `add n/BOOK_TITLE g/GENRE tp/TOTAL_PAGES b/PAGE_NUMBER`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`

@@ -327,7 +327,7 @@ Below is a sequence diagram that shows a scenario where a suggestion is provided
 
 *bookmark* allows Users to add notes to a book.
 
-This feature is facilitated mainly by `AddNoteCommandParser` and `AddCommand`.
+This feature is facilitated mainly by `AddNoteCommandParser` and `AddNoteCommand`.
 
 ![Classes involved in the AddNoteCommand](images/NoteClassDiagram.png)
 
