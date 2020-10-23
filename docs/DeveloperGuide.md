@@ -431,8 +431,19 @@ hence State 4 is deleted.
 ![UndoRedoState6](images/UndoRedoState6.png)
 
 This design choice of clearing the redo deque when a new state is added was made because states existing in the redo deque
-cannot be represented in a linear, sequential path together with the newly added state. Hence, it will be confusing
-to allow users to redo to these states. 
+cannot be represented in a linear, sequential path together with newly added states. Hence, it will be confusing
+to allow users to redo to these states. To see this, we can plot the evolution of state changes in a sequential manner: 
+
+![UndoRedoState7](images/UndoRedoState7.png)
+
+To get a clearer picture, we consider what could occur if the redo deque is not 
+cleared upon adding new state into the `HistoryManager`. 
+
+Consider a scenario where the redo deque originally contains some state. The user subsequently enters 
+5 commands that each create a new state and the redo deque is never cleared upon new states being added.
+Then, the user enters the redo command, causing the top-most state in the redo deque to be popped and made the current state. 
+As a result, all the changes that the user has done through the 5 commands are removed in a single redo command, 
+which is not the intended behaviour.
 
 Furthermore, to prevent excessive memory usage, a cap on the number of states stored by `HistoryManager`'s undo deque
 can be set in `HistoryManager#MAX_UNDO_COUNT`. If a new state is added but the undo deque is already at max capacity,
