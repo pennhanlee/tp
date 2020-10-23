@@ -11,9 +11,11 @@ public class BookReadingProgressComparator implements Comparator<Book> {
 
     @Override
     public int compare(Book b1, Book b2) {
+
         float b1PagesRead = b1.getPagesRead();
         float b1TotalPages = b1.getTotalPagesNumber();
         float b1ReadingProgress = b1PagesRead/b1TotalPages;
+
         float b2PagesRead = b2.getPagesRead();
         float b2TotalPages = b2.getTotalPagesNumber();
         float b2ReadingProgress = b2PagesRead/b2TotalPages;
@@ -29,6 +31,6 @@ public class BookReadingProgressComparator implements Comparator<Book> {
 
     @Override
     public String toString() {
-        return "ReadingProgress";
+        return "Reading Progress";
     }
 }

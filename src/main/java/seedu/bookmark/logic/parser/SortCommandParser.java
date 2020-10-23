@@ -34,7 +34,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
-                        PREFIX_NAME, PREFIX_GENRE, PREFIX_BOOKMARK);
+                        PREFIX_NAME, PREFIX_GENRE, PREFIX_BOOKMARK, PREFIX_READING_PROGRESS);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             prefixCount += 1;
