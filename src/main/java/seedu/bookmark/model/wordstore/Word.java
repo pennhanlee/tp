@@ -54,10 +54,19 @@ public class Word {
      */
     public void minusCount() { this.count--; }
 
+
+    /**
+     * Returns the distance of a word
+     * @return int
+     */
     public int getDistance() {
         return this.distance;
     }
 
+    /**
+     * Sets the distance of a word
+     * @param distance int
+     */
     public void setDistance(int distance) { this.distance = distance; }
 
     /**

@@ -120,6 +120,11 @@ public class WordBank {
         tagWordStore.deleteWords(tagWords);
     }
 
+    /**
+     * Returns a WordStore based on the type indicated.
+     * @param type String
+     * @return WordStore
+     */
     public WordStore getWordStore(String type) {
         if (type.equals(PREFIX_NAME.getPrefix())) {
             return this.nameWordStore;
