@@ -7,9 +7,6 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.bookmark.commons.core.GuiSettings;
-import seedu.bookmark.logic.parser.Prefix;
-
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Represents User's preferences.
