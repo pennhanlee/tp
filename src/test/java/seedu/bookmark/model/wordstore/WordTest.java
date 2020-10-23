@@ -15,8 +15,8 @@ import static seedu.bookmark.testutil.TypicalBooks.FULL_JANE_EYRE;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_AND;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
-import static seedu.bookmark.testutil.TypicalWords.DISTANCE_HARRY;
-import static seedu.bookmark.testutil.TypicalWords.INCORRECT_HARRY;
+import static seedu.bookmark.testutil.TypicalWords.HARRY;
+import static seedu.bookmark.testutil.TypicalWords.MISSPELT_HARRY;
 
 public class WordTest {
 
@@ -78,10 +78,12 @@ public class WordTest {
         assertFalse(CORRECT_HARRY.isSameWord(CORRECT_AND));
 
         // same word with typo -> return false
-        assertFalse(CORRECT_HARRY.isSameWord(INCORRECT_HARRY));
+        Word misspeltHarry = new Word(MISSPELT_HARRY);
+        assertFalse(CORRECT_HARRY.isSameWord(misspeltHarry));
 
         // same word with different distance -> returns true
-        assertTrue(CORRECT_HARRY.isSameWord(DISTANCE_HARRY));
+        Word distanceHarry = new Word(HARRY, 3);
+        assertTrue(CORRECT_HARRY.isSameWord(distanceHarry));
 
         // same word with different count -> returns false
         String harry = CORRECT_HARRY.getWord();
@@ -102,10 +104,12 @@ public class WordTest {
         assertFalse(CORRECT_HARRY.equals(CORRECT_AND));
 
         // same word with typo -> return false
-        assertFalse(CORRECT_HARRY.equals(INCORRECT_HARRY));
+        Word misspeltHarry = new Word(MISSPELT_HARRY);
+        assertFalse(CORRECT_HARRY.equals(misspeltHarry));
 
         // different distance -> returns false
-        assertFalse(CORRECT_HARRY.equals(DISTANCE_HARRY));
+        Word distanceHarry = new Word(HARRY, 3);
+        assertFalse(CORRECT_HARRY.equals(distanceHarry));
 
         // different count -> returns false
         String harry = CORRECT_HARRY.getWord();

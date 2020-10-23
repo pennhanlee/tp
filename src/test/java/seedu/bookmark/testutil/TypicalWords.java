@@ -17,6 +17,11 @@ public class TypicalWords {
     public static final String CHAMBER = "chamber";
     public static final String SECRETS = "secrets";
 
+    public static final String MISSPELT_HARRY = "hbrry";
+    public static final String MISSPELT_POTTER = "pptter";
+    public static final String MISSPELT_AND = "abd";
+    public static final String MISSPELT_CHAMBER = "chabber";
+    public static final String MISSPELT_SECRETS = "sekrets";
 
     //correctly spelt
     public static final Word CORRECT_HARRY = new Word("harry");
@@ -24,20 +29,6 @@ public class TypicalWords {
     public static final Word CORRECT_AND = new Word("and");
     public static final Word CORRECT_CHAMBER = new Word("chamber");
     public static final Word CORRECT_SECRETS = new Word("secrets");
-
-    //incorrectly spelt
-    public static final Word INCORRECT_HARRY = new Word("hbrry");
-    public static final Word INCORRECT_POTTER = new Word("p0tter");
-    public static final Word INCORRECT_AND = new Word("ans");
-    public static final Word INCORRECT_CHAMBER = new Word("chnmber");
-    public static final Word INCORRECT_SECRETS = new Word("sekrets");
-
-    //distance set
-    public static final Word DISTANCE_HARRY = new Word("harry", 1);
-    public static final Word DISTANCE_POTTER = new Word("potter", 1);
-    public static final Word DISTANCE_AND = new Word("and", 1);
-    public static final Word DISTANCE_CHAMBER = new Word("chamber", 1);
-    public static final Word DISTANCE_SECRETS = new Word("secrets", 1);
 
     private TypicalWords() {} //prevents instantiation
 

@@ -7,6 +7,8 @@ import seedu.bookmark.logic.parser.Prefix;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * The EditDistance class manages the finding of suggestions for
  * misspelled words
@@ -18,6 +20,7 @@ public class SuggestionAlgorithm {
     private final WordBank wordBank;
 
     public SuggestionAlgorithm(WordBank wordBank) {
+        requireNonNull(wordBank);
         this.wordBank = wordBank;
     }
 
@@ -26,6 +29,8 @@ public class SuggestionAlgorithm {
      * @param sourceWord mispelled word to find suggestion for
      */
     public ArrayList<Word> findSuggestion(String sourceWord, Prefix prefix) {
+        requireNonNull(sourceWord);
+        requireNonNull(prefix);
         String prefixName = prefix.getPrefix();
         List<Word> wordStore = wordBank.getWordStore(prefixName).getWordStore();
         int wordCount = 0;
@@ -54,9 +59,8 @@ public class SuggestionAlgorithm {
      * @throws IllegalArgumentException if either source or target is null
      */
     public int calculateDistance(String source, String target) {
-        if (source == null || target == null) {
-            throw new IllegalArgumentException("Parameters must not be null");
-        }
+        requireNonNull(source);
+        requireNonNull(target);
 
         int sourceLength = source.length();
         int targetLength = target.length();
@@ -90,5 +94,12 @@ public class SuggestionAlgorithm {
             }
         }
         return distanceArray[sourceLength][targetLength];
+    }
+
+    /**
+     * Gets the wordbank attribute in the Algorithm object
+     */
+    public WordBank getWordBank() {
+        return this.wordBank;
     }
 }
