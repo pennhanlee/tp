@@ -1,22 +1,17 @@
 package seedu.bookmark.model.wordstore;
 
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.wordstore.Word;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_BOOKMARK_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_GENRE_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_1984;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
-import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TOTAL_PAGES_1984;
-import static seedu.bookmark.testutil.TypicalBooks.FULL_JANE_EYRE;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_AND;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
 import static seedu.bookmark.testutil.TypicalWords.HARRY;
 import static seedu.bookmark.testutil.TypicalWords.MISSPELT_HARRY;
+
+import org.junit.jupiter.api.Test;
 
 public class WordTest {
 

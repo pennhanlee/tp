@@ -1,12 +1,5 @@
 package seedu.bookmark.model.wordstore;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
-import seedu.bookmark.testutil.TypicalWords;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,9 +7,17 @@ import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
 import static seedu.bookmark.testutil.TypicalWords.HARRY;
 
+import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
+import seedu.bookmark.testutil.TypicalWords;
+
 public class TagWordStoreTest {
 
-    TagWordStore tagWordStore = new TagWordStore();
+    private TagWordStore tagWordStore = new TagWordStore();
 
     //------------------- contains() ------------------------------//
 
@@ -84,7 +85,7 @@ public class TagWordStoreTest {
     @Test
     public void delete_existingBook_countNonZero() {
         tagWordStore.wordAdder(HARRY);
-        tagWordStore.wordAdder(HARRY);  //increase count to 2
+        tagWordStore.wordAdder(HARRY); //increase count to 2
         tagWordStore.wordDeleter(HARRY);
         Word harry = tagWordStore.getWordStore().stream()
                 .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
@@ -97,7 +98,7 @@ public class TagWordStoreTest {
     public void addWords() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         tagWordStore.addWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertTrue(tagWordStore.contains(word));
         }
     }
@@ -107,7 +108,7 @@ public class TagWordStoreTest {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         tagWordStore.addWords(listOfWords);
         tagWordStore.addWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertTrue(tagWordStore.contains(word));
             Word targetWord = tagWordStore.getWordStore().stream()
                     .filter(n -> n.getWord().equals(word)).findFirst().get();
@@ -122,7 +123,7 @@ public class TagWordStoreTest {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         tagWordStore.addWords(listOfWords);
         tagWordStore.deleteWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertFalse(tagWordStore.contains(word));
         }
     }
@@ -133,7 +134,7 @@ public class TagWordStoreTest {
         tagWordStore.addWords(listOfWords);
         tagWordStore.addWords(listOfWords);
         tagWordStore.deleteWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertTrue(tagWordStore.contains(word));
             Word targetWord = tagWordStore.getWordStore().stream()
                     .filter(n -> n.getWord().equals(word)).findFirst().get();
@@ -151,6 +152,5 @@ public class TagWordStoreTest {
         List<Word> tagWordStoreList = tagWordStore.getWordStore();
         assertEquals(listOfWordObjs, tagWordStoreList);
     }
-    
 }
 

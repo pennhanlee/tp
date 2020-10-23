@@ -208,7 +208,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findCompletedBooks() {  //findSuggestion will not be activated for finding CompletedBook
+    public void execute_findCompletedBooks() { //findSuggestion will not be activated for finding CompletedBook
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 1);
         BookCompletedPredicate predicate = prepareCompletedBooksPredicate();
         Prefix completedPrefix = PREFIX_COMPLETED;
@@ -220,7 +220,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findNotCompletedBooks() {  //findSuggestion will not be activated for finding NotCompletedBook
+    public void execute_findNotCompletedBooks() { //findSuggestion will not be activated for finding NotCompletedBook
         String expectedMessage = String.format(MESSAGE_BOOKS_LISTED_OVERVIEW, 6);
         BookNotCompletedPredicate predicate = prepareNotCompletedBooksPredicate();
         Prefix notCompletedPrefix = PREFIX_NOT_COMPLETED;
@@ -245,9 +245,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findSuggestionInvalidPrefix() {  //default on Stored NameWords
+    public void execute_findSuggestionInvalidPrefix() { //default on Stored NameWords
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("Hbrry");
-        Prefix invalidPrefix = PREFIX_BOOKMARK;  //invalid prefix for findSuggestion
+        Prefix invalidPrefix = PREFIX_BOOKMARK; //invalid prefix for findSuggestion
         String[] keywords = prepareKeywords("Hbrry");
         String expectedMessage = String.format(MESSAGE_WORD_SUGGESTION, "Hbrry", "Harry");
         FindCommand command = new FindCommand(predicate, invalidPrefix, keywords);
@@ -295,7 +295,7 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code String[]}.
      */
     private String[] prepareKeywords(String userInput) {
-       String[] arr = userInput.split("\\s+");
-       return arr;
+        String[] arr = userInput.split("\\s+");
+        return arr;
     }
 }

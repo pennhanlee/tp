@@ -1,12 +1,5 @@
 package seedu.bookmark.model.wordstore;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
-import seedu.bookmark.testutil.TypicalWords;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,9 +7,17 @@ import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
 import static seedu.bookmark.testutil.TypicalWords.HARRY;
 
+import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
+import seedu.bookmark.testutil.TypicalWords;
+
 public class GenreWordStoreTest {
 
-    GenreWordStore genreWordStore = new GenreWordStore();
+    private GenreWordStore genreWordStore = new GenreWordStore();
 
     //------------------- contains() ------------------------------//
 
@@ -84,7 +85,7 @@ public class GenreWordStoreTest {
     @Test
     public void delete_existingBook_countNonZero() {
         genreWordStore.wordAdder(HARRY);
-        genreWordStore.wordAdder(HARRY);  //increase count to 2
+        genreWordStore.wordAdder(HARRY); //increase count to 2
         genreWordStore.wordDeleter(HARRY);
         Word harry = genreWordStore.getWordStore().stream()
                 .filter(n -> n.getWord().equals(HARRY)).findFirst().get();
@@ -97,7 +98,7 @@ public class GenreWordStoreTest {
     public void addWords() {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         genreWordStore.addWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertTrue(genreWordStore.contains(word));
         }
     }
@@ -107,7 +108,7 @@ public class GenreWordStoreTest {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         genreWordStore.addWords(listOfWords);
         genreWordStore.addWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertTrue(genreWordStore.contains(word));
             Word targetWord = genreWordStore.getWordStore().stream()
                     .filter(n -> n.getWord().equals(word)).findFirst().get();
@@ -122,7 +123,7 @@ public class GenreWordStoreTest {
         List<String> listOfWords = TypicalWords.getTypicalStrings();
         genreWordStore.addWords(listOfWords);
         genreWordStore.deleteWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertFalse(genreWordStore.contains(word));
         }
     }
@@ -133,7 +134,7 @@ public class GenreWordStoreTest {
         genreWordStore.addWords(listOfWords);
         genreWordStore.addWords(listOfWords);
         genreWordStore.deleteWords(listOfWords);
-        for(String word : listOfWords) {
+        for (String word : listOfWords) {
             assertTrue(genreWordStore.contains(word));
             Word targetWord = genreWordStore.getWordStore().stream()
                     .filter(n -> n.getWord().equals(word)).findFirst().get();
@@ -151,6 +152,5 @@ public class GenreWordStoreTest {
         List<Word> genreWordStoreList = genreWordStore.getWordStore();
         assertEquals(listOfWordObjs, genreWordStoreList);
     }
-    
 }
 

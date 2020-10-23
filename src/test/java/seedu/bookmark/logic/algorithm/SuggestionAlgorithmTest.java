@@ -1,12 +1,5 @@
 package seedu.bookmark.logic.algorithm;
 
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.WordBank;
-import seedu.bookmark.model.wordstore.Word;
-import seedu.bookmark.testutil.TypicalWords;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,9 +9,17 @@ import static seedu.bookmark.testutil.Assert.assertThrows;
 import static seedu.bookmark.testutil.TypicalWords.HARRY;
 import static seedu.bookmark.testutil.TypicalWords.MISSPELT_HARRY;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.bookmark.model.WordBank;
+import seedu.bookmark.model.wordstore.Word;
+import seedu.bookmark.testutil.TypicalWords;
+
 public class SuggestionAlgorithmTest {
-    WordBank wordBank = TypicalWords.getTypicalWordBank();
-    SuggestionAlgorithm suggestionAlgorithm = new SuggestionAlgorithm(wordBank);
+    private WordBank wordBank = TypicalWords.getTypicalWordBank();
+    private SuggestionAlgorithm suggestionAlgorithm = new SuggestionAlgorithm(wordBank);
 
     //------------------------- instantiate Object ---------------------//
 
@@ -40,13 +41,13 @@ public class SuggestionAlgorithmTest {
 
     @Test
     public void findSuggestion_sourceWordnull() {
-        assertThrows(NullPointerException.class, ()-> suggestionAlgorithm
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm
                                                         .findSuggestion(null, PREFIX_NAME));
     }
 
     @Test
     public void findSuggestion_prefixNull() {
-        assertThrows(NullPointerException.class, ()-> suggestionAlgorithm.findSuggestion(HARRY,null));
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm.findSuggestion(HARRY,null));
     }
 
 
@@ -78,12 +79,12 @@ public class SuggestionAlgorithmTest {
 
     @Test
     public void calculateDistance_sourceWordNull() {
-        assertThrows(NullPointerException.class, ()-> suggestionAlgorithm.calculateDistance(HARRY,null));
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm.calculateDistance(HARRY,null));
     }
 
     @Test
     public void calculateDistance_targetWordNull() {
-        assertThrows(NullPointerException.class, ()-> suggestionAlgorithm.calculateDistance(null,HARRY));
+        assertThrows(NullPointerException.class, () -> suggestionAlgorithm.calculateDistance(null,HARRY));
     }
 
     @Test

@@ -1,14 +1,15 @@
 package seedu.bookmark.testutil;
 
-import javafx.scene.LightBase;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.wordstore.Word;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class TypicalWords {
     public static final String HARRY = "harry";

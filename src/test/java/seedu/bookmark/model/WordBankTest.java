@@ -1,17 +1,5 @@
 package seedu.bookmark.model;
 
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.tag.Tag;
-import seedu.bookmark.model.wordstore.Word;
-import seedu.bookmark.model.wordstore.WordStore;
-import seedu.bookmark.testutil.TypicalBooks;
-import seedu.bookmark.testutil.TypicalWords;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,17 +9,31 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.tag.Tag;
+import seedu.bookmark.model.wordstore.Word;
+import seedu.bookmark.model.wordstore.WordStore;
+import seedu.bookmark.testutil.TypicalBooks;
+import seedu.bookmark.testutil.TypicalWords;
+
 public class WordBankTest {
 
-    WordBank wordBank = TypicalWords.getEmptyWordBank();
+    private WordBank wordBank = TypicalWords.getEmptyWordBank();
 
     //-------------------- initWordBank() ------------------------//
 
-//    @Test
-//    public void initWordBank() {
-//        wordBank.initWordBank(TypicalBooks.getTypicalLibrary());
-//
-//    }
+    //    @Test
+    //    public void initWordBank() {
+    //        wordBank.initWordBank(TypicalBooks.getTypicalLibrary());
+    //
+    //    }
 
     //--------------------- handleNewBook() -----------------------//
 
@@ -60,13 +62,13 @@ public class WordBankTest {
         WordStore nameStore = wordBank.getWordStore(PREFIX_NAME.getPrefix());
         WordStore genreStore = wordBank.getWordStore(PREFIX_GENRE.getPrefix());
         WordStore tagStore = wordBank.getWordStore(PREFIX_TAG.getPrefix());
-        for(String name : nameWords) {
+        for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
         }
-        for(String genre : genreWords) {
+        for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
         }
-        for(String tag : tagWords) {
+        for (String tag : tagWords) {
             assertTrue(tagStore.contains(tag));
         }
     }
@@ -101,13 +103,13 @@ public class WordBankTest {
         WordStore nameStore = wordBank.getWordStore(PREFIX_NAME.getPrefix());
         WordStore genreStore = wordBank.getWordStore(PREFIX_GENRE.getPrefix());
         WordStore tagStore = wordBank.getWordStore(PREFIX_TAG.getPrefix());
-        for(String name : nameWords) {
+        for (String name : nameWords) {
             assertFalse(nameStore.contains(name));
         }
-        for(String genre : genreWords) {
+        for (String genre : genreWords) {
             assertFalse(genreStore.contains(genre));
         }
-        for(String tag : tagWords) {
+        for (String tag : tagWords) {
             assertFalse(tagStore.contains(tag));
         }
     }
@@ -138,25 +140,25 @@ public class WordBankTest {
 
         wordBank.addToWordBank(originalBook);
 
-        for(String name : nameWords) {
+        for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
         }
-        for(String genre : genreWords) {
+        for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
         }
-        for(String tag : tagWords) {
+        for (String tag : tagWords) {
             assertFalse(tagStore.contains(tag));
         }
 
-        wordBank.updateWordBank(originalBook, editedBook);  //Tags should now be present.
+        wordBank.updateWordBank(originalBook, editedBook); //Tags should now be present.
 
-        for(String name : nameWords) {
+        for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
         }
-        for(String genre : genreWords) {
+        for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
         }
-        for(String tag : tagWords) {
+        for (String tag : tagWords) {
             assertTrue(tagStore.contains(tag));
         }
 
@@ -187,45 +189,45 @@ public class WordBankTest {
 
         wordBank.addToWordBank(originalBook);
 
-        for(String name : nameWords) {
+        for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
 
             Word targetWord = nameStore.getWordStore().stream()
                                 .filter(word -> word.getWord().equals(name)).findFirst().get();
             assertEquals(1, targetWord.getCount());
         }
-        for(String genre : genreWords) {
+        for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
 
             Word targetWord = genreStore.getWordStore().stream()
                     .filter(word -> word.getWord().equals(genre)).findFirst().get();
             assertEquals(1, targetWord.getCount());
         }
-        for(String tag : tagWords) {
+        for (String tag : tagWords) {
             assertFalse(tagStore.contains(tag));
         }
 
-        wordBank.updateWordBank(originalBook, editedBook);  //Tags should now be present.
+        wordBank.updateWordBank(originalBook, editedBook); //Tags should now be present.
 
         //Since oldbook & newbook have the same name and genre,
         //oldbook removed & newbook added == name & genre count = 1
         //tag was newly added so tag count = 1.
 
-        for(String name : nameWords) {
+        for (String name : nameWords) {
             assertTrue(nameStore.contains(name));
 
             Word targetWord = nameStore.getWordStore().stream()
                     .filter(word -> word.getWord().equals(name)).findFirst().get();
             assertEquals(1, targetWord.getCount());
         }
-        for(String genre : genreWords) {
+        for (String genre : genreWords) {
             assertTrue(genreStore.contains(genre));
 
             Word targetWord = genreStore.getWordStore().stream()
                     .filter(word -> word.getWord().equals(genre)).findFirst().get();
             assertEquals(1, targetWord.getCount());
         }
-        for(String tag : tagWords) {
+        for (String tag : tagWords) {
             assertTrue(tagStore.contains(tag));
 
             Word targetWord = tagStore.getWordStore().stream()

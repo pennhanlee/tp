@@ -1,26 +1,22 @@
 package seedu.bookmark.model.wordstore;
 
-import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.wordstore.Word;
-import seedu.bookmark.model.wordstore.WordComparator;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.PriorityQueue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class WordComparatorTest {
-    public static final PriorityQueue<Word> differentDistancePQ = new PriorityQueue<>(new WordComparator());
-    public static final PriorityQueue<Word> differentWordsPQ = new PriorityQueue<>(new WordComparator());
-    public static final Word APPLE = new Word("Apple");
-    public static final Word BANANA = new Word("Banana");
-    public static final Word CHERRY = new Word("Cherry");
-    public static final Word DURIAN = new Word("Durian");
-    public static final Word ELDERBERRY = new Word("Elderberry");
-    public static final Word FOO = new Word("Foo", 1);
-    public static final Word BOO = new Word("Boo", 2);
-    public static final Word POO = new Word("Poo", 3);
+    private static final Word APPLE = new Word("Apple");
+    private static final Word BANANA = new Word("Banana");
+    private static final Word CHERRY = new Word("Cherry");
+    private static final Word DURIAN = new Word("Durian");
+    private static final Word ELDERBERRY = new Word("Elderberry");
+    private static final Word FOO = new Word("Foo", 1);
+    private static final Word BOO = new Word("Boo", 2);
+    private static final Word POO = new Word("Poo", 3);
+    private static final PriorityQueue<Word> differentDistancePQ = new PriorityQueue<>(new WordComparator());
+    private static final PriorityQueue<Word> differentWordsPQ = new PriorityQueue<>(new WordComparator());
 
     @Test
     public void CompareWord_ByDistance() {
