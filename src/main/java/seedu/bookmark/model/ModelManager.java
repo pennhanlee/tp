@@ -2,6 +2,11 @@ package seedu.bookmark.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DUMMY;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -14,13 +19,6 @@ import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.book.Book;
-
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DUMMY;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
-
 import seedu.bookmark.model.book.comparators.BookGenreComparator;
 import seedu.bookmark.model.book.comparators.BookNameComparator;
 import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
@@ -92,7 +90,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String getSortingPreference() { return userPrefs.getSortingPreference(); }
+    public String getSortingPreference() {
+        return userPrefs.getSortingPreference();
+    }
 
     @Override
     public void setSortingPreference(String newSortingPreference) {

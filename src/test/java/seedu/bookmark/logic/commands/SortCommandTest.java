@@ -5,12 +5,12 @@ import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_SORTED;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bookmark.testutil.TypicalBooks.CRIME_AND_PUNISHMENT;
 import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
+import static seedu.bookmark.testutil.TypicalBooks.HAMLET;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalBooks.LORD_OF_THE_FLIES;
 import static seedu.bookmark.testutil.TypicalBooks.ON_THE_ROAD;
 import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
 import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
-import static seedu.bookmark.testutil.TypicalBooks.HAMLET; //manually added
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
 import java.util.Arrays;

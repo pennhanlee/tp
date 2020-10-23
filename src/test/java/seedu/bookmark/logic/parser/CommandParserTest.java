@@ -91,7 +91,7 @@ public class CommandParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " n/ " );
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " n/ ");
         assertEquals(new SortCommand(new BookNameComparator()), command);
     }
 

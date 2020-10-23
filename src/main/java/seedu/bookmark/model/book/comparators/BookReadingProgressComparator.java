@@ -14,11 +14,11 @@ public class BookReadingProgressComparator implements Comparator<Book> {
 
         float b1PagesRead = b1.getPagesRead();
         float b1TotalPages = b1.getTotalPagesNumber();
-        float b1ReadingProgress = b1PagesRead/b1TotalPages;
+        float b1ReadingProgress = b1PagesRead / b1TotalPages;
 
         float b2PagesRead = b2.getPagesRead();
         float b2TotalPages = b2.getTotalPagesNumber();
-        float b2ReadingProgress = b2PagesRead/b2TotalPages;
+        float b2ReadingProgress = b2PagesRead / b2TotalPages;
 
         return Float.compare(b1ReadingProgress, b2ReadingProgress);
     }

@@ -113,7 +113,7 @@ Example Command | Result
 
 ### Sorting books: `sort` 
 
-Sort books according to the condition inputted.
+Sort books according to the condition inputted, and sets it as a user preference.
 
 Format: `sort [n/BOOK_TITLE] `
 
