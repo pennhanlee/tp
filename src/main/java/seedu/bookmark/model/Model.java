@@ -63,6 +63,9 @@ public interface Model {
     /** Returns the Library */
     ReadOnlyLibrary getLibrary();
 
+    /** Returns the EditDistance */
+    WordBank getWordBank();
+
     /**
      * Returns true if a book with the same identity as {@code book} exists in the Library.
      */

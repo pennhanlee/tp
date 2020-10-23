@@ -34,6 +34,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private FilteredList<Book> filteredBooks;
     private Comparator<Book> comparator;
+    private final WordBank wordBank;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -48,6 +49,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.comparator = comparatorGenerator(prefixGenerator(userPrefs.getSortingPreference()));
         filteredBooks = new FilteredList<>(this.library.getBookList());
+        this.wordBank = new WordBank(library);
     }
 
     public ModelManager() {
@@ -113,6 +115,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public WordBank getWordBank() {
+        return wordBank;
+    }
+
+    @Override
     public boolean hasBook(Book book) {
         requireNonNull(book);
         return library.hasBook(book);
@@ -121,11 +128,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
+        wordBank.deleteFromWordBank(target);
+
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
+        wordBank.addToWordBank(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         sortByDefaultComparator();
     }
@@ -133,8 +143,8 @@ public class ModelManager implements Model {
     @Override
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
-
         library.setBook(target, editedBook);
+        wordBank.updateWordBank(target, editedBook);
     }
 
     @Override
