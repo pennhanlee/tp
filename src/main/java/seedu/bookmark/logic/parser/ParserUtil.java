@@ -1,6 +1,7 @@
 package seedu.bookmark.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,9 +10,11 @@ import java.util.Set;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.StringUtil;
+import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
@@ -122,6 +125,24 @@ public class ParserUtil {
             trimmedBookmark = StringUtil.trimLeadingZeroes(trimmedBookmark);
             return new Bookmark(trimmedBookmark);
         }
+    }
+
+    /**
+     * Checks input, throws ParseException if any argument does not match the requirements
+     * Else, return a valid Goal object.
+     * @param page page in goal
+     * @param deadline deadline in goal
+     * @return new Goal object
+     * @throws ParseException with MESSAGE_USAGE message
+     */
+    public static Goal parseGoal(String page, String deadline) throws ParseException {
+        requireNonNull(page, deadline);
+        String trimmedPage = page.trim();
+        String trimmedDeadline = deadline.trim();
+        if (!Goal.isValidGoal(trimmedPage, trimmedDeadline)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
+        }
+        return new Goal(trimmedPage, trimmedDeadline);
     }
 
     /**

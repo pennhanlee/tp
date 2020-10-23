@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class ModelManager implements Model {
 
     private final VersionedLibrary library;
     private final UserPrefs userPrefs;
-    private final FilteredList<Book> filteredBooks;
+    private FilteredList<Book> filteredBooks;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -139,6 +140,11 @@ public class ModelManager implements Model {
     public void updateFilteredBookList(Predicate<Book> predicate) {
         requireNonNull(predicate);
         filteredBooks.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredBookList(Comparator<Book> comparator) {
+        this.library.sortBooks(comparator);
     }
 
     @Override

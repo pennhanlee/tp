@@ -1,6 +1,7 @@
 package seedu.bookmark.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -94,4 +95,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBookList(Predicate<Book> predicate);
+
+    /**
+     * Updates the comparator of the filtered book list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortFilteredBookList(Comparator<Book> comparator);
 }

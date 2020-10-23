@@ -245,7 +245,7 @@ Command : `find n/ Harry`
 
 *bookmark* allows Users to add books into the application.
 
-This feature is faciltated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`.
+This feature is facilitated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`.
 
 ![Classes involved in the Add Command](images/LogicClassDiagram.png)
 
@@ -320,6 +320,35 @@ will return a Standard Message for no suggestion.
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
 ![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
+
+### Add Note feature
+
+#### Implementation
+
+*bookmark* allows Users to add notes to a book.
+
+This feature is facilitated mainly by `AddNoteCommandParser` and `AddNoteCommand`.
+
+![Classes involved in the AddNoteCommand](images/NoteClassDiagram.png)
+
+`LogicManager#execute()` (not shown in the diagram above) handles the command word to create `AddNoteCommandParser` to parse the remaining inputs.
+`AddNoteCommandParser#parse()` tokenizes each prefix to create a `Note` object. This `Note` object will be
+passed as a parameter to create a `AddNoteCommand` that will be returned to `LogicManager`.<br>
+*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
+
+`LogicManager#execute()` will call `AddNoteCommand#execute()` to add the `Book` with the added `Note` into
+the `Model` and return a `CommandResult` as a feedback to the user.
+*If there is an existing note with the same title and text, an exception will be thrown with a message to the User*
+
+Below is an activity diagram which illustrates the flow of events for adding a book
+
+![Add note command flow of execution](images/NoteActivityDiagram.png)
+
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid note to a valid book<br>
+Command: `note 1 n/Thoughts txt/Something`
+
+![Interactions inside the logic component for the add note command](images/NoteSequenceDiagram.png)
+
 
 
 ### Undo/redo feature

@@ -16,6 +16,7 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
@@ -59,13 +60,15 @@ public class AddNoteCommand extends Command {
         Set<Tag> updatedTags = bookToEdit.getTags();
         TotalPages updatedTotalPages = bookToEdit.getTotalPages();
         Bookmark updatedBookmark = bookToEdit.getBookmark();
+        Goal updatedGoal = bookToEdit.getGoal();
         List<Note> updatedNotes = new ArrayList<>(bookToEdit.getNotes());
         if (bookToEdit.containsNote(note)) {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);
         }
         updatedNotes.add(note);
 
-        return new Book(updatedName, updatedGenre, updatedTags, updatedTotalPages, updatedBookmark, updatedNotes);
+        return new Book(updatedName, updatedGenre, updatedTags,
+                updatedTotalPages, updatedBookmark, updatedGoal, updatedNotes);
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {

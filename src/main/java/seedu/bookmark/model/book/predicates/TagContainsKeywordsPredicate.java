@@ -1,10 +1,11 @@
-package seedu.bookmark.model.book;
+package seedu.bookmark.model.book.predicates;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.util.StringUtil;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
 
 /**
