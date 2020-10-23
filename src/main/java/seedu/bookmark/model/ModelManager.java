@@ -91,7 +91,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public WordBank getWordBank() { return wordBank; }
+    public WordBank getWordBank() {
+        return wordBank;
+    }
 
     @Override
     public boolean hasBook(Book book) {

@@ -1,13 +1,13 @@
 package seedu.bookmark.model.wordstore;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-
 public class TagWordStore extends WordStore {
 
-    ArrayList<Word> tagWordStore;
+    private ArrayList<Word> tagWordStore;
 
     public TagWordStore() {
         this.tagWordStore = new ArrayList<>();
@@ -54,7 +54,7 @@ public class TagWordStore extends WordStore {
         if (!tagWordStore.isEmpty()) {
             Word existingWord = tagWordStore.stream().filter(word -> word.getWord()
                     .equals(targetWord)).findFirst().get();
-            if (existingWord.getCount() == 1) {  //only got 1 instance which is the deleted book
+            if (existingWord.getCount() == 1) { //only got 1 instance which is the deleted book
                 this.deleteWord(existingWord);
             } else {
                 existingWord.minusCount();

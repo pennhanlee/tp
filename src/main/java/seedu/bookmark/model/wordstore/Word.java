@@ -1,17 +1,18 @@
 package seedu.bookmark.model.wordstore;
 
-import seedu.bookmark.model.book.Book;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-
 public class Word {
-    private int STARTING_COUNT = 1;
+    private static final int STARTING_COUNT = 1;
     private String word;
     private int count;
     private int distance;
 
+    /**
+     * Creates a word object with default field
+     */
     public Word(String word) {
         requireNonNull(word);
         this.word = word;
@@ -19,6 +20,9 @@ public class Word {
         this.distance = 0;
     };
 
+    /**
+     * Create a word object with a set Distance
+     */
     public Word(String word, int distance) {
         requireNonNull(word);
         this.word = word;
@@ -52,7 +56,9 @@ public class Word {
     /**
      * Decrease the count by 1
      */
-    public void minusCount() { this.count--; }
+    public void minusCount() {
+        this.count--;
+    }
 
 
     /**
@@ -67,7 +73,9 @@ public class Word {
      * Sets the distance of a word
      * @param distance int
      */
-    public void setDistance(int distance) { this.distance = distance; }
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
 
     /**
      * Returns true if both words have the same {@code String word}

@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
-import seedu.bookmark.logic.algorithm.SuggestionAlgorithm;
-import seedu.bookmark.model.wordstore.Word;
 import seedu.bookmark.commons.core.Messages;
-import seedu.bookmark.model.wordstore.WordComparator;
+import seedu.bookmark.logic.algorithm.SuggestionAlgorithm;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.wordstore.Word;
+import seedu.bookmark.model.wordstore.WordComparator;
 
 /**
  * Finds and lists all books in bookmark whose specified property contains any of the argument keywords.
@@ -43,6 +43,9 @@ public class FindCommand extends Command {
     private final String[] keywords;
     private final Prefix prefix;
 
+    /**
+     * Creates a FindCommand Object
+     */
     public FindCommand(Predicate<Book> predicate, Prefix prefix, String[] keywords) {
         this.predicate = predicate;
         this.prefix = prefix;
@@ -56,9 +59,9 @@ public class FindCommand extends Command {
         ArrayList<Word> wordSuggestions;
         model.updateFilteredBookList(predicate);
 
-        if (model.getFilteredBookList().size() == 0 &&
-                !prefix.equals(PREFIX_COMPLETED) &&
-                !prefix.equals(PREFIX_NOT_COMPLETED)) {
+        if (model.getFilteredBookList().size() == 0
+                && !prefix.equals(PREFIX_COMPLETED)
+                && !prefix.equals(PREFIX_NOT_COMPLETED)) {
             SuggestionAlgorithm suggestionAlgorithm = new SuggestionAlgorithm(model.getWordBank());
             for (String word : keywords) {
                 wordSuggestions = suggestionAlgorithm.findSuggestion(word, prefix);

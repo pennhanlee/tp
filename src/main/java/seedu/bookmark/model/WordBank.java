@@ -1,23 +1,23 @@
 package seedu.bookmark.model;
 
-import javafx.collections.ObservableList;
-import seedu.bookmark.model.wordstore.GenreWordStore;
-import seedu.bookmark.model.wordstore.NameWordStore;
-import seedu.bookmark.model.wordstore.TagWordStore;
-import seedu.bookmark.model.wordstore.Word;
-import seedu.bookmark.model.wordstore.WordStore;
-import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
+import javafx.collections.ObservableList;
+import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.tag.Tag;
+import seedu.bookmark.model.wordstore.GenreWordStore;
+import seedu.bookmark.model.wordstore.NameWordStore;
+import seedu.bookmark.model.wordstore.TagWordStore;
+import seedu.bookmark.model.wordstore.WordStore;
+
 
 public class WordBank {
 
@@ -26,7 +26,10 @@ public class WordBank {
     private final WordStore genreWordStore;
     private final WordStore tagWordStore;
 
-
+    /**
+     * Creates a WordBank object
+     * @param library library
+     */
     public WordBank(ReadOnlyLibrary library) {
         this.library = library;
         this.nameWordStore = new NameWordStore();

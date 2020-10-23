@@ -1,13 +1,13 @@
 package seedu.bookmark.logic.algorithm;
 
-import seedu.bookmark.model.WordBank;
-import seedu.bookmark.model.wordstore.Word;
-import seedu.bookmark.logic.parser.Prefix;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import seedu.bookmark.logic.parser.Prefix;
+import seedu.bookmark.model.WordBank;
+import seedu.bookmark.model.wordstore.Word;
 
 /**
  * The EditDistance class manages the finding of suggestions for
@@ -15,10 +15,14 @@ import static java.util.Objects.requireNonNull;
  */
 public class SuggestionAlgorithm {
 
-    private final int SUGGESTION_LIMIT = 4;
-    private final int DISTANCE_TOLERANCE = 3;
+    private static final int SUGGESTION_LIMIT = 4;
+    private static final int DISTANCE_TOLERANCE = 3;
     private final WordBank wordBank;
 
+    /**
+     * Creates a SuggestionAlgorithm object
+     * @param wordBank WordBank
+     */
     public SuggestionAlgorithm(WordBank wordBank) {
         requireNonNull(wordBank);
         this.wordBank = wordBank;
@@ -71,7 +75,7 @@ public class SuggestionAlgorithm {
             return sourceLength;
         }
 
-        int[][] distanceArray = new int[sourceLength+1][targetLength+1];
+        int[][] distanceArray = new int[sourceLength + 1][targetLength + 1];
         for (int i = 0; i < sourceLength + 1; i++) {
             distanceArray[i][0] = i;
         }
@@ -82,13 +86,13 @@ public class SuggestionAlgorithm {
         //setting up 2D array for cost calculation --> Deliberate double forloop.
         for (int i = 1; i < sourceLength + 1; i++) {
             for (int j = 1; j < targetLength + 1; j++) {
-                int cost = source.charAt(i - 1) == target.charAt(j - 1) ? 0 : 1;  //testing if char are same
+                int cost = source.charAt(i - 1) == target.charAt(j - 1) ? 0 : 1; //testing if char are same
                 distanceArray[i][j] = Math.min(Math.min(distanceArray[i - 1][j] + 1, distanceArray[i][j - 1] + 1),
                                                 distanceArray[i - 1][j - 1] + cost); //setting up the cost using 2d arr
-                if (i > 1 &&
-                        j > 1 &&
-                        source.charAt(i - 1) == target.charAt(j - 2) &&
-                        source.charAt(i - 2) == target.charAt(j - 1)) { //for transpositional swapped chars
+                if (i > 1
+                        && j > 1
+                        && source.charAt(i - 1) == target.charAt(j - 2)
+                        && source.charAt(i - 2) == target.charAt(j - 1)) { //for transpositional swapped chars
                     distanceArray[i][j] = Math.min(distanceArray[i][j], distanceArray[i - 2][j - 2] + cost);
                 }
             }
