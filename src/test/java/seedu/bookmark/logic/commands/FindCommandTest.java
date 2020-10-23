@@ -32,12 +32,13 @@ import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
-import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
 import seedu.bookmark.model.book.predicates.BookCompletedPredicate;
 import seedu.bookmark.model.book.predicates.BookNotCompletedPredicate;
 import seedu.bookmark.model.book.predicates.GenreContainsKeywordsPredicate;
 import seedu.bookmark.model.book.predicates.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.predicates.TagContainsKeywordsPredicate;
+import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
