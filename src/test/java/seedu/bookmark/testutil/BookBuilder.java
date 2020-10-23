@@ -8,6 +8,7 @@ import java.util.Set;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
@@ -28,6 +29,7 @@ public class BookBuilder {
     private Set<Tag> tags;
     private TotalPages totalPages;
     private Bookmark bookmark;
+    private Goal goal;
     private List<Note> notes;
 
     /**
@@ -39,6 +41,7 @@ public class BookBuilder {
         totalPages = new TotalPages(DEFAULT_TOTAL_PAGES);
         bookmark = new Bookmark();
         tags = new HashSet<>();
+        goal = Goal.defaultGoal();
         notes = new ArrayList<>();
     }
 
@@ -51,6 +54,7 @@ public class BookBuilder {
         totalPages = bookToCopy.getTotalPages();
         bookmark = bookToCopy.getBookmark();
         tags = new HashSet<>(bookToCopy.getTags());
+        goal = bookToCopy.getGoal();
         notes = new ArrayList<>(bookToCopy.getNotes());
     }
 
@@ -103,7 +107,7 @@ public class BookBuilder {
     }
 
     public Book build() {
-        return new Book(name, genre, tags, totalPages, bookmark, notes);
+        return new Book(name, genre, tags, totalPages, bookmark, goal, notes);
     }
 
 }

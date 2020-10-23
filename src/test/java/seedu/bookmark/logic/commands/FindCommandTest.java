@@ -38,6 +38,11 @@ import seedu.bookmark.model.book.GenreContainsKeywordsPredicate;
 import seedu.bookmark.model.book.NameContainsKeywordsPredicate;
 import seedu.bookmark.model.book.TagContainsKeywordsPredicate;
 import seedu.bookmark.model.wordstore.exceptions.WordStoreNotFoundException;
+import seedu.bookmark.model.book.predicates.BookCompletedPredicate;
+import seedu.bookmark.model.book.predicates.BookNotCompletedPredicate;
+import seedu.bookmark.model.book.predicates.GenreContainsKeywordsPredicate;
+import seedu.bookmark.model.book.predicates.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.book.predicates.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

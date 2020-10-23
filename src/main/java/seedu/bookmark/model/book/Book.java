@@ -26,6 +26,7 @@ public class Book {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Bookmark bookmark;
+    private final Goal goal;
     private final List<Note> notes = new ArrayList<>();
 
     /**
@@ -38,22 +39,37 @@ public class Book {
         this.tags.addAll(tags);
         this.totalPages = totalPages;
         this.bookmark = bookmark;
+        this.goal = Goal.defaultGoal();
     }
 
     /**
-     * Overloaded constructor, to accommodate notes without having to refactor every command.
+     * Overloaded method to create a {@code Book} with goal. Accommodate to notes
+     * without having to refactor every command.
      * Will update to this constructor once notes is up and fully functional.
      */
     public Book(Name name, Genre genre, Set<Tag> tags,
-                TotalPages totalPages, Bookmark bookmark, List<Note> notes) {
+                TotalPages totalPages, Bookmark bookmark, Goal goal, List<Note> notes) {
         requireAllNonNull(name, genre, tags, totalPages, bookmark, notes);
         this.name = name;
         this.genre = genre;
         this.tags.addAll(tags);
         this.totalPages = totalPages;
         this.bookmark = bookmark;
+        this.goal = goal;
         this.notes.addAll(notes);
     }
+
+    /**
+     * Static method to create {@code Book} with a non-default {@code Goal} object from an existing book.
+     * @param b Existing book with default goal.
+     * @param g Goal to be set.
+     * @return a {@code Book} object with {@code Goal} g.
+     */
+    public static Book setGoal(Book b, Goal g) {
+        return new Book(b.getName(), b.getGenre(), b.getTags(), b.getTotalPages(), b.getBookmark(), g, b.getNotes());
+    }
+
+
 
     public Name getName() {
         return name;
@@ -81,6 +97,13 @@ public class Book {
 
     public List<Note> getNotes() {
         return Collections.unmodifiableList(notes);
+    }
+
+    /**
+     * Returns the current Goal of this book, according to its {@code Goal}.
+     */
+    public Goal getGoal() {
+        return goal;
     }
 
     /**
@@ -127,6 +150,14 @@ public class Book {
     }
 
     /**
+     * Returns true if user has set a goal for this book.
+     */
+    public boolean hasGoal() {
+        int pageGoal = Integer.parseInt(goal.getPage());
+        return pageGoal > 0;
+    }
+
+    /**
      * Returns true if the exact same note is present in the note list of the book.
      */
     public boolean containsNote(Note note) {
@@ -137,7 +168,6 @@ public class Book {
         }
         return false;
     }
-
 
     /**
      * Returns true if both books have the same identity and data fields.
@@ -184,7 +214,9 @@ public class Book {
                 .append(bookmarkPage)
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append("Notes: ");
+        builder.append(" Goal: ")
+                .append(getGoal().toString())
+                .append(" Notes: ");
         getNotes().forEach(note -> builder.append(note.title + ","));
         return builder.toString();
     }
