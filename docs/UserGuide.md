@@ -136,6 +136,16 @@ Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t
 Examples:
 *  `edit 1 b/101` Edits the bookmark of the 1st book to be `101`.
 
+<<<<<<< HEAD
+### Set goal for your book: `goal`
+
+Set a reading goal to finish a certain page by a deadline for a book in the list.
+
+Format: `goal INDEX p/PAGE d/DEADLINE`
+
+* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* Page number and deadline must be provided.
+=======
 ### Adding a note to a book : `note`
 
 Adds a note to an existing book in the list.
@@ -149,6 +159,7 @@ Format: `note INDEX n/TITLE txt/TEXT`
 Examples:
 * `note 1 n/Thoughts txt/What is the protagonist thinking` Adds a note to the first book shown with the title `Thoughts` and text `What is the protagonist thinking`
 
+>>>>>>> 254f1595b3e4abc258496f948fc2f7eb7e0101f8
 
 ### Clearing all books : `clear` [coming soon]
 
