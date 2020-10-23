@@ -124,6 +124,7 @@ Examples:
 *  `sort n/` Returns a list of books sorted by name lexicographical order.
 *  `sort g/` Returns a list of books sorted by genre lexicographical order.
 *  `sort b/` Returns a list of books sorted by ascending number of pages read (bookmark)
+*  `sort rp/` Returns a list of books sorted by ascending reading progress.
 
 ### Deleting a book : `delete`
 
