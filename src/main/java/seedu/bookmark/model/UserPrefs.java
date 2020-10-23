@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.bookmark.commons.core.GuiSettings;
+import seedu.bookmark.logic.parser.Prefix;
+
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Represents User's preferences.
@@ -15,6 +18,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path bookmarkFilePath = Paths.get("data" , "library.json");
+    private String sortingPreference = "";
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +40,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setBookmarkFilePath(newUserPrefs.getBookmarkFilePath());
+        setSortingPreference(newUserPrefs.getSortingPreference());
     }
 
     public GuiSettings getGuiSettings() {
@@ -57,6 +62,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     @Override
+    public String getSortingPreference() {
+        return sortingPreference;
+    }
+
+    public void setSortingPreference(String newSortingPreference) {
+        this.sortingPreference = newSortingPreference;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -68,12 +82,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && bookmarkFilePath.equals(o.bookmarkFilePath);
+                && bookmarkFilePath.equals(o.bookmarkFilePath)
+                && sortingPreference.equals(o.sortingPreference);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, bookmarkFilePath);
+        return Objects.hash(guiSettings, bookmarkFilePath, sortingPreference);
     }
 
     @Override
@@ -81,6 +96,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + bookmarkFilePath);
+        sb.append("\nSorting Preference: " + sortingPreference);
         return sb.toString();
     }
 

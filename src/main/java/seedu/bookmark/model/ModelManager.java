@@ -12,7 +12,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
+import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.book.Book;
+
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+
+import seedu.bookmark.model.book.comparators.BookGenreComparator;
+import seedu.bookmark.model.book.comparators.BookNameComparator;
+import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
+import seedu.bookmark.model.book.comparators.BookReadingProgressComparator;
 
 /**
  * Represents the in-memory model of the bookmark data.
@@ -23,6 +34,7 @@ public class ModelManager implements Model {
     private final Library library;
     private final UserPrefs userPrefs;
     private FilteredList<Book> filteredBooks;
+    private Comparator<Book> comparator;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -35,6 +47,7 @@ public class ModelManager implements Model {
 
         this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.comparator = comparatorGenerator(prefixGenerator(userPrefs.getSortingPreference()));
         filteredBooks = new FilteredList<>(this.library.getBookList());
     }
 
@@ -77,6 +90,15 @@ public class ModelManager implements Model {
         userPrefs.setBookmarkFilePath(bookMarkFilePath);
     }
 
+    @Override
+    public String getSortingPreference() { return userPrefs.getSortingPreference(); }
+
+    @Override
+    public void setSortingPreference(String newSortingPreference) {
+        requireNonNull(newSortingPreference);
+        userPrefs.setSortingPreference(newSortingPreference);
+    }
+
     //=========== Library ================================================================================
 
     @Override
@@ -104,6 +126,7 @@ public class ModelManager implements Model {
     public void addBook(Book book) {
         library.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        sortByDefaultComparator();
     }
 
     @Override
@@ -111,6 +134,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedBook);
 
         library.setBook(target, editedBook);
+    }
+
+    @Override
+    public void sortByDefaultComparator() {
+        sortFilteredBookList(this.comparator);
     }
 
     //=========== Filtered Book List Accessors =============================================================
@@ -132,7 +160,56 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredBookList(Comparator<Book> comparator) {
+        if (comparator instanceof BookNameComparator) {
+            setSortingPreference(PREFIX_NAME.toString());
+        } else if (comparator instanceof BookGenreComparator) {
+            setSortingPreference(PREFIX_GENRE.toString());
+        } else if (comparator instanceof BookPagesReadComparator) {
+            setSortingPreference(PREFIX_BOOKMARK.toString());
+        } else if (comparator instanceof BookReadingProgressComparator) {
+            setSortingPreference(PREFIX_READING_PROGRESS.toString());
+        }
+        this.comparator = comparator;
         this.library.sortBooks(comparator);
+    }
+
+    /**
+     * Returns a comparator based on the input prefix
+     * @return Comparator based on input prefix
+     */
+    public Comparator<Book> comparatorGenerator(Prefix inputPrefix) {
+        Comparator<Book> comparator = null;
+        if (inputPrefix == PREFIX_NAME) {
+            comparator = new BookNameComparator();
+        } else if (inputPrefix == PREFIX_GENRE) {
+            comparator = new BookGenreComparator();
+        } else if (inputPrefix == PREFIX_BOOKMARK) {
+            comparator = new BookPagesReadComparator();
+        } else if (inputPrefix == PREFIX_READING_PROGRESS) {
+            comparator = new BookReadingProgressComparator();
+        }
+        return comparator;
+    }
+
+    public Prefix prefixGenerator(String prefix) {
+        Prefix result;
+        switch (prefix) {
+        case "n/":
+            result = PREFIX_NAME;
+            break;
+        case "g/":
+            result = PREFIX_GENRE;
+            break;
+        case "b/":
+            result = PREFIX_BOOKMARK;
+            break;
+        case "rp/":
+            result = PREFIX_READING_PROGRESS;
+            break;
+        default:
+            return PREFIX_NAME;
+        }
+        return result;
     }
 
     @Override
