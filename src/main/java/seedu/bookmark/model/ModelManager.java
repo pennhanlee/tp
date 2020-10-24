@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -113,19 +115,26 @@ public class ModelManager implements Model {
         library.removeBook(target);
         historyManager.addNewState(State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.deleteFromWordBank(target);
+        updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
+        updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         historyManager.addNewState(State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.addToWordBank(book);
-        updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+
     }
 
     @Override
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
+
+        // to ensure the edited book can be viewed
+        Predicate<? super Book> prevPredicate = filteredBooks.getPredicate();
+        updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
+
         library.setBook(target, editedBook);
         historyManager.addNewState(State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.updateWordBank(target, editedBook);

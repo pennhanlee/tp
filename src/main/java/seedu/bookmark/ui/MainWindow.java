@@ -218,10 +218,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isDetailedView()) {
-                changeToDetailedView();
-            } else {
+            switch (commandResult.getViewType()) {
+            case DEFAULT:
                 resetView();
+                break;
+            case DETAILED:
+                changeToDetailedView();
+                break;
+            default:
+                break;
             }
 
             return commandResult;
