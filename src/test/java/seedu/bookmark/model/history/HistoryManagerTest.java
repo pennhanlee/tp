@@ -1,19 +1,18 @@
-package seedu.bookmark.model;
+package seedu.bookmark.model.history;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.bookmark.model.Library;
+import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
-import seedu.bookmark.model.history.HistoryManager;
-import seedu.bookmark.model.history.State;
 import seedu.bookmark.testutil.TypicalBooks;
 
 /**
