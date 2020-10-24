@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
+import seedu.bookmark.model.history.State;
 
 /**
  * Represents the history of a Library.
@@ -14,15 +15,14 @@ public class HistoryManager {
 
     private static final int MAX_UNDO_COUNT = 10;
 
-    private final ReadOnlyLibrary currentState;
-    private final ArrayDeque<ReadOnlyLibrary> undoDeque;
-    private final ArrayDeque<ReadOnlyLibrary> redoDeque;
+    private final State currentState;
+    private final ArrayDeque<State> undoDeque;
+    private final ArrayDeque<State> redoDeque;
 
     /**
-     * Initializes a new {@code HistoryManager} with the given {@code ReadOnlyLibrary} as the current state and
-     * an empty undo deque and redo deque.
+     * Initializes a new {@code HistoryManager} with the given {@code State} as the initial state.
      */
-    public HistoryManager(ReadOnlyLibrary currentState) {
+    public HistoryManager(State currentState) {
         this.currentState = currentState;
         this.undoDeque = new ArrayDeque<>();
         this.redoDeque = new ArrayDeque<>();
@@ -31,14 +31,14 @@ public class HistoryManager {
     /**
      * Private constructor to facilitate the immutable nature of {@code HistoryManager}
      */
-    private HistoryManager(ReadOnlyLibrary currentState, ArrayDeque<ReadOnlyLibrary> undoDeque,
-            ArrayDeque<ReadOnlyLibrary> redoDeque) {
+    private HistoryManager(State currentState, ArrayDeque<State> undoDeque,
+            ArrayDeque<State> redoDeque) {
         this.currentState = currentState;
         this.undoDeque = undoDeque;
         this.redoDeque = redoDeque;
     }
 
-    public ReadOnlyLibrary getCurrentState() {
+    public State getCurrentState() {
         return this.currentState;
     }
 
@@ -46,7 +46,7 @@ public class HistoryManager {
      * Sets a {@code ReadOnlyLibrary} as the currentState, adding the previous currentState to the undoDeque and
      * clearing the redoDeque.
      */
-    public HistoryManager addNewState(ReadOnlyLibrary state) {
+    public HistoryManager addNewState(State state) {
         addToUndo(currentState);
         redoDeque.clear();
         return new HistoryManager(state, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
@@ -60,7 +60,7 @@ public class HistoryManager {
             throw new UndoException();
         }
         redoDeque.add(currentState);
-        ReadOnlyLibrary newCurrentState = undoDeque.pop();
+        State newCurrentState = undoDeque.pop();
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
 
@@ -71,7 +71,7 @@ public class HistoryManager {
         if (!canRedo()) {
             throw new RedoException();
         }
-        ReadOnlyLibrary newCurrentState = redoDeque.pop();
+        State newCurrentState = redoDeque.pop();
         addToUndo(currentState);
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
@@ -87,7 +87,7 @@ public class HistoryManager {
     /**
      * Add a state to the undo deque, removes the oldest states to make space if necessary.
      */
-    private void addToUndo(ReadOnlyLibrary state) {
+    private void addToUndo(State state) {
         while (undoDeque.size() >= MAX_UNDO_COUNT) {
             undoDeque.removeFirst();
         }
