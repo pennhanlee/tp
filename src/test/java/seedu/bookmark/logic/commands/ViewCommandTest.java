@@ -31,7 +31,9 @@ public class ViewCommandTest {
         Book bookToView = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         expectedModel.updateFilteredBookList(b -> b.equals(bookToView));
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.DETAILED);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
     }
 
     @Test

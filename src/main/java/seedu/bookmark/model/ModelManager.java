@@ -114,7 +114,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
-        updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         historyManager = historyManager.addNewState(
                 State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.deleteFromWordBank(target);
@@ -136,14 +135,14 @@ public class ModelManager implements Model {
         library.setBook(target, editedBook);
 
         // to ensure the edited book doesn't leave the view
-        Predicate<? super Book> prevPredicate = filteredBooks.getPredicate() != null
-                ? filteredBooks.getPredicate()
-                : PREDICATE_SHOW_ALL_BOOKS;
-        updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
-
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
-        wordBank.updateWordBank(target, editedBook);
+//        Predicate<? super Book> prevPredicate = filteredBooks.getPredicate() != null
+//                ? filteredBooks.getPredicate()
+//                : PREDICATE_SHOW_ALL_BOOKS;
+//        updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
+//
+//        historyManager = historyManager.addNewState(
+//                State.createState(library, userPrefs, filteredBooks.getPredicate()));
+//        wordBank.updateWordBank(target, editedBook);
     }
 
     //=========== Filtered Book List Accessors =============================================================

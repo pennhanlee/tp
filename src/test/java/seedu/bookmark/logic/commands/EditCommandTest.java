@@ -30,6 +30,8 @@ import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.testutil.BookBuilder;
 import seedu.bookmark.testutil.EditBookDescriptorBuilder;
 
+import java.util.function.Predicate;
+
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
@@ -49,7 +51,9 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -70,7 +74,10 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -82,7 +89,10 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -93,13 +103,15 @@ public class EditCommandTest {
         Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_JANE_EYRE).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK,
                 new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE).build());
-
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
+        expectedModel.updateFilteredBookList(b -> b.equals(bookInFilteredList));
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -174,7 +186,10 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test

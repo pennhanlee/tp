@@ -25,6 +25,8 @@ public class RedoCommandTest {
         expectedModel.addBook(HARRY_POTTER);
         model.addBook(HARRY_POTTER);
         model.undo();
-        assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandResult expectedResult = new CommandResult(RedoCommand.MESSAGE_SUCCESS, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(new RedoCommand(), model, expectedResult, expectedModel);
     }
 }

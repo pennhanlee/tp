@@ -23,6 +23,8 @@ public class UndoCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
         model.addBook(HARRY_POTTER);
-        assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandResult expectedResult = new CommandResult(UndoCommand.MESSAGE_SUCCESS, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(new UndoCommand(), model, expectedResult, expectedModel);
     }
 }
