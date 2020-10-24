@@ -57,6 +57,8 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override

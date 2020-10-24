@@ -4,32 +4,42 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
 import seedu.bookmark.model.history.HistoryManager;
+import seedu.bookmark.model.history.State;
 import seedu.bookmark.testutil.TypicalBooks;
 
+/**
+ * Integration tests with {@code State}
+ */
 public class HistoryManagerTest {
 
     private static final List<Book> BOOKS = TypicalBooks.getTypicalBooks();
+    private static final Library DEFAULT_LIBRARY = TypicalBooks.getTypicalLibrary();
     private static final Book TO_ADD = TypicalBooks.HAMLET;
+    private static final UserPrefs DEFAULT_USER_PREFS = new UserPrefs();
+    private static final Predicate<Book> DEFAULT_PREDICATE = (b) -> true;
+    private static final State DEFAULT_STATE = State.createState(DEFAULT_LIBRARY,
+            DEFAULT_USER_PREFS, DEFAULT_PREDICATE);
+
 
     @Test
     public void equalsTest() {
-        List<Book> editedBooks = new ArrayList<>(BOOKS);
-        editedBooks.add(TO_ADD);
+        Library editedLibrary = new Library(DEFAULT_LIBRARY);
+        editedLibrary.addBook(TO_ADD);
+        State newState = State.createState(editedLibrary, DEFAULT_USER_PREFS, DEFAULT_PREDICATE);
 
-        HistoryManager historyA = new HistoryManager(new LibraryStub(BOOKS));
-        HistoryManager historyB = new HistoryManager(new LibraryStub(BOOKS));
-        HistoryManager historyC = new HistoryManager(new LibraryStub(editedBooks));
+
+        HistoryManager historyA = new HistoryManager(DEFAULT_STATE);
+        HistoryManager historyB = new HistoryManager(DEFAULT_STATE);
+        HistoryManager historyC = new HistoryManager(newState);
 
         // same object
         assertEquals(historyA, historyA);
@@ -41,7 +51,7 @@ public class HistoryManagerTest {
         assertNotEquals(historyA, historyC);
 
         // same current state, different undo deque
-        historyA = historyA.addNewState(new LibraryStub(editedBooks));
+        historyA = historyA.addNewState(newState);
         assertNotEquals(historyA, historyC);
 
         // same current state, different redo deque
@@ -51,64 +61,40 @@ public class HistoryManagerTest {
 
     @Test
     public void changeThenUndo_validActions_success() {
-        List<Book> editedBooks = new ArrayList<>(BOOKS);
-        editedBooks.add(TO_ADD);
+        Library editedLibrary = new Library(DEFAULT_LIBRARY);
+        editedLibrary.addBook(TO_ADD);
+        State newState = State.createState(editedLibrary, DEFAULT_USER_PREFS, DEFAULT_PREDICATE);
 
-        HistoryManager historyA = new HistoryManager(new LibraryStub(BOOKS));
-        historyA = historyA.addNewState(new LibraryStub(editedBooks));
+        HistoryManager historyA = new HistoryManager(DEFAULT_STATE);
+        historyA = historyA.addNewState(newState);
         historyA = historyA.undo();
 
-        assertEquals(historyA.getCurrentState(), new LibraryStub(BOOKS));
+        assertEquals(historyA.getCurrentState(), DEFAULT_STATE);
     }
 
     @Test
     public void changeThenUndoThenRedo_validActions_success() {
-        List<Book> editedBooks = new ArrayList<>(BOOKS);
-        editedBooks.add(TO_ADD);
+        Library editedLibrary = new Library(DEFAULT_LIBRARY);
+        editedLibrary.addBook(TO_ADD);
+        State newState = State.createState(editedLibrary, DEFAULT_USER_PREFS, DEFAULT_PREDICATE);
 
-        HistoryManager historyA = new HistoryManager(new LibraryStub(BOOKS));
-        historyA = historyA.addNewState(new LibraryStub(editedBooks));
+        HistoryManager historyA = new HistoryManager(DEFAULT_STATE);
+        historyA = historyA.addNewState(newState);
         historyA = historyA.undo();
         historyA = historyA.redo();
 
-        assertEquals(historyA.getCurrentState(), new LibraryStub(editedBooks));
+        assertEquals(historyA.getCurrentState(), newState);
     }
 
     @Test
     public void undo_noUndoAvailable_throwsException() {
-        HistoryManager historyA = new HistoryManager(new LibraryStub(BOOKS));
+        HistoryManager historyA = new HistoryManager(DEFAULT_STATE);
         assertThrows(UndoException.class, historyA::undo);
     }
 
     @Test
     public void redo_noRedoAvailable_throwsException() {
-        HistoryManager historyA = new HistoryManager(new LibraryStub(BOOKS));
+        HistoryManager historyA = new HistoryManager(DEFAULT_STATE);
         assertThrows(RedoException.class, historyA::redo);
     }
-
-    static class LibraryStub implements ReadOnlyLibrary {
-
-        private final List<Book> books;
-
-        public LibraryStub(List<Book> books) {
-            this.books = books;
-        }
-
-        @Override
-        public ObservableList<Book> getBookList() {
-            return FXCollections.observableArrayList(books);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (this == other) {
-                return true;
-            } else if (other instanceof LibraryStub) {
-                return getBookList().equals(((LibraryStub) other).getBookList());
-            }
-            return false;
-        }
-    }
 }
-
-
