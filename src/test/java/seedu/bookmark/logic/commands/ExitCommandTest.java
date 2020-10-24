@@ -5,6 +5,7 @@ import static seedu.bookmark.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGE
 
 import org.junit.jupiter.api.Test;
 
+import seedu.bookmark.logic.commands.CommandResult.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 
@@ -14,7 +15,8 @@ public class ExitCommandTest {
 
     @Test
     public void execute_exit_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true,
+                ViewType.DEFAULT);
         assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }

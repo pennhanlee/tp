@@ -21,7 +21,6 @@ import seedu.bookmark.testutil.TypicalBooks;
  */
 public class HistoryManagerTest {
 
-    private static final List<Book> BOOKS = TypicalBooks.getTypicalBooks();
     private static final Library DEFAULT_LIBRARY = TypicalBooks.getTypicalLibrary();
     private static final Book TO_ADD = TypicalBooks.HAMLET;
     private static final UserPrefs DEFAULT_USER_PREFS = new UserPrefs();
