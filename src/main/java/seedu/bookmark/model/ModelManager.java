@@ -24,7 +24,7 @@ public class ModelManager implements Model {
 
     private final VersionedLibrary library;
     private final UserPrefs userPrefs;
-    private FilteredList<Book> filteredBooks;
+    private final FilteredList<Book> filteredBooks;
     private final WordBank wordBank;
 
     /**
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
 
         this.library = new VersionedLibrary(library);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredBooks = new FilteredList<>(this.library.getBookList());
+        this.filteredBooks = new FilteredList<>(this.library.getBookList());
         this.wordBank = new WordBank(library);
     }
 
@@ -139,11 +139,13 @@ public class ModelManager implements Model {
     @Override
     public void undo() throws UndoException {
         library.undo();
+        wordBank.resetWordBank(library);
     }
 
     @Override
     public void redo() throws RedoException {
         library.redo();
+        wordBank.resetWordBank(library);
     }
 
     @Override
