@@ -207,16 +207,16 @@ commands entered.
 
 </div>
 
-The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands 
+The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
 entered during your usage session cannot be undone using the `undo` command the next time you start _bookmark_ again.
 
 ### Redoing a command: `redo`
 
 Redoes the last command that you have undone. Can be used multiple times consecutively to redo up to ten 
-undone commands. This command is meant to be used in conjunction with the [undo](#undoing-a-command--undo) command.
+undone commands. This command is to be used in conjunction with the [undo](#undoing-a-command--undo) command.
 
-The redo command will not execute if there are no undone commands available to undo. Once you close _bookmark_, the 
-commands that you have undone during your usage session cannot be redone using the `redo` command the next time you 
+The redo command will not execute if there are no undone commands available to undo. Once you close _bookmark_, the
+commands that you have undone during your usage session cannot be redone using the `redo` command the next time you
 start _bookmark_ again.
 
 ### Clearing all books : `clear` [coming soon]
