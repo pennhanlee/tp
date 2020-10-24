@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,6 +15,7 @@ import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
+import seedu.bookmark.model.history.HistoryManager;
 import seedu.bookmark.model.history.State;
 
 /**
@@ -113,16 +112,18 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
-        historyManager.addNewState(State.createState(library, userPrefs, filteredBooks.getPredicate()));
-        wordBank.deleteFromWordBank(target);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
+        wordBank.deleteFromWordBank(target);
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        historyManager.addNewState(State.createState(library, userPrefs, filteredBooks.getPredicate()));
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.addToWordBank(book);
 
     }
@@ -130,13 +131,16 @@ public class ModelManager implements Model {
     @Override
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
+        library.setBook(target, editedBook);
 
-        // to ensure the edited book can be viewed
-        Predicate<? super Book> prevPredicate = filteredBooks.getPredicate();
+        // to ensure the edited book doesn't leave the view
+        Predicate<? super Book> prevPredicate = filteredBooks.getPredicate() != null
+                ? filteredBooks.getPredicate()
+                : PREDICATE_SHOW_ALL_BOOKS;
         updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
 
-        library.setBook(target, editedBook);
-        historyManager.addNewState(State.createState(library, userPrefs, filteredBooks.getPredicate()));
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.updateWordBank(target, editedBook);
     }
 
@@ -144,7 +148,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code Library}
      */
     @Override
     public ObservableList<Book> getFilteredBookList() {
@@ -184,7 +188,11 @@ public class ModelManager implements Model {
     private void resetModelData(State state) {
         library.resetData(state.getLibrary());
         userPrefs.resetData(state.getUserPrefs());
-        filteredBooks.setPredicate(state.getPredicate());
+        System.out.println(state.getPredicate() != null);
+        Predicate<? super Book> prevPredicate = state.getPredicate() != null
+                ? state.getPredicate()
+                : PREDICATE_SHOW_ALL_BOOKS;
+        filteredBooks.setPredicate(prevPredicate);
         wordBank.resetWordBank(library);
     }
 

@@ -225,8 +225,14 @@ public class MainWindow extends UiPart<Stage> {
             case DETAILED:
                 changeToDetailedView();
                 break;
+            case MOST_RECENTLY_USED:
+                break;
             default:
                 break;
+            }
+
+            if (logic.getFilteredBookList().size() > 1) {
+                resetView();
             }
 
             return commandResult;

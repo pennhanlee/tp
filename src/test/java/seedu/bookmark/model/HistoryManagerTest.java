@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
+import seedu.bookmark.model.history.HistoryManager;
 import seedu.bookmark.testutil.TypicalBooks;
 
 public class HistoryManagerTest {

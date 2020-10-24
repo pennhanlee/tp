@@ -32,6 +32,6 @@ public class UndoCommand extends Command {
             logger.info("Undo failed, books not modified: " + unmodifiedBookList);
             throw new CommandException(MESSAGE_MOST_RECENT_CHANGE);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 }

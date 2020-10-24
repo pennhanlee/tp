@@ -32,6 +32,6 @@ public class RedoCommand extends Command {
             logger.info("Redo failed, books not modified: " + unmodifiedBookList);
             throw new CommandException(MESSAGE_NO_UNDONE_CHANGES);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 }

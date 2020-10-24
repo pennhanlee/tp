@@ -1,11 +1,11 @@
-package seedu.bookmark.model;
+package seedu.bookmark.model.history;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
-import seedu.bookmark.model.history.State;
 
 /**
  * Represents the history of a Library.
@@ -59,8 +59,9 @@ public class HistoryManager {
         if (!canUndo()) {
             throw new UndoException();
         }
-        redoDeque.add(currentState);
+        redoDeque.push(currentState);
         State newCurrentState = undoDeque.pop();
+        System.out.println("UNDO STATE: " + newCurrentState.getLibrary().getBookList());
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
 
@@ -91,7 +92,7 @@ public class HistoryManager {
         while (undoDeque.size() >= MAX_UNDO_COUNT) {
             undoDeque.removeFirst();
         }
-        undoDeque.add(state);
+        undoDeque.push(state);
         assert(undoDeque.size() <= MAX_UNDO_COUNT);
     }
 
