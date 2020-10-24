@@ -3,7 +3,6 @@ package seedu.bookmark.model.history;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import seedu.bookmark.model.exceptions.RedoException;
 import seedu.bookmark.model.exceptions.UndoException;
 
