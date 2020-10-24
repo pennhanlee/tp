@@ -161,11 +161,13 @@ The class diagram below shows the relevant classes involved:
 
 `MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()`
 which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
-From the returned `CommandResult`, `CommandResult#isDetailedView()` indicates whether the UI should be in the detailed view,
-or the default summarised view.
+From the returned `CommandResult`, `CommandResult#getViewType()` indicates whether the UI should switch to the 
+detailed view, switch to the the default summarised view or remain in whatever view it currently is in. 
+`CommandResult#getViewType()` returns a `ViewType`, of which there are three types: `ViewType.DEFAULT`, `ViewType.DETAILED`
+and `ViewType.MOST_RECENTLY_USED`.
 
-Based on the value returned by `CommandResult#isDetailedView()`, either `MainWindow#changeToDetailedView()` or
-`MainWindow#resetView()` is called accordingly.
+Based on the type of `ViewType` returned by `CommandResult#getViewType()`, `MainWindow#changeToDetailedView()`,
+`MainWindow#resetView()`, or no method is called accordingly.
 
 The activity diagram below illustrates the flow of execution when the UI decides which view to use:
 
@@ -182,7 +184,7 @@ detailed view:
 
 * **Alternative 1 (current choice):** Use JavaFX ListView
   * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
-  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is currently only meant to show
+  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is only meant to show
   one book
 
 * **Alternative 2:** Use other JavaFX layouts
@@ -354,20 +356,19 @@ Command: `note 1 n/Thoughts txt/Something`
 ### Undo/redo feature
 #### Implementation
 
-The undo/redo mechanism is facilitated by `VersionedLibrary`. It extends `Library` with an undo/redo history, 
-that is stored and maintained by `HistoryManager`. `HistoryManager` manages the current library state as well as the
-undo and redo history. It does so by storing copies of `ReadOnlyLibrary`. Henceforth, state shall refer to an object of
-type `ReadOnlyLibrary`. 
+The undo/redo mechanism is facilitated by `HistoryManager`. `HistoryManager` manages the current model state as well as 
+the states that can be undone/redone. It does so by storing `State` objects. Each `State` object contains a 
+`ReadOnlyLibrary`, `ReadOnlyUserPrefs` and a `Predicate` used to decide which books should be visible to the user. 
 
 * `HistoryManager#addNewState()` — Add a new state to be used as the current state
 * `HistoryManager#undo()` — Restores the most recent previous state from its history.
 * `HistoryManager#redo()` — Restores the most recently undone state from its history.
 
 The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
-Whenever there are changes that add, modify or delete the books stored in the `VersionedLibrary`, the previous state
-will be saved and a new state created by calling `HistoryMangeer#addNewState()`. 
-This occurs whenever the methods exposed to modify the library: `VersionedLibrary#addBook()`, `VersionedLibrary#removeBook()` 
-and `VersionedLibrary#setBook()` are called. The class diagram below illustrates the classes that facilitates the undo and redo
+Whenever the user enters a command (besides `undo/redo/help/exit/list/view/find`), the previous state
+will be saved and a new state created by calling `HistoryManager#addNewState()`. 
+This occurs whenever the methods exposed to modify the model: `Model#addBook()`, `Model#removeBook()` 
+and `Model#setBook()` and `Model#setUserPrefs` are called. The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
 
 ![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
@@ -378,12 +379,12 @@ feature.
 The undo deque stores the states to be recovered via an undo command, while the redo deque stores previously undone states 
 to be recovered via a redo command. Below is an example to illustrate how `HistoryManager` manages state.
 
-Step 1. The user launches the application for the first time. The `VersionedLibrary` will be inititalised with the
-initial library as the current state, i.e State 1. Undo and redo deques will be empty.
+Step 1. The user launches the application for the first time. The `HistoryManager` will be inititalised with the
+initial state of the model as the current state, i.e State 1. Undo and redo deques will be empty.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes add command to add a new book. This command will call the `VersionedLibrary#addBook()` method
+Step 2. The user executes add command to add a new book. This command will call the `Model#addBook()` method
 which in turn will call the `HistoryManager#addNewState()` method, causing a new state, State 2 to be created and saved
 as the current state. The previous current state, State 1, will be pushed into the undo deque.
 
@@ -414,8 +415,8 @@ when the user tries to undo and redo respectively, an error will be shown and no
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the books in the library such
-as `list`, `view` or `find` will not create new states.
+Step 5. The user then decides to execute the command `list`. Commands that only change which books are displayable to 
+the user such as `list`, `view` or `find` will not create new states.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -456,7 +457,7 @@ execution when a new state is added.
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire library.
+* **Alternative 1 (current choice):** Saves copies of the entire `Library` and `UserPrefs`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -472,7 +473,7 @@ or modification of commands.
 
 ##### Aspect: How to decide which actions should create and save state
 
-* **Alternative 1 (current choice):** The methods exposed by `VersionedLibrary` to modify the library also creates and 
+* **Alternative 1 (current choice):** The methods implemented by `ModelManager` to modify the model also creates and 
     save state.
   * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
     and thus warrants the creation and saving of state.
@@ -481,7 +482,7 @@ or modification of commands.
 * **Alternative 2:** Expose a method in the `Model` interface that when called creates and saves state.
   * Pros: More declarative, easier to see when the model will create and save state.
   * Cons: Worse separation of concerns, the responsibility of deciding when to create and save state is moved away 
-    from the model and to all the components that interact with the model.
+    from the model and to the components that interact with the model.
     
 Alternative 1 was eventually chosen as we liked the clear separation of concerns it provides. We also feel that it is 
 less prone to errors such as forgetting to call the hypothetical "save" method that would exist in alternative 2, 

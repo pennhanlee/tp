@@ -7,10 +7,11 @@ skinparam classBackgroundColor MODEL_COLOR
 package Model {
 Interface Model <<Interface>>
 Class ModelManager
-Class Library
 Interface ReadOnlyLibrary<<Interface>>
-Class VersionedLibrary
+Interface ReadOnlyUserPrefs<<Interface>>
+Interface Predicate<<Interface>>
 Class HistoryManager
+Class State
 }
 
 Model : undo()
@@ -22,17 +23,13 @@ HistoryManager : undo()
 HistoryManager : redo()
 show HistoryManager members
 
-VersionedLibrary : addBook()
-VersionedLibrary : removeBook()
-VersionedLibrary : setBook()
-show VersionedLibrary members
-
 ModelManager .up.|> Model
-ModelManager *-down-> VersionedLibrary
+ModelManager *--> HistoryManager
 
-Library .up.|> ReadOnlyLibrary
-VersionedLibrary -up-|> Library
-VersionedLibrary *-right-> HistoryManager
-HistoryManager --up-> "1..*" ReadOnlyLibrary : > Contains
+HistoryManager --up-> "1..*" State : > Contains
+
+State *-up-> "1" ReadOnlyLibrary
+State *-up-> "1" ReadOnlyUserPrefs
+State *-up-> "0..1" Predicate
 
 @enduml

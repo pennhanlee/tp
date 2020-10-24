@@ -8,8 +8,7 @@ participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant ":VersionedLibrary" as VersionedLibrary MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":HistoryManager" as HistoryManager MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
@@ -31,23 +30,17 @@ deactivate CommandParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undo()
-activate Model
+UndoCommand -> ModelManager : undo()
+activate ModelManager
 
-Model -> VersionedLibrary : undo()
-activate VersionedLibrary
-
-VersionedLibrary -> HistoryManager : undo()
+ModelManager -> HistoryManager : undo()
 activate HistoryManager
 
-HistoryManager --> VersionedLibrary : new history
+HistoryManager -> ModelManager :
 deactivate HistoryManager
 
-VersionedLibrary -> Model
-deactivate VersionedLibrary
-
-Model --> UndoCommand
-deactivate Model
+ModelManager --> UndoCommand
+deactivate ModelManager
 
 UndoCommand --> LogicManager : result
 deactivate UndoCommand
