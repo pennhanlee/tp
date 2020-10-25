@@ -94,6 +94,16 @@ public interface Model {
     ObservableList<Book> getFilteredBookList();
 
     /**
+     * Undoes the most recent change that modified the books stored in the {@code Model}.
+     */
+    void undo();
+
+    /**
+     * Redoes the most recently undone change that modified the books stored in the {@code Model}.
+     */
+    void redo();
+
+    /**
      * Updates the filter of the filtered book list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
