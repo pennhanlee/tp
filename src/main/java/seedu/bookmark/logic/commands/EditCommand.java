@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import java.util.function.Predicate;
 import seedu.bookmark.commons.core.Messages;
