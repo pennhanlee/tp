@@ -18,7 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_TEXT = new Prefix("txt/");
     public static final Prefix PREFIX_COMPLETED = new Prefix("c/");
     public static final Prefix PREFIX_NOT_COMPLETED = new Prefix("nc/");
-    public static final Prefix PREFIX_DUMMY = new Prefix("dummy/");
 
     /**
      * Returns a prefix based on the input string.
@@ -40,7 +39,8 @@ public class CliSyntax {
             result = PREFIX_READING_PROGRESS;
             break;
         default:
-            return PREFIX_DUMMY;
+            result = null;
+            break;
         }
         return result;
     }
