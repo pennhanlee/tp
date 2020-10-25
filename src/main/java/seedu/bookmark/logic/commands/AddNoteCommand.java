@@ -83,8 +83,8 @@ public class AddNoteCommand extends Command {
         Book editedBook = createEditedBook(bookToEdit, note);
 
         model.setBook(bookToEdit, editedBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS, editedBook), false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 
     @Override
