@@ -65,7 +65,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         comparator = comparatorGenerator(inputPrefix);
 
-        return new SortCommand(comparator);
+        return new SortCommand(comparator, inputPrefix);
     }
 
     /**

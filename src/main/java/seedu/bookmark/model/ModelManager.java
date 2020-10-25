@@ -173,15 +173,6 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredBookList(Comparator<Book> comparator) {
-        if (comparator instanceof BookNameComparator) {
-            setSortingPreference(PREFIX_NAME.toString());
-        } else if (comparator instanceof BookGenreComparator) {
-            setSortingPreference(PREFIX_GENRE.toString());
-        } else if (comparator instanceof BookPagesReadComparator) {
-            setSortingPreference(PREFIX_BOOKMARK.toString());
-        } else if (comparator instanceof BookReadingProgressComparator) {
-            setSortingPreference(PREFIX_READING_PROGRESS.toString());
-        }
         this.comparator = comparator;
         this.library.sortBooks(comparator);
     }

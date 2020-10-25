@@ -13,6 +13,11 @@ import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
 import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -36,8 +41,9 @@ public class SortCommandTest {
     public void execute_sortByName_success() {
         BookNameComparator comparator = prepareBookNameComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_NAME);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_NAME.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CRIME_AND_PUNISHMENT, ENDERS_GAME, HARRY_POTTER, LORD_OF_THE_FLIES,
                 ON_THE_ROAD, THE_HUNGER_GAMES, TO_KILL_A_MOCKINGBIRD), model.getFilteredBookList());
@@ -47,8 +53,9 @@ public class SortCommandTest {
     public void execute_sortByGenre_success() {
         BookGenreComparator comparator = prepareBookGenreComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_GENRE);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_GENRE.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CRIME_AND_PUNISHMENT, HARRY_POTTER, TO_KILL_A_MOCKINGBIRD,
                 THE_HUNGER_GAMES, LORD_OF_THE_FLIES, ENDERS_GAME, ON_THE_ROAD), model.getFilteredBookList());
@@ -58,8 +65,9 @@ public class SortCommandTest {
     public void execute_sortByPagesRead_success() {
         BookPagesReadComparator comparator = prepareBookPagesReadComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_BOOKMARK);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_BOOKMARK.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(THE_HUNGER_GAMES, ENDERS_GAME, ON_THE_ROAD, LORD_OF_THE_FLIES,
                 TO_KILL_A_MOCKINGBIRD, HARRY_POTTER, CRIME_AND_PUNISHMENT), model.getFilteredBookList());
@@ -69,8 +77,9 @@ public class SortCommandTest {
     public void execute_sortByReadingProgress_success() {
         BookReadingProgressComparator comparator = prepareBookReadingProgressComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_READING_PROGRESS);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_READING_PROGRESS.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(THE_HUNGER_GAMES, TO_KILL_A_MOCKINGBIRD, ENDERS_GAME, LORD_OF_THE_FLIES,
                 ON_THE_ROAD, HARRY_POTTER, CRIME_AND_PUNISHMENT), model.getFilteredBookList());
@@ -80,8 +89,9 @@ public class SortCommandTest {
     public void execute_sortByNameThenAddBook_success() {
         BookNameComparator comparator = prepareBookNameComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_NAME);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_NAME.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         expectedModel.addBook(HAMLET);
         assertEquals(Arrays.asList(CRIME_AND_PUNISHMENT, ENDERS_GAME, HAMLET, HARRY_POTTER, LORD_OF_THE_FLIES,
@@ -92,8 +102,9 @@ public class SortCommandTest {
     public void execute_sortByGenreThenAddBook_success() {
         BookGenreComparator comparator = prepareBookGenreComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_GENRE);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_GENRE.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         expectedModel.addBook(HAMLET);
         assertEquals(Arrays.asList(HAMLET, CRIME_AND_PUNISHMENT, HARRY_POTTER, TO_KILL_A_MOCKINGBIRD,
@@ -104,8 +115,9 @@ public class SortCommandTest {
     public void execute_sortByPagesReadThenAddBook_success() {
         BookPagesReadComparator comparator = prepareBookPagesReadComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_BOOKMARK);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_BOOKMARK.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         expectedModel.addBook(HAMLET);
         assertEquals(Arrays.asList(HAMLET, THE_HUNGER_GAMES, ENDERS_GAME, ON_THE_ROAD, LORD_OF_THE_FLIES,
@@ -116,8 +128,9 @@ public class SortCommandTest {
     public void execute_sortByReadingProgressThenAddBook_success() {
         BookReadingProgressComparator comparator = prepareBookReadingProgressComparator();
         String expectedMessage = String.format(MESSAGE_BOOKS_SORTED + comparator.toString());
-        SortCommand command = new SortCommand(comparator);
+        SortCommand command = new SortCommand(comparator, PREFIX_READING_PROGRESS);
         expectedModel.sortFilteredBookList(comparator);
+        expectedModel.setSortingPreference(PREFIX_READING_PROGRESS.toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         expectedModel.addBook(HAMLET);
         assertEquals(Arrays.asList(HAMLET, THE_HUNGER_GAMES, TO_KILL_A_MOCKINGBIRD, ENDERS_GAME, LORD_OF_THE_FLIES,
