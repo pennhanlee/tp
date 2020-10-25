@@ -36,7 +36,7 @@ public class DetailedBookListPanel extends BookListPanel {
         assert(bookList.size() <= 1);
         ObservableList<Note> notes = getNotes(bookList);
         bookNotesListView.setItems(notes);
-        bookNotesListView.setCellFactory(lv -> new noteListViewCell());
+        bookNotesListView.setCellFactory(lv -> new NoteListViewCell());
         if (notes.size() < 1) {
             notesHeading.setText("Notes: No Notes to display");
         } else {
@@ -50,7 +50,7 @@ public class DetailedBookListPanel extends BookListPanel {
     private ObservableList<Note> getNotes(List<Book> books) {
         List<Note> notes = books.stream()
                 .map(Book::getNotes)
-                .reduce(new ArrayList<Note>(), (a,b) -> {
+                .reduce(new ArrayList<Note>(), (a, b) -> {
                     a.addAll(b);
                     return a;
                 });
@@ -77,7 +77,7 @@ public class DetailedBookListPanel extends BookListPanel {
     /**
      * Custom {@code ListCell} that displays the notes of a {@code Book} using a {@code NoteCard}.
      */
-    class noteListViewCell extends ListCell<Note> {
+    class NoteListViewCell extends ListCell<Note> {
         @Override
         protected void updateItem(Note note, boolean empty) {
             super.updateItem(note, empty);

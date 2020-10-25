@@ -3,7 +3,6 @@ package seedu.bookmark.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TEXT;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
-import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.ArrayList;
 import java.util.List;
