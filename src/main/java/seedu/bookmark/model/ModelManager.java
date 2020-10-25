@@ -2,11 +2,8 @@ package seedu.bookmark.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_DUMMY;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+import static seedu.bookmark.logic.parser.CliSyntax.sortingPrefixGenerator;
+import static seedu.bookmark.model.book.comparators.ComparatorGenerator.comparatorGenerator;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -19,10 +16,6 @@ import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.comparators.BookGenreComparator;
-import seedu.bookmark.model.book.comparators.BookNameComparator;
-import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
-import seedu.bookmark.model.book.comparators.BookReadingProgressComparator;
 
 /**
  * Represents the in-memory model of the bookmark data.
@@ -47,7 +40,7 @@ public class ModelManager implements Model {
 
         this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.comparator = comparatorGenerator(prefixGenerator(userPrefs.getSortingPreference()));
+        this.comparator = comparatorGenerator(sortingPrefixGenerator(userPrefs.getSortingPreference()));
         filteredBooks = new FilteredList<>(this.library.getBookList());
         this.wordBank = new WordBank(library);
     }
@@ -175,49 +168,6 @@ public class ModelManager implements Model {
     public void sortFilteredBookList(Comparator<Book> comparator) {
         this.comparator = comparator;
         this.library.sortBooks(comparator);
-    }
-
-    /**
-     * Returns a comparator based on the input prefix
-     * @return Comparator based on input prefix
-     */
-    public Comparator<Book> comparatorGenerator(Prefix inputPrefix) {
-        Comparator<Book> comparator = null;
-        if (inputPrefix == PREFIX_NAME) {
-            comparator = new BookNameComparator();
-        } else if (inputPrefix == PREFIX_GENRE) {
-            comparator = new BookGenreComparator();
-        } else if (inputPrefix == PREFIX_BOOKMARK) {
-            comparator = new BookPagesReadComparator();
-        } else if (inputPrefix == PREFIX_READING_PROGRESS) {
-            comparator = new BookReadingProgressComparator();
-        }
-        return comparator;
-    }
-
-    /**
-     * Returns a prefix based on the input string.
-     * @return Prefix based on the input string.
-     */
-    public Prefix prefixGenerator(String prefix) {
-        Prefix result;
-        switch (prefix) {
-        case "n/":
-            result = PREFIX_NAME;
-            break;
-        case "g/":
-            result = PREFIX_GENRE;
-            break;
-        case "b/":
-            result = PREFIX_BOOKMARK;
-            break;
-        case "rp/":
-            result = PREFIX_READING_PROGRESS;
-            break;
-        default:
-            return PREFIX_DUMMY;
-        }
-        return result;
     }
 
     @Override

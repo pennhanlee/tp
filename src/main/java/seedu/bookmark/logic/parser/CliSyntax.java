@@ -19,4 +19,29 @@ public class CliSyntax {
     public static final Prefix PREFIX_COMPLETED = new Prefix("c/");
     public static final Prefix PREFIX_NOT_COMPLETED = new Prefix("nc/");
     public static final Prefix PREFIX_DUMMY = new Prefix("dummy/");
+
+    /**
+     * Returns a prefix based on the input string.
+     * @return Prefix based on the input string.
+     */
+    public static Prefix sortingPrefixGenerator(String prefix) {
+        Prefix result;
+        switch (prefix) {
+        case "n/":
+            result = PREFIX_NAME;
+            break;
+        case "g/":
+            result = PREFIX_GENRE;
+            break;
+        case "b/":
+            result = PREFIX_BOOKMARK;
+            break;
+        case "rp/":
+            result = PREFIX_READING_PROGRESS;
+            break;
+        default:
+            return PREFIX_DUMMY;
+        }
+        return result;
+    }
 }

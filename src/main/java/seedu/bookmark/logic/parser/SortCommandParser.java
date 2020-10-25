@@ -5,16 +5,13 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+import static seedu.bookmark.model.book.comparators.ComparatorGenerator.comparatorGenerator;
 
 import java.util.Comparator;
 
 import seedu.bookmark.logic.commands.SortCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.comparators.BookGenreComparator;
-import seedu.bookmark.model.book.comparators.BookNameComparator;
-import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
-import seedu.bookmark.model.book.comparators.BookReadingProgressComparator;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -66,23 +63,5 @@ public class SortCommandParser implements Parser<SortCommand> {
         comparator = comparatorGenerator(inputPrefix);
 
         return new SortCommand(comparator, inputPrefix);
-    }
-
-    /**
-     * Returns a comparator based on the input prefix
-     * @return Comparator based on input prefix
-     */
-    public Comparator<Book> comparatorGenerator(Prefix inputPrefix) {
-        Comparator<Book> comparator = null;
-        if (inputPrefix == PREFIX_NAME) {
-            comparator = new BookNameComparator();
-        } else if (inputPrefix == PREFIX_GENRE) {
-            comparator = new BookGenreComparator();
-        } else if (inputPrefix == PREFIX_BOOKMARK) {
-            comparator = new BookPagesReadComparator();
-        } else if (inputPrefix == PREFIX_READING_PROGRESS) {
-            comparator = new BookReadingProgressComparator();
-        }
-        return comparator;
     }
 }
