@@ -21,6 +21,7 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
+import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.testutil.BookBuilder;
 
@@ -125,6 +126,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public WordBank getWordBank() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasBook(Book book) {
             throw new AssertionError("This method should not be called.");
         }
@@ -138,6 +144,12 @@ public class AddCommandTest {
         public void setBook(Book target, Book editedBook) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void undo(){}
+
+        @Override
+        public void redo(){}
 
         @Override
         public ObservableList<Book> getFilteredBookList() {

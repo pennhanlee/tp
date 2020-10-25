@@ -79,7 +79,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         predicate = predicateGenerator(inputPrefix, keywords);
 
-        return new FindCommand(predicate);
+        return new FindCommand(predicate, inputPrefix, keywords);
     }
 
     /**

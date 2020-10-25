@@ -6,7 +6,6 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
-import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,6 +16,7 @@ import java.util.Set;
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.CollectionUtil;
+import seedu.bookmark.logic.commands.CommandResult.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -67,7 +67,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Book> lastShownList = model.getFilteredBookList();
+        final List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
@@ -82,8 +82,8 @@ public class EditCommand extends Command {
             throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
         }
         model.setBook(bookToEdit, editedBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook),
+                false, false, ViewType.MOST_RECENTLY_USED);
     }
 
     /**

@@ -18,7 +18,7 @@ import seedu.bookmark.model.book.exceptions.BookNotFoundException;
 import seedu.bookmark.model.book.exceptions.DuplicateBookException;
 import seedu.bookmark.testutil.BookBuilder;
 
-public class UniqueLibraryTest {
+public class UniqueBookListTest {
 
     private final UniqueBookList uniqueBookList = new UniqueBookList();
 

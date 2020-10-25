@@ -53,6 +53,9 @@ public interface Model {
     /** Returns the Library */
     ReadOnlyLibrary getLibrary();
 
+    /** Returns the EditDistance */
+    WordBank getWordBank();
+
     /**
      * Returns true if a book with the same identity as {@code book} exists in the Library.
      */
@@ -79,6 +82,16 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered book list */
     ObservableList<Book> getFilteredBookList();
+
+    /**
+     * Undoes the most recent change that modified the books stored in the {@code Model}.
+     */
+    void undo();
+
+    /**
+     * Redoes the most recently undone change that modified the books stored in the {@code Model}.
+     */
+    void redo();
 
     /**
      * Updates the filter of the filtered book list to filter by the given {@code predicate}.
