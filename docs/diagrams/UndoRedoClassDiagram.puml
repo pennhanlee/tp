@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+
+package Model {
+Interface Model <<Interface>>
+Class ModelManager
+Interface ReadOnlyLibrary<<Interface>>
+Interface ReadOnlyUserPrefs<<Interface>>
+Interface Predicate<<Interface>>
+Class HistoryManager
+Class State
+}
+
+Model : undo()
+Model : redo()
+show Model members
+
+HistoryManager : addNewState()
+HistoryManager : undo()
+HistoryManager : redo()
+show HistoryManager members
+
+ModelManager .up.|> Model
+ModelManager *--> HistoryManager
+
+HistoryManager --up-> "1..*" State : > Contains
+
+State *-up-> "1" ReadOnlyLibrary
+State *-up-> "1" ReadOnlyUserPrefs
+State *-up-> "0..1" Predicate
+
+@enduml
