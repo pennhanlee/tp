@@ -49,7 +49,9 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -70,7 +72,10 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -82,7 +87,10 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -93,13 +101,16 @@ public class EditCommandTest {
         Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_JANE_EYRE).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK,
                 new EditBookDescriptorBuilder().withName(VALID_NAME_JANE_EYRE).build());
-
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
+        model.updateFilteredBookList(b -> true);
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
+        expectedModel.updateFilteredBookList(b -> true);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -174,7 +185,10 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+
+        assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
     @Test

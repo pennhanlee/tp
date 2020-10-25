@@ -160,7 +160,6 @@ Example Command | Result
 -----------------|--------
 `edit 1 b/101` | Edits the bookmark of the 1st book to be `101`.
 
-<<<<<<< HEAD
 ### Set goal for your book: `goal`
 
 Set a reading goal to finish a certain page by a deadline for a book in the list.
@@ -169,7 +168,7 @@ Format: `goal INDEX p/PAGE d/DEADLINE`
 
 * Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
 * Page number and deadline must be provided.
-=======
+
 ### Adding a note to a book : `note`
 
 Adds a note to an existing book in the list.
@@ -189,7 +188,38 @@ Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
 
->>>>>>> 254f1595b3e4abc258496f948fc2f7eb7e0101f8
+### Undoing a command : `undo`
+
+Undoes the last command that you made. Can be used multiple times consecutively to undo up to ten 
+commands entered.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: About commands that can be undone:**<br>
+
+* Only certain commands can be undone. <br>
+
+* These commands include the following: <br>
+  * `add`
+  * `delete`
+  * `edit`
+  * `note`
+  * `goal`
+  * `sort`
+
+</div>
+
+The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
+entered during your usage session cannot be undone using the `undo` command the next time you start _bookmark_ again.
+
+### Redoing a command: `redo`
+
+Redoes the last command that you have undone. Can be used multiple times consecutively to redo up to ten 
+undone commands. This command is to be used in conjunction with the [undo](#undoing-a-command--undo) command.
+
+The redo command will not execute if there are no undone commands available to undo. Once you close _bookmark_, the
+commands that you have undone during your usage session cannot be redone using the `redo` command the next time you
+start _bookmark_ again.
 
 ### Clearing all books : `clear` [coming soon]
 

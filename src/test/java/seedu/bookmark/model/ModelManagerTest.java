@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.model.book.predicates.NameContainsKeywordsPredicate;
+import seedu.bookmark.model.exceptions.RedoException;
+import seedu.bookmark.model.exceptions.UndoException;
 import seedu.bookmark.testutil.LibraryBuilder;
 
 public class ModelManagerTest {
@@ -91,6 +93,43 @@ public class ModelManagerTest {
     @Test
     public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredBookList().remove(0));
+    }
+
+    @Test
+    public void undo_nothingToUndo_throwsUndoException() {
+        Library library = new LibraryBuilder().withBook(HARRY_POTTER).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(library, userPrefs);
+        assertThrows(UndoException.class, modelManager::undo);
+    }
+
+    @Test
+    public void undo_validUndo_success() {
+        Library library = new LibraryBuilder().withBook(HARRY_POTTER).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(library, userPrefs);
+        modelManager.deleteBook(HARRY_POTTER);
+        modelManager.undo();
+        assertTrue(modelManager.hasBook(HARRY_POTTER));
+    }
+
+    @Test
+    public void redo_nothingToRedo_throwsRedoException() {
+        Library library = new LibraryBuilder().withBook(HARRY_POTTER).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(library, userPrefs);
+        assertThrows(RedoException.class, modelManager::redo);
+    }
+
+    @Test
+    public void undoThenRedo_validUndoRedo_success() {
+        Library library = new LibraryBuilder().withBook(HARRY_POTTER).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(library, userPrefs);
+        modelManager.deleteBook(HARRY_POTTER);
+        modelManager.undo();
+        modelManager.redo();
+        assertFalse(modelManager.hasBook(HARRY_POTTER));
     }
 
     @Test
