@@ -18,16 +18,22 @@ public class CommandResult {
     private final boolean exit;
 
     /** The application should change view. */
-    private final boolean detailedView;
+    private final ViewType viewType;
+
+    public enum ViewType {
+        DEFAULT,
+        DETAILED,
+        MOST_RECENTLY_USED
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean detailedView) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, ViewType viewType) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.detailedView = detailedView;
+        this.viewType = viewType;
     }
 
     /**
@@ -35,7 +41,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, ViewType.DEFAULT);
     }
 
     public String getFeedbackToUser() {
@@ -50,8 +56,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isDetailedView() {
-        return detailedView;
+    public ViewType getViewType() {
+        return viewType;
     }
 
     @Override
@@ -68,12 +74,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && viewType.toString().equals(otherCommandResult.viewType.toString());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, viewType.toString());
     }
 
 }

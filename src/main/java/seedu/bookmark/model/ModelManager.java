@@ -13,6 +13,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.exceptions.RedoException;
+import seedu.bookmark.model.exceptions.UndoException;
+import seedu.bookmark.model.history.HistoryManager;
+import seedu.bookmark.model.history.State;
 
 /**
  * Represents the in-memory model of the bookmark data.
@@ -22,8 +26,9 @@ public class ModelManager implements Model {
 
     private final Library library;
     private final UserPrefs userPrefs;
-    private FilteredList<Book> filteredBooks;
+    private final FilteredList<Book> filteredBooks;
     private final WordBank wordBank;
+    private HistoryManager historyManager;
 
     /**
      * Initializes a ModelManager with the given library and userPrefs.
@@ -36,8 +41,10 @@ public class ModelManager implements Model {
 
         this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredBooks = new FilteredList<>(this.library.getBookList());
+        this.filteredBooks = new FilteredList<>(this.library.getBookList());
         this.wordBank = new WordBank(library);
+        State initialState = State.createState(library, userPrefs, filteredBooks.getPredicate());
+        this.historyManager = new HistoryManager(initialState);
     }
 
     public ModelManager() {
@@ -50,6 +57,8 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
@@ -105,21 +114,34 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.deleteFromWordBank(target);
-
     }
 
     @Override
     public void addBook(Book book) {
         library.addBook(book);
-        wordBank.addToWordBank(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
+        wordBank.addToWordBank(book);
+
     }
 
     @Override
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
         library.setBook(target, editedBook);
+
+        // to ensure the edited book doesn't leave the view
+        Predicate<? super Book> prevPredicate = filteredBooks.getPredicate() != null
+                ? filteredBooks.getPredicate()
+                : PREDICATE_SHOW_ALL_BOOKS;
+        updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
+
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.updateWordBank(target, editedBook);
     }
 
@@ -127,11 +149,27 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code Library}
      */
     @Override
     public ObservableList<Book> getFilteredBookList() {
         return filteredBooks;
+    }
+
+    @Override
+    public void undo() throws UndoException {
+        historyManager = historyManager.undo();
+        State newState = historyManager.getCurrentState();
+
+        resetModelData(newState);
+    }
+
+    @Override
+    public void redo() throws RedoException {
+        historyManager = historyManager.redo();
+        State newState = historyManager.getCurrentState();
+
+        resetModelData(newState);
     }
 
     @Override
@@ -143,6 +181,20 @@ public class ModelManager implements Model {
     @Override
     public void sortFilteredBookList(Comparator<Book> comparator) {
         this.library.sortBooks(comparator);
+    }
+
+    /**
+     * Reset the data stored in this {@code ModelManager} to that stored in the given {@code State}.
+     */
+    private void resetModelData(State state) {
+        library.resetData(state.getLibrary());
+        userPrefs.resetData(state.getUserPrefs());
+        System.out.println(state.getPredicate() != null);
+        Predicate<? super Book> prevPredicate = state.getPredicate() != null
+                ? state.getPredicate()
+                : PREDICATE_SHOW_ALL_BOOKS;
+        filteredBooks.setPredicate(prevPredicate);
+        wordBank.resetWordBank(library);
     }
 
     @Override

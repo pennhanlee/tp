@@ -161,11 +161,13 @@ The class diagram below shows the relevant classes involved:
 
 `MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()`
 which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
-From the returned `CommandResult`, `CommandResult#isDetailedView()` indicates whether the UI should be in the detailed view,
-or the default summarised view.
+From the returned `CommandResult`, `CommandResult#getViewType()` indicates whether the UI should switch to the 
+detailed view, switch to the the default summarised view or remain in whatever view it currently is in. 
+`CommandResult#getViewType()` returns a `ViewType`, of which there are three types: `ViewType.DEFAULT`, `ViewType.DETAILED`
+and `ViewType.MOST_RECENTLY_USED`.
 
-Based on the value returned by `CommandResult#isDetailedView()`, either `MainWindow#changeToDetailedView()` or
-`MainWindow#resetView()` is called accordingly.
+Based on the type of `ViewType` returned by `CommandResult#getViewType()`, `MainWindow#changeToDetailedView()`,
+`MainWindow#resetView()`, or no method is called accordingly.
 
 The activity diagram below illustrates the flow of execution when the UI decides which view to use:
 
@@ -182,7 +184,7 @@ detailed view:
 
 * **Alternative 1 (current choice):** Use JavaFX ListView
   * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
-  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is currently only meant to show
+  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is only meant to show
   one book
 
 * **Alternative 2:** Use other JavaFX layouts
@@ -351,89 +353,148 @@ Command: `note 1 n/Thoughts txt/Something`
 
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
+#### Implementation
 
-#### Proposed Implementation
+The undo/redo mechanism is facilitated by `HistoryManager`. `HistoryManager` manages the current model state as well as 
+the states that can be undone/redone. It does so by storing `State` objects. Each `State` object contains a 
+`ReadOnlyLibrary`, `ReadOnlyUserPrefs` and a `Predicate` used to decide which books should be visible to the user. 
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `HistoryManager#addNewState()` — Add a new state to be used as the current state
+* `HistoryManager#undo()` — Restores the most recent previous state from its history.
+* `HistoryManager#redo()` — Restores the most recently undone state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
+Whenever the user enters a one of the following commands:
+  * `add`
+  * `delete`
+  * `edit`
+  * `note`
+  * `goal`
+  * `sort`
+  
+the previous state
+will be saved and a new state created by calling `HistoryManager#addNewState()`. 
+This occurs whenever the methods exposed to modify the model such as: `Model#addBook()`, `Model#removeBook()` 
+and `Model#setBook()` and `Model#setUserPrefs` are called. The class diagram below illustrates the classes that facilitates the undo and redo
+feature.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+#### How state is managed
+
+`HistoryManager` manages state by keeping a current state variable as well as two deques, an undo deque and a redo deque.
+The undo deque stores the states to be recovered via an undo command, while the redo deque stores previously undone states 
+to be recovered via a redo command. Below is an example to illustrate how `HistoryManager` manages state.
+
+Step 1. The user launches the application for the first time. The `HistoryManager` will be inititalised with the
+initial state of the model as the current state, i.e State 1. Undo and redo deques will be empty.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th book in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes add command to add a new book. This command will call the `Model#addBook()` method
+which in turn will call the `HistoryManager#addNewState()` method, causing a new state, State 2 to be created and saved
+as the current state. The previous current state, State 1, will be pushed into the undo deque.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new book. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `HistoryManager#addNewState()`, so the state will not be saved.
+
+</div>
+
+Step 3. The user decides that adding the book was a mistake and decides to undo the action by using the undo command.
+This causes the current state, State 2 to be pushed to the redo deque. State 1 will be popped from the undo deque and 
+made the current state.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the book was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
 
 The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+Step 4. The user changes his mind again, deciding that he wants to add the book. He redoes the action by using the redo
+command, causing the current state, State 1 to be pushed back into the undo deque and State 2 to be popped from the redo
+deque and made the current state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the undo deque or redo deque is empty
+when the user tries to undo and redo respectively, an error will be shown and no state change will occur.
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that only change which books are displayable to 
+the user such as `list`, `view` or `find` will not create new states.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. Now suppose the user adds a book and then edits a book, causing State 3 and State 4 to be created. He then
+undoes the edit command. `HistoryManager` will now look like this:
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+Step 7: The user decides to then delete a book, causing State 5 to be created and made the current state.
+The previous current state, State 3, will be pushed into the undo deque while the redo deque is cleared and 
+hence State 4 is deleted.
 
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
+![UndoRedoState6](images/UndoRedoState6.png)
+
+This design choice of clearing the redo deque when a new state is added was made because states existing in the redo deque
+cannot be represented in a linear, sequential path together with newly added states. Hence, it will be confusing
+to allow users to redo to these states. To see this, we can plot the evolution of state changes in a sequential manner: 
+
+![UndoRedoState7](images/UndoRedoState7.png)
+
+To get a clearer picture, we consider what could occur if the redo deque is not 
+cleared upon adding new state into the `HistoryManager`. 
+
+Consider a scenario where the redo deque originally contains some state. The user subsequently enters 
+5 commands that each create a new state and the redo deque is never cleared upon new states being added.
+Then, the user enters the redo command, causing the top-most state in the redo deque to be popped and made the current state. 
+As a result, all the changes that the user has done through the 5 commands are removed in a single redo command, 
+which is not the intended behaviour.
+
+Furthermore, to prevent excessive memory usage, a cap on the number of states stored by `HistoryManager`'s undo deque
+can be set in `HistoryManager#MAX_UNDO_COUNT`. If a new state is added but the undo deque is already at max capacity,
+then the oldest state in the undo deque will be deleted to make room. The activity diagram below explains the flow of
+execution when a new state is added.
+
+![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
 #### Design consideration:
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves copies of the entire `Library` and `UserPrefs`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the book being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the implementation of each individual command are correct, complexity builds up as more
+  commands are added.
+  
+Alternative 1 was eventually chosen as there was no noticable performance degradation during testing with a reasonable 
+cap (10) on the number of states stored. It is also much more scalable and less prone to breaking upon addition
+or modification of commands. 
 
-_{more aspects and alternatives to be added}_
+##### Aspect: How to decide which actions should create and save state
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 1 (current choice):** The methods implemented by `ModelManager` to modify the model also creates and 
+    save state.
+  * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
+    and thus warrants the creation and saving of state.
+  * Cons: The creation and saving of state becomes a side effect, not immediately clear that it occurs.
+  
+* **Alternative 2:** Expose a method in the `Model` interface that when called creates and saves state.
+  * Pros: More declarative, easier to see when the model will create and save state.
+  * Cons: Worse separation of concerns, the responsibility of deciding when to create and save state is moved away 
+    from the model and to the components that interact with the model.
+    
+Alternative 1 was eventually chosen as we liked the clear separation of concerns it provides. We also feel that it is 
+less prone to errors such as forgetting to call the hypothetical "save" method that would exist in alternative 2, 
+or calling it in the wrong places, especially when more commands are added.
 
 --------------------------------------------------------------------------------------------------------------------
 
