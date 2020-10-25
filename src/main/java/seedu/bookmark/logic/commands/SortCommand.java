@@ -34,6 +34,10 @@ public class SortCommand extends Command {
     private final Comparator<Book> comparator;
     private final Prefix inputPrefix;
 
+    /**
+     * @param comparator The comparator to sort the book list by
+     * @param inputPrefix The new sorting preference prefix
+     */
     public SortCommand(Comparator<Book> comparator, Prefix inputPrefix) {
         this.comparator = comparator;
         this.inputPrefix = inputPrefix;

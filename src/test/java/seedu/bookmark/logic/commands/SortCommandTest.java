@@ -3,6 +3,10 @@ package seedu.bookmark.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_BOOKS_SORTED;
 import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 import static seedu.bookmark.testutil.TypicalBooks.CRIME_AND_PUNISHMENT;
 import static seedu.bookmark.testutil.TypicalBooks.ENDERS_GAME;
 import static seedu.bookmark.testutil.TypicalBooks.HAMLET;
@@ -12,11 +16,6 @@ import static seedu.bookmark.testutil.TypicalBooks.ON_THE_ROAD;
 import static seedu.bookmark.testutil.TypicalBooks.THE_HUNGER_GAMES;
 import static seedu.bookmark.testutil.TypicalBooks.TO_KILL_A_MOCKINGBIRD;
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
-
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 
 import java.util.Arrays;
 

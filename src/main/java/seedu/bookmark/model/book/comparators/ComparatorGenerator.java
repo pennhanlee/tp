@@ -6,6 +6,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 
 import java.util.Comparator;
+
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.book.Book;
 
