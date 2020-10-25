@@ -48,6 +48,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
+    private static final Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
