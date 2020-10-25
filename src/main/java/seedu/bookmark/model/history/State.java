@@ -16,6 +16,7 @@ public class State {
 
     private final ReadOnlyLibrary library;
     private final ReadOnlyUserPrefs userPrefs;
+    /** {@code Predicate} to be applied to the {@code Book} stored in the {@code ReadOnlyLibrary} */
     private final Predicate<? super Book> filterPredicate;
 
     /**
@@ -41,14 +42,23 @@ public class State {
         return new State(copiedLibrary, copiedUserPrefs, filterPredicate);
     }
 
+    /**
+     * Returns the {@code ReadOnlyLibrary} stored in this {@code State}.
+     */
     public ReadOnlyLibrary getLibrary() {
         return this.library;
     }
 
+    /**
+     * Returns the {@code ReadOnlyUserPrefs} stored in this {@code State}.
+     */
     public ReadOnlyUserPrefs getUserPrefs() {
         return this.userPrefs;
     }
 
+    /**
+     * Returns the {@code Predicate} used stored in this {@code State}.
+     */
     public Predicate<? super Book> getPredicate() {
         return this.filterPredicate;
     }

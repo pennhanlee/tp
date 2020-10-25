@@ -365,9 +365,17 @@ the states that can be undone/redone. It does so by storing `State` objects. Eac
 * `HistoryManager#redo()` — Restores the most recently undone state from its history.
 
 The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
-Whenever the user enters a command (besides `undo/redo/help/exit/list/view/find`), the previous state
+Whenever the user enters a one of the following commands:
+  * `add`
+  * `delete`
+  * `edit`
+  * `note`
+  * `goal`
+  * `sort`
+  
+the previous state
 will be saved and a new state created by calling `HistoryManager#addNewState()`. 
-This occurs whenever the methods exposed to modify the model: `Model#addBook()`, `Model#removeBook()` 
+This occurs whenever the methods exposed to modify the model such as: `Model#addBook()`, `Model#removeBook()` 
 and `Model#setBook()` and `Model#setUserPrefs` are called. The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
 

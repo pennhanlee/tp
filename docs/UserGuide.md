@@ -196,7 +196,7 @@ commands entered.
 
 **:information_source: About commands that can be undone:**<br>
 
-* Only commands that caused a change to the books stored in _bookmark_ can be undone.<br>
+* Only certain commands can be undone. <br>
 
 * These commands include the following: <br>
   * `add`
@@ -204,6 +204,7 @@ commands entered.
   * `edit`
   * `note`
   * `goal`
+  * `sort`
 
 </div>
 
