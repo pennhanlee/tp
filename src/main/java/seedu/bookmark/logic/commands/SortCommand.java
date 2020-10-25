@@ -39,6 +39,8 @@ public class SortCommand extends Command {
      * @param inputPrefix The new sorting preference prefix
      */
     public SortCommand(Comparator<Book> comparator, Prefix inputPrefix) {
+        requireNonNull(comparator);
+        requireNonNull(inputPrefix);
         this.comparator = comparator;
         this.inputPrefix = inputPrefix;
     }
