@@ -158,13 +158,6 @@ public class Book {
     }
 
     /**
-     * Returns true if this {@code Book} contains at least one {@code Note}.
-     */
-    public boolean hasNotes() {
-        return notes.size() > 0;
-    }
-
-    /**
      * Returns true if the exact same note is present in the note list of the book.
      */
     public boolean containsNote(Note note) {
