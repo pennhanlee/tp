@@ -29,7 +29,7 @@ public class WordStore {
 
     /**
      * Adds words from a given list into the Store
-     * @param words
+     * @param words list of words to be added
      */
     public void addWords(List<String> words) {
         for (String word : words) {
@@ -40,7 +40,7 @@ public class WordStore {
 
     /**
      * Deletes words from a given list out of the Store
-     * @param words
+     * @param words list of words to be deleted
      */
     public void deleteWords(List<String> words) {
         for (String word : words) {
@@ -51,7 +51,7 @@ public class WordStore {
     /**
      * Processes the provided word into wordStore by either creating a new Word or incrementing the count based on
      * whether the word already exists
-     * @param targetWord
+     * @param targetWord word to be added
      */
     public void wordAdder(String targetWord) {
         requireNonNull(targetWord);
@@ -70,7 +70,7 @@ public class WordStore {
      * Processes the provided word out of wordStore by either removing the word or minusing the count based on
      * whether the word count > 1
      * If there are no words found, the deletion is ignored
-     * @param targetWord
+     * @param targetWord word to be deleted
      */
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
