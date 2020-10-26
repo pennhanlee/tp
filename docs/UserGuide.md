@@ -3,14 +3,14 @@ layout: page
 title: User Guide
 ---
 
-bookmark is a **desktop app for tracking reading progress and book loans, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, bookmark can get your reading and book management tasks done faster than traditional GUI apps.
+_bookmark_ is a **desktop app for tracking reading progress and book loans, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, bookmark can get your reading and book management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start [coming soon]
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -22,18 +22,8 @@ bookmark is a **desktop app for tracking reading progress and book loans, optimi
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-   
-Example Command | Result
------------------|--------
-`list` | Lists all books.
-`add n/Fifty Shades of Gray g/Romance tp/350 b/200` | Adds a book titled `Fifty Shades of Grey` to the Storage Library.
-`edit 1 b/300` | Edits the bookmark of the first book shown to page `300`.
-`delete 3` | Deletes the 3rd book shown in the current list.
-`note 2 n/Thoughts txt/The dog is the killer` | Adds a note to the second book shown titled `Thoughts` with the content `The dog is the killer`.
-`exit` | Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +50,7 @@ Example Command | Result
 
 ### Adding a bookmark: `add`
 
-Adds a book to the Storage Library.
+Adds a book to _bookmark_.
 
 Format: `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
 
@@ -76,20 +66,19 @@ Example Command | Result
 Shows all details of one specified book.
 
 Format: `view INDEX`
-* View the title, bookmark and percentage completed of a specified book.
+* View the title, bookmark and percentage completed, goal and notes added of a specified book.
 * INDEX refers to index number shown in displayed book list, which must be
-a positive integer and be from 1 to total number of books you track.
+a positive number and be from 1 to the total number of books in _bookmark_.
 
 Examples:
-* This assumes you are tracking at least 3 books.
-* `list` followed by `view 3` results in:
-    * **book title:** Fifty shades of grey
-    * **bookmark:** Page 138
-    * **read**: 138/200 (69%)
+* This assumes you are tracking at least 2 books.
+* `list` followed by `view 2` results in:
+
+    ![detailed_view](images/detailed_view.PNG)
 
 ### Listing all books : `list`
 
-Shows a list of all books in the Storage Library.
+Shows a list of all books in _bookmark_.
 
 Format: `list`
 
@@ -97,8 +86,14 @@ Format: `list`
 
 Find books that adhere to the input filter.
 
-Format: `find [n/BOOK_TITLE] KEYWORDS, find [c/COMPLETED_BOOKS]`
+Format: 
+* `find n/BOOK_TITLE`
+* `find g/GENRE`
+* `find t/TAG`
+* `find c/`
+* `find nc/`
 
+Purpose: 
 * Finds books whose specified field contains any of the input keywords.
 * Can also find completed books & non-completed books using "c/" and "nc/" prefixes.
 * No keywords are required for finding completed & non-completed books.
@@ -107,33 +102,41 @@ Examples:
 
 Example Command | Result
 -----------------|--------
-`find n/ ant bear` | Returns a list of books that contain `ant` and/or `bear` in the "Name" field.
-`find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in the "Tag" field.
+`find n/ ant bear` | Returns a list of books that contain `ant` and/or `bear` in its name.
+`find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
 `find c/` | Returns a list of completed books.
 
 ### Sorting books: `sort` 
 
-Sort books according to the condition inputted.
+Sort books according to the condition inputted, and sets it as a user preference.
 
-Format: `sort [n/BOOK_TITLE] `
+Format: 
+*`sort n/`
+*`sort g/`
+*`sort b/`
+*`sort rp/`
 
-* Sorts books in descending order according to the input filter.
-* Supports sorting by Name, Genre and Bookmark fields.
+Purpose:
+* Sorts books according to the input filter.
+* Supports sorting by Name, Genre, Bookmarked page and Reading progress.
 
 Examples:
-*  `sort n/` Returns a list of books sorted by name lexicographical order.
-*  `sort g/` Returns a list of books sorted by genre lexicographical order.
-*  `sort b/` Returns a list of books sorted by ascending number of pages read (bookmark)
+Example Command | Result
+-----------------|--------
+`sort n/` | Returns a list of books sorted by name alphabetical order.
+`sort g/` | Returns a list of books sorted by genre alphabetical order.
+`sort b/` | Returns a list of books sorted by ascending number of pages read.
+`sort rp/` | Returns a list of books sorted by ascending reading progress.
 
 ### Deleting a book : `delete`
 
-Deletes the specified book from the book list.
+Deletes the specified book from _bookmark_.
 
 Format: `delete INDEX`
 
 * Deletes the book at the specified `INDEX`.
 * The index refers to the index number shown in the displayed book list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The index **must be a positive number** 1, 2, 3, …
 
 Examples:
 
@@ -143,13 +146,13 @@ Example Command | Result
 
 ### Editing a book : `edit`
 
-Edits an existing book in the list.
+Edits an existing book in _bookmark_.
 
 Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
 
 * Edits the book at the specified `INDEX`.
 * The index refers to the index number shown in the displayed book list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -161,22 +164,28 @@ Example Command | Result
 
 ### Set goal for your book: `goal`
 
-Set a reading goal to finish a certain page by a deadline for a book in the list.
+Set a reading goal to finish a certain page by a deadline for a book in _bookmark_.
 
-Format: `goal INDEX p/PAGE d/DEADLINE`
+Format: `goal INDEX p/PAGE d/DD-MM-YYYY`
 
-* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …​
+* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive number** 1, 2, 3, …​
 * Page number and deadline must be provided.
+
+Examples:
+
+Example Command | Result
+-----------------|--------
+`goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the first book by 22nd May 2020.
 
 ### Adding a note to a book : `note`
 
-Adds a note to an existing book in the list.
+Adds a note to an existing book in _bookmark_.
 
 Format: `note INDEX n/TITLE txt/TEXT`
 
 * Edits the book at the specified `INDEX`.
 * The index refers to the index number shown in the displayed book list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive number** 1, 2, 3, …​
 * `TITLE` and `INDEX` must not start with a whitespace.
 * `TITLE` is limited to 1 to 120 characters.
 * `TEXT` is limited to 1 to 1000 characters.
