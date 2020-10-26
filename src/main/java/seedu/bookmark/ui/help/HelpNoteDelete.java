@@ -1,8 +1,8 @@
 package seedu.bookmark.ui.help;
 
-public class HelpGoal implements HelpAction {
+public class HelpNoteDelete implements HelpAction {
 
-    public HelpGoal() {}
+    public HelpNoteDelete() {}
 
     @Override
     public String helpIntro() {

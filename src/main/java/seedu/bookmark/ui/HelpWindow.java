@@ -26,33 +26,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f13-2.github.io/tp/";
     public static final String HEADER_MESSAGE = "Welcome to bookmark!\n"
                                                 + "Click on the Copy URL button for the link to our Website!\n";
-
-    public static final String DELETE_INTRO = "You can now DELETE a book! \n";
-    public static final String DELETE_COMMAND = "delete {Index} \n";
-    public static final String DELETE_EXAMPLE = "eg. delete 3 \n";
-    public static final String DELETE_RESPONSE = "Response: \nDeleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
-                                            + "Bookmarked at: 3 Tags: [Japanese]";
-
-    public static final String VIEW_INTRO = "You can now VIEW a book's contents! \n";
-    public static final String VIEW_COMMAND = "view {Index} \n";
-    public static final String VIEW_EXAMPLE = "eg. view 3 \n";
-    public static final String VIEW_RESPONSE = "Response: \nViewing 3";
-
-    public static final String LIST_INTRO = "You can now LIST all recorded books! \n";
-    public static final String LIST_COMMAND = "list \n";
-    public static final String LIST_EXAMPLE = "eg. list \n";
-    public static final String LIST_RESPONSE = "Response: \nListing all books";
-
-    public static final String EDIT_INTRO = "You can now EDIT a book's contents! \n";
-    public static final String EDIT_COMMAND = "edit {Index} *b/{Bookmarked Page} \n";
-    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 \n";
-    public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
-                                            + " Bookmarked at: 360";
-
-    public static final String LIST_MESSAGE = LIST_INTRO + LIST_COMMAND + LIST_EXAMPLE + LIST_RESPONSE;
-    public static final String VIEW_MESSAGE = VIEW_INTRO + VIEW_COMMAND + VIEW_EXAMPLE + VIEW_RESPONSE;
-    public static final String EDIT_MESSAGE = EDIT_INTRO + EDIT_COMMAND + EDIT_EXAMPLE + EDIT_RESPONSE;
-    public static final String DELETE_MESSAGE = DELETE_INTRO + DELETE_COMMAND + DELETE_EXAMPLE + DELETE_RESPONSE;
+    public static final String HEADER_ICON = "";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
