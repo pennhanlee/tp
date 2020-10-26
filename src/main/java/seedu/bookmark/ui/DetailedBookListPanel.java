@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,10 +31,18 @@ public class DetailedBookListPanel extends BookListPanel {
      */
     public DetailedBookListPanel(ObservableList<Book> bookList) {
         super(FXML);
+        assert(bookList.size() <= 1);
+
         bookListView.setItems(bookList);
         bookListView.setCellFactory(lv -> new DetailedBookListViewCell());
 
-        assert(bookList.size() <= 1);
+        showNotes(bookList);
+        bookList.addListener((ListChangeListener<Book>) c -> {
+            showNotes(bookList);
+        });
+    }
+
+    private void showNotes(ObservableList<Book> bookList) {
         ObservableList<Note> notes = getNotes(bookList);
         bookNotesListView.setItems(notes);
         bookNotesListView.setCellFactory(lv -> new NoteListViewCell());

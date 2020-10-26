@@ -1,5 +1,6 @@
 package seedu.bookmark.ui;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -29,12 +30,15 @@ public class SidebarPanel extends UiPart<Region> {
         super(FXML);
         this.books = books;
         update(books);
+        books.addListener((ListChangeListener<Book>) c -> {
+            update(books);
+        });
     }
 
     /**
      * Update the sidebar's Label texts.
      */
-    public void update(ObservableList<Book> books) {
+    private void update(ObservableList<Book> books) {
         int length = books.size();
         int bookmarkCount = (int) books.stream()
                 .filter(Book::hasStartedReading)
