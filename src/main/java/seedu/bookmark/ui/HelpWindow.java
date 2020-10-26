@@ -12,6 +12,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.bookmark.commons.core.LogsCenter;
+import seedu.bookmark.ui.help.HelpAdd;
 
 /**
  * Controller for a help page
@@ -21,13 +22,6 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f13-2.github.io/tp/";
     public static final String HEADER_MESSAGE = "Welcome to bookmark!\n"
                                                 + "Click on the Copy URL button for the link to our Website!\n";
-
-    public static final String ADD_INTRO = "You can now ADD a book! \n";
-    public static final String ADD_COMMAND = "add n/{Book Name} g/{Genre} tp/{Total Pages} b/{Bookmarked Page} \n";
-    public static final String ADD_EXAMPLE = "eg. add n/Harry Potter g/Fiction t/Wizard tp/550 b/20\n";
-    public static final String ADD_RESPONSE = "Response: \nNew book added: Harry Potter "
-                                            + "Genre: Fiction Total Pages: 550 Bookmarked at: 20\n";
-    public static final String ADD_REMARK = "Note: Adding Tags (t/) and Bookmarks (b/) are optional! \n";
 
     public static final String DELETE_INTRO = "You can now DELETE a book! \n";
     public static final String DELETE_COMMAND = "delete {Index} \n";
@@ -51,7 +45,6 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
                                             + " Bookmarked at: 360";
 
-    public static final String ADD_MESSAGE = ADD_INTRO + ADD_COMMAND + ADD_EXAMPLE + ADD_RESPONSE;
     public static final String LIST_MESSAGE = LIST_INTRO + LIST_COMMAND + LIST_EXAMPLE + LIST_RESPONSE;
     public static final String VIEW_MESSAGE = VIEW_INTRO + VIEW_COMMAND + VIEW_EXAMPLE + VIEW_RESPONSE;
     public static final String EDIT_MESSAGE = EDIT_INTRO + EDIT_COMMAND + EDIT_EXAMPLE + EDIT_RESPONSE;
@@ -59,12 +52,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-
-    private Image addImage = new Image(this.getClass().getResourceAsStream("/images/add_command.png"));
-    private Image listImage = new Image(this.getClass().getResourceAsStream("/images/list_command.png"));
-    private Image viewImage = new Image(this.getClass().getResourceAsStream("/images/view_command.png"));
-    private Image editImage = new Image(this.getClass().getResourceAsStream("/images/edit_command.png"));
-    private Image deleteImage = new Image(this.getClass().getResourceAsStream("/images/delete_command.png"));
 
     @FXML
     private Button copyButton;
@@ -88,12 +75,9 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         welcomeHelp.setText(HEADER_MESSAGE);
         scrollPane.setVvalue(0);
+        HelpAdd helpAdd = new HelpAdd();
         helpContainer.getChildren().addAll(
-                HelpBox.getHelpBox(ADD_MESSAGE, addImage),
-                HelpBox.getHelpBox(LIST_MESSAGE, listImage),
-                HelpBox.getHelpBox(VIEW_MESSAGE, viewImage),
-                HelpBox.getHelpBox(EDIT_MESSAGE, editImage),
-                HelpBox.getHelpBox(DELETE_MESSAGE, deleteImage)
+                HelpBox.getHelpBox(helpAdd.helpIntro(), helpAdd.helpMessage())
         );
     }
 

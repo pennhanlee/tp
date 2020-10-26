@@ -1,6 +1,7 @@
 package seedu.bookmark.ui;
 
 import java.io.IOException;
+import java.util.logging.XMLFormatter;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +17,12 @@ import javafx.scene.layout.VBox;
  */
 public class HelpBox extends VBox {
     @FXML
-    private Label exampleCommand;
-    @FXML
-    private ImageView examplePic;
+    private Label exampleIntro;
 
-    private HelpBox(String text, Image img) {
+    @FXML
+    private Label exampleCommand;
+
+    private HelpBox(String intro, String message) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/HelpBox.fxml"));
             fxmlLoader.setController(this);
@@ -29,8 +31,8 @@ public class HelpBox extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        exampleCommand.setText(text);
-        examplePic.setImage(img);
+        exampleIntro.setText(intro);
+        exampleCommand.setText(message);
     }
 
     /**
@@ -39,7 +41,7 @@ public class HelpBox extends VBox {
      * @param img A picture as an example
      * @return a HelpBox object
      */
-    public static HelpBox getHelpBox(String text, Image img) {
-        return new HelpBox(text, img);
+    public static HelpBox getHelpBox(String intro, String message) {
+        return new HelpBox(intro, message);
     }
 }
