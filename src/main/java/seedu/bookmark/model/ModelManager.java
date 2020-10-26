@@ -204,6 +204,8 @@ public class ModelManager implements Model {
     public void sortFilteredBookList(Comparator<Book> comparator) {
         this.comparator = comparator;
         this.library.sortBooks(comparator);
+        historyManager = historyManager.addNewState
+                (State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     /**
