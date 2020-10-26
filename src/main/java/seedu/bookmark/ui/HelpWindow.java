@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
@@ -41,6 +41,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Button copyButton;
+
+    @FXML
+    private ImageView bookmarkIcon;
 
     @FXML
     private Label welcomeHelp;
