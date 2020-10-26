@@ -40,7 +40,7 @@
                 </graphic>
             </Label>
             <Label fx:id="percentageCompletion" styleClass="cell_small_label" text="\$ %completed" />
-            <Label fx:id="goal" styleClass="cell_small_label" text="\$ goal" />
+            <Label fx:id="goal" styleClass="cell_small_label" text="\$ goal" textFill="white"/>
         </VBox>
     </GridPane>
 </HBox>

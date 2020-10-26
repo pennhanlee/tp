@@ -140,7 +140,7 @@ public class ParserUtil {
         String trimmedPage = page.trim();
         String trimmedDeadline = deadline.trim();
         if (!Goal.isValidGoal(trimmedPage, trimmedDeadline)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS));
         }
         return new Goal(trimmedPage, trimmedDeadline);
     }

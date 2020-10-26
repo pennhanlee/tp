@@ -7,8 +7,12 @@ import java.time.format.DateTimeParseException;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
-            "Goals should only contain numeric characters for page, and Date format DD-MM-YYYY for a deadline"
-                    + ", and it should not be blank";
+            "Page should only contain numeric characters,\n " +
+                    "Deadline format is DD-MM-YYYY\n"
+                    + "both page and deadline should not be empty";
+    public static final String UI_COMPLETED = " (Completed!)";
+    public static final String UI_OVERDUE = " (Overdue!)";
+    public static final String UI_IN_PROGRESS = " (In Progress!)";
     /*
         Goal must be in the format: [page] [deadline]
         Deadline must be specified as dd-mm-yyyy
@@ -53,6 +57,10 @@ public class Goal {
         return page;
     }
 
+    public int getPageInt() {
+        return Integer.parseInt(page);
+    }
+
     /**
      * Checks if a {@code Goal} object is overdue compared to today's date.
      * @return true if a goal is already overdue.
@@ -80,19 +88,6 @@ public class Goal {
             return deadline.equals(otherDeadline) && page.equals(otherPage);
         }
         return false;
-    }
-
-    @Override
-    public String toString() {
-        if (this.equals(Goal.defaultGoal())) {
-            return "Currently no goal";
-        }
-        return String.format("Finish page %s before %s", page, deadline);
-    }
-
-    @Override
-    public int hashCode() {
-        return String.format("%s %s", page, deadline).hashCode();
     }
 
     /**
@@ -123,6 +118,19 @@ public class Goal {
         String deadlineLocalDateFormat = String.format("%s-%s-%s", year, month, day);
 
         return LocalDate.parse(deadlineLocalDateFormat);
+    }
+
+    @Override
+    public String toString() {
+        if (this.equals(Goal.defaultGoal())) {
+            return "Currently no goal";
+        }
+        return String.format("Finish page %s before %s", page, deadline);
+    }
+
+    @Override
+    public int hashCode() {
+        return String.format("%s %s", page, deadline).hashCode();
     }
 
 
