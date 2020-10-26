@@ -171,7 +171,7 @@ public class Book {
      * @return true if a goal is already overdue but not completed.
      */
     public boolean goalOverdue() {
-        return goal.isOverdue() && !goalCompleted();
+        return goal.isOverdue() && !goalCompleted() && hasGoal();
     }
 
     /**
@@ -179,7 +179,7 @@ public class Book {
      * @return true if a goal is not overdue and not completed.
      */
     public boolean goalInProgress() {
-        return !goal.isOverdue() && !goalCompleted();
+        return !goal.isOverdue() && !goalCompleted() && hasGoal();
     }
 
     /**
