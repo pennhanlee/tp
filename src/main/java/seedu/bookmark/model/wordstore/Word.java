@@ -1,8 +1,8 @@
 package seedu.bookmark.model.wordstore;
 
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.Objects;
 
 public class Word {
     private static final int STARTING_COUNT = 1;
