@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
@@ -48,6 +49,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
+    private static final Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
@@ -82,6 +84,8 @@ public class EditCommand extends Command {
             throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
         }
         model.setBook(bookToEdit, editedBook);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        model.sortByDefaultComparator();
         return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook),
                 false, false, ViewType.MOST_RECENTLY_USED);
     }
