@@ -6,7 +6,7 @@ public class HelpRedo implements HelpAction {
     private static final String REDO_MESSAGE = "Decided to stick with it? Redo past commands using our Redo Command!";
     private static final String REDO_COMMAND = "COMMAND: redo";
     private static final String REDO_EXAMPLE = "EXAMPLE: redo";
-    private static final String REDO_RESPONSE = "Previous undone command successfully redone";
+    private static final String REDO_RESPONSE = "RESPONSE: Previous undone command successfully redone";
     private static final String LB = " \n";
 
     public HelpRedo() {}

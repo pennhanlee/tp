@@ -7,7 +7,7 @@ public class HelpUndo implements HelpAction {
                                                 + "commands by using our Undo Command!";
     private static final String UNDO_COMMAND = "COMMAND: undo";
     private static final String UNDO_EXAMPLE = "EXAMPLE: undo";
-    private static final String UNDO_RESPONSE = "Previous command successfully undone";
+    private static final String UNDO_RESPONSE = "RESPONSE: Previous command successfully undone";
     private static final String LB = " \n";
 
     public HelpUndo() {}

@@ -24,6 +24,6 @@ public class HelpNoteAdd implements HelpAction {
 
     @Override
     public String helpExample() {
-        return NOTE_ADD_COMMAND + LB + NOTE_ADD_EXAMPLE + NOTE_ADD_RESPONSE;
+        return NOTE_ADD_COMMAND + LB + NOTE_ADD_EXAMPLE + LB + NOTE_ADD_RESPONSE;
     }
 }

@@ -7,7 +7,7 @@ public class HelpGoalDelete implements HelpAction {
                                                 + "using our Goal Command!";
     private static final String GOAL_DELETE_COMMAND = "COMMAND: goal INDEX remove";
     private static final String GOAL_DELETE_EXAMPLE = "EXAMPLE: goal 1 remove";
-    private static final String GOAL_DELETE_RESPONSE = "Goal removed for Harry Potter";
+    private static final String GOAL_DELETE_RESPONSE = "RESPONSE: Goal removed for Harry Potter";
     private static final String LB = " \n";
 
     public HelpGoalDelete() {}
@@ -24,6 +24,6 @@ public class HelpGoalDelete implements HelpAction {
 
     @Override
     public String helpExample() {
-        return GOAL_DELETE_COMMAND + GOAL_DELETE_EXAMPLE + GOAL_DELETE_RESPONSE;
+        return GOAL_DELETE_COMMAND + LB + GOAL_DELETE_EXAMPLE + LB + GOAL_DELETE_RESPONSE;
     }
 }
