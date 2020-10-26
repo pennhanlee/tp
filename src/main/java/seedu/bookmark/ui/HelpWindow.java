@@ -75,19 +75,19 @@ public class HelpWindow extends UiPart<Stage> {
         HelpUndo helpUndo = new HelpUndo();
         HelpRedo helpRedo = new HelpRedo();
         helpContainer.getChildren().addAll(
-                HelpBox.getHelpBox(helpAdd.helpIntro(), helpAdd.helpMessage()),
-                HelpBox.getHelpBox(helpList.helpIntro(), helpList.helpMessage()),
-                HelpBox.getHelpBox(helpView.helpIntro(), helpView.helpMessage()),
-                HelpBox.getHelpBox(helpEdit.helpIntro(), helpEdit.helpMessage()),
-                HelpBox.getHelpBox(helpDelete.helpIntro(), helpDelete.helpMessage()),
-                HelpBox.getHelpBox(helpSort.helpIntro(), helpSort.helpMessage()),
-                HelpBox.getHelpBox(helpFind.helpIntro(), helpFind.helpMessage()),
-                HelpBox.getHelpBox(helpGoalAdd.helpIntro(), helpGoalAdd.helpMessage()),
-                HelpBox.getHelpBox(helpGoalDelete.helpIntro(), helpGoalDelete.helpMessage()),
-                HelpBox.getHelpBox(helpNoteAdd.helpIntro(), helpNoteAdd.helpMessage()),
-                HelpBox.getHelpBox(helpNoteDelete.helpIntro(), helpNoteDelete.helpMessage()),
-                HelpBox.getHelpBox(helpUndo.helpIntro(), helpUndo.helpMessage()),
-                HelpBox.getHelpBox(helpRedo.helpIntro(), helpRedo.helpMessage())
+                HelpBox.getHelpBox(helpAdd.helpIntro(), helpAdd.helpMessage(), helpAdd.helpExample()),
+                HelpBox.getHelpBox(helpList.helpIntro(), helpList.helpMessage(), helpList.helpExample()),
+                HelpBox.getHelpBox(helpView.helpIntro(), helpView.helpMessage(), helpView.helpExample()),
+                HelpBox.getHelpBox(helpEdit.helpIntro(), helpEdit.helpMessage(), helpEdit.helpExample()),
+                HelpBox.getHelpBox(helpDelete.helpIntro(), helpDelete.helpMessage(), helpDelete.helpExample()),
+                HelpBox.getHelpBox(helpSort.helpIntro(), helpSort.helpMessage(), helpSort.helpExample()),
+                HelpBox.getHelpBox(helpFind.helpIntro(), helpFind.helpMessage(), helpFind.helpExample()),
+                HelpBox.getHelpBox(helpGoalAdd.helpIntro(), helpGoalAdd.helpMessage(), helpGoalAdd.helpExample()),
+                HelpBox.getHelpBox(helpGoalDelete.helpIntro(), helpGoalDelete.helpMessage(), helpGoalDelete.helpExample()),
+                HelpBox.getHelpBox(helpNoteAdd.helpIntro(), helpNoteAdd.helpMessage(), helpNoteAdd.helpExample()),
+                HelpBox.getHelpBox(helpNoteDelete.helpIntro(), helpNoteDelete.helpMessage(), helpNoteDelete.helpExample()),
+                HelpBox.getHelpBox(helpUndo.helpIntro(), helpUndo.helpMessage(), helpUndo.helpExample()),
+                HelpBox.getHelpBox(helpRedo.helpIntro(), helpRedo.helpMessage(), helpRedo.helpExample())
         );
     }
 

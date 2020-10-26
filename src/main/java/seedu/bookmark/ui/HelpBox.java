@@ -20,9 +20,12 @@ public class HelpBox extends VBox {
     private Label exampleIntro;
 
     @FXML
+    private Label exampleMessage;
+
+    @FXML
     private Label exampleCommand;
 
-    private HelpBox(String intro, String message) {
+    private HelpBox(String intro, String message, String example) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/HelpBox.fxml"));
             fxmlLoader.setController(this);
@@ -32,16 +35,18 @@ public class HelpBox extends VBox {
             e.printStackTrace();
         }
         exampleIntro.setText(intro);
-        exampleCommand.setText(message);
+        exampleMessage.setText(message);
+        exampleCommand.setText(example);
     }
 
     /**
      * Creates a HelpBox object
-     * @param text Text that is to be included in the Help Box
-     * @param img A picture as an example
+     * @param intro Text that is to be included in the Help Box
+     * @param message A picture as an example
+     * @param example
      * @return a HelpBox object
      */
-    public static HelpBox getHelpBox(String intro, String message) {
-        return new HelpBox(intro, message);
+    public static HelpBox getHelpBox(String intro, String message, String example) {
+        return new HelpBox(intro, message, example);
     }
 }
