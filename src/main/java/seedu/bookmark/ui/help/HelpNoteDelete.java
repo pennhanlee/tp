@@ -19,6 +19,11 @@ public class HelpNoteDelete implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return NOTE_DELETE_MESSAGE + LB + NOTE_DELETE_COMMAND + LB + NOTE_DELETE_EXAMPLE + LB + NOTE_DELETE_RESPONSE;
+        return NOTE_DELETE_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return NOTE_DELETE_COMMAND + LB + NOTE_DELETE_EXAMPLE + LB + NOTE_DELETE_RESPONSE;
     }
 }

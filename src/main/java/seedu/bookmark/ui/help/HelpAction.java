@@ -13,4 +13,10 @@ public interface HelpAction {
      * @return
      */
     public String helpMessage();
+
+    /**
+     *
+     * @return
+     */
+    public String helpExample();
 }

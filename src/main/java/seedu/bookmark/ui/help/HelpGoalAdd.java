@@ -20,6 +20,11 @@ public class HelpGoalAdd implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return GOAL_ADD_MESSAGE + LB + GOAL_ADD_COMMAND + LB + GOAL_ADD_EXAMPLE + LB + GOAL_ADD_RESPONSE;
+        return GOAL_ADD_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return GOAL_ADD_COMMAND + LB + GOAL_ADD_EXAMPLE + LB + GOAL_ADD_RESPONSE;
     }
 }

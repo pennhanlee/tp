@@ -15,7 +15,15 @@ import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.ui.help.HelpAdd;
 import seedu.bookmark.ui.help.HelpDelete;
 import seedu.bookmark.ui.help.HelpEdit;
+import seedu.bookmark.ui.help.HelpFind;
+import seedu.bookmark.ui.help.HelpGoalAdd;
+import seedu.bookmark.ui.help.HelpGoalDelete;
 import seedu.bookmark.ui.help.HelpList;
+import seedu.bookmark.ui.help.HelpNoteAdd;
+import seedu.bookmark.ui.help.HelpNoteDelete;
+import seedu.bookmark.ui.help.HelpRedo;
+import seedu.bookmark.ui.help.HelpSort;
+import seedu.bookmark.ui.help.HelpUndo;
 import seedu.bookmark.ui.help.HelpView;
 
 /**
@@ -58,12 +66,28 @@ public class HelpWindow extends UiPart<Stage> {
         HelpView helpView = new HelpView();
         HelpEdit helpEdit = new HelpEdit();
         HelpDelete helpDelete = new HelpDelete();
+        HelpSort helpSort = new HelpSort();
+        HelpFind helpFind = new HelpFind();
+        HelpGoalAdd helpGoalAdd = new HelpGoalAdd();
+        HelpGoalDelete helpGoalDelete = new HelpGoalDelete();
+        HelpNoteAdd helpNoteAdd = new HelpNoteAdd();
+        HelpNoteDelete helpNoteDelete = new HelpNoteDelete();
+        HelpUndo helpUndo = new HelpUndo();
+        HelpRedo helpRedo = new HelpRedo();
         helpContainer.getChildren().addAll(
                 HelpBox.getHelpBox(helpAdd.helpIntro(), helpAdd.helpMessage()),
                 HelpBox.getHelpBox(helpList.helpIntro(), helpList.helpMessage()),
                 HelpBox.getHelpBox(helpView.helpIntro(), helpView.helpMessage()),
                 HelpBox.getHelpBox(helpEdit.helpIntro(), helpEdit.helpMessage()),
-                HelpBox.getHelpBox(helpDelete.helpIntro(), helpDelete.helpMessage())
+                HelpBox.getHelpBox(helpDelete.helpIntro(), helpDelete.helpMessage()),
+                HelpBox.getHelpBox(helpSort.helpIntro(), helpSort.helpMessage()),
+                HelpBox.getHelpBox(helpFind.helpIntro(), helpFind.helpMessage()),
+                HelpBox.getHelpBox(helpGoalAdd.helpIntro(), helpGoalAdd.helpMessage()),
+                HelpBox.getHelpBox(helpGoalDelete.helpIntro(), helpGoalDelete.helpMessage()),
+                HelpBox.getHelpBox(helpNoteAdd.helpIntro(), helpNoteAdd.helpMessage()),
+                HelpBox.getHelpBox(helpNoteDelete.helpIntro(), helpNoteDelete.helpMessage()),
+                HelpBox.getHelpBox(helpUndo.helpIntro(), helpUndo.helpMessage()),
+                HelpBox.getHelpBox(helpRedo.helpIntro(), helpRedo.helpMessage())
         );
     }
 

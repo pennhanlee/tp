@@ -19,6 +19,11 @@ public class HelpView implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return VIEW_MESSAGE + LB + VIEW_COMMAND + LB + VIEW_EXAMPLE + LB + VIEW_RESPONSE;
+        return VIEW_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return VIEW_COMMAND + LB + VIEW_EXAMPLE + LB + VIEW_RESPONSE;
     }
 }

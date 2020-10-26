@@ -19,6 +19,11 @@ public class HelpNoteAdd implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return NOTE_ADD_EXPLANATION + LB + NOTE_ADD_COMMAND + LB + NOTE_ADD_EXAMPLE + NOTE_ADD_RESPONSE;
+        return NOTE_ADD_EXPLANATION;
+    }
+
+    @Override
+    public String helpExample() {
+        return NOTE_ADD_COMMAND + LB + NOTE_ADD_EXAMPLE + NOTE_ADD_RESPONSE;
     }
 }

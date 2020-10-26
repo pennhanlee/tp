@@ -20,6 +20,11 @@ public class HelpFind implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return FIND_MESSAGE + LB + FIND_COMMAND + LB + FIND_EXAMPLE + LB + FIND_RESPONSE + LB + FIND_NOTES;
+        return FIND_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return FIND_COMMAND + LB + FIND_EXAMPLE + LB + FIND_RESPONSE + LB + FIND_NOTES;
     }
 }

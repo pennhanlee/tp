@@ -19,6 +19,11 @@ public class HelpList implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return LIST_MESSAGE + LB + LIST_COMMAND + LB + LIST_EXAMPLE + LB + LIST_RESPONSE;
+        return LIST_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return LIST_COMMAND + LB + LIST_EXAMPLE + LB + LIST_RESPONSE;
     }
 }

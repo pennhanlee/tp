@@ -19,6 +19,11 @@ public class HelpGoalDelete implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return GOAL_DELETE_MESSAGE + LB + GOAL_DELETE_COMMAND + GOAL_DELETE_EXAMPLE + GOAL_DELETE_RESPONSE;
+        return GOAL_DELETE_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return GOAL_DELETE_COMMAND + GOAL_DELETE_EXAMPLE + GOAL_DELETE_RESPONSE;
     }
 }

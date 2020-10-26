@@ -18,6 +18,11 @@ public class HelpRedo implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return REDO_MESSAGE + LB + REDO_COMMAND + LB + REDO_EXAMPLE + LB + REDO_RESPONSE;
+        return REDO_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return REDO_COMMAND + LB + REDO_EXAMPLE + LB + REDO_RESPONSE;
     }
 }

@@ -20,6 +20,11 @@ public class HelpSort implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return SORT_MESSAGE + LB + SORT_COMMAND + LB + SORT_EXAMPLE + SORT_RESPONSE + SORT_NOTES;
+        return SORT_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return SORT_COMMAND + LB + SORT_EXAMPLE + SORT_RESPONSE + SORT_NOTES;
     }
 }

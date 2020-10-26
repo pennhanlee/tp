@@ -20,6 +20,11 @@ public class HelpDelete implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return DELETE_MESSAGE + LB + DELETE_COMMAND + LB + DELETE_EXAMPLE + LB + DELETE_RESPONSE;
+        return DELETE_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return DELETE_COMMAND + LB + DELETE_EXAMPLE + LB + DELETE_RESPONSE;
     }
 }

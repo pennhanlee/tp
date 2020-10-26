@@ -20,6 +20,11 @@ public class HelpUndo implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return UNDO_MESSAGE + LB + UNDO_COMMAND + LB + UNDO_EXAMPLE + LB + UNDO_RESPONSE;
+        return UNDO_MESSAGE;
+    }
+
+    @Override
+    public String helpExample() {
+        return UNDO_COMMAND + LB + UNDO_EXAMPLE + LB + UNDO_RESPONSE;
     }
 }
