@@ -33,6 +33,7 @@ public class WordStore {
      */
     public void addWords(List<String> words) {
         for (String word : words) {
+            assert word != null;
             wordAdder(word);
         }
     }
@@ -57,6 +58,7 @@ public class WordStore {
         boolean added = contains(targetWord);
         if (added) {
             Word targetWordObj = wordStore.get(targetWord.hashCode());
+            assert targetWordObj != null;
             targetWordObj.addCount();
         } else {
             Word newWord = new Word(targetWord);
