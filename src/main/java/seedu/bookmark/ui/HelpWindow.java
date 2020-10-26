@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -34,16 +35,15 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f13-2.github.io/tp/";
     public static final String HEADER_MESSAGE = "Welcome to bookmark!\n"
                                                 + "Click on the Copy URL button for the link to our Website!\n";
-    public static final String HEADER_ICON = "";
-
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private Image bookmarkIcon = new Image(this.getClass().getResourceAsStream("/images/bookmark_logo.png"));
 
     @FXML
     private Button copyButton;
 
     @FXML
-    private ImageView bookmarkIcon;
+    private ImageView icon;
 
     @FXML
     private Label welcomeHelp;
@@ -63,7 +63,9 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         welcomeHelp.setText(HEADER_MESSAGE);
+        icon.setImage(bookmarkIcon);
         scrollPane.setVvalue(0);
+
         HelpAdd helpAdd = new HelpAdd();
         HelpList helpList = new HelpList();
         HelpView helpView = new HelpView();
