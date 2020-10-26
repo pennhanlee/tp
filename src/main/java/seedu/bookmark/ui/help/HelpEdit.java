@@ -20,7 +20,6 @@ public class HelpEdit implements HelpAction {
 
     @Override
     public String helpMessage() {
-        String message = EDIT_COMMAND + LB + EDIT_EXAMPLE + EDIT_RESPONSE;
-        return message;
+        return EDIT_MESSAGE + LB + EDIT_COMMAND + LB + EDIT_EXAMPLE + EDIT_RESPONSE;
     }
 }

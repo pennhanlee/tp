@@ -3,7 +3,7 @@ package seedu.bookmark.ui.help;
 public class HelpGoalAdd implements HelpAction {
 
     private static final String GOAL_ADD_INTRO = "ADD A READING GOAL TO YOUR BOOK!";
-    private static final String GOAL_ADD_EXPLANATION = "Up for a challenge? Add a reading goal to your book using our"
+    private static final String GOAL_ADD_MESSAGE = "Up for a challenge? Add a reading goal to your book using our"
                                                     + "Goal Command!";
     private static final String GOAL_ADD_COMMAND = "COMMAND: goal INDEX [p/PAGE] [d/DD-MM-YYYY]";
     private static final String GOAL_ADD_EXAMPLE = "EXAMPLE: goal 1 p/69 d/22-05-2020";
@@ -20,6 +20,6 @@ public class HelpGoalAdd implements HelpAction {
 
     @Override
     public String helpMessage() {
-        return GOAL_ADD_EXPLANATION + LB + GOAL_ADD_COMMAND + LB + GOAL_ADD_EXAMPLE + LB + GOAL_ADD_RESPONSE;
+        return GOAL_ADD_MESSAGE + LB + GOAL_ADD_COMMAND + LB + GOAL_ADD_EXAMPLE + LB + GOAL_ADD_RESPONSE;
     }
 }
