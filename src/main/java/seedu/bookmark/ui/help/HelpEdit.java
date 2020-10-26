@@ -8,6 +8,8 @@ public class HelpEdit implements HelpAction {
     public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
             + " Bookmarked at: 360";
 
+    public HelpEdit() {}
+
     @Override
     public String helpIntro() {
         return null;

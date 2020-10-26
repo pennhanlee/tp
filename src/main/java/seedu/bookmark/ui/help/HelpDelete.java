@@ -8,6 +8,8 @@ public class HelpDelete implements HelpAction {
     public static final String DELETE_RESPONSE = "Response: \nDeleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
             + "Bookmarked at: 3 Tags: [Japanese]";
 
+    public HelpDelete() {}
+
     @Override
     public String helpIntro() {
         return null;

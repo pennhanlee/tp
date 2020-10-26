@@ -9,6 +9,7 @@ public class HelpAdd implements HelpAction {
             + "Genre: Fiction Total Pages: 550 Bookmarked at: 20\n";
     public static final String ADD_REMARK = "Note: Adding Tags (t/) and Bookmarks (b/) are optional! \n";
 
+    public HelpAdd() {}
 
     @Override
     public String helpIntro() {

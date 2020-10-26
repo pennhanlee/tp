@@ -7,6 +7,8 @@ public class HelpView implements HelpAction {
     public static final String VIEW_EXAMPLE = "eg. view 3 \n";
     public static final String VIEW_RESPONSE = "Response: \nViewing 3";
 
+    public HelpView() {}
+
     @Override
     public String helpIntro() {
         return null;
