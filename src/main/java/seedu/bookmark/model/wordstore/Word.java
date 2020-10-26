@@ -1,5 +1,7 @@
 package seedu.bookmark.model.wordstore;
 
+import java.util.Objects;
+
 import static java.util.Objects.requireNonNull;
 
 public class Word {
@@ -106,11 +108,11 @@ public class Word {
 
     @Override
     public int hashCode() {
-        return word.hashCode();
+        return Objects.hash(this.word, this.count, this.distance);
     }
 
     @Override
     public String toString() {
-        return this.word;
+        return "Word: " + this.word + ", Count: " + this.count + ", Distance: " + this.distance;
     }
 }

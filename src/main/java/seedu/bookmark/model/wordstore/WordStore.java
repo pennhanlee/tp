@@ -9,7 +9,7 @@ import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 
 public class WordStore {
 
-    private HashMap<Integer, Word> wordStore;
+    private HashMap<String, Word> wordStore;
 
     /**
      * Creates a WordStore object
@@ -23,8 +23,7 @@ public class WordStore {
      */
     public boolean contains(String toCheck) {
         requireNonNull(toCheck);
-        Integer hashedWord = toCheck.hashCode();
-        return wordStore.containsKey(hashedWord);
+        return wordStore.containsKey(toCheck);
     }
 
     /**
@@ -57,7 +56,7 @@ public class WordStore {
         requireNonNull(targetWord);
         boolean added = contains(targetWord);
         if (added) {
-            Word targetWordObj = wordStore.get(targetWord.hashCode());
+            Word targetWordObj = wordStore.get(targetWord);
             assert targetWordObj != null;
             targetWordObj.addCount();
         } else {
@@ -74,7 +73,7 @@ public class WordStore {
      */
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
-        Word targetWordObj = wordStore.get(targetWord.hashCode());
+        Word targetWordObj = wordStore.get(targetWord);
         if (targetWordObj == null) {
             throw new WordNotFoundException();
         }
@@ -89,7 +88,7 @@ public class WordStore {
      * Returns the wordStore
      * @return wordStore
      */
-    public HashMap<Integer, Word> getWordStore() {
+    public HashMap<String, Word> getWordStore() {
         return this.wordStore;
     }
 
@@ -98,18 +97,17 @@ public class WordStore {
      * @return Word
      */
     public Word getWord(String word) {
-        Integer wordHash = word.hashCode();
-        return this.wordStore.get(wordHash);
+        return this.wordStore.get(word);
     }
 
 
     private void addWord(Word word) {
-        this.wordStore.put(word.hashCode(), word);
+        this.wordStore.put(word.getWord(), word);
 
     }
 
     private void deleteWord(Word word) {
-        this.wordStore.remove(word.hashCode(), word);
+        this.wordStore.remove(word.getWord(), word);
     }
 
 }
