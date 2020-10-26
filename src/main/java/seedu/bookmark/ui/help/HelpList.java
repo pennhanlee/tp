@@ -2,20 +2,22 @@ package seedu.bookmark.ui.help;
 
 public class HelpList implements HelpAction {
 
-    public static final String LIST_INTRO = "You can now LIST all recorded books! \n";
-    public static final String LIST_COMMAND = "list \n";
-    public static final String LIST_EXAMPLE = "eg. list \n";
-    public static final String LIST_RESPONSE = "Response: \nListing all books";
+    private static final String LIST_INTRO = "LIST ALL BOOKS";
+    private static final String LIST_COMMAND = "COMMAND: list";
+    private static final String LIST_EXAMPLE = "EXAMPLE: list";
+    private static final String LIST_RESPONSE = "RESPONSE: Listing all books";
+    private static final String LB = "\n";
 
     public HelpList() {}
 
     @Override
     public String helpIntro() {
-        return null;
+        return LIST_INTRO;
     }
 
     @Override
     public String helpMessage() {
-        return null;
+        String message = LIST_COMMAND + LB + LIST_EXAMPLE + LB + LIST_RESPONSE;
+        return message;
     }
 }

@@ -2,21 +2,23 @@ package seedu.bookmark.ui.help;
 
 public class HelpEdit implements HelpAction {
 
-    public static final String EDIT_INTRO = "You can now EDIT a book's contents! \n";
-    public static final String EDIT_COMMAND = "edit {Index} *b/{Bookmarked Page} \n";
-    public static final String EDIT_EXAMPLE = "eg. edit 3 b/360 \n";
-    public static final String EDIT_RESPONSE = "Response: \nEdited Book: Haikyuu Genre: Manga Total Pages: 500"
+    private static final String EDIT_INTRO = "EDIT A BOOK!";
+    private static final String EDIT_COMMAND = "COMMAND: edit {Index} *b/{Bookmarked Page}";
+    private static final String EDIT_EXAMPLE = "EXAMPLE: edit 3 b/360";
+    private static final String EDIT_RESPONSE = "RESPONSE: Edited Book: Haikyuu Genre: Manga Total Pages: 500"
             + " Bookmarked at: 360";
+    private static final String LB = " \n";
 
     public HelpEdit() {}
 
     @Override
     public String helpIntro() {
-        return null;
+        return EDIT_INTRO;
     }
 
     @Override
     public String helpMessage() {
-        return null;
+        String message = EDIT_COMMAND + LB + EDIT_EXAMPLE + EDIT_RESPONSE;
+        return message;
     }
 }

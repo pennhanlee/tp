@@ -2,21 +2,22 @@ package seedu.bookmark.ui.help;
 
 public class HelpDelete implements HelpAction {
 
-    public static final String DELETE_INTRO = "You can now DELETE a book! \n";
-    public static final String DELETE_COMMAND = "delete {Index} \n";
-    public static final String DELETE_EXAMPLE = "eg. delete 3 \n";
-    public static final String DELETE_RESPONSE = "Response: \nDeleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
+    private static final String DELETE_INTRO = "DELETE A BOOK!";
+    private static final String DELETE_COMMAND = "COMMAND: delete {Index}";
+    private static final String DELETE_EXAMPLE = "EXAMPLE: delete 3";
+    private static final String DELETE_RESPONSE = "RESPONSE: Deleted Book: Tokyo Ghoul Genre: Anime Total Pages: 1000 "
             + "Bookmarked at: 3 Tags: [Japanese]";
+    private static final String LB = " \n";
 
     public HelpDelete() {}
 
     @Override
     public String helpIntro() {
-        return null;
+        return DELETE_INTRO;
     }
 
     @Override
     public String helpMessage() {
-        return null;
+        return DELETE_COMMAND + LB + DELETE_EXAMPLE + LB + DELETE_RESPONSE;
     }
 }

@@ -13,6 +13,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.ui.help.HelpAdd;
+import seedu.bookmark.ui.help.HelpDelete;
+import seedu.bookmark.ui.help.HelpEdit;
+import seedu.bookmark.ui.help.HelpList;
+import seedu.bookmark.ui.help.HelpView;
 
 /**
  * Controller for a help page
@@ -76,8 +80,16 @@ public class HelpWindow extends UiPart<Stage> {
         welcomeHelp.setText(HEADER_MESSAGE);
         scrollPane.setVvalue(0);
         HelpAdd helpAdd = new HelpAdd();
+        HelpList helpList = new HelpList();
+        HelpView helpView = new HelpView();
+        HelpEdit helpEdit = new HelpEdit();
+        HelpDelete helpDelete = new HelpDelete();
         helpContainer.getChildren().addAll(
-                HelpBox.getHelpBox(helpAdd.helpIntro(), helpAdd.helpMessage())
+                HelpBox.getHelpBox(helpAdd.helpIntro(), helpAdd.helpMessage()),
+                HelpBox.getHelpBox(helpList.helpIntro(), helpList.helpMessage()),
+                HelpBox.getHelpBox(helpView.helpIntro(), helpView.helpMessage()),
+                HelpBox.getHelpBox(helpEdit.helpIntro(), helpEdit.helpMessage()),
+                HelpBox.getHelpBox(helpDelete.helpIntro(), helpDelete.helpMessage())
         );
     }
 
