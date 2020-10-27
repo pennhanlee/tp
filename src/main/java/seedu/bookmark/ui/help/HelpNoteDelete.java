@@ -7,7 +7,7 @@ public class HelpNoteDelete implements HelpAction {
                                                     + "by using our Note Command!";
     private static final String NOTE_DELETE_COMMAND = "COMMAND: note INDEX NOTE_INDEX";
     private static final String NOTE_DELETE_EXAMPLE = "EXAMPLE: note 1 3";
-    private static final String NOTE_DELETE_RESPONSE = "RESPONSE: Note: Chapter 1 removed for Harry Potter";
+    private static final String NOTE_DELETE_RESPONSE = "RESPONSE: Deleted Note: Thoughts, from Book: 1984";
     private static final String LB = " \n";
 
     public HelpNoteDelete() {}
