@@ -16,7 +16,7 @@ _bookmark_ is a **desktop app for tracking reading progress and book loans, opti
 
 1. Download the latest `bookmark.jar` from [here](https://github.com/AY2021S1-CS2103T-F13-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for bookmark.
+1. Copy the file to the folder you want to use as the _home folder_ for _bookmark_.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -67,8 +67,8 @@ Shows all details of one specified book.
 
 Format: `view INDEX`
 * View the title, bookmark and percentage completed, goal and notes added of a specified book.
-* INDEX refers to index number shown in displayed book list, which must be
-a positive number and be from 1 to the total number of books in _bookmark_.
+* The `INDEX` refers to the index number shown in the displayed book list.
+* The `INDEX` **must be a positive number** 1, 2, 3, …
 
 Examples:
 * This assumes you are tracking at least 2 books.
@@ -94,7 +94,7 @@ Format:
 * `find nc/`
 
 Purpose: 
-* Finds books whose specified field contains any of the input keywords.
+* Find books whose specified field contains any of the input keywords.
 * Can also find completed books & non-completed books using "c/" and "nc/" prefixes.
 * No keywords are required for finding completed & non-completed books.
 
@@ -117,14 +117,14 @@ Format:
 *`sort rp/`
 
 Purpose:
-* Sorts books according to the input filter.
+* Sorts the books according to the input filter.
 * Supports sorting by Name, Genre, Bookmarked page and Reading progress.
 
 Examples:
 Example Command | Result
 -----------------|--------
-`sort n/` | Returns a list of books sorted by name alphabetical order.
-`sort g/` | Returns a list of books sorted by genre alphabetical order.
+`sort n/` | Returns a list of books sorted by name in alphabetical order.
+`sort g/` | Returns a list of books sorted by genre in alphabetical order.
 `sort b/` | Returns a list of books sorted by ascending number of pages read.
 `sort rp/` | Returns a list of books sorted by ascending reading progress.
 
@@ -135,8 +135,8 @@ Deletes the specified book from _bookmark_.
 Format: `delete INDEX`
 
 * Deletes the book at the specified `INDEX`.
-* The index refers to the index number shown in the displayed book list.
-* The index **must be a positive number** 1, 2, 3, …
+* The `INDEX` refers to the index number shown in the displayed book list.
+* The `INDEX` **must be a positive number** 1, 2, 3, …
 
 Examples:
 
@@ -146,13 +146,13 @@ Example Command | Result
 
 ### Editing a book : `edit`
 
-Edits an existing book in _bookmark_.
+Edits an existing book in _bookmark_ so that you can update information of a book without having to delete the outdated version and add the updated book.
 
 Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
 
 * Edits the book at the specified `INDEX`.
-* The index refers to the index number shown in the displayed book list.
-* The index **must be a positive number** 1, 2, 3, …​
+* The `INDEX` refers to the index number shown in the displayed book list.
+* The `INDEX` **must be a positive number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -168,7 +168,9 @@ Set a reading goal to finish a certain page by a deadline for a book in _bookmar
 
 Format: `goal INDEX p/PAGE d/DD-MM-YYYY`
 
-* Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive number** 1, 2, 3, …​
+* Sets goal for the book at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed book list.
+* The `INDEX` **must be a positive number** 1, 2, 3, …
 * Page number and deadline must be provided.
 
 Examples:
@@ -179,7 +181,7 @@ Example Command | Result
 
 ### Adding a note to a book : `note`
 
-Adds a note to an existing book in _bookmark_.
+Adds a note to an existing book in _bookmark_ so that you can pen down your thoughts or keep track of important information for the book.
 
 Format: `note INDEX n/TITLE txt/TEXT`
 
@@ -195,6 +197,24 @@ Examples:
 Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
+
+### Deleting a note from a book : `notedel`
+
+Deletes a note from an existing book in _bookmark_ so that you can remove outdated, unwanted notes that may clutter your workspace.
+
+Format: `notedel INDEX NOTE_INDEX`
+
+* Deletes the note at the specified `NOTE_INDEX` of the book specified at `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed book list.
+* The `NOTE_INDEX` refers to the index number shown in the displayed notes in the detailed view.
+* All indexes **must be a positive number** 1, 2, 3, …​
+
+Examples:
+
+Example Command | Result
+-----------------|--------
+`notedel 1 3` | Deletes the third note of the first book displayed
+`notedel 4 2` | Deletes the fourth note of the second book displayed
 
 ### Undoing a command : `undo`
 
@@ -212,6 +232,7 @@ commands entered.
   * `delete`
   * `edit`
   * `note`
+  * `notedel`
   * `goal`
   * `sort`
 
@@ -272,15 +293,17 @@ bookmark will recommend the likely word that has been misspelled.
 
 ## Command summary
 
-Action | Format, Examples
+Action | Format
 --------|------------------
-**Add** | `add n/BOOK_TITLE g/GENRE tp/TOTAL_PAGES b/PAGE_NUMBER`
+**Add** | `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX`
 **List** | `list`
-**View** | `view INDEX` <br> e.g., `view 3`
-**Edit** | `edit INDEX b/PAGE_NUMBER`
-**Note** | `note INDEX n/TITLE txt/TEXT` <br> e.g., `note 1 n/Thoughts txt/My thoughts`
-**Find** | `find n/ KEYWORDS` <br> e.g., `find n/ Harry Hunger`
-**Sort** | `sort n/BOOK_TITLE ` <br> e.g., `sort n/`
+**View** | `view INDEX`
+**Edit** | `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
+**Goal** | `goal INDEX p/PAGE d/DD-MM-YYYY`
+**Add Note** | `note INDEX n/TITLE txt/TEXT`
+**Delete Note** | `notedel INDEX NOTE_INDEX`
+**Find** | `find n/BOOK_TITLE`, `find g/GENRE`, `find t/TAG`, `find c/`, `find nc/`
+**Sort** | `sort n/`, `sort g/`, `sort b/`, `sort rp/`
 **Help** | `help`
