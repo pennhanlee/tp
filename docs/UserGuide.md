@@ -165,18 +165,37 @@ Example Command | Result
 
 ### Set goal for your book: `goal`
 
-Set a reading goal to finish a certain page by a deadline for a book in _bookmark_.
+Set a reading goal to finish a certain page by a deadline for a book in _bookmark_.\
+This helps you stay motivated and achieve small goals as you read your book.\
+Remember to update your bookmark as you go!
 
 Format: `goal INDEX p/PAGE d/DD-MM-YYYY`
 
 * Sets goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive number** 1, 2, 3, …​
 * Page number and deadline must be provided.
+* Your goal is displayed in yellow, green or red for in progress, completed or overdue.
+* To remove a goal from specified book, refer to [remove a goal command](#remove-your-goal) below.
 
 Examples:
 
 Example Command | Result
 -----------------|--------
 `goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the first book by 22nd May 2020.
+
+### Remove your Goal: `goaldel`
+
+Remove the goal you set for a particular book.\
+If you prefer to have no goals attached to your book or if you have completed a goal, you can choose to remove the goal.
+
+Format: `goaldel INDEX`
+
+* Removes goal for the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive number** 1, 2, 3, …​
+
+Examples:
+
+Example Command | Result
+-----------------|--------
+`goaldel 1` | Goal successfully removed for Harry Potter.
 
 ### Adding a note to a book : `note`
 

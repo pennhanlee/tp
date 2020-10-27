@@ -2,7 +2,6 @@ package seedu.bookmark.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Goal;
 
