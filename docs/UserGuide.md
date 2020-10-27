@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-_bookmark_ is a **desktop app for tracking reading progress and book loans, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, bookmark can get your reading and book management tasks done faster than traditional GUI apps.
+_bookmark_ is a **desktop app for tracking reading progress and book loans, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, _bookmark_ can get your reading and book management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -26,6 +26,24 @@ _bookmark_ is a **desktop app for tracking reading progress and book loans, opti
 1. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Prefixes
+
+Before diving into the features, this section will provide you with some
+basic information on what each prefix used in the features below represent.
+
+Prefix | Explanation
+-------|------------
+`n/` | Name of the book / Title of the note to add to a book
+`g/` | Genre of the book
+`t/` | Tag attached to a book
+`tp/` | Total pages of the book
+`b/` | The page where the bookmark is placed at
+`c/` | Completed books
+`nc/` | Not yet completed books
+`rp/` | The reading progress of the book
+`p/` | The page to set the your goal
+`d/` | The date to complete your goal by
+`txt/` | The text of your note
 
 ## Features
 
@@ -46,6 +64,8 @@ _bookmark_ is a **desktop app for tracking reading progress and book loans, opti
   e.g. if the command specifies `n/BOOK_TITLE tp/TOTAL_PAGES`, `tp/TOTAL_PAGES n/BOOK_TITLE` is also acceptable.
 
 </div>
+
+
 
 
 ### Adding a bookmark: `add`
@@ -161,6 +181,7 @@ Examples:
 Example Command | Result
 -----------------|--------
 `edit 1 b/101` | Edits the bookmark of the 1st book to be `101`.
+`edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
 
 ### Set goal for your book: `goal`
 
@@ -177,7 +198,7 @@ Examples:
 
 Example Command | Result
 -----------------|--------
-`goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the first book by 22nd May 2020.
+`goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the 1st book by 22nd May 2020.
 
 ### Adding a note to a book : `note`
 
@@ -213,8 +234,8 @@ Examples:
 
 Example Command | Result
 -----------------|--------
-`notedel 1 3` | Deletes the third note of the first book displayed
-`notedel 4 2` | Deletes the fourth note of the second book displayed
+`notedel 1 3` | Deletes the 3rd note of the 1st book displayed
+`notedel 4 2` | Deletes the 4th note of the 2nd book displayed
 
 ### Undoing a command : `undo`
 
@@ -264,7 +285,7 @@ Format: `exit`
 
 ### Saving the data
 
-bookmark data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+_bookmark_ data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Accessing Help : `help`
 
@@ -277,7 +298,7 @@ Format: `help`
 When a typing error is made while trying to find a book <br>
 eg. `find n/Hsrry` instead of `find n/Harry`
 
-bookmark will recommend the likely word that has been misspelled.
+_bookmark_ will recommend the likely word that has been misspelled.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -286,7 +307,7 @@ bookmark will recommend the likely word that has been misspelled.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous bookmark home folder.
 
-**Q**: How can I know more about the available commands that bookmark supports?<br>
+**Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
 
 --------------------------------------------------------------------------------------------------------------------
