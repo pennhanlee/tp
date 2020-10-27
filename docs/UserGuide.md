@@ -3,7 +3,13 @@ layout: page
 title: User Guide
 ---
 
-_bookmark_ is a **desktop app for tracking reading progress and book loans, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, _bookmark_ can get your reading and book management tasks done faster than traditional GUI apps.
+_bookmark_ is a desktop application to mange your indulgent bookworm habits! Use _bookmark_ to track your book reading progress 
+or pen down thoughts about mindboggling fan theories about your favourite characters!
+
+_bookmark_ allows you to add and update your beloved books, track your reading progress using our bookmark and even add reading goals and notes to your chosen books!
+
+Guess what? _bookmark_ also uses the special Command Line Interface style so if you love to type, you're in luck! So 
+get cracking and start saving your best reads and ideas into _bookmark_, Type away!~
 
 * Table of Contents
 {:toc}
@@ -12,24 +18,33 @@ _bookmark_ is a **desktop app for tracking reading progress and book loans, opti
 
 ## Quick start
 
+### Installation
+
 1. Ensure you have Java `11` or above installed in your Computer.
 
 1. Download the latest `bookmark.jar` from [here](https://github.com/AY2021S1-CS2103T-F13-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for _bookmark_.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+### Starting _bookmark_
+
+1. Double-click the `bookmark.jar` file to start the application. You will be greeted by our lovely bookshelf GUI in a few seconds. <br>
+*If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
+
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
+`add n/My First Book g/Non-Fiction t/Yay tp/1000` 
 
-1. Refer to the [Features](#features) section below for details of each command.
+1. You should see that My First Book will be added into the list of books you see! 
+
+ Want to do more? Refer to the [Features](#features) section below for details of many more commands!
 
 --------------------------------------------------------------------------------------------------------------------
 ## Prefixes
 
 Before diving into the features, this section will provide you with some
-basic information on what each prefix used in the features below represent.
+information on what each prefix used in the features below represent.
 
 Prefix | Explanation
 -------|------------
@@ -66,13 +81,12 @@ Prefix | Explanation
 </div>
 
 
-
-
 ### Adding a bookmark: `add`
 
-Adds a book to _bookmark_.
+Adds your book into _bookmark_ by using our Add Command.
 
-Format: `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
+Format: `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]` <br>
+*tags and bookmarks are optional!*
 
 Examples:
 
