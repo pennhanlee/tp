@@ -11,6 +11,7 @@ import seedu.bookmark.logic.commands.AddNoteCommand;
 import seedu.bookmark.logic.commands.ClearCommand;
 import seedu.bookmark.logic.commands.Command;
 import seedu.bookmark.logic.commands.DeleteCommand;
+import seedu.bookmark.logic.commands.DeleteNoteCommand;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.ExitCommand;
 import seedu.bookmark.logic.commands.FindCommand;
@@ -91,6 +92,8 @@ public class CommandParser {
 
         case AddNoteCommand.COMMAND_WORD:
             return new AddNoteCommandParser().parse(arguments);
+        case DeleteNoteCommand.COMMAND_WORD:
+            return new DeleteNoteCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
