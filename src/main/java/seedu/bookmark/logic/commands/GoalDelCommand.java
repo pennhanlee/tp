@@ -50,8 +50,8 @@ public class GoalDelCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else if (other instanceof ViewCommand) {
-            return index.equals(((ViewCommand) other).index);
+        } else if (other instanceof GoalDelCommand) {
+            return index.equals(((GoalDelCommand) other).index);
         } else {
             return false;
         }
