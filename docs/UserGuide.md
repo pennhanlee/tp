@@ -108,7 +108,7 @@ Example Command | Result
 
 ### Sorting books: `sort` 
 
-Sort books according to the condition inputted.
+Sort books according to the condition inputted, and sets it as a user preference.
 
 Format: 
 *`sort n/`
@@ -121,7 +121,6 @@ Purpose:
 * Supports sorting by Name, Genre, Bookmarked page and Reading progress.
 
 Examples:
-
 Example Command | Result
 -----------------|--------
 `sort n/` | Returns a list of books sorted by name alphabetical order.

@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path bookmarkFilePath = Paths.get("data" , "library.json");
+    private String sortingPreference = "";
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setBookmarkFilePath(newUserPrefs.getBookmarkFilePath());
+        setSortingPreference(newUserPrefs.getSortingPreference());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +58,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.bookmarkFilePath = bookmarkFilePath;
     }
 
+    public String getSortingPreference() {
+        return sortingPreference;
+    }
+
+    public void setSortingPreference(String newSortingPreference) {
+        assert newSortingPreference != null;
+        this.sortingPreference = newSortingPreference;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -68,12 +79,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && bookmarkFilePath.equals(o.bookmarkFilePath);
+                && bookmarkFilePath.equals(o.bookmarkFilePath)
+                && sortingPreference.equals(o.sortingPreference);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, bookmarkFilePath);
+        return Objects.hash(guiSettings, bookmarkFilePath, sortingPreference);
     }
 
     @Override
@@ -81,6 +93,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + bookmarkFilePath);
+        sb.append("\nSorting Preference: " + sortingPreference);
         return sb.toString();
     }
 

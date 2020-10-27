@@ -1,16 +1,19 @@
 @startuml
 :User executes command;
 
-if () then ([command causes Ui to switch to detailed view])
-    if () then ([already in Detailed View])
-    else ([else])
-        :Switch to Detailed View;
+if () then ([command causes view switch])
+    if () then ([command causes switch to default view])
+        if () then ([already in default view])
+        else ()
+            : Ui switches switch to default view;
+        endif
+    else ([command causes switch to detailed view])
+        if () then ([already in detailed view])
+        else ()
+            : UI switches to detailed view;
+        endif
     endif
+    stop
 else ([else])
-    if () then ([already in Default View])
-    else ([else])
-        :Switch to Default View;
-    endif
-endif
 stop
 @enduml

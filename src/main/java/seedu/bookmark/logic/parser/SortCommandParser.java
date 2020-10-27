@@ -4,15 +4,14 @@ import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
+import static seedu.bookmark.model.book.comparators.ComparatorGenerator.comparatorGenerator;
 
 import java.util.Comparator;
 
 import seedu.bookmark.logic.commands.SortCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.book.comparators.BookGenreComparator;
-import seedu.bookmark.model.book.comparators.BookNameComparator;
-import seedu.bookmark.model.book.comparators.BookPagesReadComparator;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -32,7 +31,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
-                        PREFIX_NAME, PREFIX_GENRE, PREFIX_BOOKMARK);
+                        PREFIX_NAME, PREFIX_GENRE, PREFIX_BOOKMARK, PREFIX_READING_PROGRESS);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             prefixCount += 1;
@@ -45,6 +44,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (argMultimap.getValue(PREFIX_BOOKMARK).isPresent()) {
             prefixCount += 1;
             inputPrefix = PREFIX_BOOKMARK;
+        }
+        if (argMultimap.getValue(PREFIX_READING_PROGRESS).isPresent()) {
+            prefixCount += 1;
+            inputPrefix = PREFIX_READING_PROGRESS;
         }
         if (prefixCount != 1) { //if more than/ less than 1 input prefix, we throw an error.
             throw new ParseException(
@@ -59,22 +62,6 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         comparator = comparatorGenerator(inputPrefix);
 
-        return new SortCommand(comparator);
-    }
-
-    /**
-     * Returns a comparator based on the input prefix
-     * @return Comparator based on input prefix
-     */
-    public Comparator<Book> comparatorGenerator(Prefix inputPrefix) {
-        Comparator<Book> comparator = null;
-        if (inputPrefix == PREFIX_NAME) {
-            comparator = new BookNameComparator();
-        } else if (inputPrefix == PREFIX_GENRE) {
-            comparator = new BookGenreComparator();
-        } else if (inputPrefix == PREFIX_BOOKMARK) {
-            comparator = new BookPagesReadComparator();
-        }
-        return comparator;
+        return new SortCommand(comparator, inputPrefix);
     }
 }

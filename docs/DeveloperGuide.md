@@ -67,7 +67,6 @@ The sections below give more details of each component.
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
-The exception to this is `DetailedBookListPanel`, which shares the same `.fxml` file as `BookListPanel`.
 
 The `UI` component,
 
@@ -146,10 +145,11 @@ regarding the books stored, and the **detailed view** which displays detailed in
 the display of book information.
 When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
 while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
-`DetailedBookCard`.
+`DetailedBookCard`. As there is more information to display, `DetailedBookListPanel` will also use other components
+such as `NoteCard` to display the notes added to the book, if any. 
 
-Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the
-list of `BookCard` or `DetailedBookCard` respectively.
+Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the `BookCard` or `DetailedBookCard`
+respectively.
 
 The class diagram below shows the relevant classes involved:
 
@@ -161,13 +161,14 @@ The class diagram below shows the relevant classes involved:
 
 `MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()`
 which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
-From the returned `CommandResult`, `CommandResult#getViewType()` indicates whether the UI should switch to the 
-detailed view, switch to the the default summarised view or remain in whatever view it currently is in. 
-`CommandResult#getViewType()` returns a `ViewType`, of which there are three types: `ViewType.DEFAULT`, `ViewType.DETAILED`
-and `ViewType.MOST_RECENTLY_USED`.
+From the returned `CommandResult`, `CommandResult#getViewType()` indicates how the UI should switch its view.
+`CommandResult#getViewType()` returns a `ViewType`, of which there are three types: 
+   * `ViewType.DEFAULT` - Instructs UI to switch to the default, summarised view
+   * `ViewType.DETAILED` - Instructs UI to switch to the detailed, single book view
+   * `ViewType.MOST_RECENTLY_USED` - Instructs UI to stay in whatever view it is in
 
-Based on the type of `ViewType` returned by `CommandResult#getViewType()`, `MainWindow#changeToDetailedView()`,
-`MainWindow#resetView()`, or no method is called accordingly.
+Based on the type of `ViewType` returned by `CommandResult#getViewType()`, `MainWindow#resetView()`,
+`MainWindow#changeToDetailedView()`, or no method is called accordingly.
 
 The activity diagram below illustrates the flow of execution when the UI decides which view to use:
 
@@ -184,7 +185,7 @@ detailed view:
 
 * **Alternative 1 (current choice):** Use JavaFX ListView
   * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
-  * Cons: Can allow for displaying of multiple DetailedBookCards even though the detailed view is only meant to show
+  * Cons: Extra care must be taken to not allow multiple books to be displayed as detailed view is only meant to show
   one book
 
 * **Alternative 2:** Use other JavaFX layouts
@@ -365,7 +366,7 @@ the states that can be undone/redone. It does so by storing `State` objects. Eac
 * `HistoryManager#redo()` — Restores the most recently undone state from its history.
 
 The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
-Whenever the user enters a one of the following commands:
+Whenever the user enters one of the following commands:
   * `add`
   * `delete`
   * `edit`
@@ -374,9 +375,12 @@ Whenever the user enters a one of the following commands:
   * `sort`
   
 the previous state
-will be saved and a new state created by calling `HistoryManager#addNewState()`. 
-This occurs whenever the methods exposed to modify the model such as: `Model#addBook()`, `Model#removeBook()` 
-and `Model#setBook()` and `Model#setUserPrefs` are called. The class diagram below illustrates the classes that facilitates the undo and redo
+will be saved and a new state created by calling `HistoryManager#addNewState()`.
+This occurs via the methods implemented by `ModelManager` to modify the model such as: `ModelManager#addBook()`, `ModelManager#removeBook()`,
+`ModelManager#setBook()` and `ModelManager#setUserPrefs` are called. When these methods are called, they will
+modify the model and call `HistoryManager#addNewState()` to create a new `State` capturing the state of the modified model,
+to be stored by `HistoryManager`.
+The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
 
 ![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
