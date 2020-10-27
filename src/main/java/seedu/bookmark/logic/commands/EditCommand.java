@@ -23,7 +23,9 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -102,8 +104,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
         TotalPages updatedTotalPages = editBookDescriptor.getTotalPages().orElse(bookToEdit.getTotalPages());
         Bookmark updatedBookmark = editBookDescriptor.getBookmark().orElse(bookToEdit.getBookmark());
+        Goal currentGoal = bookToEdit.getGoal();
+        List<Note> currentNotes = bookToEdit.getNotes();
 
-        return new Book(updatedName, updatedGenre, updatedTags, updatedTotalPages, updatedBookmark);
+        return new Book(updatedName, updatedGenre, updatedTags,
+                updatedTotalPages, updatedBookmark, currentGoal, currentNotes);
     }
 
     @Override

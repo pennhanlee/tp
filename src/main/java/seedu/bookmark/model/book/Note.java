@@ -24,6 +24,7 @@ public class Note {
      * @param text A valid text string.
      */
     public Note(String title, String text) {
+        assert (title != null && text != null);
         requireNonNull(title);
         requireNonNull(text);
         checkArgument(isValidNote(title, text), MESSAGE_CONSTRAINTS);
