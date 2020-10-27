@@ -70,9 +70,6 @@ public class DeleteNoteCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
-
-
-
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         if (noteIndex.getZeroBased() >= bookToEdit.getNotes().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
