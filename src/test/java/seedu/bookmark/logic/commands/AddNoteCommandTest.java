@@ -43,7 +43,9 @@ public class AddNoteCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
-        assertCommandSuccess(addNoteCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(addNoteCommand, model, expectedResult, expectedModel);
     }
 
     @Test

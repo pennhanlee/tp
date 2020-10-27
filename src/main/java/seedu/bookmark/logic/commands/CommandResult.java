@@ -17,9 +17,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The application should change view. */
     private final ViewType viewType;
 
+    /** Represents how the UI should change view. */
     public enum ViewType {
         DEFAULT,
         DETAILED,

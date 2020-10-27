@@ -3,7 +3,6 @@ package seedu.bookmark.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TEXT;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
-import static seedu.bookmark.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +82,8 @@ public class AddNoteCommand extends Command {
         Book editedBook = createEditedBook(bookToEdit, note);
 
         model.setBook(bookToEdit, editedBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS, editedBook), false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 
     @Override
