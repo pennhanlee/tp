@@ -2,6 +2,8 @@ package seedu.bookmark.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.bookmark.logic.parser.CliSyntax.sortingPrefixGenerator;
+import static seedu.bookmark.model.book.comparators.ComparatorGenerator.comparatorGenerator;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -26,6 +28,7 @@ public class ModelManager implements Model {
 
     private final Library library;
     private final UserPrefs userPrefs;
+    private Comparator<Book> comparator;
     private final FilteredList<Book> filteredBooks;
     private final WordBank wordBank;
     private HistoryManager historyManager;
@@ -41,6 +44,7 @@ public class ModelManager implements Model {
 
         this.library = new Library(library);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.comparator = comparatorGenerator(sortingPrefixGenerator(userPrefs.getSortingPreference()));
         this.filteredBooks = new FilteredList<>(this.library.getBookList());
         this.wordBank = new WordBank(library);
         State initialState = State.createState(library, userPrefs, filteredBooks.getPredicate());
@@ -88,6 +92,17 @@ public class ModelManager implements Model {
         userPrefs.setBookmarkFilePath(bookMarkFilePath);
     }
 
+    @Override
+    public String getSortingPreference() {
+        return userPrefs.getSortingPreference();
+    }
+
+    @Override
+    public void setSortingPreference(String newSortingPreference) {
+        requireNonNull(newSortingPreference);
+        userPrefs.setSortingPreference(newSortingPreference);
+    }
+
     //=========== Library ================================================================================
 
     @Override
@@ -123,10 +138,10 @@ public class ModelManager implements Model {
     public void addBook(Book book) {
         library.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        sortByDefaultComparator();
         historyManager = historyManager.addNewState(
                 State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.addToWordBank(book);
-
     }
 
     @Override
@@ -143,6 +158,13 @@ public class ModelManager implements Model {
         historyManager = historyManager.addNewState(
                 State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.updateWordBank(target, editedBook);
+    }
+
+    @Override
+    public void sortByDefaultComparator() {
+        if (this.comparator != null) { //should be removed, should sort by date added field
+            sortFilteredBookList(this.comparator);
+        }
     }
 
     //=========== Filtered Book List Accessors =============================================================
@@ -180,7 +202,10 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredBookList(Comparator<Book> comparator) {
+        this.comparator = comparator;
         this.library.sortBooks(comparator);
+        historyManager = historyManager.addNewState
+                (State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     /**
