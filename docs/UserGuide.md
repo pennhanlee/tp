@@ -41,7 +41,7 @@ Prefix | Explanation
 `c/` | Completed books
 `nc/` | Not yet completed books
 `rp/` | The reading progress of the book
-`p/` | The page to set the your goal
+`p/` | The page to set your goal on
 `d/` | The date to complete your goal by
 `txt/` | The text of your note
 
@@ -131,16 +131,17 @@ Example Command | Result
 Sort books according to the condition inputted, and sets it as a user preference.
 
 Format: 
-*`sort n/`
-*`sort g/`
-*`sort b/`
-*`sort rp/`
+* `sort n/`
+* `sort g/`
+* `sort b/`
+* `sort rp/`
 
 Purpose:
 * Sorts the books according to the input filter.
 * Supports sorting by Name, Genre, Bookmarked page and Reading progress.
 
 Examples:
+
 Example Command | Result
 -----------------|--------
 `sort n/` | Returns a list of books sorted by name in alphabetical order.
