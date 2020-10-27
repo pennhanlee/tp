@@ -9,7 +9,7 @@ import seedu.bookmark.model.wordstore.exceptions.WordNotFoundException;
 
 public class WordStore {
 
-    private HashMap<Integer, Word> wordStore;
+    private HashMap<String, Word> wordStore;
 
     /**
      * Creates a WordStore object
@@ -23,23 +23,23 @@ public class WordStore {
      */
     public boolean contains(String toCheck) {
         requireNonNull(toCheck);
-        Integer hashedWord = toCheck.hashCode();
-        return wordStore.containsKey(hashedWord);
+        return wordStore.containsKey(toCheck);
     }
 
     /**
      * Adds words from a given list into the Store
-     * @param words
+     * @param words list of words to be added
      */
     public void addWords(List<String> words) {
         for (String word : words) {
+            assert word != null;
             wordAdder(word);
         }
     }
 
     /**
      * Deletes words from a given list out of the Store
-     * @param words
+     * @param words list of words to be deleted
      */
     public void deleteWords(List<String> words) {
         for (String word : words) {
@@ -50,13 +50,14 @@ public class WordStore {
     /**
      * Processes the provided word into wordStore by either creating a new Word or incrementing the count based on
      * whether the word already exists
-     * @param targetWord
+     * @param targetWord word to be added
      */
     public void wordAdder(String targetWord) {
         requireNonNull(targetWord);
         boolean added = contains(targetWord);
         if (added) {
-            Word targetWordObj = wordStore.get(targetWord.hashCode());
+            Word targetWordObj = wordStore.get(targetWord);
+            assert targetWordObj != null;
             targetWordObj.addCount();
         } else {
             Word newWord = new Word(targetWord);
@@ -68,11 +69,11 @@ public class WordStore {
      * Processes the provided word out of wordStore by either removing the word or minusing the count based on
      * whether the word count > 1
      * If there are no words found, the deletion is ignored
-     * @param targetWord
+     * @param targetWord word to be deleted
      */
     public void wordDeleter(String targetWord) {
         requireNonNull(targetWord);
-        Word targetWordObj = wordStore.get(targetWord.hashCode());
+        Word targetWordObj = wordStore.get(targetWord);
         if (targetWordObj == null) {
             throw new WordNotFoundException();
         }
@@ -87,7 +88,7 @@ public class WordStore {
      * Returns the wordStore
      * @return wordStore
      */
-    public HashMap<Integer, Word> getWordStore() {
+    public HashMap<String, Word> getWordStore() {
         return this.wordStore;
     }
 
@@ -96,18 +97,17 @@ public class WordStore {
      * @return Word
      */
     public Word getWord(String word) {
-        Integer wordHash = word.hashCode();
-        return this.wordStore.get(wordHash);
+        return this.wordStore.get(word);
     }
 
 
     private void addWord(Word word) {
-        this.wordStore.put(word.hashCode(), word);
+        this.wordStore.put(word.getWord(), word);
 
     }
 
     private void deleteWord(Word word) {
-        this.wordStore.remove(word.hashCode(), word);
+        this.wordStore.remove(word.getWord(), word);
     }
 
 }
