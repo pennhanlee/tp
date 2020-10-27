@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
@@ -22,7 +23,9 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
+import seedu.bookmark.model.book.Goal;
 import seedu.bookmark.model.book.Name;
+import seedu.bookmark.model.book.Note;
 import seedu.bookmark.model.book.TotalPages;
 import seedu.bookmark.model.tag.Tag;
 
@@ -48,6 +51,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the library.";
+    private static final Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
@@ -82,6 +86,8 @@ public class EditCommand extends Command {
             throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
         }
         model.setBook(bookToEdit, editedBook);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        model.sortByDefaultComparator();
         return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook),
                 false, false, ViewType.MOST_RECENTLY_USED);
     }
@@ -98,8 +104,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
         TotalPages updatedTotalPages = editBookDescriptor.getTotalPages().orElse(bookToEdit.getTotalPages());
         Bookmark updatedBookmark = editBookDescriptor.getBookmark().orElse(bookToEdit.getBookmark());
+        Goal currentGoal = bookToEdit.getGoal();
+        List<Note> currentNotes = bookToEdit.getNotes();
 
-        return new Book(updatedName, updatedGenre, updatedTags, updatedTotalPages, updatedBookmark);
+        return new Book(updatedName, updatedGenre, updatedTags,
+                updatedTotalPages, updatedBookmark, currentGoal, currentNotes);
     }
 
     @Override

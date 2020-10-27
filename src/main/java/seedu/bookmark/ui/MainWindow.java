@@ -208,7 +208,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            sidebarPanel.update(logic.getFilteredBookList());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -223,16 +222,17 @@ public class MainWindow extends UiPart<Stage> {
                 resetView();
                 break;
             case DETAILED:
-                changeToDetailedView();
+                if (logic.getFilteredBookList().size() <= 1) {
+                    // can only use detailed view when there is <= 1 books to display
+                    changeToDetailedView();
+                } else {
+                    resetView();
+                }
                 break;
             case MOST_RECENTLY_USED:
                 break;
             default:
                 break;
-            }
-
-            if (logic.getFilteredBookList().size() > 1) {
-                resetView();
             }
 
             return commandResult;

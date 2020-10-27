@@ -29,6 +29,13 @@ public class BookListPanel extends UiPart<Region> {
         bookListView.setCellFactory(lv -> new BookListViewCell());
     }
 
+    /**
+     * Constructor for subclasses to specify their own fxml file path.
+     */
+    public BookListPanel(String fxmlPath) {
+        super(fxmlPath);
+    }
+
     public BookListPanel() {
         super(FXML);
     }

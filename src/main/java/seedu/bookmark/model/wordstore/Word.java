@@ -2,6 +2,8 @@ package seedu.bookmark.model.wordstore;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 public class Word {
     private static final int STARTING_COUNT = 1;
     private String word;
@@ -106,11 +108,11 @@ public class Word {
 
     @Override
     public int hashCode() {
-        return word.hashCode();
+        return Objects.hash(this.word, this.count, this.distance);
     }
 
     @Override
     public String toString() {
-        return this.word;
+        return "Word: " + this.word + ", Count: " + this.count + ", Distance: " + this.distance;
     }
 }

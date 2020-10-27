@@ -18,4 +18,10 @@ public class UserPrefsTest {
         assertThrows(NullPointerException.class, () -> userPrefs.setBookmarkFilePath(null));
     }
 
+    @Test
+    public void setSortingPreferences_nullSortingPreferences_throwsAssertionError() {
+        UserPrefs userPrefs = new UserPrefs();
+        assertThrows(AssertionError.class, () -> userPrefs.setSortingPreference(null));
+    }
+
 }
