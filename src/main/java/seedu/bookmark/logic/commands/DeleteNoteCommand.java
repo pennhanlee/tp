@@ -1,8 +1,6 @@
 package seedu.bookmark.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TEXT;
-import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,34 +22,32 @@ import seedu.bookmark.model.tag.Tag;
 /**
  * Adds a Note to a Book.
  */
-public class AddNoteCommand extends Command {
+public class DeleteNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "note";
+    public static final String COMMAND_WORD = "notedel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a note from the book. \n"
                                                        + "Parameters: INDEX (must be a positive integer) "
-                                                       + PREFIX_NOTE_TITLE + "TITLE "
-                                                       + PREFIX_NOTE_TEXT + "TEXT";
+                                                       + "NOTE_INDEX (must be a positive integer)";
 
-    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added Note: %1$s, to Book: %2$s";
-    public static final String MESSAGE_DUPLICATE_NOTE = "This note already exists for the book.";
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Deleted Note: %1$s, from Book: %2$s";
 
     private final Index index;
-    private final Note note;
+    private final Index noteIndex;
     /**
-     * Creates an AddNoteCommand to add a {@code note} to the specified book at {@code index}
+     * Creates a DeleteNoteCommand to delete a {@code note} at {@code index} from the specified book.
      */
-    public AddNoteCommand(Index index, Note note) {
+    public DeleteNoteCommand(Index index, Index noteIndex) {
         requireNonNull(index);
-        requireNonNull(note);
+        requireNonNull(noteIndex);
         this.index = index;
-        this.note = note;
+        this.noteIndex = noteIndex;
     }
 
     /**
-     * Creates and returns a {@code Book} with the updated details of {@code bookToEdit} with the added note.
+     * Creates and returns a {@code Book} with the updated details of {@code bookToEdit} without the deleted note.
      */
-    protected static Book createEditedBook(Book bookToEdit, Note note) throws CommandException {
+    protected static Book createEditedBook(Book bookToEdit, Index index) {
         assert bookToEdit != null;
 
         Name updatedName = bookToEdit.getName();
@@ -61,10 +57,7 @@ public class AddNoteCommand extends Command {
         Bookmark updatedBookmark = bookToEdit.getBookmark();
         Goal updatedGoal = bookToEdit.getGoal();
         List<Note> updatedNotes = new ArrayList<>(bookToEdit.getNotes());
-        if (bookToEdit.containsNote(note)) {
-            throw new CommandException(MESSAGE_DUPLICATE_NOTE);
-        }
-        updatedNotes.add(note);
+        updatedNotes.remove(index.getZeroBased());
 
         return new Book(updatedName, updatedGenre, updatedTags,
                 updatedTotalPages, updatedBookmark, updatedGoal, updatedNotes);
@@ -77,13 +70,16 @@ public class AddNoteCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
-
         Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedBook(bookToEdit, note);
+        if (noteIndex.getZeroBased() >= bookToEdit.getNotes().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
+        }
+        Note deletedNote = bookToEdit.getNotes().get(noteIndex.getZeroBased());
+        Book editedBook = createEditedBook(bookToEdit, noteIndex);
 
         model.setBook(bookToEdit, editedBook);
-        return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS,
-                note.title, bookToEdit.getName()), false, false,
+        return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS,
+                deletedNote.title, bookToEdit.getName()), false, false,
                 CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 
@@ -95,14 +91,14 @@ public class AddNoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddNoteCommand)) {
+        if (!(other instanceof DeleteNoteCommand)) {
             return false;
         }
 
         // state check
-        AddNoteCommand e = (AddNoteCommand) other;
+        DeleteNoteCommand e = (DeleteNoteCommand) other;
         return index.equals(e.index)
-                       && note.equals(e.note);
+                       && noteIndex.equals(e.noteIndex);
 
     }
 }

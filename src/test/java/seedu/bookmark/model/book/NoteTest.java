@@ -10,9 +10,9 @@ public class NoteTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Note("Hello", null));
-        assertThrows(NullPointerException.class, () -> new Note(null, "Hello"));
-        assertThrows(NullPointerException.class, () -> new Note(null, null));
+        assertThrows(AssertionError.class, () -> new Note("Hello", null));
+        assertThrows(AssertionError.class, () -> new Note(null, "Hello"));
+        assertThrows(AssertionError.class, () -> new Note(null, null));
     }
 
     @Test

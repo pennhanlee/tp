@@ -44,6 +44,7 @@ public class WordBank {
         this.genreWordStore = new WordStore();
         this.tagWordStore = new WordStore();
         ObservableList<Book> librarylist = library.getBookList();
+        assert librarylist != null;
         for (Book book : librarylist) {
             handleNewBook(book);
         }
@@ -129,6 +130,7 @@ public class WordBank {
      * @return WordStore
      */
     public WordStore getWordStore(String type) {
+        assert type != null;
         if (type.equals(PREFIX_NAME.getPrefix())) {
             return this.nameWordStore;
         } else if (type.equals(PREFIX_GENRE.getPrefix())) {
