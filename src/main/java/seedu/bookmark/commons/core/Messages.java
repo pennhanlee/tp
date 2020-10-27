@@ -10,7 +10,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_BOOK_DISPLAYED_INDEX = "The book index provided is invalid";
     public static final String MESSAGE_BOOKS_LISTED_OVERVIEW = "%1$d books listed!";
     public static final String MESSAGE_WORD_SUGGESTION = "Could not find: %1$s \nDid you mean: %2$s?";
-    public static final String MESSAGE_WORD_NOT_UNDERSTOOD = "Could not find: %1$s \nSorry! I don't understand!";
+    public static final String MESSAGE_WORD_NOT_UNDERSTOOD = "Could not find: %1$s \nSorry! I don't"
+                                                            + " have any suggestions!!";
     public static final String MESSAGE_BOOKS_SORTED = "Sorted by ";
 
 }
