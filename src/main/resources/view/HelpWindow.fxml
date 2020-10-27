@@ -22,7 +22,7 @@
             <HBox styleClass="headerbar" stylesheets="@HelpWindow.css">
                <children>
                    <ImageView fx:id="icon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                    <Label fx:id="welcomeHelp" alignment="CENTER" minHeight="-Infinity" prefHeight="57.0" prefWidth="389.0" text="Label" wrapText="true" />
+                    <Label fx:id="welcomeHelp" alignment="CENTER" minHeight="-Infinity" prefHeight="57.0" prefWidth="389.0" styleClass="headerbar" text="Label" wrapText="true" />
                     <Button fx:id="copyButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
                      <HBox.margin>
                         <Insets top="16.0" />
@@ -38,7 +38,7 @@
                   <VBox fx:id="helpContainer" alignment="CENTER" styleClass="body" />
                </content>
                <styleClass>
-                  <String fx:value="background" />
+                  <String fx:value="body" />
                   <String fx:value="edge-to-edge" />
                </styleClass>
             </ScrollPane>

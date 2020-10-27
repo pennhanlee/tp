@@ -1,5 +1,15 @@
-.label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Light ";
+
+
+.commandtitle {
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-border-width: 5;
+    -fx-border-color: black;
+}
+
+.message {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI ";
     -fx-text-fill: black;
 }
