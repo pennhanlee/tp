@@ -1,5 +1,9 @@
 package seedu.bookmark.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
@@ -7,9 +11,6 @@ import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Goal;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class GoalDelCommand extends Command {
     public static final String COMMAND_WORD = "goaldel";

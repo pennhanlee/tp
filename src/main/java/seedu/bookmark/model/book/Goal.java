@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
-            "Page should only contain numeric characters,\n " +
-                    "Deadline format is DD-MM-YYYY\n"
+            "Page should only contain numeric characters,\n "
+                    + "Deadline format is DD-MM-YYYY\n"
                     + "both page and deadline should not be empty";
     public static final String UI_COMPLETED = " (Completed!)";
     public static final String UI_OVERDUE = " (Overdue!)";

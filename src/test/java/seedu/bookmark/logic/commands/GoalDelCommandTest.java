@@ -7,10 +7,9 @@ import static seedu.bookmark.logic.commands.CommandTestUtil.assertCommandSuccess
 import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
-// All the other imports
-
 
 import org.junit.jupiter.api.Test;
+
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.model.Model;
@@ -53,7 +52,7 @@ public class GoalDelCommandTest {
         GoalDelCommand cmd1 = new GoalDelCommand(INDEX_FIRST_BOOK);
         GoalDelCommand cmd2 = new GoalDelCommand(INDEX_SECOND_BOOK);
 
-        GoalDelCommand cmd1_clone = new GoalDelCommand(INDEX_FIRST_BOOK);
+        GoalDelCommand cmd1Clone = new GoalDelCommand(INDEX_FIRST_BOOK);
 
         // True when same object
         assertTrue(cmd1.equals(cmd1)); // short circuit
@@ -62,7 +61,7 @@ public class GoalDelCommandTest {
         assertFalse(cmd2.equals(cmd1));
 
         // True with same index
-        assertTrue(cmd1.equals(cmd1_clone));
+        assertTrue(cmd1.equals(cmd1Clone));
 
         // False if diff type
         assertFalse(cmd1.equals(1));

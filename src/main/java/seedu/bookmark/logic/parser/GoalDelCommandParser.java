@@ -1,11 +1,10 @@
 package seedu.bookmark.logic.parser;
 
+import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.GoalDelCommand;
-import seedu.bookmark.logic.commands.ViewCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
-
-import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class GoalDelCommandParser implements Parser<GoalDelCommand> {
     /**
