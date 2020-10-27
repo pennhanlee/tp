@@ -185,7 +185,7 @@ detailed view:
 
 * **Alternative 1 (current choice):** Use JavaFX ListView
   * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
-  * Cons: Technically allows for displaying of multiple books even though the detailed view is only meant to show
+  * Cons: Extra care must be taken to not allow multiple books to be displayed as detailed view is only meant to show
   one book
 
 * **Alternative 2:** Use other JavaFX layouts
