@@ -5,7 +5,7 @@ public class HelpAdd implements HelpAction {
     private static final String ADD_INTRO = "ADD A BOOK!";
     private static final String ADD_MESSAGE = "Add books to the storage to keep track of your "
                                                 + "reading progress using our Add Command!";
-    private static final String ADD_COMMAND = "COMMAND: add [n/BOOK_TITLE] [g/GENRE] [t/TAG] [t/TAG] [tp/TOTAL_PAGES] "
+    private static final String ADD_COMMAND = "COMMAND: add n/BOOK_TITLE g/GENRE [t/TAG] [t/TAG] tp/TOTAL_PAGES "
                                                 + "[b/PAGE_NUMBER]";
     private static final String ADD_EXAMPLE = "EXAMPLE: add n/Harry Potter g/Fiction t/Magic /t/Spells"
                                                 + " t/Wizard tp/550 b/20";
