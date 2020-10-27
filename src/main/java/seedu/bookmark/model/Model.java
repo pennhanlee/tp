@@ -46,6 +46,16 @@ public interface Model {
     void setBookmarkFilePath(Path bookMarkFilePath);
 
     /**
+     * Sets the user prefs' sorting preference.
+     */
+    void setSortingPreference(String newSortingPreference);
+
+    /**
+     * Returns the user pref's sorting preference.
+     */
+    String getSortingPreference();
+
+    /**
      * Replaces bookmark data with the data in {@code library}.
      */
     void setLibrary(ReadOnlyLibrary library);
@@ -104,4 +114,6 @@ public interface Model {
      * @throws NullPointerException if {@code comparator} is null.
      */
     void sortFilteredBookList(Comparator<Book> comparator);
+
+    void sortByDefaultComparator();
 }
