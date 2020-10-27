@@ -19,6 +19,11 @@ public class DetailedBookCard extends BookCard {
     @FXML
     private Label goal;
 
+    private static final String COMPLETED_STYLE = "-fx-text-fill: lime";
+    private static final String IN_PROGRESS_STYLE = "-fx-text-fill: gold";
+    private static final String OVERDUE_STYLE = "-fx-text-fill: red";
+    private static final String DEFAULT_STYLE = "";
+
     /**
      * Creates a {@code DetailedBookCard} with the given {@code Book} and index to display.
      */
@@ -36,7 +41,7 @@ public class DetailedBookCard extends BookCard {
         goalText = determineGoalText(book, goalText);
         percentageCompletion.setText(progressDisplay);
         goal.setText(goalText);
-        goal.setTextFill(determineGoalColour(book));
+        goal.setStyle(determineGoalStyle(book));
     }
 
     private int calculateCompletion(Book book) {
@@ -45,15 +50,15 @@ public class DetailedBookCard extends BookCard {
         return (int) ((pagesRead / totalPages) * 100);
     }
 
-    private Color determineGoalColour(Book book) {
+    private String determineGoalStyle(Book book) {
         if (book.goalCompleted()) {
-            return Color.GREEN;
+            return COMPLETED_STYLE;
         } else if (book.goalInProgress()) {
-            return Color.YELLOW;
+            return IN_PROGRESS_STYLE;
         } else if (book.goalOverdue()) {
-            return Color.RED;
+            return OVERDUE_STYLE;
         } else { // No goal
-            return Color.WHITE;
+            return DEFAULT_STYLE;
         }
     }
 
