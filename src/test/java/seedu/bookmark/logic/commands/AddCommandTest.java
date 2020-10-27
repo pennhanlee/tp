@@ -111,6 +111,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setSortingPreference(String newSortingPreference) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getSortingPreference() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addBook(Book book) {
             throw new AssertionError("This method should not be called.");
         }
@@ -164,6 +174,11 @@ public class AddCommandTest {
         @Override
         public void sortFilteredBookList(Comparator<Book> comparator) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByDefaultComparator() {
+            //will be called, but we do nothing here
         }
     }
 

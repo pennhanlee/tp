@@ -74,10 +74,9 @@ public class CommandParserTest {
     public void parseCommand_find() throws Exception {
         String[] keywords = {"foo", "bar", "baz"};
         List<String> keywordList = Arrays.asList(keywords);
-        Prefix namePrefix = PREFIX_NAME;
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " n/ " + keywordList.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywordList), namePrefix, keywords), command);
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywordList), PREFIX_NAME, keywords), command);
     }
 
     @Test
@@ -95,7 +94,7 @@ public class CommandParserTest {
     @Test
     public void parseCommand_sort() throws Exception {
         SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " n/ ");
-        assertEquals(new SortCommand(new BookNameComparator()), command);
+        assertEquals(new SortCommand(new BookNameComparator(), PREFIX_NAME), command);
     }
 
     @Test
