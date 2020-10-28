@@ -16,6 +16,7 @@ public class Messages {
     public static final String MESSAGE_TOO_MANY_TAGS = "The book has too many tags, every book can only have %d tags!";
     public static final String MESSAGE_TOO_MANY_NOTES = "The book has too many notes, "
             + "every book can only have %d notes";
+    public static final String MESSAGE_TOO_MANY_BOOKS = "Sorry, bookmark can only store up to %d books!";
     public static final String MESSAGE_BOOKS_SORTED = "Sorted by ";
 
 }

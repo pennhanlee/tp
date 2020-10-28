@@ -98,6 +98,10 @@ public class UniqueBookList implements Iterable<Book> {
         internalList.setAll(books);
     }
 
+    public int getSize() {
+        return internalList.size();
+    }
+
     /**
      * Sorts the book list according to the input {@code comparator}.
      */

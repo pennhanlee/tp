@@ -127,6 +127,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isFullCapacity() {
+        return library.getSize() >= Model.MAX_BOOK_CAPACITY;
+    }
+
+    @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
         historyManager = historyManager.addNewState(
