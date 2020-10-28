@@ -15,7 +15,6 @@ import seedu.bookmark.model.book.UniqueBookList;
  */
 public class Library implements ReadOnlyLibrary {
 
-    public static final int MAX_BOOK_CAPACITY = 100;
     protected final UniqueBookList books;
 
     /*
