@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-_bookmark_ is a desktop application to mange your indulgent bookworm habits! Use _bookmark_ to track your book reading progress 
-or pen down thoughts about mindboggling fan theories about your favourite characters!
+_bookmark_ is a desktop application to manage your indulgent bookworm habits! Use _bookmark_ to track your book reading progress 
+or pen down thoughts of mindboggling fan theories about your favourite characters!
 
 _bookmark_ allows you to add and update your beloved books, track your reading progress using our bookmark and even add reading goals and notes to your chosen books!
 
@@ -28,15 +28,38 @@ get cracking and start saving your best reads and ideas into _bookmark_, Type aw
 
 ### Starting _bookmark_
 
-1. Double-click the `bookmark.jar` file to start the application. You will be greeted by our lovely bookshelf GUI in a few seconds. <br>
+1. Double-click the `bookmark.jar` file to start the application. <br>
 *If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
-
-   ![Ui](images/Ui.png)
 
 1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
 `add n/My First Book g/Non-Fiction t/Yay tp/1000` 
 
 1. You should see that My First Book will be added into the list of books you see! 
+
+### The _bookmark_ Tour
+
+Here's a brief tour of the _bookmark_ application! <br>
+When you open _bookmark_, you will greeted by our lovely bookshelf GUI in a few seconds. (Exhibit 1)
+    
+   ![Ui](images/Ui.png)
+   *Exhibit 1*
+   
+You can find a list of all your recorded books at the the main window. (Exhibit 2) <br>
+The books only show
+a condensed version of your books. Notes and Goals will be shown when you view a chosen book!
+
+   ![Ui](images/mainwindow_list.png)
+   
+You can also see data of the summary of all your stored books, bookmarks and pages read on the
+right side of the application window. (Exhibit 3)
+
+   ![Ui](images/mainwindow_summary.png)
+   
+You can start to invoke commands by typing them in the provided input box at the bottom of 
+the application window. (Exhibit 4) <br>
+ _bookmark_ will reply you with the appropriate response for each command.
+
+   ![Ui](images/mainwindow_cli.png)
 
  Want to do more? Refer to the [Features](#features) section below for details of many more commands!
 
@@ -66,26 +89,29 @@ Prefix | Explanation
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/BOOK_TITLE`, `BOOK_TITLE` is a parameter which can be used as `add n/Harry Potter`.
+* Words in `UPPER_CASE` are the information to be given by you.<br>
+  e.g. in `add n/BOOK_TITLE`, `BOOK_TITLE` refers to the name of the book you want to add.
 
-* Items in square brackets are optional.<br>
-  e.g `n/BOOK_TITLE [b/PAGE_NUMBER]` can be used as `n/Harry Potter b/64` or as `n/Harry Potter`.
+* Words in square brackets are optional.<br>
+  e.g `n/BOOK_TITLE [b/PAGE_NUMBER]` means that you can omit this if you do not want to include a bookmark.<br>
+  You can always edit the book to have that information at a later time.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Words with trailing `…` refers to fields that can be used multiple times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/BOOK_TITLE tp/TOTAL_PAGES`, `tp/TOTAL_PAGES n/BOOK_TITLE` is also acceptable.
+* You can enter your book information in any order you like.<br>
+  e.g. If our command instructions specify `n/BOOK_TITLE tp/TOTAL_PAGES`, `tp/TOTAL_PAGES n/BOOK_TITLE` is also acceptable.
 
 </div>
 
 
 ### Adding a bookmark: `add`
 
-Adds your book into _bookmark_ by using our Add Command.
+Adds your book into _bookmark_ by using our Add Command so that you can
+track your book reading progress together with us!
 
-Format: `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]` <br>
+Format: <br>
+ `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]` <br>
 *tags and bookmarks are optional!*
 
 Examples:
@@ -97,40 +123,45 @@ Example Command | Result
 
 ### Viewing details of a book : `View`
 
-Shows all details of one specified book.
+Want a closer look? Look at the detailed information of your recorded book by using our 
+View Command. <br>
+With this command, you can see your recorded book contents in detail.
 
 Format: `view INDEX`
 * View the title, bookmark and percentage completed, goal and notes added of a specified book.
 * The `INDEX` refers to the index number shown in the displayed book list.
 * The `INDEX` **must be a positive number** 1, 2, 3, …
 
-Examples:
-* This assumes you are tracking at least 2 books.
-* `list` followed by `view 2` results in:
+Example: <br>
+*This assumes you are tracking at least 2 books.* <br>
 
-    ![detailed_view](images/detailed_view.PNG)
+1. `list`
+2. `view 2`
+
+   ![detailed_view](images/detailed_view.PNG)
 
 ### Listing all books : `list`
 
-Shows a list of all books in _bookmark_.
+Want to see all your books in storage? Use the List Command to display all
+of the books that you have added since the day you started!
 
 Format: `list`
 
+   ![list_view](images/mainwindow.png) 
+
 ### Locating books: `find`
 
-Find books that adhere to the input filter.
+Looking for something? Use the Find Command to search for your book of choice
+by filtering your list of books to only those that you want. 
 
-Format: 
-* `find n/BOOK_TITLE`
-* `find g/GENRE`
-* `find t/TAG`
-* `find c/`
-* `find nc/`
+Format: `find {Field}` <br>
 
-Purpose: 
-* Find books whose specified field contains any of the input keywords.
-* Can also find completed books & non-completed books using "c/" and "nc/" prefixes.
-* No keywords are required for finding completed & non-completed books.
+{Field} refers to any of these listed below:
+* `find n/BOOK_TITLE` : find by input book name
+* `find g/GENRE` : find by input book genre
+* `find t/TAG` : find by input tag
+* `find c/` : find by completed books
+* `find nc/` : find by uncompleted books
 
 Examples:
 
