@@ -172,6 +172,30 @@ public class Book {
     }
 
     /**
+     * Checks if a reader has already completed his/her {@code Goal}.
+     * @return true if current .
+     */
+    public boolean goalCompleted() {
+        return goal.getPageInt() <= getPagesRead();
+    }
+
+    /**
+     * Checks if a {@code Book}'s {@code Goal} object is overdue but not completed.
+     * @return true if a goal is already overdue but not completed.
+     */
+    public boolean goalOverdue() {
+        return goal.isOverdue() && !goalCompleted() && hasGoal();
+    }
+
+    /**
+     * Checks if a {@code Goal} object is in progress and not overdue.
+     * @return true if a goal is not overdue and not completed.
+     */
+    public boolean goalInProgress() {
+        return !goal.isOverdue() && !goalCompleted() && hasGoal();
+    }
+
+    /**
      * Returns true if this {@code Book} contains at least one {@code Note}.
      */
     public boolean hasNotes() {

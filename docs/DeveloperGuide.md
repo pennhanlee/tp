@@ -6,6 +6,22 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+### Purpose 
+
+This document is written to describe the architecture and software design decisions for the desktop application, _bookmark_
+
+### Scope
+
+The goal of this document is to cover the high-level system architecture and design. It will also cover the implementation of each
+feature in _bookmark_.
+
+### Audience 
+
+The intended audience is any person who is looking to understand the system architecture and design of _bookmark_
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -372,6 +388,7 @@ Whenever the user enters one of the following commands:
   * `edit`
   * `note`
   * `goal`
+  * `goaldel`
   * `sort`
   
 the previous state
