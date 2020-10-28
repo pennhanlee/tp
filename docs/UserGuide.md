@@ -79,7 +79,7 @@ Prefix | Explanation
 `c/` | Completed books
 `nc/` | Not yet completed books
 `rp/` | The reading progress of the book
-`p/` | The page to set the your goal
+`p/` | The page to set your goal on
 `d/` | The date to complete your goal by
 `txt/` | The text of your note
 
@@ -175,14 +175,13 @@ Example Command | Result
 Too messy? Use our Sort Command to organise your bookshelf! The sort command will
 help you organise your books in based on the order you indicate.
 
+
 Format: `sort {Field}` <br>
 {Field} refers to any of the following:
 * `n/` : Sort by Name
 * `g/` : Sort by Genre
 * `b/` : Sort by bookmarked page
 * `rp/` : Sort by reading progress
-
-Examples: 
 
 Example Command | Result
 -----------------|--------
