@@ -16,6 +16,7 @@ import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.ExitCommand;
 import seedu.bookmark.logic.commands.FindCommand;
 import seedu.bookmark.logic.commands.GoalCommand;
+import seedu.bookmark.logic.commands.GoalDelCommand;
 import seedu.bookmark.logic.commands.HelpCommand;
 import seedu.bookmark.logic.commands.ListCommand;
 import seedu.bookmark.logic.commands.RedoCommand;
@@ -89,6 +90,9 @@ public class CommandParser {
 
         case GoalCommand.COMMAND_WORD:
             return new GoalCommandParser().parse(arguments);
+
+        case GoalDelCommand.COMMAND_WORD:
+            return new GoalDelCommandParser().parse(arguments);
 
         case AddNoteCommand.COMMAND_WORD:
             return new AddNoteCommandParser().parse(arguments);
