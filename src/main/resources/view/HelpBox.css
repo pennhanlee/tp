@@ -1,11 +1,7 @@
-
-
 .commandtitle {
     -fx-font-size: 12pt;
     -fx-font-weight: bold;
     -fx-text-fill: black;
-    -fx-border-width: 5;
-    -fx-border-color: black;
 }
 
 .message {

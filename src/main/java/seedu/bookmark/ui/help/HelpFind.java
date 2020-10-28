@@ -7,8 +7,8 @@ public class HelpFind implements HelpAction {
     private static final String FIND_COMMAND = "COMMAND: find n/BOOK_TITLE";
     private static final String FIND_EXAMPLE = "EXAMPLE: find n/Harry Potter";
     private static final String FIND_RESPONSE = "RESPONSE: 1 books listed!";
-    private static final String FIND_NOTES = "NOTE: finding on g/GENRE, t/TAG, c/ (completed), "
-                                                + "nc/ (not completed) are also available";
+    private static final String FIND_NOTES = "NOTE: You can also find book on g/GENRE, t/TAG, c/ (completed), "
+                                                + "nc/ (not completed)";
     private static final String LB = " \n";
 
     public HelpFind() {}
