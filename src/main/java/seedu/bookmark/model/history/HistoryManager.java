@@ -60,7 +60,6 @@ public class HistoryManager {
         }
         redoDeque.push(currentState);
         State newCurrentState = undoDeque.pop();
-        System.out.println("UNDO STATE: " + newCurrentState.getLibrary().getBookList());
         return new HistoryManager(newCurrentState, new ArrayDeque<>(undoDeque), new ArrayDeque<>(redoDeque));
     }
 

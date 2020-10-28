@@ -219,7 +219,6 @@ public class ModelManager implements Model {
     private void resetModelData(State state) {
         library.resetData(state.getLibrary());
         userPrefs.resetData(state.getUserPrefs());
-        System.out.println(state.getPredicate() != null);
         Predicate<? super Book> prevPredicate = state.getPredicate() != null
                 ? state.getPredicate()
                 : PREDICATE_SHOW_ALL_BOOKS;
