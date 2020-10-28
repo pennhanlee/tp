@@ -13,7 +13,7 @@ public class HelpAdd implements HelpAction {
                                                 + "Genre: Fiction Total Pages: 550 "
                                                 + "Bookmarked at: 20 Tags: [Magic, Wizard]";
     private static final String ADD_NOTES = "NOTE: adding Tags and Bookmarked Page are optional and you can add \n"
-                                                + "multiple tags" ;
+                                                + "multiple tags";
     private static final String LB = " \n";
 
     public HelpAdd() {}
