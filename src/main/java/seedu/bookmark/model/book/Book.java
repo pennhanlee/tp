@@ -43,13 +43,11 @@ public class Book {
     }
 
     /**
-     * Overloaded method to create a {@code Book} with goal. Accommodate to notes
-     * without having to refactor every command.
-     * Will update to this constructor once notes is up and fully functional.
+     * Overloaded method to create a {@code Book} with goal and notes.
      */
     public Book(Name name, Genre genre, Set<Tag> tags,
                 TotalPages totalPages, Bookmark bookmark, Goal goal, List<Note> notes) {
-        requireAllNonNull(name, genre, tags, totalPages, bookmark, notes);
+        requireAllNonNull(name, genre, tags, totalPages, bookmark, goal, notes);
         this.name = name;
         this.genre = genre;
         this.tags.addAll(tags);
@@ -182,6 +180,13 @@ public class Book {
     }
 
     /**
+     * Returns true if this {@code Book} contains at least one {@code Note}.
+     */
+    public boolean hasNotes() {
+        return notes.size() > 0;
+    }
+
+    /**
      * Returns true if the exact same note is present in the note list of the book.
      */
     public boolean containsNote(Note note) {
@@ -241,7 +246,7 @@ public class Book {
         builder.append(" Goal: ")
                 .append(getGoal().toString())
                 .append(" Notes: ");
-        getNotes().forEach(note -> builder.append(note.title + ","));
+        getNotes().forEach(note -> builder.append("[" + note.title + "]"));
         return builder.toString();
     }
 }

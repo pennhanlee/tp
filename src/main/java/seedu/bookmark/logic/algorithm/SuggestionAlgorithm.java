@@ -36,9 +36,9 @@ public class SuggestionAlgorithm {
         requireNonNull(sourceWord);
         requireNonNull(prefix);
         String prefixName = prefix.getPrefix();
-        HashMap<Integer, Word> wordStore = wordBank.getWordStore(prefixName).getWordStore();
+        HashMap<String, Word> wordStore = wordBank.getWordStore(prefixName).getWordStore();
         ArrayList<Word> suggestions = new ArrayList<>();
-        for (Map.Entry<Integer, Word> word : wordStore.entrySet()) {
+        for (Map.Entry<String, Word> word : wordStore.entrySet()) {
             Word targetWord = word.getValue();
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
             if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {

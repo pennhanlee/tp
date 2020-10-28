@@ -33,17 +33,21 @@ public class AddNoteCommandTest {
 
     @Test
     public void execute_addValidNoteUnfilteredList_success() {
+        Note noteToAdd = new Note(VALID_NOTE_TITLE, VALID_NOTE_TITLE);
         Book toAddNote = model.getFilteredBookList().get(0);
         Book editedBook = new BookBuilder(toAddNote).withNotes(VALID_NOTE_TITLE).build();
         AddNoteCommand addNoteCommand =
-                new AddNoteCommand(INDEX_FIRST_BOOK, new Note(VALID_NOTE_TITLE, VALID_NOTE_TITLE));
+                new AddNoteCommand(INDEX_FIRST_BOOK, noteToAdd);
 
-        String expectedMessage = String.format(AddNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedBook);
+        String expectedMessage = String.format(AddNoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+                noteToAdd.title, editedBook.getName());
 
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
-        assertCommandSuccess(addNoteCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(addNoteCommand, model, expectedResult, expectedModel);
     }
 
     @Test
