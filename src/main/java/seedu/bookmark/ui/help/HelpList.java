@@ -4,7 +4,7 @@ public class HelpList implements HelpAction {
 
     private static final String LIST_INTRO = "LIST ALL BOOKS";
     private static final String LIST_MESSAGE = "Want to take a peek of your bookshelf? See all of your "
-                                                + "stored booked using our List Command!";
+                                                + "stored books using our List Command!";
     private static final String LIST_COMMAND = "COMMAND: list";
     private static final String LIST_EXAMPLE = "EXAMPLE: list";
     private static final String LIST_RESPONSE = "RESPONSE: Listing all books";
