@@ -178,6 +178,15 @@ Format: `goal INDEX p/PAGE d/DD-MM-YYYY`
 
 Examples:
 
+Goal In Progress:
+![goal_in_progress](images/GoalUi_InProgress.png)
+
+Goal Completed:
+![goal_completed](images/GoalUi_Completed.png)
+
+Goal Overdue:
+![goal_overdue](images/GoalUi_Overdue.png)
+
 Example Command | Result
 -----------------|--------
 `goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the first book by 22nd May 2020.
