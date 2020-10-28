@@ -14,7 +14,7 @@ public class HelpView implements HelpAction {
 
     @Override
     public String helpIntro() {
-    return VIEW_INTRO;
+        return VIEW_INTRO;
     }
 
     @Override

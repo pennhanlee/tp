@@ -8,7 +8,8 @@ public class HelpSort implements HelpAction {
     private static final String SORT_COMMAND = "COMMAND: sort n/";
     private static final String SORT_EXAMPLE = "EXAMPLE: sort n/";
     private static final String SORT_RESPONSE = "RESPONSE: Sorted by Name";
-    private static final String SORT_NOTES = "NOTE: You can also sort on g/ (genre), b/ (bookmark) or rp/ (reading progress)";
+    private static final String SORT_NOTES = "NOTE: You can also sort on g/ (genre), b/ (bookmark) or "
+                                                + "rp/ (reading progress)";
     private static final String LB = "\n";
 
     public HelpSort() {}

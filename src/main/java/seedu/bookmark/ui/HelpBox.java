@@ -1,13 +1,10 @@
 package seedu.bookmark.ui;
 
 import java.io.IOException;
-import java.util.logging.XMLFormatter;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**

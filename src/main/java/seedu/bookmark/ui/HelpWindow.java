@@ -88,9 +88,11 @@ public class HelpWindow extends UiPart<Stage> {
                 HelpBox.getHelpBox(helpSort.helpIntro(), helpSort.helpMessage(), helpSort.helpExample()),
                 HelpBox.getHelpBox(helpFind.helpIntro(), helpFind.helpMessage(), helpFind.helpExample()),
                 HelpBox.getHelpBox(helpGoalAdd.helpIntro(), helpGoalAdd.helpMessage(), helpGoalAdd.helpExample()),
-                HelpBox.getHelpBox(helpGoalDelete.helpIntro(), helpGoalDelete.helpMessage(), helpGoalDelete.helpExample()),
+                HelpBox.getHelpBox(helpGoalDelete.helpIntro(),
+                            helpGoalDelete.helpMessage(), helpGoalDelete.helpExample()),
                 HelpBox.getHelpBox(helpNoteAdd.helpIntro(), helpNoteAdd.helpMessage(), helpNoteAdd.helpExample()),
-                HelpBox.getHelpBox(helpNoteDelete.helpIntro(), helpNoteDelete.helpMessage(), helpNoteDelete.helpExample()),
+                HelpBox.getHelpBox(helpNoteDelete.helpIntro(),
+                            helpNoteDelete.helpMessage(), helpNoteDelete.helpExample()),
                 HelpBox.getHelpBox(helpUndo.helpIntro(), helpUndo.helpMessage(), helpUndo.helpExample()),
                 HelpBox.getHelpBox(helpRedo.helpIntro(), helpRedo.helpMessage(), helpRedo.helpExample())
         );
