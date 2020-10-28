@@ -5,8 +5,6 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**
@@ -16,11 +14,15 @@ import javafx.scene.layout.VBox;
  */
 public class HelpBox extends VBox {
     @FXML
-    private Label exampleCommand;
-    @FXML
-    private ImageView examplePic;
+    private Label exampleIntro;
 
-    private HelpBox(String text, Image img) {
+    @FXML
+    private Label exampleMessage;
+
+    @FXML
+    private Label exampleCommand;
+
+    private HelpBox(String intro, String message, String example) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/HelpBox.fxml"));
             fxmlLoader.setController(this);
@@ -29,17 +31,19 @@ public class HelpBox extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        exampleCommand.setText(text);
-        examplePic.setImage(img);
+        exampleIntro.setText(intro);
+        exampleMessage.setText(message);
+        exampleCommand.setText(example);
     }
 
     /**
      * Creates a HelpBox object
-     * @param text Text that is to be included in the Help Box
-     * @param img A picture as an example
+     * @param intro Text that is to be included in the Help Box
+     * @param message A picture as an example
+     * @param example
      * @return a HelpBox object
      */
-    public static HelpBox getHelpBox(String text, Image img) {
-        return new HelpBox(text, img);
+    public static HelpBox getHelpBox(String intro, String message, String example) {
+        return new HelpBox(intro, message, example);
     }
 }

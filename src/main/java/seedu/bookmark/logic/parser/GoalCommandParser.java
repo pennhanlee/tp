@@ -32,7 +32,6 @@ public class GoalCommandParser implements Parser<GoalCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PAGE, PREFIX_DEADLINE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
-            // Check if page and deadline provided matches page and deadline regex.
         }
 
         assert(arePrefixesPresent(argMultimap, PREFIX_PAGE, PREFIX_DEADLINE));

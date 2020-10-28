@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.StringUtil;
-import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.book.Bookmark;
 import seedu.bookmark.model.book.Genre;
@@ -140,7 +139,7 @@ public class ParserUtil {
         String trimmedPage = page.trim();
         String trimmedDeadline = deadline.trim();
         if (!Goal.isValidGoal(trimmedPage, trimmedDeadline)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoalCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS));
         }
         return new Goal(trimmedPage, trimmedDeadline);
     }
