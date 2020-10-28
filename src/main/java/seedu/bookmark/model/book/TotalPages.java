@@ -9,14 +9,18 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
  */
 public class TotalPages {
 
+    public static final int MAX_TOTAL_PAGES_LENGTH = 9;
+
     public static final String MESSAGE_CONSTRAINTS =
             "Total pages should only contain numeric characters, it should not be blank"
-                    + "and its numerical value should be greater than 0";
+                    + "and its numerical value should be greater than 0 \n"
+                    + String.format("Maximum of %d digits allowed.", MAX_TOTAL_PAGES_LENGTH);
 
     /*
-     * Only a 1 or more of the digits 0-9 allowed
+     * Only 1 to 9 number of digits from 0-9 allowed
      */
-    public static final String VALIDATION_REGEX = "^\\d+";
+    public static final String VALIDATION_REGEX = "^\\d"
+            + "{1," + MAX_TOTAL_PAGES_LENGTH + "}$";
 
     public final String value;
 
