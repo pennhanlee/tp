@@ -11,6 +11,9 @@ import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
@@ -22,9 +25,6 @@ import seedu.bookmark.model.UserPrefs;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Note;
 import seedu.bookmark.testutil.BookBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains unit tests for AddNoteCommand.
