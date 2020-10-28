@@ -40,6 +40,14 @@ public class GoalDelCommandTest {
     }
 
     @Test
+    public void execute_bookNoGoal_exception() {
+        GoalDelCommand cmd = new GoalDelCommand(INDEX_FIRST_BOOK);
+        Book bookToChange = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+
+        assertCommandFailure(cmd, model, String.format(GoalDelCommand.MESSAGE_NO_GOAL, bookToChange.getName()));
+    }
+
+    @Test
     public void execute_invalidIndex_exception() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
         GoalDelCommand goalDelCommand = new GoalDelCommand(outOfBoundIndex);
