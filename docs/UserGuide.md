@@ -156,12 +156,12 @@ by filtering your list of books to only those that you want.
 
 Format: `find {Field}` <br>
 
-{Field} refers to any of these listed below:
-* `find n/BOOK_TITLE` : find by input book name
-* `find g/GENRE` : find by input book genre
-* `find t/TAG` : find by input tag
-* `find c/` : find by completed books
-* `find nc/` : find by uncompleted books
+{Field} refers to any of the following:
+* `n/BOOK_TITLE` : find by input book name
+* `g/GENRE` : find by input book genre
+* `t/TAG` : find by input tag
+* `c/` : find by completed books
+* `nc/` : find by uncompleted books
 
 Examples:
 
@@ -173,19 +173,18 @@ Example Command | Result
 
 ### Sorting books: `sort` 
 
-Sort books according to the condition inputted, and sets it as a user preference.
+Too messy? Use our Sort Command to organise your bookshelf! The sort command will
+help you organise your books in based on the order you indicate.
 
-Format: 
-*`sort n/`
-*`sort g/`
-*`sort b/`
-*`sort rp/`
+Format: `sort {Field}` <br>
+{Field} refers to any of the following:
+* `n/` : Sort by Name
+* `g/` : Sort by Genre
+* `b/` : Sort by bookmarked page
+* `rp/` : Sort by reading progress
 
-Purpose:
-* Sorts the books according to the input filter.
-* Supports sorting by Name, Genre, Bookmarked page and Reading progress.
+Examples: 
 
-Examples:
 Example Command | Result
 -----------------|--------
 `sort n/` | Returns a list of books sorted by name in alphabetical order.
