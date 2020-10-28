@@ -108,6 +108,8 @@ public class ModelManager implements Model {
     @Override
     public void setLibrary(ReadOnlyLibrary library) {
         this.library.resetData(library);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
