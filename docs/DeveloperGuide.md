@@ -372,6 +372,7 @@ Whenever the user enters one of the following commands:
   * `edit`
   * `note`
   * `goal`
+  * `goaldel`
   * `sort`
   
 the previous state
