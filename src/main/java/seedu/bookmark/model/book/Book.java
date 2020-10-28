@@ -3,6 +3,7 @@ package seedu.bookmark.model.book;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,9 @@ import seedu.bookmark.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Book {
+
+    public static final int MAX_TAG_COUNT = 10;
+    public static final int MAX_NOTE_COUNT = 10;
 
     // Identity fields
     private final Name name;
@@ -67,7 +71,19 @@ public class Book {
         return new Book(b.getName(), b.getGenre(), b.getTags(), b.getTotalPages(), b.getBookmark(), g, b.getNotes());
     }
 
+    /**
+     * Checks if the given collection of tags contains a valid number of tags this {@code Book} can contain.
+     */
+    public static boolean isValidNumTags(Collection<Tag> tags) {
+        return tags.size() <= MAX_TAG_COUNT;
+    }
 
+    /**
+     * Checks if the given collection of notes contains a valid number of notes this {@code Book} can contain.
+     */
+    public static boolean isValidNumNotes(Collection<Note> notes) {
+        return notes.size() <= MAX_NOTE_COUNT;
+    }
 
     public Name getName() {
         return name;

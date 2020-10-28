@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.bookmark.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.bookmark.model.book.Name;
 
 public class TagTest {
 
