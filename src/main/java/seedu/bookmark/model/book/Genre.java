@@ -12,7 +12,7 @@ public class Genre {
     public static final int MAX_GENRE_LENGTH = 60;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank. \n"
+            "Genre should only contain alphanumeric characters and spaces, and it should not be blank. \n"
             + String.format("Maximum of %d characters allowed, including spaces.", MAX_GENRE_LENGTH);
 
     /*
