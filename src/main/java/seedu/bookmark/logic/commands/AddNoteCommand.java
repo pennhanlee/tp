@@ -65,6 +65,9 @@ public class AddNoteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);
         }
         updatedNotes.add(note);
+        if (!Book.isValidNumNotes(updatedNotes)) {
+            throw new CommandException(String.format(Messages.MESSAGE_TOO_MANY_NOTES, Book.MAX_NOTE_COUNT));
+        }
 
         return new Book(updatedName, updatedGenre, updatedTags,
                 updatedTotalPages, updatedBookmark, updatedGoal, updatedNotes);

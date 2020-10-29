@@ -108,6 +108,8 @@ public class ModelManager implements Model {
     @Override
     public void setLibrary(ReadOnlyLibrary library) {
         this.library.resetData(library);
+        historyManager = historyManager.addNewState(
+                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
@@ -124,6 +126,11 @@ public class ModelManager implements Model {
     public boolean hasBook(Book book) {
         requireNonNull(book);
         return library.hasBook(book);
+    }
+
+    @Override
+    public boolean isFullCapacity() {
+        return library.getSize() >= Model.MAX_BOOK_CAPACITY;
     }
 
     @Override
@@ -214,7 +221,6 @@ public class ModelManager implements Model {
     private void resetModelData(State state) {
         library.resetData(state.getLibrary());
         userPrefs.resetData(state.getUserPrefs());
-        System.out.println(state.getPredicate() != null);
         Predicate<? super Book> prevPredicate = state.getPredicate() != null
                 ? state.getPredicate()
                 : PREDICATE_SHOW_ALL_BOOKS;

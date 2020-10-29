@@ -7,6 +7,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 
+import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -49,6 +50,10 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.isFullCapacity()) {
+            throw new CommandException(String.format(Messages.MESSAGE_TOO_MANY_BOOKS, Model.MAX_BOOK_CAPACITY));
+        }
 
         if (model.hasBook(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOK);

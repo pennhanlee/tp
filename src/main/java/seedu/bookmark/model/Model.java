@@ -14,6 +14,7 @@ import seedu.bookmark.model.book.Book;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
+    int MAX_BOOK_CAPACITY = 100;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -70,6 +71,11 @@ public interface Model {
      * Returns true if a book with the same identity as {@code book} exists in the Library.
      */
     boolean hasBook(Book book);
+
+    /**
+     * Returns true if the {@code Model} is storing the maximum number of books already.
+     */
+    boolean isFullCapacity();
 
     /**
      * Deletes the given book.
