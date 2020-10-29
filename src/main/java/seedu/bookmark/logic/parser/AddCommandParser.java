@@ -1,6 +1,7 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_TOO_MANY_TAGS;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,6 +48,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!Bookmark.isValidBookmark(bookmark, totalPages)) {
             throw new ParseException(Bookmark.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Book.isValidNumTags(tagList)) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_TAGS, Book.MAX_TAG_COUNT));
         }
 
         Book book = new Book(name, genre, tagList, totalPages, bookmark);
