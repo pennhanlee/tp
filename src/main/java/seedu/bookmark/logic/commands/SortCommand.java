@@ -9,6 +9,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_READING_PROGRESS;
 import java.util.Comparator;
 
 import seedu.bookmark.commons.core.Messages;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -50,6 +51,8 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.setSortingPreference(inputPrefix.toString());
         model.sortFilteredBookList(comparator);
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.DEFAULT);
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_SORTED + comparator.toString()));
     }

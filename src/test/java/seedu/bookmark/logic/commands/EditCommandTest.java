@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.EditCommand.EditBookDescriptor;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
@@ -50,7 +51,7 @@ public class EditCommandTest {
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
         assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
@@ -73,7 +74,7 @@ public class EditCommandTest {
         expectedModel.setBook(lastBook, editedBook);
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
 
         assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
@@ -88,7 +89,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
 
         assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
@@ -109,7 +110,7 @@ public class EditCommandTest {
         expectedModel.updateFilteredBookList(b -> true);
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
         assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }
 
@@ -186,7 +187,7 @@ public class EditCommandTest {
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
 
         assertCommandSuccess(editCommand, model, expectedResult, expectedModel);
     }

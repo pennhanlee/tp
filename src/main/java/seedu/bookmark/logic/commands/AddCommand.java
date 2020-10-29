@@ -8,6 +8,7 @@ import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TOTAL_PAGES;
 
 import seedu.bookmark.commons.core.Messages;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -60,6 +61,8 @@ public class AddCommand extends Command {
         }
 
         model.addBook(toAdd);
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.DEFAULT);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

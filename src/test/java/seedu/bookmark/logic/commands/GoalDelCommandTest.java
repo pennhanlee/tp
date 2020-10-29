@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -35,7 +36,7 @@ public class GoalDelCommandTest {
 
         String expectedMsg = String.format(GoalDelCommand.MESSAGE_SUCCESS, bookToChange.getName());
         CommandResult expectedResult = new CommandResult(expectedMsg, false, false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
 
         assertCommandSuccess(cmd, model, expectedResult, expectedModel);
     }

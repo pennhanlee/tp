@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
@@ -47,7 +48,7 @@ public class DeleteNoteCommandTest {
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
         assertCommandSuccess(deleteNoteCommand, beforeDeletionModel, expectedResult, expectedModel);
     }
 

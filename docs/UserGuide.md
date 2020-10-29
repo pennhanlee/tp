@@ -321,16 +321,9 @@ actions.
 
 **:information_source: About commands that can be undone:**<br>
 
-* Only certain commands can be undone. <br>
-
-* These commands include the following: <br>
-  * `add`
-  * `delete`
-  * `edit`
-  * `note`
-  * `notedel`
-  * `goal`
-  * `sort`
+* All commands can be undone except the following: <br>
+  * `exit`
+  * `help`
 
 </div>
 
