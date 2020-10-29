@@ -9,8 +9,11 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final int MAX_TAG_LENGTH = 25;
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric. \n"
+            + String.format("Maximum of %d characters allowed.", MAX_TAG_LENGTH);
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}]"
+            + "{1," + MAX_TAG_LENGTH + "}$";
 
     public final String tagName;
 
