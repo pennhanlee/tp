@@ -12,7 +12,7 @@ import seedu.bookmark.model.exceptions.UndoException;
  */
 public class HistoryManager {
 
-    private static final int MAX_UNDO_COUNT = 10;
+    public static final int MAX_UNDO_COUNT = 10;
 
     private final State currentState;
     private final ArrayDeque<State> undoDeque;
