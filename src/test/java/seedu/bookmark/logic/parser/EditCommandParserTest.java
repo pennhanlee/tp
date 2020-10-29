@@ -1,6 +1,7 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_TOO_MANY_TAGS;
 import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
 import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_JANE_EYRE;
 import static seedu.bookmark.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
@@ -26,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.commands.EditCommand.EditBookDescriptor;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
 import seedu.bookmark.model.tag.Tag;
@@ -72,6 +74,16 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_GENRE_DESC, Genre.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+
+        // too many tags
+        int tagLimit = Book.MAX_TAG_COUNT;
+        StringBuilder userInput = new StringBuilder();
+
+        for (int i = 0; i <= tagLimit + 1; i++) {
+            userInput.append(String.format(" %s %d ", PREFIX_TAG, i));
+        }
+        assertParseFailure(parser, "1" + userInput.toString(), String.format(MESSAGE_TOO_MANY_TAGS, tagLimit));
+
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Book} being edited,
         // parsing it together with a valid tag results in error

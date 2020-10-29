@@ -35,7 +35,9 @@ public class GoalCommandTest {
                 bookToSetGoal.getName(), validGoal.toString());
         expectedModel.setBook(bookToSetGoal, bookWithGoal);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
     }
 
     @Test

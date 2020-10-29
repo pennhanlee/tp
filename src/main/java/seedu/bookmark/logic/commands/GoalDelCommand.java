@@ -44,7 +44,8 @@ public class GoalDelCommand extends Command {
 
         model.setBook(bookWithGoal, bookWithoutGoal);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, bookWithGoal.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, bookWithGoal.getName()), false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 
     @Override

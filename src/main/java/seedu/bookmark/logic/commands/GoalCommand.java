@@ -67,7 +67,8 @@ public class GoalCommand extends Command {
 
         model.setBook(bookWithoutGoal, bookWithGoal);
 
-        return new CommandResult(String.format(MESSAGE_ADD_GOAL_SUCCESS, bookWithGoal.getName(), goal.toString()));
+        return new CommandResult(String.format(MESSAGE_ADD_GOAL_SUCCESS, bookWithGoal.getName(), goal.toString()),
+                false, false, CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 
     @Override

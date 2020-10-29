@@ -230,6 +230,10 @@ public class MainWindow extends UiPart<Stage> {
                 }
                 break;
             case MOST_RECENTLY_USED:
+                if (logic.getFilteredBookList().size() > 1) {
+                    // cannot keep using detailed view if there are > 1 books to display
+                    resetView();
+                }
                 break;
             default:
                 break;

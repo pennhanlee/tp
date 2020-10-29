@@ -6,12 +6,12 @@ import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 
 /**
- * Clears the address book.
+ * Deletes all books stored.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "All books have been cleared!";
 
 
     @Override
