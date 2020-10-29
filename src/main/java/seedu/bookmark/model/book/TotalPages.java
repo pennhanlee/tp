@@ -12,7 +12,7 @@ public class TotalPages {
     public static final int MAX_TOTAL_PAGES_LENGTH = 9;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Total pages should only contain numeric characters, it should not be blank"
+            "Total pages should only contain numeric characters, it should not be blank "
                     + "and its numerical value should be greater than 0 \n"
                     + String.format("Maximum of %d digits allowed.", MAX_TOTAL_PAGES_LENGTH);
 
