@@ -13,13 +13,6 @@ public class ViewManager {
     private ViewType currentView = ViewType.DEFAULT;
 
     /**
-     * Returns the current {@code ViewType}.
-     */
-    public ViewType getCurrentViewType() {
-        return currentView;
-    }
-
-    /**
      * Returns the correct {@code ViewType} for the given {@code State}.
      */
     public ViewType getViewType(State state) {
