@@ -34,7 +34,8 @@ public class GoalDelCommandTest {
         // Expected model stays default
 
         String expectedMsg = String.format(GoalDelCommand.MESSAGE_SUCCESS, bookToChange.getName());
-        CommandResult expectedResult = new CommandResult(expectedMsg);
+        CommandResult expectedResult = new CommandResult(expectedMsg, false, false,
+                CommandResult.ViewType.MOST_RECENTLY_USED);
 
         assertCommandSuccess(cmd, model, expectedResult, expectedModel);
     }

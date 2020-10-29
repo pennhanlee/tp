@@ -86,7 +86,6 @@ public class EditCommand extends Command {
             throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
         }
         model.setBook(bookToEdit, editedBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.sortByDefaultComparator();
         return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook),
                 false, false, ViewType.MOST_RECENTLY_USED);
