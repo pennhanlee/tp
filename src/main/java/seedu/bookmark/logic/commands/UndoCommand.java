@@ -3,7 +3,6 @@ package seedu.bookmark.logic.commands;
 import java.util.logging.Logger;
 
 import seedu.bookmark.commons.core.LogsCenter;
-import seedu.bookmark.logic.LogicManager;
 import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
@@ -32,8 +31,8 @@ public class UndoCommand extends Command {
             String finalBookList = model.getFilteredBookList().toString();
             logger.info("Undo success, books modified: " + finalBookList);
 
-            ViewType newViewType = viewManager.getViewType(model.getCurrentState());
-            viewManager.setCurrentView(newViewType);
+            ViewType newViewType = VIEW_MANAGER.getViewType(model.getCurrentState());
+            VIEW_MANAGER.setCurrentView(newViewType);
             return new CommandResult(MESSAGE_SUCCESS, false, false,
                     newViewType);
         } catch (UndoException e) {

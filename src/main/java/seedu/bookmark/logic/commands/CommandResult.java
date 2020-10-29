@@ -1,10 +1,10 @@
 package seedu.bookmark.logic.commands;
 
-import seedu.bookmark.logic.ViewType;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+
+import seedu.bookmark.logic.ViewType;
 
 /**
  * Represents the result of a command execution.

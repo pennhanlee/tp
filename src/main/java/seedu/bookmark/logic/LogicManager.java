@@ -2,8 +2,6 @@ package seedu.bookmark.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -17,7 +15,6 @@ import seedu.bookmark.logic.parser.exceptions.ParseException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.book.Book;
-import seedu.bookmark.model.history.State;
 import seedu.bookmark.storage.Storage;
 
 /**

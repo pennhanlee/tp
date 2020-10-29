@@ -6,12 +6,9 @@ import java.util.List;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
-import seedu.bookmark.logic.LogicManager;
-import seedu.bookmark.logic.ViewManager;
 import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
-import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.book.Book;
 
 /**

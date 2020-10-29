@@ -11,7 +11,7 @@ import seedu.bookmark.model.history.State;
  */
 public abstract class Command {
 
-    public static final ViewManager viewManager = new ViewManager();
+    public static final ViewManager VIEW_MANAGER = new ViewManager();
 
     /**
      * Executes the command and returns the result message.
@@ -24,9 +24,9 @@ public abstract class Command {
 
     protected void storeViewType(State state, ViewType viewType) {
         if (viewType != ViewType.MOST_RECENTLY_USED) {
-            viewManager.setCurrentView(viewType);
+            VIEW_MANAGER.setCurrentView(viewType);
         }
-        viewManager.addViewTypePairing(state, viewType);
+        VIEW_MANAGER.addViewTypePairing(state, viewType);
     }
 
 }

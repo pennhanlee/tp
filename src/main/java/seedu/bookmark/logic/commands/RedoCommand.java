@@ -31,8 +31,8 @@ public class RedoCommand extends Command {
             String finalBookList = model.getFilteredBookList().toString();
             logger.info("Redo success, books modified: " + finalBookList);
 
-            ViewType newViewType = viewManager.getViewType(model.getCurrentState());
-            viewManager.setCurrentView(newViewType);
+            ViewType newViewType = VIEW_MANAGER.getViewType(model.getCurrentState());
+            VIEW_MANAGER.setCurrentView(newViewType);
             return new CommandResult(MESSAGE_SUCCESS, false, false,
                     newViewType);
         } catch (RedoException e) {
