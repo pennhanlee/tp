@@ -7,6 +7,7 @@ import seedu.bookmark.model.history.State;
 
 /**
  * Manages what view the {@code Ui} should be in given a {@code State} representing the state of the {@code Model}.
+ * Implementation is backed by a LRU cache using java's {@code LinkedHashMap}.
  */
 public class ViewManager {
 
