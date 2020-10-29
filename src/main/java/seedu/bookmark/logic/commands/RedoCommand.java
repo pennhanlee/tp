@@ -3,6 +3,7 @@ package seedu.bookmark.logic.commands;
 import java.util.logging.Logger;
 
 import seedu.bookmark.commons.core.LogsCenter;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.exceptions.RedoException;
@@ -29,11 +30,15 @@ public class RedoCommand extends Command {
 
             String finalBookList = model.getFilteredBookList().toString();
             logger.info("Redo success, books modified: " + finalBookList);
+
+            ViewType newViewType = viewManager.getViewType(model.getCurrentState());
+            viewManager.setCurrentView(newViewType);
+            return new CommandResult(MESSAGE_SUCCESS, false, false,
+                    newViewType);
         } catch (RedoException e) {
             String unmodifiedBookList = model.getFilteredBookList().toString();
             logger.info("Redo failed, books not modified: " + unmodifiedBookList);
             throw new CommandException(MESSAGE_NO_UNDONE_CHANGES);
         }
-        return new CommandResult(MESSAGE_SUCCESS, false, false, CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 }

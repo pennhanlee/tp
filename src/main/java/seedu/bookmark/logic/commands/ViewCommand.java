@@ -7,6 +7,8 @@ import java.util.List;
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.LogicManager;
+import seedu.bookmark.logic.ViewManager;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
@@ -41,8 +43,9 @@ public class ViewCommand extends Command {
         Book bookToView = lastShownList.get(index.getZeroBased());
         model.updateFilteredBookList(b -> b.equals(bookToView));
         model.save();
+        storeViewType(model.getCurrentState(), ViewType.DETAILED);
         return new CommandResult(String.format(MESSAGE_SUCCESS, index.getOneBased()),
-                false, false, CommandResult.ViewType.DETAILED);
+                false, false, ViewType.DETAILED);
     }
 
     @Override

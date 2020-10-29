@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -44,8 +45,9 @@ public class GoalDelCommand extends Command {
 
         model.setBook(bookWithGoal, bookWithoutGoal);
         model.save();
+        storeViewType(model.getCurrentState(), ViewType.MOST_RECENTLY_USED);
         return new CommandResult(String.format(MESSAGE_SUCCESS, bookWithGoal.getName()), false, false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
     }
 
     @Override

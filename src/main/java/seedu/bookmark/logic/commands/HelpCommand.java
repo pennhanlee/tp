@@ -1,5 +1,6 @@
 package seedu.bookmark.logic.commands;
 
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 
 /**
@@ -16,6 +17,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, CommandResult.ViewType.MOST_RECENTLY_USED);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, ViewType.MOST_RECENTLY_USED);
     }
 }
