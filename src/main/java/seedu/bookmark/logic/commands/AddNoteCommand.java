@@ -85,6 +85,7 @@ public class AddNoteCommand extends Command {
         Book editedBook = createEditedBook(bookToEdit, note);
 
         model.setBook(bookToEdit, editedBook);
+        model.save();
         return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS,
                 note.title, bookToEdit.getName()), false, false,
                 CommandResult.ViewType.MOST_RECENTLY_USED);

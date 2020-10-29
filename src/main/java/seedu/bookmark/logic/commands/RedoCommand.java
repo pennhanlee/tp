@@ -24,7 +24,9 @@ public class RedoCommand extends Command {
         try {
             String initialBookList = model.getFilteredBookList().toString();
             logger.info("Redo initiated, initial books: \n" + initialBookList);
+
             model.redo();
+
             String finalBookList = model.getFilteredBookList().toString();
             logger.info("Redo success, books modified: " + finalBookList);
         } catch (RedoException e) {

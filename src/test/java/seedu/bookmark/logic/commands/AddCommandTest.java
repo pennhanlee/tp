@@ -178,6 +178,9 @@ public class AddCommandTest {
         public void redo(){}
 
         @Override
+        public void save(){}
+
+        @Override
         public ObservableList<Book> getFilteredBookList() {
             throw new AssertionError("This method should not be called.");
         }

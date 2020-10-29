@@ -24,6 +24,7 @@ public class RedoCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.addBook(HARRY_POTTER);
         model.addBook(HARRY_POTTER);
+        model.save();
         model.undo();
         CommandResult expectedResult = new CommandResult(RedoCommand.MESSAGE_SUCCESS, false , false,
                 CommandResult.ViewType.MOST_RECENTLY_USED);

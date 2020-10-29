@@ -60,6 +60,7 @@ public class AddCommand extends Command {
         }
 
         model.addBook(toAdd);
+        model.save();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

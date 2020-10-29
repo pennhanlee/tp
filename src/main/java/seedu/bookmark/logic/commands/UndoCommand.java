@@ -3,6 +3,7 @@ package seedu.bookmark.logic.commands;
 import java.util.logging.Logger;
 
 import seedu.bookmark.commons.core.LogsCenter;
+import seedu.bookmark.logic.LogicManager;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.exceptions.UndoException;
@@ -24,14 +25,17 @@ public class UndoCommand extends Command {
         try {
             String initialBookList = model.getFilteredBookList().toString();
             logger.info("Undo initiated, initial books: \n" + initialBookList);
+
             model.undo();
+
             String finalBookList = model.getFilteredBookList().toString();
             logger.info("Undo success, books modified: " + finalBookList);
+            return new CommandResult(MESSAGE_SUCCESS, false, false,
+                    CommandResult.ViewType.MOST_RECENTLY_USED);
         } catch (UndoException e) {
             String unmodifiedBookList = model.getFilteredBookList().toString();
             logger.info("Undo failed, books not modified: " + unmodifiedBookList);
             throw new CommandException(MESSAGE_MOST_RECENT_CHANGE);
         }
-        return new CommandResult(MESSAGE_SUCCESS, false, false, CommandResult.ViewType.MOST_RECENTLY_USED);
     }
 }

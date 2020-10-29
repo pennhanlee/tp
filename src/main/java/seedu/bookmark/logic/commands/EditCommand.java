@@ -87,6 +87,7 @@ public class EditCommand extends Command {
         }
         model.setBook(bookToEdit, editedBook);
         model.sortByDefaultComparator();
+        model.save();
         return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook),
                 false, false, ViewType.MOST_RECENTLY_USED);
     }

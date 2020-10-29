@@ -61,8 +61,6 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
@@ -108,8 +106,6 @@ public class ModelManager implements Model {
     @Override
     public void setLibrary(ReadOnlyLibrary library) {
         this.library.resetData(library);
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
@@ -136,8 +132,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.deleteFromWordBank(target);
     }
 
@@ -146,8 +140,6 @@ public class ModelManager implements Model {
         library.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         sortByDefaultComparator();
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.addToWordBank(book);
     }
 
@@ -162,8 +154,6 @@ public class ModelManager implements Model {
                 : PREDICATE_SHOW_ALL_BOOKS;
         updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
 
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.updateWordBank(target, editedBook);
     }
 
@@ -185,6 +175,21 @@ public class ModelManager implements Model {
         return filteredBooks;
     }
 
+
+    @Override
+    public void updateFilteredBookList(Predicate<Book> predicate) {
+        requireNonNull(predicate);
+        filteredBooks.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredBookList(Comparator<Book> comparator) {
+        this.comparator = comparator;
+        this.library.sortBooks(comparator);
+    }
+
+    //=========== Undo Redo  =============================================================
+
     @Override
     public void undo() throws UndoException {
         historyManager = historyManager.undo();
@@ -202,17 +207,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredBookList(Predicate<Book> predicate) {
-        requireNonNull(predicate);
-        filteredBooks.setPredicate(predicate);
+    public void save() {
+        historyManager = historyManager.addNewState
+                (State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
-    public void sortFilteredBookList(Comparator<Book> comparator) {
-        this.comparator = comparator;
-        this.library.sortBooks(comparator);
-        historyManager = historyManager.addNewState
-                (State.createState(library, userPrefs, filteredBooks.getPredicate()));
+    public State getCurrentState() {
+        return historyManager.getCurrentState();
     }
 
     /**

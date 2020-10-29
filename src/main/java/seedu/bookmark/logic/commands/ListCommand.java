@@ -19,6 +19,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        model.save();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

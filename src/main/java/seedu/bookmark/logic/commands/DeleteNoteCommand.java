@@ -78,6 +78,7 @@ public class DeleteNoteCommand extends Command {
         Book editedBook = createEditedBook(bookToEdit, noteIndex);
 
         model.setBook(bookToEdit, editedBook);
+        model.save();
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS,
                 deletedNote.title, bookToEdit.getName()), false, false,
                 CommandResult.ViewType.MOST_RECENTLY_USED);

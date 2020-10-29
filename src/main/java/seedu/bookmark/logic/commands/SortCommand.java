@@ -50,6 +50,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.setSortingPreference(inputPrefix.toString());
         model.sortFilteredBookList(comparator);
+        model.save();
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_SORTED + comparator.toString()));
     }

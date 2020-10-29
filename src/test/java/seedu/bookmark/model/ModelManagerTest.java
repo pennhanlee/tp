@@ -109,6 +109,7 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         modelManager = new ModelManager(library, userPrefs);
         modelManager.deleteBook(HARRY_POTTER);
+        modelManager.save();
         modelManager.undo();
         assertTrue(modelManager.hasBook(HARRY_POTTER));
     }
@@ -127,6 +128,7 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         modelManager = new ModelManager(library, userPrefs);
         modelManager.deleteBook(HARRY_POTTER);
+        modelManager.save();
         modelManager.undo();
         modelManager.redo();
         assertFalse(modelManager.hasBook(HARRY_POTTER));
