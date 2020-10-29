@@ -28,7 +28,8 @@ public class GoalCommand extends Command {
     public static final String MESSAGE_DEADLINE_OVERDUE = "%s has already passed. "
             + "Please choose a deadline later than today.";
     public static final String MESSAGE_ADD_GOAL_SUCCESS = "New goal for %s: %s";
-
+    public static final String MESSAGE_GOAL_OVERSHOT_TOTAL_PAGES = "Your goal (page %d) "
+            + "overshot number of pages of the book (%d pages). Please choose a valid page!";
     private final Index targetIndex;
     private final Goal goal;
 
@@ -56,6 +57,12 @@ public class GoalCommand extends Command {
         }
 
         Book bookWithoutGoal = allBooks.get(targetIndex.getZeroBased());
+
+        if (bookWithoutGoal.getTotalPagesNumber() < goal.getPageInt()) { // If goal > totalPages
+            throw new CommandException(String.format(MESSAGE_GOAL_OVERSHOT_TOTAL_PAGES, goal.getPageInt(),
+                    bookWithoutGoal.getTotalPagesNumber()));
+        }
+
         Book bookWithGoal = Book.setGoal(bookWithoutGoal, goal);
 
         model.setBook(bookWithoutGoal, bookWithGoal);

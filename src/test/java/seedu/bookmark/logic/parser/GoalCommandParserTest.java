@@ -7,6 +7,7 @@ import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.GoalCommand;
 import seedu.bookmark.model.book.Goal;
@@ -54,12 +55,13 @@ public class GoalCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPage_failure() {
-        assertParseFailure(parser, "1" + VALID_PAGE + INVALID_DEADLINE, MESSAGE_INVALID_FORMAT); // invalid deadline
-        assertParseFailure(parser, "1" + INVALID_PAGE + VALID_DEADLINE, MESSAGE_INVALID_FORMAT); // invalid page
-
-        // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_PAGE + INVALID_DEADLINE, MESSAGE_INVALID_FORMAT);
+    public void parse_invalidPageDeadline_failure() {
+        assertParseFailure(parser, "1" + VALID_PAGE + INVALID_DEADLINE,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS)); // invalid deadline
+        assertParseFailure(parser, "1" + INVALID_PAGE + VALID_DEADLINE,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS)); // invalid page
+        assertParseFailure(parser, "1" + INVALID_PAGE + INVALID_DEADLINE, // invalid page n deadline
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS));
     }
 
     @Test
