@@ -162,8 +162,8 @@ public class ModelManager implements Model {
 
     @Override
     public void sortByDefaultComparator() {
-        if (this.comparator != null) { //should be removed, should sort by date added field
-            sortFilteredBookList(this.comparator);
+        if (this.comparator != null) {
+            sortFilteredBookList(comparatorGenerator(sortingPrefixGenerator(userPrefs.getSortingPreference())));
         }
     }
 
