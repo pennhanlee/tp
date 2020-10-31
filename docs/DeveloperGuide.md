@@ -382,21 +382,11 @@ the states that can be undone/redone. It does so by storing `State` objects. Eac
 * `HistoryManager#redo()` — Restores the most recently undone state from its history.
 
 The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
-Whenever the user enters one of the following commands:
-  * `add`
-  * `delete`
-  * `edit`
-  * `note`
-  * `goal`
-  * `goaldel`
-  * `sort`
+Whenever the user enters any commands EXCEPT:
+   * `help`
+   * `exit`
   
-the previous state
-will be saved and a new state created by calling `HistoryManager#addNewState()`.
-This occurs via the methods implemented by `ModelManager` to modify the model such as: `ModelManager#addBook()`, `ModelManager#removeBook()`,
-`ModelManager#setBook()` and `ModelManager#setUserPrefs` are called. When these methods are called, they will
-modify the model and call `HistoryManager#addNewState()` to create a new `State` capturing the state of the modified model,
-to be stored by `HistoryManager`.
+the previous state will be saved and a new state created by calling the method `Model#save()`.
 The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
 
@@ -413,7 +403,7 @@ initial state of the model as the current state, i.e State 1. Undo and redo dequ
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes add command to add a new book. This command will call the `Model#addBook()` method
+Step 2. The user executes add command to add a new book. The command will call the `Model#save()` method
 which in turn will call the `HistoryManager#addNewState()` method, causing a new state, State 2 to be created and saved
 as the current state. The previous current state, State 1, will be pushed into the undo deque.
 
@@ -486,7 +476,7 @@ execution when a new state is added.
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves copies of the entire `Library` and `UserPrefs`.
+* **Alternative 1 (current choice):** Saves copies of the entire `Library` and `UserPrefs` in `State`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -501,21 +491,21 @@ cap (10) on the number of states stored. It is also much more scalable and less 
 or modification of commands. 
 
 ##### Aspect: How to decide which actions should create and save state
-
-* **Alternative 1 (current choice):** The methods implemented by `ModelManager` to modify the model also creates and 
-    save state.
-  * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
-    and thus warrants the creation and saving of state.
-  * Cons: The creation and saving of state becomes a side effect, not immediately clear that it occurs.
-  
-* **Alternative 2:** Expose a method in the `Model` interface that when called creates and saves state.
+ 
+* **Alternative 1 (current choice):** Expose a method in the `Model` interface that when called creates and saves state.
   * Pros: More declarative, easier to see when the model will create and save state.
   * Cons: Worse separation of concerns, the responsibility of deciding when to create and save state is moved away 
     from the model and to the components that interact with the model.
     
-Alternative 1 was eventually chosen as we liked the clear separation of concerns it provides. We also feel that it is 
-less prone to errors such as forgetting to call the hypothetical "save" method that would exist in alternative 2, 
-or calling it in the wrong places, especially when more commands are added.
+* **Alternative 2:** The methods implemented by `ModelManager` to modify the model such as 
+    `ModelManager#addBook()` also creates and save state.
+  * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
+    and thus warrants the creation and saving of state.
+  * Cons: The creation and saving of state becomes a side effect, not immediately clear that it occurs.  
+    
+Alternative 1 was eventually chosen as we liked the declarative nature of it as well as the clarity it provides. We also
+felt that alternative 2 could cause a lot of problems if a command needed to modify the model in multiple ways thus
+would cause multiple states to be created for a single command.
 
 --------------------------------------------------------------------------------------------------------------------
 

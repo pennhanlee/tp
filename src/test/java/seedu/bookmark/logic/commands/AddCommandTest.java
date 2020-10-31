@@ -24,6 +24,7 @@ import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.history.State;
 import seedu.bookmark.testutil.BookBuilder;
 
 public class AddCommandTest {
@@ -176,6 +177,14 @@ public class AddCommandTest {
 
         @Override
         public void redo(){}
+
+        @Override
+        public void save(){}
+
+        @Override
+        public State getCurrentState() {
+            return null;
+        }
 
         @Override
         public ObservableList<Book> getFilteredBookList() {

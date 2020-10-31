@@ -16,6 +16,7 @@ Class State
 
 Model : undo()
 Model : redo()
+Model : save()
 show Model members
 
 HistoryManager : addNewState()

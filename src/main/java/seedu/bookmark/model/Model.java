@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.history.State;
 
 /**
  * The API of the Model component.
@@ -108,6 +109,13 @@ public interface Model {
      * Redoes the most recently undone change that modified the books stored in the {@code Model}.
      */
     void redo();
+
+    /**
+     * Save the current state of the {@code Model}
+     */
+    void save();
+
+    State getCurrentState();
 
     /**
      * Updates the filter of the filtered book list to filter by the given {@code predicate}.
