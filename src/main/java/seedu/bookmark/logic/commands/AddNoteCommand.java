@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -65,6 +66,9 @@ public class AddNoteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);
         }
         updatedNotes.add(note);
+        if (!Book.isValidNumNotes(updatedNotes)) {
+            throw new CommandException(String.format(Messages.MESSAGE_TOO_MANY_NOTES, Book.MAX_NOTE_COUNT));
+        }
 
         return new Book(updatedName, updatedGenre, updatedTags,
                 updatedTotalPages, updatedBookmark, updatedGoal, updatedNotes);
@@ -82,9 +86,11 @@ public class AddNoteCommand extends Command {
         Book editedBook = createEditedBook(bookToEdit, note);
 
         model.setBook(bookToEdit, editedBook);
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.MOST_RECENTLY_USED);
         return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS,
                 note.title, bookToEdit.getName()), false, false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
     }
 
     @Override

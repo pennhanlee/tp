@@ -12,6 +12,7 @@ import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
 import seedu.bookmark.commons.core.Messages;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.algorithm.SuggestionAlgorithm;
 import seedu.bookmark.logic.parser.Prefix;
 import seedu.bookmark.model.Model;
@@ -78,6 +79,8 @@ public class FindCommand extends Command {
                     String.format(Messages.MESSAGE_WORD_SUGGESTION, searchedWord, suggestedWord));
         }
 
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.DEFAULT);
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
     }

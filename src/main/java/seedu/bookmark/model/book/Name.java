@@ -9,14 +9,18 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int MAX_NAME_LENGTH = 120;
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank. \n"
+            + String.format("Maximum of %d characters allowed, including spaces.", MAX_NAME_LENGTH);
 
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]"
+            + "{1," + MAX_NAME_LENGTH + "}$";
 
     public final String fullName;
 

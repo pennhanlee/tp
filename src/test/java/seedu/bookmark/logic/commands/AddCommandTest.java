@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
+import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
@@ -23,6 +24,7 @@ import seedu.bookmark.model.ReadOnlyLibrary;
 import seedu.bookmark.model.ReadOnlyUserPrefs;
 import seedu.bookmark.model.WordBank;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.history.State;
 import seedu.bookmark.testutil.BookBuilder;
 
 public class AddCommandTest {
@@ -50,6 +52,16 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithBook(validBook);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_BOOK, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_fullModel_throwsCommandException() {
+        Book validBook = new BookBuilder().build();
+        AddCommand addCommand = new AddCommand(validBook);
+        ModelStub modelStub = new ModelStubFullModel();
+
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_TOO_MANY_BOOKS,
+                Model.MAX_BOOK_CAPACITY), () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -146,6 +158,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isFullCapacity() {
+            return false;
+        }
+
+        @Override
         public void deleteBook(Book target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -160,6 +177,14 @@ public class AddCommandTest {
 
         @Override
         public void redo(){}
+
+        @Override
+        public void save(){}
+
+        @Override
+        public State getCurrentState() {
+            return null;
+        }
 
         @Override
         public ObservableList<Book> getFilteredBookList() {
@@ -221,6 +246,17 @@ public class AddCommandTest {
         @Override
         public ReadOnlyLibrary getLibrary() {
             return new Library();
+        }
+    }
+
+    /**
+     * A Model stub that is always full.
+     */
+    private class ModelStubFullModel extends ModelStub {
+
+        @Override
+        public boolean isFullCapacity() {
+            return true;
         }
     }
 

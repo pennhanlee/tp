@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.history.State;
 
 /**
  * The API of the Model component.
@@ -14,6 +15,7 @@ import seedu.bookmark.model.book.Book;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
+    int MAX_BOOK_CAPACITY = 100;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -72,6 +74,11 @@ public interface Model {
     boolean hasBook(Book book);
 
     /**
+     * Returns true if the {@code Model} is storing the maximum number of books already.
+     */
+    boolean isFullCapacity();
+
+    /**
      * Deletes the given book.
      * The book must exist in the library.
      */
@@ -102,6 +109,13 @@ public interface Model {
      * Redoes the most recently undone change that modified the books stored in the {@code Model}.
      */
     void redo();
+
+    /**
+     * Save the current state of the {@code Model}
+     */
+    void save();
+
+    State getCurrentState();
 
     /**
      * Updates the filter of the filtered book list to filter by the given {@code predicate}.

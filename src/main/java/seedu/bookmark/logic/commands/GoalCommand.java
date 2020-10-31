@@ -8,6 +8,7 @@ import java.util.List;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -28,7 +29,8 @@ public class GoalCommand extends Command {
     public static final String MESSAGE_DEADLINE_OVERDUE = "%s has already passed. "
             + "Please choose a deadline later than today.";
     public static final String MESSAGE_ADD_GOAL_SUCCESS = "New goal for %s: %s";
-
+    public static final String MESSAGE_GOAL_OVERSHOT_TOTAL_PAGES = "Your goal (page %d) "
+            + "overshot number of pages of the book (%d pages). Please choose a valid page!";
     private final Index targetIndex;
     private final Goal goal;
 
@@ -56,11 +58,19 @@ public class GoalCommand extends Command {
         }
 
         Book bookWithoutGoal = allBooks.get(targetIndex.getZeroBased());
+
+        if (bookWithoutGoal.getTotalPagesNumber() < goal.getPageInt()) { // If goal > totalPages
+            throw new CommandException(String.format(MESSAGE_GOAL_OVERSHOT_TOTAL_PAGES, goal.getPageInt(),
+                    bookWithoutGoal.getTotalPagesNumber()));
+        }
+
         Book bookWithGoal = Book.setGoal(bookWithoutGoal, goal);
 
         model.setBook(bookWithoutGoal, bookWithGoal);
-
-        return new CommandResult(String.format(MESSAGE_ADD_GOAL_SUCCESS, bookWithGoal.getName(), goal.toString()));
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.MOST_RECENTLY_USED);
+        return new CommandResult(String.format(MESSAGE_ADD_GOAL_SUCCESS, bookWithGoal.getName(), goal.toString()),
+                false, false, ViewType.MOST_RECENTLY_USED);
     }
 
     @Override

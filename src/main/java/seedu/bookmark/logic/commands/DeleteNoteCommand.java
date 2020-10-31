@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -78,9 +79,11 @@ public class DeleteNoteCommand extends Command {
         Book editedBook = createEditedBook(bookToEdit, noteIndex);
 
         model.setBook(bookToEdit, editedBook);
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.MOST_RECENTLY_USED);
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS,
                 deletedNote.title, bookToEdit.getName()), false, false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
     }
 
     @Override

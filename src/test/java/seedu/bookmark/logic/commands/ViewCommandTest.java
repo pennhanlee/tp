@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -32,7 +33,7 @@ public class ViewCommandTest {
         expectedModel.updateFilteredBookList(b -> b.equals(bookToView));
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false , false,
-                CommandResult.ViewType.DETAILED);
+                ViewType.DETAILED);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
     }
 

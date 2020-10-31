@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.commons.util.CollectionUtil;
-import seedu.bookmark.logic.commands.CommandResult.ViewType;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -86,8 +86,9 @@ public class EditCommand extends Command {
             throw new CommandException(Bookmark.MESSAGE_CONSTRAINTS);
         }
         model.setBook(bookToEdit, editedBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.sortByDefaultComparator();
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.MOST_RECENTLY_USED);
         return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook),
                 false, false, ViewType.MOST_RECENTLY_USED);
     }

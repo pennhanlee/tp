@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.book.Book;
@@ -41,6 +42,8 @@ public class DeleteCommand extends Command {
 
         Book bookToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteBook(bookToDelete);
+        model.save();
+        storeViewType(model.getCurrentState(), ViewType.DEFAULT);
         return new CommandResult(String.format(MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete));
     }
 
