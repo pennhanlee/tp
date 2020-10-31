@@ -84,7 +84,7 @@ public class DetailedBookListPanel extends BookListPanel {
     }
 
     /**
-     * Custom {@code ListCell} that displays the notes of a {@code Book} using a {@code NoteCard}.
+     * Custom {@code ListCell} that displays the {@code Note}(s) of a {@code Book} using a {@code NoteCard}.
      */
     class NoteListViewCell extends ListCell<Note> {
         @Override
