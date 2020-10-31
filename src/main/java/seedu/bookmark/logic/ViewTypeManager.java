@@ -7,14 +7,14 @@ import seedu.bookmark.model.history.State;
 
 /**
  * Manages what view the {@code Ui} should be in given a {@code State} representing the state of the {@code Model}.
- * Implementation is backed by a LRU cache using java's {@code LinkedHashMap}.
+ * Implementation is backed by a FIFO cache using java's {@code LinkedHashMap}.
  */
-public class ViewManager {
+public class ViewTypeManager {
 
-    private static final int MAX_CACHE_SIZE = HistoryManager.MAX_UNDO_COUNT;
+    private static final int MAX_CACHE_SIZE = HistoryManager.MAX_UNDO_COUNT * 2;
     /**
      * Cache that maps {@code State} to a {@code ViewType}.
-     * Deletes entries for states that would have been deleted to prevent excessive memory usage.
+     * Deletes entries for obsolete states to prevent excessive memory usage.
      */
     private final Map<State, ViewType> stateToViewMap = new LinkedHashMap<>() {
         protected boolean removeEldestEntry(final Map.Entry eldest) {
@@ -37,7 +37,9 @@ public class ViewManager {
      * Sets the current {@code ViewType} to the given ViewType.
      */
     public void setCurrentView(ViewType newView) {
-        currentView = newView;
+        if (newView != ViewType.MOST_RECENTLY_USED) {
+            currentView = newView;
+        }
     }
 
     /**
