@@ -5,6 +5,7 @@ import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.util.Arrays;
 
 /**
@@ -74,7 +75,7 @@ public class StringUtil {
      */
     public static String trimLeadingZeroes(String s) {
         requireNonNull(s);
-        int value = Integer.parseInt(s);
+        BigInteger value = new BigInteger(s);
         return String.valueOf(value);
     }
 }

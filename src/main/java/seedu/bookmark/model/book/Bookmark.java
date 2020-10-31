@@ -1,5 +1,7 @@
 package seedu.bookmark.model.book;
 
+import java.math.BigInteger;
+
 import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,13 +12,14 @@ import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 public class Bookmark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "bookmark should only contain numeric characters, it should not be blank, and its numerical value should"
-                    + "be less than or equals to the total number of pages in the book it is in";
+            "bookmark should only contain numeric characters, it should not be blank, and its numerical value should \n"
+                    + "be less than or equals to the total number of pages in the book it is in.";
 
     /*
-     * Only a 1 or more of the digits 0-9 allowed
+     * Only 1 to 9 number of digits from 0-9 allowed
      */
-    public static final String VALIDATION_REGEX = "^\\d+";
+    public static final String VALIDATION_REGEX = "^\\d"
+            + "{1," + TotalPages.MAX_TOTAL_PAGES_LENGTH + "}$";
 
     public final String value;
 
@@ -49,12 +52,8 @@ public class Bookmark {
             return false;
         }
 
-        int bookmarkInt = Integer.parseInt(bookmarkedPage);
-        if (bookmarkInt < 0) {
-            return false;
-        }
-
-        return true;
+        BigInteger bookmarkInt = new BigInteger(bookmarkedPage);
+        return bookmarkInt.compareTo(BigInteger.ZERO) >= 0;
     }
 
 
