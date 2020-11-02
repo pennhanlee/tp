@@ -44,13 +44,13 @@ When you open _bookmark_, you will greeted by our lovely bookshelf GUI in a few 
    ![Ui](images/Ui.png)
    *Exhibit 1*
    
-You can find a list of all your recorded books at the the main window. (Exhibit 2) <br>
+You can find a list of all your recorded books at the main window. (Exhibit 2) <br>
 The books only show
 a condensed version of your books. Notes and Goals will be shown when you view a chosen book!
 
    ![Ui](images/mainwindow_list.png)
    
-You can also see data of the summary of all your stored books, bookmarks and pages read on the
+You can also see data of the summary of all the shown books, bookmarks and pages read on the
 right side of the application window. (Exhibit 3)
 
    ![Ui](images/mainwindow_summary.png)
@@ -313,9 +313,8 @@ Example Command | Result
 
 ### Undoing a command : `undo`
 
-Made a mistake? It's okay, simply use our Undo command to undo mistakes so that you
-can retrieve your previously saved book storage. You can undo as many as 10 previous 
-actions.
+Made a mistake? _bookmark_ provides an undo command to undo the last action that you've made.
+You can undo as many as 10 previous actions.
 
 <div markdown="block" class="alert alert-info">
 
@@ -329,14 +328,14 @@ actions.
 
 Example Command | Result
 --------------- | ----------
-undo | Previous version is restored
+undo | Previous action is undone
 
 The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
 entered during your usage session cannot be undone using the `undo` command once you quit and restart the application. 
 
 ### Redoing a command: `redo`
 
-Decided to stick to your decision? Use the Redo command so that you can recall the last command that you have undone!
+If you have accidentally undone an action, use the redo command to redo the last action that you have undone!
 This command can be used multiple times consecutively to redo up to ten undone commands. <br> 
 You should use `redo` in conjunction with the [undo](#undoing-a-command--undo) command.
 
