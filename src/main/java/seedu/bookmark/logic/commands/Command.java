@@ -1,7 +1,7 @@
 package seedu.bookmark.logic.commands;
 
-import seedu.bookmark.logic.ViewTypeManager;
 import seedu.bookmark.logic.ViewType;
+import seedu.bookmark.logic.ViewTypeManager;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.history.State;

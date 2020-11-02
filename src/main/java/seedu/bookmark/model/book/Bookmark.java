@@ -1,7 +1,5 @@
 package seedu.bookmark.model.book;
 
-import java.math.BigInteger;
-
 import static seedu.bookmark.commons.util.AppUtil.checkArgument;
 import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -52,8 +50,8 @@ public class Bookmark {
             return false;
         }
 
-        BigInteger bookmarkInt = new BigInteger(bookmarkedPage);
-        return bookmarkInt.compareTo(BigInteger.ZERO) >= 0;
+        int bookmarkInt = Integer.parseInt(bookmarkedPage);
+        return bookmarkInt >= 0;
     }
 
 
