@@ -10,13 +10,14 @@ import static seedu.bookmark.commons.util.CollectionUtil.requireAllNonNull;
 public class Bookmark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "bookmark should only contain numeric characters, it should not be blank, and its numerical value should"
-                    + "be less than or equals to the total number of pages in the book it is in";
+            "bookmark should only contain numeric characters, it should not be blank, and its numerical value should \n"
+                    + "be less than or equals to the total number of pages in the book it is in.";
 
     /*
-     * Only a 1 or more of the digits 0-9 allowed
+     * Only 1 to 9 number of digits from 0-9 allowed
      */
-    public static final String VALIDATION_REGEX = "^\\d+";
+    public static final String VALIDATION_REGEX = "^\\d"
+            + "{1," + TotalPages.MAX_TOTAL_PAGES_LENGTH + "}$";
 
     public final String value;
 
@@ -50,20 +51,16 @@ public class Bookmark {
         }
 
         int bookmarkInt = Integer.parseInt(bookmarkedPage);
-        if (bookmarkInt < 0) {
-            return false;
-        }
-
-        return true;
+        return bookmarkInt >= 0;
     }
 
 
     /**
-     * Returns if a given string and {@code TotalPages} forms a valid bookmark.
+     * Returns if a given {@code Bookmark} is valid for a given {@code TotalPages}.
      *
-     * @param bookmark Bookmark Object representing the bookmark page
+     * @param bookmark bookmarked page
      * @param totalPages the total number of pages in the Book which the bookmark will be placed in
-     * @return true iff bookmark page is less than equals to total pages
+     * @return true iff bookmarked page is less than equals to total pages
      */
     public static boolean isValidBookmark(Bookmark bookmark, TotalPages totalPages) {
         int bookmarkPage = Integer.parseInt(bookmark.value);

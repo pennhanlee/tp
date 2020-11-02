@@ -8,6 +8,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import seedu.bookmark.model.book.Book;
 
+/**
+ * A sidebar that displays metadata.
+ */
 public class SidebarPanel extends UiPart<Region> {
 
     private static final String FXML = "SidebarPanel.fxml";
