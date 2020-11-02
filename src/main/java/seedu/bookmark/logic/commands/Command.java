@@ -1,7 +1,7 @@
 package seedu.bookmark.logic.commands;
 
-import seedu.bookmark.logic.ViewManager;
 import seedu.bookmark.logic.ViewType;
+import seedu.bookmark.logic.ViewTypeManager;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.history.State;
@@ -11,7 +11,7 @@ import seedu.bookmark.model.history.State;
  */
 public abstract class Command {
 
-    public static final ViewManager VIEW_MANAGER = new ViewManager();
+    public static final ViewTypeManager VIEW_TYPE_MANAGER = new ViewTypeManager();
 
     /**
      * Executes the command and returns the result message.
@@ -24,9 +24,9 @@ public abstract class Command {
 
     protected void storeViewType(State state, ViewType viewType) {
         if (viewType != ViewType.MOST_RECENTLY_USED) {
-            VIEW_MANAGER.setCurrentView(viewType);
+            VIEW_TYPE_MANAGER.setCurrentView(viewType);
         }
-        VIEW_MANAGER.addViewTypePairing(state, viewType);
+        VIEW_TYPE_MANAGER.addViewTypePairing(state, viewType);
     }
 
 }
