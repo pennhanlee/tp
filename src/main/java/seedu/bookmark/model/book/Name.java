@@ -18,8 +18,9 @@ public class Name {
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * MAX_NAME_LENGTH - 1 to accomodate the 0.
      */
-    public static final String VALIDATION_REGEX = "^[^ ].{0,120}$"
+    public static final String VALIDATION_REGEX = "^[^ ].{0," + (MAX_NAME_LENGTH - 1) + "}$"
             + "{1," + MAX_NAME_LENGTH + "}$";
 
     public final String fullName;

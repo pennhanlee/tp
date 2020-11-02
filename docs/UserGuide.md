@@ -418,11 +418,8 @@ Example Command | Result
 
 ### Saving the data
 
-_bookmark_ data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-<div markdown="block" class="alert alert-warning">
-:star: **Important Detail:**
-Do take note in exiting _bookmark_ properly to ensure that your records are stored!
-</div>
+_bookmark_ data will be saved in the hard disk automatically after any command that changes the data is called.
+ There is no need to save manually.
 
 ### Accessing Help : `help`
 
