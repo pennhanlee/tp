@@ -324,6 +324,32 @@ Below is a sequence diagram that shows a scenario where a suggestion is provided
 
 ![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
 
+### Add Goal feature
+
+#### Implementation
+
+*bookmark* allows Users to add notes to a book.
+
+This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `GoalCommand` and `Book`.
+
+<Add diagram>
+
+`LogicManager#execute()` (not shown in the diagram above) handles the command word to create 
+`GoalCommandParser` to parse the remaining inputs. `GoalCommandParser#parse()` tokenizes each prefix
+to create a `Goal` object. This `Goal` object will be passed as a parameter to create a `GoalCommand`
+that will be returned to `Logic Manager`.\
+*If there are missing or invalid parameters in command, an exception will be thrown with a 
+message to the User.*
+
+Below is an activity diagram which illustrates the flow of events for adding a Goal.
+
+<Insert activity diagram>
+
+Below is a sequence diagram which illustrates a scenario where a User adds a valid Goal
+to a valid book via Command: `goal 1 p/69 d/10-12-2020`
+
+<Insert Sequence diagram>
+
 ### Add Note feature
 
 #### Implementation
