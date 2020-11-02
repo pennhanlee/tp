@@ -29,7 +29,10 @@ public class DetailedBookCard extends BookCard {
     private Label goal;
 
     @FXML
-    private VBox detailedBookContainer;
+    private VBox notesContainer;
+
+    @FXML
+    private Label noteHeading;
 
     /**
      * Creates a {@code DetailedBookCard} with the given {@code Book} and index to display.
@@ -83,9 +86,14 @@ public class DetailedBookCard extends BookCard {
     }
 
     private void showNotes(List<Note> notes) {
+        if (notes.size() > 0) {
+            noteHeading.setText("Notes:");
+        } else {
+            noteHeading.setText("Notes: This book has no notes!");
+        }
         IntStream.rangeClosed(1, notes.size())
                 .mapToObj(i -> new NoteCard(notes.get(i - 1), i))
-                .forEach(note -> detailedBookContainer
+                .forEach(note -> notesContainer
                         .getChildren()
                         .add(note.getRoot()));
     }
