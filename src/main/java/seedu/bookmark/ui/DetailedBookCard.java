@@ -1,9 +1,14 @@
 package seedu.bookmark.ui;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.book.Goal;
+import seedu.bookmark.model.book.Note;
 
 /**
  * An UI component that displays more detailed information of a {@code Book}.
@@ -23,6 +28,9 @@ public class DetailedBookCard extends BookCard {
     @FXML
     private Label goal;
 
+    @FXML
+    private VBox detailedBookContainer;
+
     /**
      * Creates a {@code DetailedBookCard} with the given {@code Book} and index to display.
      */
@@ -41,6 +49,7 @@ public class DetailedBookCard extends BookCard {
         percentageCompletion.setText(progressDisplay);
         goal.setText(goalText);
         goal.setStyle(determineGoalStyle(book));
+        showNotes(book.getNotes());
     }
 
     private int calculateCompletion(Book book) {
@@ -71,5 +80,13 @@ public class DetailedBookCard extends BookCard {
             goalText += Goal.UI_IN_PROGRESS;
         }
         return goalText;
+    }
+
+    private void showNotes(List<Note> notes) {
+        IntStream.rangeClosed(1, notes.size())
+                .mapToObj(i -> new NoteCard(notes.get(i - 1), i))
+                .forEach(note -> detailedBookContainer
+                        .getChildren()
+                        .add(note.getRoot()));
     }
 }

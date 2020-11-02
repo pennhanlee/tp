@@ -9,12 +9,10 @@ class BookListPanel
 class DetailedBookListPanel
 class BookCard
 class DetailedBookCard
-class NoteCard
 
 MainWindow *-down-> "1" BookListPanel
 BookListPanel -right-> "*" BookCard : renders >
 DetailedBookListPanel -up-|> BookListPanel
 DetailedBookCard -up-|> BookCard
-DetailedBookListPanel -down-> NoteCard : renders >
 
 @enduml

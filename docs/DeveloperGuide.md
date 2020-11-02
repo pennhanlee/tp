@@ -162,8 +162,7 @@ regarding the books stored, and the **detailed view** which displays detailed in
 the display of book information.
 When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
 while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
-`DetailedBookCard`. As there is more information to display, `DetailedBookListPanel` will also use other components
-such as `NoteCard` to display the notes added to the book, if any. 
+`DetailedBookCard`. 
 
 Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the `BookCard` or `DetailedBookCard`
 respectively.

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="bookmark" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="bookmark" minWidth="960" minHeight="650" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/bookmark_icon.png" />
   </icons>
@@ -43,7 +43,7 @@
             <StackPane fx:id="bookListPanelPlaceholder" style="fx-background-color: transparent;" VBox.vgrow="ALWAYS"/>
           </VBox>
           <VBox>
-            <StackPane fx:id="sidebarPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="sidebarPanelPlaceholder" minWidth="110" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
