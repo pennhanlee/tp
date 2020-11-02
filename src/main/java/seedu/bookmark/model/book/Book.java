@@ -256,7 +256,8 @@ public class Book {
                 .append(getTotalPages())
                 .append(" Bookmarked at: ")
                 .append(bookmarkPage)
-                .append(" Tags: ");
+                .append("\n")
+                .append("Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Goal: ")
                 .append(getGoal().toString())

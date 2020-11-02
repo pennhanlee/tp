@@ -64,6 +64,8 @@ the application window. (Exhibit 4) <br>
 Want to do more? Refer to the [Features](#features) section below for details of many more commands!
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 ## Prefixes
 
 Before diving into the features, this section will provide you with some
@@ -77,13 +79,36 @@ Prefix | Explanation
 `tp/` | Total pages of the book
 `b/` | The page where the bookmark is placed at
 `c/` | Completed books
-`nc/` | Not yet completed books
+`nc/` | Not completed books
 `rp/` | The reading progress of the book
 `p/` | The page to set your goal on
 `d/` | The date to complete your goal by
 `txt/` | The text of your note
 
 ## Features
+
+Before we begin, you should be familiar with these annotations that this User Guide will use
+to bring emphasis to important points! 
+
+<div markdown="block" class="alert alert-primary">
+:information_source: **Information: "
+Information to know
+</div>
+
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Example:**
+Example to follow
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detail:**
+Important point
+</div>
+
+<div markdown="block" class="alert alert-danger">
+:warning: **Warning: **
+Caution is advised for this area
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -114,7 +139,10 @@ Format: <br>
  `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]` <br>
 *tags and bookmarks are optional!*
 
-Examples:
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detail:**
+* Genre and Tags only accepts Alphabets and Numbers (No special symbols like ! ? *)
+</div>
 
 Example Command | Result
 -----------------|--------
@@ -170,11 +198,25 @@ Example Command | Result
 `find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
 `find c/` | Returns a list of completed books.
 
+#### Suggestions feature for Typing Error when finding a book
+
+Oh no! you've misspelled your book when adding it into the storage and you 
+can't seem to recall its actual name! <br> Fret not, _bookmark_ has an automatic Suggestion feature
+that will recommend the closest matching word to your misspelled word! 
+
+This feature also works when finding using these fields: 
+* Name
+* Genre
+* Tags
+
+Example Command | Result
+-------------| ---------------
+find n/Hsrry | Did you mean: Harry?
+
 ### Sorting books: `sort` 
 
 Too messy? Use our Sort Command to organise your bookshelf! The sort command will
 help you organise your books in based on the order you indicate.
-
 
 Format: `sort {Field}` <br>
 {Field} refers to any of the following:
@@ -329,7 +371,7 @@ actions.
 
 Example Command | Result
 --------------- | ----------
-undo | Previous version is restored
+`undo` | Previous version is restored
 
 The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
 entered during your usage session cannot be undone using the `undo` command once you quit and restart the application. 
@@ -342,27 +384,45 @@ You should use `redo` in conjunction with the [undo](#undoing-a-command--undo) c
 
 Example Command | Result
 --------------- | ----------
-redo | Previously undone command is invoked again
+`redo` | Previously undone command is invoked again
 
 The redo command will not execute if there are no undone commands available to undo. Once _bookmark_ is closed, the
 commands that have been undone during your last usage session cannot be redone using the `redo` command when you
 start _bookmark_ again.
 
-### Clearing all books : `clear` [coming soon]
+### Clearing all books : `clear`
 
-Clears all books from the Storage Library.
+Looking to clear your entire book records? Use the Clear Command to swiftly delete all books at one go!. 
+<div markdown="block" class="alert alert-danger">
+:warning: **Warning: **
+Take caution! While the undo feature will help you restore books deleted by `Clear`, you will not be able
+to recover your deleted books if you call too many commands (10 and more) after clearing!
+</div>
+
+Example Command | Result
+--------------- | ----------
+`clear` | Clears the entire _bookmark_ storage
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Ready to continue your reading? Close the program by using our Exit Command to safely exit the 
+program. 
 
 Format: `exit`
+
+Example Command | Result
+---------------- | ---------
+`exit` | Exits _bookmark_
 
 ### Saving the data
 
 _bookmark_ data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detail:**
+Do take note in exiting _bookmark_ properly to ensure that your records are stored!
+</div>
 
 ### Accessing Help : `help`
 
@@ -376,28 +436,13 @@ Example Command | Result
 -----------------|--------
 `help` | Help Window opens
 
-
-### Suggestions for Typing Error
-
-Oh no! you've misspelled your book when adding it into the storage and you 
-can't seem to recall its actual name! <br> Fret not, _bookmark_ has an automatic Suggestion feature
-that will recommend the closest matching word to your misspelled word! 
-
-This feature also works when finding using these fields: 
-* Name
-* Genre
-* Tags
-
-Example Command | Result
--------------| ---------------
-find n/Hsrry | Did you mean: Harry?
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous bookmark home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the 
+`library.json` file located in the `data` file of your previous bookmark home folder.
 
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
@@ -420,3 +465,13 @@ Action | Format
 **Find** | `find n/BOOK_TITLE`, `find g/GENRE`, `find t/TAG`, `find c/`, `find nc/`
 **Sort** | `sort n/`, `sort g/`, `sort b/`, `sort rp/`
 **Help** | `help`
+
+## Glossary
+
+Term | Meaning
+-------- | ------------
+**Genre** | The classification of the book <br> (eg. Fiction, Nonfiction, Selfhelp etc.)
+**Tag** | Short descriptive words to describe your book <br> (eg. Fun, Exciting, Magic)
+**Note** | Short paragraphs written by you to be added to your stored book records.
+**Goal** | A date set by you to finish a certain page of the book
+**Reading Progress** | The percentage of the book completed
