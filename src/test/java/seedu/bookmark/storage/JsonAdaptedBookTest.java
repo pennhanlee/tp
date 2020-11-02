@@ -16,7 +16,8 @@ import seedu.bookmark.model.book.Genre;
 import seedu.bookmark.model.book.Name;
 
 public class JsonAdaptedBookTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            + "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
     private static final String INVALID_GENRE = "F@ACTS0nLY";
     private static final String INVALID_TAG = "#friend";
 

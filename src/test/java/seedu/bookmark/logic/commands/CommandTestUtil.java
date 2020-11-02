@@ -55,7 +55,9 @@ public class CommandTestUtil {
     public static final String NOTE_TITLE = " " + PREFIX_NOTE_TITLE + "My thoughts...";
     public static final String NOTE_TEXT = " " + PREFIX_NOTE_TEXT + "Awesome read!";
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            + "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            + "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"; // name character limited to 120
     public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "@@@@"; // '@' not allowed in genres
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TOTAL_PAGES_DESC = " " + PREFIX_TOTAL_PAGES + "cnw"; // "alphabets not allowed"
