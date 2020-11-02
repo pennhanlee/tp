@@ -56,11 +56,11 @@ public class Bookmark {
 
 
     /**
-     * Returns if a given string and {@code TotalPages} forms a valid bookmark.
+     * Returns if a given {@code Bookmark} is valid for a given {@code TotalPages}.
      *
-     * @param bookmark Bookmark Object representing the bookmark page
+     * @param bookmark bookmarked page
      * @param totalPages the total number of pages in the Book which the bookmark will be placed in
-     * @return true iff bookmark page is less than equals to total pages
+     * @return true iff bookmarked page is less than equals to total pages
      */
     public static boolean isValidBookmark(Bookmark bookmark, TotalPages totalPages) {
         int bookmarkPage = Integer.parseInt(bookmark.value);
