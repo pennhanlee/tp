@@ -131,8 +131,7 @@ public class Book {
 
         return otherBook != null
                 && otherBook.getName().equals(getName())
-                && otherBook.getGenre().equals(getGenre())
-                && otherBook.getTotalPages().equals(getTotalPages());
+                && otherBook.getGenre().equals(getGenre());
     }
 
     /**

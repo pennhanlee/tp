@@ -32,7 +32,7 @@ get cracking and start saving your best reads and ideas into _bookmark_, Type aw
 *If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
 
 1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
-`add n/My First Book g/Non-Fiction t/Yay tp/1000` 
+`add n/My First Book g/NonFiction t/Yay tp/1000` 
 
 1. You should see that My First Book will be added into the list of books you see! 
 
