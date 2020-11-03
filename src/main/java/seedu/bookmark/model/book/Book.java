@@ -160,7 +160,7 @@ public class Book {
      * Returns true if book is completed, i.e. if bookmarked page is equal to total pages.
      */
     public boolean isCompleted() {
-        return bookmark.value.equals(totalPages.value);
+        return  bookmark.value.equals(totalPages.value);
     }
 
     /**
@@ -176,7 +176,7 @@ public class Book {
      * @return true if current .
      */
     public boolean goalCompleted() {
-        return goal.getPageInt() <= getPagesRead();
+        return hasGoal() && goal.getPageInt() <= getPagesRead();
     }
 
     /**
