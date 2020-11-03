@@ -332,7 +332,7 @@ Below is a sequence diagram that shows a scenario where a suggestion is provided
 
 This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `GoalCommand` and `Book`.
 
-<Add diagram>
+![class diagram for goals](images/GoalClassDiagram.png)
 
 `LogicManager#execute()` (not shown in the diagram above) handles the command word to create 
 `GoalCommandParser` to parse the remaining inputs. `GoalCommandParser#parse()` tokenizes each prefix
@@ -343,12 +343,12 @@ message to the User.*
 
 Below is an activity diagram which illustrates the flow of events for adding a Goal.
 
-<Insert activity diagram>
+![goal activity diagram](images/GoalActivityDiagram.png)
 
 Below is a sequence diagram which illustrates a scenario where a User adds a valid Goal
 to a valid book via Command: `goal 1 p/69 d/10-12-2020`
 
-<Insert Sequence diagram>
+![goal sequence diagram](images/GoalSequenceDiagram.png)
 
 ### Add Note feature
 
