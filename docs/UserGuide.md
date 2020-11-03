@@ -33,7 +33,7 @@ get cracking and start saving your best reads and ideas into _bookmark_, Type aw
 *If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
 
 1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
-`add n/My First Book g/Non-Fiction t/Yay tp/1000` 
+`add n/My First Book g/NonFiction t/Yay tp/1000` 
 
 1. You should see that My First Book will be added into the list of books you see! 
 
@@ -77,14 +77,14 @@ When you open _bookmark_, you will greeted by our lovely bookshelf GUI in a few 
    ![Ui](images/Ui.png)
    *Exhibit 1*
    
-You can find a list of all your recorded books at the the main window. (Exhibit 2) <br>
+You can find a list of all your recorded books at the main window. (Exhibit 2) <br>
 The books only show
 a condensed version of your books. Notes and Goals will be shown when you view a chosen book!
 
    ![Ui](images/mainwindow_list.png)
    *Exhibit 2*
    
-You can also see data of the summary of all your stored books, bookmarks and pages read on the
+You can also see data of the summary of all the shown books, bookmarks and pages read on the
 right side of the application window. (Exhibit 3)
 
    ![Ui](images/mainwindow_summary.png)
@@ -100,6 +100,8 @@ the application window. (Exhibit 4) <br>
 Want to do more? Refer to the [Features](#features) section below for details of many more commands!
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 ## Prefixes
 
 Before diving into the features, this section will provide you with some
@@ -113,13 +115,36 @@ Prefix | Explanation
 `tp/` | Total pages of the book
 `b/` | The page where the bookmark is placed at
 `c/` | Completed books
-`nc/` | Not yet completed books
+`nc/` | Not completed books
 `rp/` | The reading progress of the book
 `p/` | The page to set your goal on
 `d/` | The date to complete your goal by
 `txt/` | The text of your note
 
 ## Features
+
+Before we begin, you should be familiar with these annotations that this User Guide will use
+to bring emphasis to important points! 
+
+<div markdown="block" class="alert alert-primary">
+:information_source: **Information: "
+Information to know
+</div>
+
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Example:**
+Example to follow
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detail:**
+Important point
+</div>
+
+<div markdown="block" class="alert alert-danger">
+:warning: **Warning: **
+Caution is advised for this area
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -153,6 +178,11 @@ track your book reading progress together with us!
 Format: <br>
  `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]` <br>
 *tags and bookmarks are optional!*
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detail:**
+* Genre and Tags only accepts Alphabets and Numbers (No special symbols like ! ? *)
+</div>
 
 Example Command | Result
 -----------------|--------
@@ -207,11 +237,25 @@ Example Command | Result
 `find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
 `find c/` | Returns a list of completed books.
 
+#### Suggestions feature for Typing Error when finding a book
+
+Oh no! you've misspelled your book when adding it into the storage and you 
+can't seem to recall its actual name! <br> Fret not, _bookmark_ has an automatic Suggestion feature
+that will recommend the closest matching word to your misspelled word! 
+
+This feature also works when finding using these fields: 
+* Name
+* Genre
+* Tags
+
+Example Command | Result
+-------------| ---------------
+find n/Hsrry | Did you mean: Harry?
+
 ### Sorting books: `sort` 
 
 Too messy? Use our Sort Command to organise your bookshelf! The sort command will
 help you organise your books in based on the order you indicate.
-
 
 Format: `sort {Field}` <br>
 {Field} refers to any of the following:
@@ -346,9 +390,8 @@ Example Command | Result
 
 ### Undoing a command : `undo`
 
-Made a mistake? It's okay, simply use our Undo command to undo mistakes so that you
-can retrieve your previously saved book storage. You can undo as many as 10 previous 
-actions.
+Made a mistake? _bookmark_ provides an undo command to undo the last action that you've made.
+You can undo as many as 10 previous actions.
 
 <div markdown="block" class="alert alert-info">
 
@@ -362,40 +405,55 @@ actions.
 
 Example Command | Result
 --------------- | ----------
-undo | Previous version is restored
+`undo` | Previous version is restored
 
 The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
 entered during your usage session cannot be undone using the `undo` command once you quit and restart the application. 
 
 ### Redoing a command: `redo`
 
-Decided to stick to your decision? Use the Redo command so that you can recall the last command that you have undone!
+If you have accidentally undone an action, use the redo command to redo the last action that you have undone!
 This command can be used multiple times consecutively to redo up to ten undone commands. <br> 
 You should use `redo` in conjunction with the [undo](#undoing-a-command--undo) command.
 
 Example Command | Result
 --------------- | ----------
-redo | Previously undone command is invoked again
+`redo` | Previously undone command is invoked again
 
 The redo command will not execute if there are no undone commands available to undo. Once _bookmark_ is closed, the
 commands that have been undone during your last usage session cannot be redone using the `redo` command when you
 start _bookmark_ again.
 
-### Clearing all books : `clear` [coming soon]
+### Clearing all books : `clear`
 
-Clears all books from the Storage Library.
+Looking to clear your entire book records? Use the Clear Command to swiftly delete all books at one go!. 
+<div markdown="block" class="alert alert-danger">
+:warning: **Warning: **
+Take caution! While the undo feature will help you restore books deleted by `Clear`, you will not be able
+to recover your deleted books if you call too many commands (10 and more) after clearing!
+</div>
+
+Example Command | Result
+--------------- | ----------
+`clear` | Clears the entire _bookmark_ storage
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Ready to continue your reading? Close the program by using our Exit Command to safely exit the 
+program. 
 
 Format: `exit`
 
+Example Command | Result
+---------------- | ---------
+`exit` | Exits _bookmark_
+
 ### Saving the data
 
-_bookmark_ data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+_bookmark_ data will be saved in the hard disk automatically after any command that changes the data is called.
+ There is no need to save manually.
 
 ### Accessing Help : `help`
 
@@ -409,28 +467,13 @@ Example Command | Result
 -----------------|--------
 `help` | Help Window opens
 
-
-### Suggestions for Typing Error
-
-Oh no! you've misspelled your book when adding it into the storage and you 
-can't seem to recall its actual name! <br> Fret not, _bookmark_ has an automatic Suggestion feature
-that will recommend the closest matching word to your misspelled word! 
-
-This feature also works when finding using these fields: 
-* Name
-* Genre
-* Tags
-
-Example Command | Result
--------------| ---------------
-find n/Hsrry | Did you mean: Harry?
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install _bookmark_ on your other computer and overwrite the `library.json` data file found in the `data` folder with your previous _bookmark_ `library.json` data file.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the 
+`library.json` file located in the `data` file of your previous bookmark home folder.
 
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
@@ -457,3 +500,13 @@ Action | Format
 **Clear** | `clear`
 **Exit** | `exit`
 **Help** | `help`
+
+## Glossary
+
+Term | Meaning
+-------- | ------------
+**Genre** | The classification of the book <br> (eg. Fiction, Nonfiction, Selfhelp etc.)
+**Tag** | Short descriptive words to describe your book <br> (eg. Fun, Exciting, Magic)
+**Note** | Short paragraphs written by you to be added to your stored book records.
+**Goal** | A date set by you to finish a certain page of the book
+**Reading Progress** | The percentage of the book completed

@@ -18,9 +18,9 @@ public class Name {
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * MAX_NAME_LENGTH - 1 to accomodate the 0.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]"
-            + "{1," + MAX_NAME_LENGTH + "}$";
+    public static final String VALIDATION_REGEX = "^[^ ].{0," + (MAX_NAME_LENGTH - 1) + "}$";
 
     public final String fullName;
 
@@ -52,7 +52,7 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+                && fullName.toLowerCase().equals(((Name) other).fullName.toLowerCase())); // state check
     }
 
     @Override

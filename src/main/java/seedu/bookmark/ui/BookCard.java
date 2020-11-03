@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.TextAlignment;
 import seedu.bookmark.MainApp;
 import seedu.bookmark.model.book.Book;
 
@@ -72,6 +73,8 @@ public class BookCard extends UiPart<Region> {
     protected void initialize(Book book, int displayedIndex) {
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
+        name.setWrapText(true);
+        name.setTextAlignment(TextAlignment.JUSTIFY);
         genre.setText(book.getGenre().value);
         totalPages.setText(book.getTotalPages().value + " pages");
         if (book.hasStartedReading()) {
