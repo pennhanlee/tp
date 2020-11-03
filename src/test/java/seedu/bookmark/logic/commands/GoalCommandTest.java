@@ -23,7 +23,7 @@ import seedu.bookmark.testutil.BookBuilder;
 public class GoalCommandTest {
     private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
-    private Goal validGoal = new Goal("10", "15-10-2024");
+    private Goal validGoal = new Goal("501", "15-10-2024");
     private Goal overdueGoal = new Goal("10 15-10-1999");
 
     @Test

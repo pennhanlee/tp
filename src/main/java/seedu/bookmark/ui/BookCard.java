@@ -21,12 +21,17 @@ public class BookCard extends UiPart<Region> {
     protected static final String BOOKMARK_ICON_PATH = "/images/bookmark.png";
     protected static final String NO_BOOKMARK_ICON_PATH = "/images/no_bookmark.png";
     private static final String FXML = "BookCard.fxml";
+    private static final String COMPLETED_STYLE = "-fx-text-fill: lime";
+    private static final String DEFAULT_STYLE = "";
+    private static final String IN_PROGRESS_STYLE = "-fx-text-fill: gold";
+    private static final String OVERDUE_STYLE = "-fx-text-fill: red";
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
-     *
+
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
@@ -52,6 +57,8 @@ public class BookCard extends UiPart<Region> {
     protected Label noteLabel;
     @FXML
     protected FlowPane notes;
+    @FXML
+    protected Label goal;
 
     /**
      * Creates a {@code BookCard} with the given {@code Book} and index to display.
@@ -89,12 +96,37 @@ public class BookCard extends UiPart<Region> {
         book.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        String goalString = "Goal";
+        if (!book.hasGoal()) {
+            goalString += ": No goals set";
+        } else if (book.goalCompleted()) {
+            goalString += " (completed!): " + book.getGoal().toString();
+        } else if (book.goalInProgress()) {
+            goalString += " (in progress): " + book.getGoal().toString();
+        } else if (book.goalOverdue()) {
+            goalString += " (overdue): " + book.getGoal().toString();
+        }
+        goal.setText(goalString);
+        goal.setStyle(determineGoalStyle(book));
+
         if (book.hasNotes()) {
             noteLabel.setText("Notes:");
             book.getNotes()
                     .forEach(note -> notes.getChildren().add(new Label(note.title)));
         } else {
             noteLabel.setText("Notes: No notes added");
+        }
+    }
+
+    private String determineGoalStyle(Book book) {
+        if (book.goalCompleted()) {
+            return COMPLETED_STYLE;
+        } else if (book.goalInProgress()) {
+            return IN_PROGRESS_STYLE;
+        } else if (book.goalOverdue()) {
+            return OVERDUE_STYLE;
+        } else { // No goal
+            return DEFAULT_STYLE;
         }
     }
 
