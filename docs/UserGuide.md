@@ -216,7 +216,7 @@ find n/Hsrry | Did you mean: Harry?
 ### Sorting books: `sort` 
 
 Too messy? Use our Sort Command to organise your bookshelf! The sort command will
-help you organise your books in based on the order you indicate.
+help you organise the books in your current view based on the order you indicate.
 
 Format: `sort {Field}` <br>
 {Field} refers to any of the following:
