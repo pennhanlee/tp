@@ -163,9 +163,9 @@ Caution is advised for this area
 * You can enter your book information in any order you like.<br>
   e.g. If our command instructions specify `n/BOOK_TITLE tp/TOTAL_PAGES`, `tp/TOTAL_PAGES n/BOOK_TITLE` is also acceptable.
   
-* The `INDEX` will **always refer to the current shown list of books, be it in the detailed view, or the list view.**
-  For example, when in the detailed view of a book, any commands using `INDEX` can only refer to index 1 (the currently viewed book).
-  If you would like to use commands on other books, please ensure they are in the currently shown list.
+* The `INDEX` will **change based on the currently shown books on the screen.**
+  For example, the `INDEX` of the first book shown will be 1, the `INDEX` of the second book shown will be 2, etc.
+  If you would like to use commands on other books, please ensure they are currently displayed.
 
 </div>
 
@@ -193,12 +193,15 @@ Example Command | Result
 
 Want a closer look? Look at the detailed information of your recorded book by using our 
 View Command. <br>
-With this command, you can see your recorded book contents in detail.
+With this command, you can see your recorded book contents in detail. <br>
+If you would like to go back to see all your books, you can type in `list`.
 
 Format: `view INDEX`
 * View the title, bookmark and percentage completed, goal and notes added of a specified book.
 * The `INDEX` refers to the index number shown in the displayed book list.
 * The `INDEX` **must be a positive number** 1, 2, 3, …
+
+*Suppose you have two books currently displayed*
 
 Example Command | Result
 -----------------|--------
@@ -366,9 +369,11 @@ Format: `note INDEX n/TITLE txt/TEXT`
 * `TITLE` is limited to 1 to 120 characters.
 * `TEXT` is limited to 1 to 1000 characters.
 
+*Suppose you have at least one book currently displayed*
+
 Example Command | Result
 -----------------|--------
-`list` <br> `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
+`note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
 
 ### Deleting a note from a book : `notedel`
 
@@ -382,6 +387,8 @@ Format: `notedel INDEX NOTE_INDEX`
 * The `INDEX` refers to the index number shown in the displayed book list.
 * The `NOTE_INDEX` refers to the index number shown in the displayed notes in the detailed view.
 * All indexes **must be a positive number** 1, 2, 3, …​
+
+*Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
