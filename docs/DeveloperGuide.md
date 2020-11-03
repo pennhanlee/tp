@@ -871,7 +871,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Book list filtered by a command (e.g `find` command). At least one book shown in the list.
    
    1. Test case: `edit 1 n/Edited Name`<br>
-      Expected: First book in the list is edited to have a name of "Edited Name"
+      Expected: First book in the list is edited to have a name of "Edited Name".
       Details of the edited book shown in the status message.
       The edited book remains in the list regardless of how it was edited.
       
@@ -887,7 +887,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a book into a sorted book list.
 
    1. Prerequisites: Book list is initially showing at least 1 books to see the sorting effect.
-   1. Test case: `sort n/`<br> followed by `add` command to add another book
+   1. Test case: `sort n/`<br> followed by `add` command to add another book.
       Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
       The new book will be added to the book list in the correct position that maintains the sorted order.
 
