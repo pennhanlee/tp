@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.bookmark.logic.commands.CommandResult.ViewType;
+import seedu.bookmark.logic.ViewType;
 
 public class CommandResultTest {
     @Test

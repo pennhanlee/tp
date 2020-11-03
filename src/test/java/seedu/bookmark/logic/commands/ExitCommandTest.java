@@ -5,7 +5,7 @@ import static seedu.bookmark.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGE
 
 import org.junit.jupiter.api.Test;
 
-import seedu.bookmark.logic.commands.CommandResult.ViewType;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 

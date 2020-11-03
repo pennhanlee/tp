@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -35,7 +36,9 @@ public class GoalCommandTest {
                 bookToSetGoal.getName(), validGoal.toString());
         expectedModel.setBook(bookToSetGoal, bookWithGoal);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
+                ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
     }
 
     @Test

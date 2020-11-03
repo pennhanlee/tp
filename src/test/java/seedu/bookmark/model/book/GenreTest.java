@@ -20,6 +20,13 @@ public class GenreTest {
     }
 
     @Test
+    public void constructor_tooLongGenre_throwsIllegalArgumentException() {
+        StringBuilder tooLong = new StringBuilder();
+        tooLong.append("a".repeat(Genre.MAX_GENRE_LENGTH + 2));
+        assertThrows(IllegalArgumentException.class, () -> new Genre(tooLong.toString()));
+    }
+
+    @Test
     public void isValidGenre() {
         // null genre
         assertThrows(NullPointerException.class, () -> Genre.isValidGenre(null));
@@ -30,6 +37,10 @@ public class GenreTest {
 
         // invalid genre
         assertFalse(Genre.isValidGenre("f1ct10nXDXD@@@@")); // mixture of alphanumeric and special characters
+
+        StringBuilder tooLong = new StringBuilder();
+        tooLong.append("a".repeat(Genre.MAX_GENRE_LENGTH + 2));
+        assertFalse(Genre.isValidGenre(tooLong.toString())); // too long
 
         // valid genre
         assertTrue(Genre.isValidGenre("Horror 1")); // alphanumeric

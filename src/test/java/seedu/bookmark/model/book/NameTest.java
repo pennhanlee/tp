@@ -16,7 +16,17 @@ public class NameTest {
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
+
         assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    }
+
+    @Test
+    public void constructor_tooLongName_throwsIllegalArgumentException() {
+        StringBuilder tooLong = new StringBuilder();
+        // tooLong is one character too long
+        tooLong.append("a".repeat(Name.MAX_NAME_LENGTH + 2));
+
+        assertThrows(IllegalArgumentException.class, () -> new Name(tooLong.toString()));
     }
 
     @Test
@@ -29,6 +39,12 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+
+        StringBuilder tooLong = new StringBuilder();
+        // tooLong is one character too long
+        tooLong.append("a".repeat(Name.MAX_NAME_LENGTH + 3));
+
+        assertFalse(Name.isValidName(tooLong.toString())); // too long
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only

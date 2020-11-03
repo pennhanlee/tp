@@ -2,6 +2,7 @@ package seedu.bookmark.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_TOO_MANY_TAGS;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_BOOKMARK;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_NAME;
@@ -16,6 +17,7 @@ import java.util.Set;
 import seedu.bookmark.commons.core.index.Index;
 import seedu.bookmark.logic.commands.EditCommand;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
+import seedu.bookmark.model.book.Book;
 import seedu.bookmark.model.tag.Tag;
 
 /**
@@ -80,7 +82,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Set<Tag> parsedTags = ParserUtil.parseTags(tagSet);
+        if (!Book.isValidNumTags(parsedTags)) {
+            throw new ParseException(String.format(MESSAGE_TOO_MANY_TAGS, Book.MAX_TAG_COUNT));
+        }
+        return Optional.of(parsedTags);
     }
 
 }

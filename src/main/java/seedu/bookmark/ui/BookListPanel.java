@@ -36,10 +36,6 @@ public class BookListPanel extends UiPart<Region> {
         super(fxmlPath);
     }
 
-    public BookListPanel() {
-        super(FXML);
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */

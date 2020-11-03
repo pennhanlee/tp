@@ -6,6 +6,22 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+### Purpose 
+
+This document is written to describe the architecture and software design decisions for the desktop application, _bookmark_
+
+### Scope
+
+The goal of this document is to cover the high-level system architecture and design. It will also cover the implementation of each
+feature in _bookmark_.
+
+### Audience 
+
+The intended audience is any person who is looking to understand the system architecture and design of _bookmark_
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -72,6 +88,7 @@ The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Has two different states, a default summarised view, and a detailed view.
 
 ### Logic component
 
@@ -145,8 +162,7 @@ regarding the books stored, and the **detailed view** which displays detailed in
 the display of book information.
 When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
 while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
-`DetailedBookCard`. As there is more information to display, `DetailedBookListPanel` will also use other components
-such as `NoteCard` to display the notes added to the book, if any. 
+`DetailedBookCard`. 
 
 Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the `BookCard` or `DetailedBookCard`
 respectively.
@@ -383,59 +399,79 @@ Command: `note 1 n/Thoughts txt/Something`
 ### Undo/redo feature
 #### Implementation
 
-The undo/redo mechanism is facilitated by `HistoryManager`. `HistoryManager` manages the current model state as well as 
-the states that can be undone/redone. It does so by storing `State` objects. Each `State` object contains a 
-`ReadOnlyLibrary`, `ReadOnlyUserPrefs` and a `Predicate` used to decide which books should be visible to the user. 
+The undo/redo mechanism is implemented by storing the state of the application after each command. The state of the 
+application can be divided into two components:
+   1. The state of the [Model](#model-component)
+   2. The state of the [Ui](#ui-component)
 
-* `HistoryManager#addNewState()` — Add a new state to be used as the current state
-* `HistoryManager#undo()` — Restores the most recent previous state from its history.
-* `HistoryManager#redo()` — Restores the most recently undone state from its history.
+The state of the Model is managed by `HistoryManager`. It does so by storing `State` objects. Each `State` object contains a 
+`ReadOnlyLibrary`, `ReadOnlyUserPrefs` and a `Predicate` used to decide which books stored in the Model should be visible to
+users. `HistoryManager` maintains a current state property representing the current state of the Model. It also stores 
+previous states that be restored via a redo or undo.
 
-The undo and redo operations are exposed in the `Model` interface as `Model#undo()` and `Model#redo()` respectively.
-Whenever the user enters one of the following commands:
-  * `add`
-  * `delete`
-  * `edit`
-  * `note`
-  * `goal`
-  * `goaldel`
-  * `sort`
-  
-the previous state
-will be saved and a new state created by calling `HistoryManager#addNewState()`.
-This occurs via the methods implemented by `ModelManager` to modify the model such as: `ModelManager#addBook()`, `ModelManager#removeBook()`,
-`ModelManager#setBook()` and `ModelManager#setUserPrefs` are called. When these methods are called, they will
-modify the model and call `HistoryManager#addNewState()` to create a new `State` capturing the state of the modified model,
-to be stored by `HistoryManager`.
+* `HistoryManager#addNewState()` — Adds a new state to be used as the current state
+* `HistoryManager#undo()` — Restores the most recent previous state.
+* `HistoryManager#redo()` — Restores the most recently undone state.
+
+The state of the Ui is managed by `ViewTypeManager`. 
+The state of the Ui refers to what `ViewType` the Ui is in (see [Changing Ui View](#changing-ui-view)).
+`ViewTypeManager` maintains a mapping between `State` objects and a `ViewType`. This mapping indicates what 
+`ViewType` the Ui should be given a particular `State` of the Model.
+
+* `ViewTypeManager#addViewTypePairing()` — Adds a new pairing between a given `State` and `ViewType`
+* `ViewTypeManager#getViewType()` — Get the correct `ViewType` for the given `State`
+
+Whenever the user enters any commands EXCEPT:
+   * `help`
+   * `exit`
+   * `undo` and `redo` itself
+   
+the method `Model#save()` will be called which adds a new `State`, representing the new state of the Model, to `HistoryManager`
+and causes `HistoryManager` to store the previous `State`. Additionally, `ViewTypeManager#addViewTypePairing()` will be 
+called to create a new pairing between the newly create `State` and the appropriate `ViewType` to use to display the contents of the 
+Model to the user. The stored `States` and its corresponding `ViewType` pairing will be used to change the application
+state accordingly when a undo or redo operation, exposed as `Model#undo` and `Model#redo` respectively, is executed.
+
 The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
 
 ![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
 
+The next section will go into more detail about how the state of the application is managed as well as how undo and redo
+executes.
+
 #### How state is managed
 
 `HistoryManager` manages state by keeping a current state variable as well as two deques, an undo deque and a redo deque.
 The undo deque stores the states to be recovered via an undo command, while the redo deque stores previously undone states 
-to be recovered via a redo command. Below is an example to illustrate how `HistoryManager` manages state.
+to be recovered via a redo command. `ViewTypeManager` maintains a map that maps `State` objects to a corresponding 
+`ViewType`.
+
+Below is an example to illustrate how undoing and redoing works in a typical scenario.
 
 Step 1. The user launches the application for the first time. The `HistoryManager` will be inititalised with the
-initial state of the model as the current state, i.e State 1. Undo and redo deques will be empty.
+initial state of the model as the current state, i.e State 1. Undo and redo deques will be empty. `ViewTypeManager`'s map
+will also only have 1 entry, mapping the initial `State` to `ViewType.DEFAULT`.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes add command to add a new book. This command will call the `Model#addBook()` method
-which in turn will call the `HistoryManager#addNewState()` method, causing a new state, State 2 to be created and saved
-as the current state. The previous current state, State 1, will be pushed into the undo deque.
+Step 2. The user executes add command to add a new book. The command will call the `Model#save()` method
+which will create a new `State`, State 2, representing the new state of the Model and add it into `HistoryManager` via the 
+`HistoryManager#addNewState()` method. State 2 will now be the current state while the previous current state, State 1,
+will be pushed into the undo deque. `ViewTypeManager`'s map will be updated accordingly by calling the
+`ViewTypeManager#addViewTypePairing()` method with State 2 and the correct `ViewType` to be used to display State 2 to 
+the user.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `HistoryManager#addNewState()`, so the state will not be saved.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#save()`, so the state will not be saved.
 
 </div>
 
 Step 3. The user decides that adding the book was a mistake and decides to undo the action by using the undo command.
 This causes the current state, State 2 to be pushed to the redo deque. State 1 will be popped from the undo deque and 
-made the current state.
+made the current state. `ViewTypeManager#getViewType()` will be called with State 1 in order to get the correct 
+`ViewType` to display State 1 with.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -445,7 +481,8 @@ The following sequence diagram shows how the undo operation works:
 
 Step 4. The user changes his mind again, deciding that he wants to add the book. He redoes the action by using the redo
 command, causing the current state, State 1 to be pushed back into the undo deque and State 2 to be popped from the redo
-deque and made the current state.
+deque and made the current state. Again, `ViewTypeManager#getViewType()` will be called to get the correct `ViewType`
+to display State 2 with.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -454,17 +491,12 @@ when the user tries to undo and redo respectively, an error will be shown and no
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that only change which books are displayable to 
-the user such as `list`, `view` or `find` will not create new states.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. Now suppose the user adds a book and then edits a book, causing State 3 and State 4 to be created. He then
+Step 5. Now suppose the user adds a book and then edits a book, causing State 3 and State 4 to be created. He then
 undoes the edit command. `HistoryManager` will now look like this:
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-Step 7: The user decides to then delete a book, causing State 5 to be created and made the current state.
+Step 6: The user decides to then delete a book, causing State 5 to be created and made the current state.
 The previous current state, State 3, will be pushed into the undo deque while the redo deque is cleared and 
 hence State 4 is deleted.
 
@@ -487,8 +519,9 @@ which is not the intended behaviour.
 
 Furthermore, to prevent excessive memory usage, a cap on the number of states stored by `HistoryManager`'s undo deque
 can be set in `HistoryManager#MAX_UNDO_COUNT`. If a new state is added but the undo deque is already at max capacity,
-then the oldest state in the undo deque will be deleted to make room. The activity diagram below explains the flow of
-execution when a new state is added.
+then the oldest state in the undo deque will be deleted to make room. A similar strategy is employed for `ViewTypeManager`,
+with its map being implemented as a FIFO cache with a fixed maximum size.
+The activity diagram below explains the flow of execution when a new state is added to `HistoryManager`.
 
 ![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
@@ -496,14 +529,14 @@ execution when a new state is added.
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves copies of the entire `Library` and `UserPrefs`.
+* **Alternative 1 (current choice):** Saves copies of the entire `Library` and `UserPrefs` in `State`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the book being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct, complexity builds up as more
+  * Cons: We must ensure that the implementation of undoing/redoing of each individual command are correct, complexity builds up as more
   commands are added.
   
 Alternative 1 was eventually chosen as there was no noticable performance degradation during testing with a reasonable 
@@ -511,21 +544,21 @@ cap (10) on the number of states stored. It is also much more scalable and less 
 or modification of commands. 
 
 ##### Aspect: How to decide which actions should create and save state
-
-* **Alternative 1 (current choice):** The methods implemented by `ModelManager` to modify the model also creates and 
-    save state.
-  * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
-    and thus warrants the creation and saving of state.
-  * Cons: The creation and saving of state becomes a side effect, not immediately clear that it occurs.
-  
-* **Alternative 2:** Expose a method in the `Model` interface that when called creates and saves state.
+ 
+* **Alternative 1 (current choice):** Expose a method in the `Model` interface that when called creates and saves state.
   * Pros: More declarative, easier to see when the model will create and save state.
   * Cons: Worse separation of concerns, the responsibility of deciding when to create and save state is moved away 
     from the model and to the components that interact with the model.
     
-Alternative 1 was eventually chosen as we liked the clear separation of concerns it provides. We also feel that it is 
-less prone to errors such as forgetting to call the hypothetical "save" method that would exist in alternative 2, 
-or calling it in the wrong places, especially when more commands are added.
+* **Alternative 2:** The methods implemented by `ModelManager` to modify the model such as 
+    `ModelManager#addBook()` also creates and save state.
+  * Pros: Better separation of concerns, the model is responsible for deciding what actions constitute a modification
+    and thus warrants the creation and saving of state.
+  * Cons: The creation and saving of state becomes a side effect, not immediately clear that it occurs.  
+    
+Alternative 1 was eventually chosen as we liked the declarative nature of it as well as the clarity it provides. We also
+felt that alternative 2 could cause a lot of problems if a command needed to modify the model in multiple ways thus
+would cause multiple states to be created for a single command.
 
 --------------------------------------------------------------------------------------------------------------------
 

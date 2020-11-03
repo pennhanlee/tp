@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.bookmark.logic.ViewType;
+
 /**
  * Represents the result of a command execution.
  */
@@ -18,13 +20,6 @@ public class CommandResult {
     private final boolean exit;
 
     private final ViewType viewType;
-
-    /** Represents how the UI should change view. */
-    public enum ViewType {
-        DEFAULT,
-        DETAILED,
-        MOST_RECENTLY_USED
-    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.

@@ -61,8 +61,6 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
@@ -127,10 +125,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isFullCapacity() {
+        return library.getSize() >= Model.MAX_BOOK_CAPACITY;
+    }
+
+    @Override
     public void deleteBook(Book target) {
         library.removeBook(target);
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.deleteFromWordBank(target);
     }
 
@@ -139,8 +140,6 @@ public class ModelManager implements Model {
         library.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         sortByDefaultComparator();
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.addToWordBank(book);
     }
 
@@ -155,15 +154,13 @@ public class ModelManager implements Model {
                 : PREDICATE_SHOW_ALL_BOOKS;
         updateFilteredBookList(b -> prevPredicate.test(b) || b.equals(editedBook));
 
-        historyManager = historyManager.addNewState(
-                State.createState(library, userPrefs, filteredBooks.getPredicate()));
         wordBank.updateWordBank(target, editedBook);
     }
 
     @Override
     public void sortByDefaultComparator() {
-        if (this.comparator != null) { //should be removed, should sort by date added field
-            sortFilteredBookList(this.comparator);
+        if (this.comparator != null) {
+            sortFilteredBookList(comparatorGenerator(sortingPrefixGenerator(userPrefs.getSortingPreference())));
         }
     }
 
@@ -177,6 +174,21 @@ public class ModelManager implements Model {
     public ObservableList<Book> getFilteredBookList() {
         return filteredBooks;
     }
+
+
+    @Override
+    public void updateFilteredBookList(Predicate<Book> predicate) {
+        requireNonNull(predicate);
+        filteredBooks.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredBookList(Comparator<Book> comparator) {
+        this.comparator = comparator;
+        this.library.sortBooks(comparator);
+    }
+
+    //=========== Undo Redo  =============================================================
 
     @Override
     public void undo() throws UndoException {
@@ -195,17 +207,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredBookList(Predicate<Book> predicate) {
-        requireNonNull(predicate);
-        filteredBooks.setPredicate(predicate);
+    public void save() {
+        historyManager = historyManager.addNewState
+                (State.createState(library, userPrefs, filteredBooks.getPredicate()));
     }
 
     @Override
-    public void sortFilteredBookList(Comparator<Book> comparator) {
-        this.comparator = comparator;
-        this.library.sortBooks(comparator);
-        historyManager = historyManager.addNewState
-                (State.createState(library, userPrefs, filteredBooks.getPredicate()));
+    public State getCurrentState() {
+        return historyManager.getCurrentState();
     }
 
     /**
@@ -214,7 +223,6 @@ public class ModelManager implements Model {
     private void resetModelData(State state) {
         library.resetData(state.getLibrary());
         userPrefs.resetData(state.getUserPrefs());
-        System.out.println(state.getPredicate() != null);
         Predicate<? super Book> prevPredicate = state.getPredicate() != null
                 ? state.getPredicate()
                 : PREDICATE_SHOW_ALL_BOOKS;
