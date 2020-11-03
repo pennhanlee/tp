@@ -20,8 +20,7 @@ public class Name {
      * otherwise " " (a blank string) becomes a valid input.
      * MAX_NAME_LENGTH - 1 to accomodate the 0.
      */
-    public static final String VALIDATION_REGEX = "^[^ ].{0," + (MAX_NAME_LENGTH - 1) + "}$"
-            + "{1," + MAX_NAME_LENGTH + "}$";
+    public static final String VALIDATION_REGEX = "^[^ ].{0," + (MAX_NAME_LENGTH - 1) + "}$";
 
     public final String fullName;
 
