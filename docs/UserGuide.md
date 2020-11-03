@@ -127,7 +127,7 @@ Before we begin, you should be familiar with these annotations that this User Gu
 to bring emphasis to important points! 
 
 <div markdown="block" class="alert alert-primary">
-:information_source: **Information: "
+:information_source: **Information:**
 Information to know
 </div>
 
@@ -142,7 +142,7 @@ Important point
 </div>
 
 <div markdown="block" class="alert alert-danger">
-:warning: **Warning: **
+:warning: **Warning:**
 Caution is advised for this area
 </div>
 
@@ -195,6 +195,12 @@ Want a closer look? Look at the detailed information of your recorded book by us
 View Command. <br>
 With this command, you can see your recorded book contents in detail. <br>
 If you would like to go back to see all your books, you can type in `list`.
+
+<div markdown="block" class="alert alert-primary">
+:information_source: **Information:**
+After using the view command, the viewed book will have an INDEX of 1 since it is the only book shown on the screen.
+To interact with the book, use the INDEX of 1 to refer to the book.
+</div>
 
 Format: `view INDEX`
 * View the title, bookmark and percentage completed, goal and notes added of a specified book.
@@ -392,8 +398,8 @@ Format: `notedel INDEX NOTE_INDEX`
 
 Example Command | Result
 -----------------|--------
-`list` <br> `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
-`list` <br> `notedel 4 2` | Deletes the 4th note of the 2nd book displayed
+`notedel 1 3` | Deletes the 3rd note of the 1st book displayed
+`notedel 4 2` | Deletes the 4th note of the 2nd book displayed
 
 ### Undoing a command : `undo`
 
