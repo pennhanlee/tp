@@ -14,6 +14,18 @@ Class HistoryManager
 Class State
 }
 
+package Logic {
+Class ViewTypeManager LOGIC_COLOR
+Class Command LOGIC_COLOR
+}
+
+ViewTypeManager : addViewTypePairing()
+ViewTypeManager : getViewType()
+show ViewTypeManager members
+
+Command --right-> ViewTypeManager
+Command ---> Model
+
 Model : undo()
 Model : redo()
 Model : save()
@@ -27,7 +39,7 @@ show HistoryManager members
 ModelManager .up.|> Model
 ModelManager *--> HistoryManager
 
-HistoryManager --up-> "1..*" State : > Contains
+HistoryManager --up-> "1..*" State : > Stores
 
 State *-up-> "1" ReadOnlyLibrary
 State *-up-> "1" ReadOnlyUserPrefs
