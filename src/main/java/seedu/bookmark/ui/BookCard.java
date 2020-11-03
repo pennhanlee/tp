@@ -72,11 +72,22 @@ public class BookCard extends UiPart<Region> {
 
     protected void initialize(Book book, int displayedIndex) {
         id.setText(displayedIndex + ". ");
+        setCompulsoryFields(book);
+        setBookmark(book);
+        setTags(book);
+        setNotes(book);
+
+    }
+
+    private void setCompulsoryFields(Book book) {
         name.setText(book.getName().fullName);
         name.setWrapText(true);
         name.setTextAlignment(TextAlignment.JUSTIFY);
         genre.setText(book.getGenre().value);
         totalPages.setText(book.getTotalPages().value + " pages");
+    }
+
+    private void setBookmark(Book book) {
         if (book.hasStartedReading()) {
             bookmark.setText("Bookmarked @ page " + book.getBookmark().value);
             Image image = new Image(MainApp.class.getResourceAsStream(BOOKMARK_ICON_PATH));
@@ -86,9 +97,15 @@ public class BookCard extends UiPart<Region> {
             Image image = new Image(MainApp.class.getResourceAsStream(NO_BOOKMARK_ICON_PATH));
             bookmarkIcon.setImage(image);
         }
+    }
+
+    private void setTags(Book book) {
         book.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void setNotes(Book book) {
         if (book.hasNotes()) {
             noteLabel.setText("Notes:");
             book.getNotes()
