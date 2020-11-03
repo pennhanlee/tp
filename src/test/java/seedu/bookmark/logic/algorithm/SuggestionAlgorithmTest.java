@@ -33,10 +33,10 @@ public class SuggestionAlgorithmTest {
 
     @Test
     public void create_suggestionAlgo_correctValue() {
-        WordBank wb = TypicalWords.getTypicalWordBank();
-        SuggestionAlgorithm sa = new SuggestionAlgorithm(wb);
+        WordBank wordBank = TypicalWords.getTypicalWordBank();
+        SuggestionAlgorithm suggestionAlgorithm = new SuggestionAlgorithm(wordBank);
 
-        assertEquals(wb, sa.getWordBank());
+        assertEquals(wordBank, suggestionAlgorithm.getWordBank());
 
     }
 
@@ -64,6 +64,10 @@ public class SuggestionAlgorithmTest {
 
     @Test
     public void findSuggestion_correctParameters() {
+        String validWord = "Harry";
+        Book testBook = new BookBuilder().withName(validWord).withGenre("Fiction").withTotalPages("100").build();
+        wordBank.addToWordBank(testBook);
+
         ArrayList<Word> suggestions = suggestionAlgorithm.findSuggestion("Haary", PREFIX_NAME);
         int distance = suggestionAlgorithm.calculateDistance("Haary", "Harry"); //distance = 1
         Word harry = new Word("Harry", distance);
@@ -82,6 +86,7 @@ public class SuggestionAlgorithmTest {
         Word wordObjectWithinLimit = new Word(validWord, wordDistanceWithinLimit);
         Word validWordObject = new Word(validWord, wordDistanceWithinLimit);
         ArrayList<Word> suggestions = suggestionAlgorithm.findSuggestion(wordObjectWithinLimit.getWord(), PREFIX_NAME);
+        System.out.println(suggestions.size());
         assertTrue(suggestions.contains(validWordObject));
 
         //word found when at distance limit
