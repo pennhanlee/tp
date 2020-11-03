@@ -22,11 +22,9 @@ public class NameTest {
 
     @Test
     public void constructor_tooLongName_throwsIllegalArgumentException() {
-        StringBuilder tooLong = new StringBuilder();
-        // tooLong is one character too long
-        tooLong.append("a".repeat(Name.MAX_NAME_LENGTH + 2));
+        String tooLong = "a".repeat(Name.MAX_NAME_LENGTH + 1);
 
-        assertThrows(IllegalArgumentException.class, () -> new Name(tooLong.toString()));
+        assertThrows(IllegalArgumentException.class, () -> new Name(tooLong));
     }
 
     @Test
@@ -38,11 +36,7 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
 
-        StringBuilder tooLong = new StringBuilder();
-        // tooLong is one character too long
-        tooLong.append("a".repeat(Name.MAX_NAME_LENGTH + 3));
-
-        assertFalse(Name.isValidName(tooLong.toString())); // too long
+        assertFalse(Name.isValidName("a".repeat(Name.MAX_NAME_LENGTH + 1))); // 1 char too long
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
