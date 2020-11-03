@@ -16,8 +16,8 @@ import seedu.bookmark.model.wordstore.Word;
  */
 public class SuggestionAlgorithm {
 
-    private static final int DISTANCE_TOLERANCE = 3;
     private final WordBank wordBank;
+    public static final int DISTANCE_TOLERANCE = 3;
 
     /**
      * Creates a SuggestionAlgorithm object
@@ -41,7 +41,7 @@ public class SuggestionAlgorithm {
         for (Map.Entry<String, Word> word : wordStore.entrySet()) {
             Word targetWord = word.getValue();
             int wordDistance = calculateDistance(sourceWord, targetWord.getWord());
-            if (wordDistance <= DISTANCE_TOLERANCE && wordDistance > 0) {
+            if (wordDistance <= DISTANCE_TOLERANCE && wordDistance >= 0) {
                 Word wordCopy = new Word(targetWord.getWord(), wordDistance);
                 suggestions.add(wordCopy);
             }
