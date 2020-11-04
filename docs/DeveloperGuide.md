@@ -846,7 +846,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a book while only some books are being shown.
 
-   1. Test case: `add n/Test book g/TEst genre tp/1000 b/50`<br>
+   1. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
       Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
       50 will be created and added to the list. All books will be shown.  
 
