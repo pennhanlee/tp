@@ -272,7 +272,7 @@ Command : `find n/ Harry`
 This feature is facilitated mainly by `ModelManager`, `SortCommandParser` and `SortCommand`.
 
 `ModelManager#sortFilteredBookList()` takes in a single parameter, a `comparator`, and applies the `comparator` on all elements
-of the internal observable book list. Book's are sorted according to the input comparator in descending order. 
+of the internal observable book list. Book's are sorted according to the input comparator in ascending order. 
 
 `ModelManager#setSortingPreference()` takes in a single parameter, a `newSortingPreference`, and updates the sorting preference 
 in the `preferences.json` file. Thereafter, the specified sorting mechanism will apply to the user until the user decides to change 
@@ -282,7 +282,7 @@ Currently, the `sort` command supports sorting by name, genre, bookmark, and rea
 
 #### Sorting the ObservableList
 The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
-would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator` generates a comparator based on the 
+would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
 user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
 When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
 updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
@@ -314,7 +314,7 @@ Command : `sort n/`
 
 *bookmark* allows Users to add books into the application.
 
-This feature is facilitated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`.
+This feature is facilitated mainly by `LogicManager`, `ModelManager`, `AddCommandParser` and `AddCommand`.
 
 ![Classes involved in the Add Command](images/LogicClassDiagram.png)
 
@@ -324,7 +324,9 @@ passed as a parameter to create a `AddCommand` that will be returned to `LogicMa
 *If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
 
 `LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` attribute into
-the `Model`to return a `CommandResult` as a feedback to the user.
+the `Model` via `ModelManager#addBook()`. Subsequently, `ModelManager#sortByDefaultComparator()` would be called
+to sort the internal book list according to the user's sorting preference, if any.
+Finally, a `CommandResult` is returned as a feedback to the user. <br>
 *If there is an existing book with the same name, an exception will be thrown with a message to the User*
 
 Below is an activity diagram which illustrates the flow of events for adding a book

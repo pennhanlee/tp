@@ -48,7 +48,7 @@ deactivate CommandParser
 LogicManager -> SortCommand : execute()
 activate SortCommand
 
-SortCommand -> Model : setSortingPreference("/n")
+SortCommand -> Model : setSortingPreference("n/")
 activate Model
 
 Model --> SortCommand

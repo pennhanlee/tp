@@ -61,6 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addBook(toAdd);
+        model.sortByDefaultComparator();
         model.save();
         storeViewType(model.getCurrentState(), ViewType.DEFAULT);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
