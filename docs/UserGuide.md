@@ -213,8 +213,6 @@ Example Command | Result
 -----------------|--------
 `list` <br> `view 2` | views the 2nd book in the list. 
 
-*This assumes you are tracking at least 2 books.*
-
    ![detailed_view](images/detailed_view.PNG)
 
 ### Listing all books : `list`
