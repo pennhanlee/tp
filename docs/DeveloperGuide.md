@@ -211,9 +211,14 @@ detailed view:
 ### Find feature
 
 #### Implementation
+
+*bookmark* allows users to find books by a specified field.
+
+This feature is facilitated mainly by `ModelManager`, `FindCommandParser` and `FindCommand`.
+
 The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList()` method. 
 `ModelManager#updateFilteredBookList()` takes in a single parameter, a `predicate`, and applies the `predicate` 
-on all elements of the observable book list. Elements that satisfy the `predicate` remain in the 
+on all elements of the observable book list. Books that satisfy the `predicate` remain in the 
 list, while elements that do not are removed and omitted from the user's view. Currently, the `find` command 
 supports finding by name, genre and tag fields, and can also filter completed & non-completed books.
 
@@ -223,23 +228,24 @@ Step 1. The user launches the application for the first time. `FilteredList` is 
 
 ![FindState1](images/FindState1.png)
 
-Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The `NameContainsKeywordsPredicate` predicate is generated
-and used as a filter in this scenario.
+Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The 
+`NameContainsKeywordsPredicate` predicate is generated and is used as a filter in this scenario.
 
 ![FindState2](images/FindState2.png)
 
 #### Filtering the FilteredList
 The `FindCommandParser#parse()` parses the `find` command input, and checks for input errors for which if found,
-an error would be thrown. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
-user's input filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
-and when `FindCommand#execute()` is called, the `predicate` is passed on to `ModelManager#updateFilteredBookList()`,
+would throw an error. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
+user's input keyword(s) and filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
+and when `FindCommand#execute()` is called, the `predicate` is passed to `ModelManager#updateFilteredBookList()`,
 where the filtering of the observable book list based on the `predicate` occurs. 
 
 The activity diagram below illustrates the flow of execution when the user inputs a `find` command.
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
-Below is a sequence diagram that shows a scenario whereby the user decides to find keywords in the book name field:
+Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
+field.<br>
 Command : `find n/ Harry`
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
@@ -257,7 +263,51 @@ Command : `find n/ Harry`
   the user uses the keyword for multiple fields.
   * Cons: Might not be easy to find specific books, i.e. cannot streamline the search as well.
 
+### Sort feature
 
+#### Implementation 
+
+*bookmark* allows Users to sort books by a specified field.
+
+This feature is facilitated mainly by `ModelManager`, `SortCommandParser` and `SortCommand`.
+
+`ModelManager#sortFilteredBookList()` takes in a single parameter, a `comparator`, and applies the `comparator` on all elements
+of the internal observable book list. Book's are sorted according to the input comparator in descending order. 
+
+`ModelManager#setSortingPreference()` takes in a single parameter, a `newSortingPreference`, and updates the sorting preference 
+in the `preferences.json` file. Thereafter, the specified sorting mechanism will apply to the user until the user decides to change 
+the sorting mechanism using the sort command. 
+
+Currently, the `sort` command supports sorting by name, genre, bookmark, and reading progress.
+
+#### Sorting the ObservableList
+The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
+would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator` generates a comparator based on the 
+user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
+When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
+updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
+where sorting of the internal observable list based on the `comparator` occurs.
+
+The activity diagram below illustrates the flow of execution when the user inputs a `sort` command.
+
+![SortActivityDiagram](images/SortActivityDiagram.png)
+
+Below is a sequence diagram that shows a scenario whereby the user decides to sort books by the name field.
+Command : `sort n/`
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+##### Aspect: Sorting visible observable list or internal observable list
+
+* **Alternative 1 (current choice):** Sorting internal observable list
+  * Pros: Allows user to set sorting preference. When the user exits and reopens the application, the books would remain
+  in the sorted order.
+  * Cons: Could be a drawback if the user only wants to sort for temporary view.
+  
+* **Alternative 2:** Sorting visible observable list
+  * Pros: Sorts the user's book list temporarily, which is useful if the user only wants the sorted view momentarily.
+  * Cons: Book list would always return to default view after subsequent commands which is be distracting.
+  
 ### Add book
 
 #### Implementation
