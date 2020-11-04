@@ -139,6 +139,7 @@ public class ModelManager implements Model {
     public void addBook(Book book) {
         library.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        sortByDefaultComparator();
         wordBank.addToWordBank(book);
     }
 
