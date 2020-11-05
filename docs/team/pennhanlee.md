@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to existing features**:
-  * Updated codebase for Add Command and other relevant classes to accept Books.  (Pull requests [\#33](), [\#34]())
+  * Updated codebase for Add Command and other relevant classes to accept Books and its attributes.  (Pull requests [\#33](), [\#34]())
   * Updated constants in various TestUtil to be used in tests and updated tests to accommodate to 
   revamped Add Command(Pull requests [\#36](), [\#38]())
 
@@ -41,7 +41,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `Add` and `Suggestion Feature` and `Help` [\#72]()
     * Edited Quickstart to installation and starting the application with Images
-    * Made edits such as Examples and Command Overview to existing documentation of features for all commands: [\#74]()
+    * Standardise all comments to follow a format: Command Overview Examples, Important Detail and Warning to existing documentation: [\#74]()
     
   * Developer Guide:
     * Added implementation details of the `Add` feature.

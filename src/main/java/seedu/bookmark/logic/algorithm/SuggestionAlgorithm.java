@@ -57,6 +57,8 @@ public class SuggestionAlgorithm {
      * @return The edit distance between source and target strings
      * @throws IllegalArgumentException if either source or target is null
      */
+    //@@author crwohlfeil-reused
+    //Reused from https://github.com/crwohlfeil/damerau-levenshtein/blob/master/src/main/java/com/codeweasel/DamerauLevenshtein.java with minor modifications
     public int calculateDistance(String source, String target) {
         requireNonNull(source);
         requireNonNull(target);
@@ -94,6 +96,7 @@ public class SuggestionAlgorithm {
         }
         return distanceArray[sourceLength][targetLength];
     }
+    //@@author
 
     /**
      * Gets the wordbank attribute in the Algorithm object
