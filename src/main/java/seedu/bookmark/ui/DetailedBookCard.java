@@ -14,12 +14,7 @@ import seedu.bookmark.model.book.Note;
  */
 public class DetailedBookCard extends BookCard {
 
-    private static final String COMPLETED_STYLE = "-fx-text-fill: lime";
-    private static final String DEFAULT_STYLE = "";
     private static final String FXML = "DetailedBookCard.fxml";
-    private static final String IN_PROGRESS_STYLE = "-fx-text-fill: gold";
-    private static final String OVERDUE_STYLE = "-fx-text-fill: red";
-
 
     @FXML
     private Label percentageCompletion;
