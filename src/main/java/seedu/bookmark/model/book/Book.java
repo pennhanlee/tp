@@ -175,7 +175,7 @@ public class Book {
      * @return true if current .
      */
     public boolean goalCompleted() {
-        return goal.getPageInt() <= getPagesRead();
+        return hasGoal() && goal.getPageInt() <= getPagesRead();
     }
 
     /**
