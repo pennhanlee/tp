@@ -20,7 +20,7 @@ public class Genre {
      * otherwise " " (a blank string) becomes a valid input. Max of 60 characters.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]"
-            + "{1," + MAX_GENRE_LENGTH + "}$";
+            + "{0," + (MAX_GENRE_LENGTH - 1) + "}$";
 
     public final String value;
 

@@ -23,7 +23,7 @@ public class State {
      * Constructs a {@code State} with the given {@code ReadOnlyLibrary}, {@code ReadOnlyUserPrefs} and
      * {@code Predicate}
      */
-    private State(ReadOnlyLibrary library, ReadOnlyUserPrefs userPrefs, Predicate<? super Book> filterPredicate) {
+    protected State(ReadOnlyLibrary library, ReadOnlyUserPrefs userPrefs, Predicate<? super Book> filterPredicate) {
         this.library = library;
         this.userPrefs = userPrefs;
         this.filterPredicate = filterPredicate;
