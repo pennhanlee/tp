@@ -186,7 +186,7 @@ track your book reading progress together with us!
 :star: **Important Detail:** 
 
    * `NAME` is limited to 1 to 120 characters.
-   * `GENRE` and `TAG` only accepts Alphabets and Numbers (No special symbols like ! ? *)
+   * `GENRE` and `TAG` only accepts Alphabets and Numbers (Special symbols like ! ? * are not supported)
    * You can add multiple tags
    * Adding tags and bookmarks are optional
 </div>
