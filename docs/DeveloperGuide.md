@@ -306,7 +306,7 @@ Command : `sort n/`
   
 * **Alternative 2:** Sorting visible observable list
   * Pros: Sorts the user's book list temporarily, which is useful if the user only wants the sorted view momentarily.
-  * Cons: Book list would always return to default view after subsequent commands which is be distracting.
+  * Cons: Book list would always return to default view after subsequent commands which could be distracting.
   
 ### Add book
 
