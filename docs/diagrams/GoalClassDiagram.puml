@@ -13,18 +13,17 @@ Class CommandParser
 }
 
 package Command {
-
 Class GoalCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 }
 
-CommandParser .left.> GoalCommandParser: creates >
+GoalCommandParser .up.|> Parser
+CommandParser .right.> GoalCommandParser: creates >
 
 GoalCommandParser ..> GoalCommand : creates >
-GoalCommandParser ..|> Parser
 
-GoalCommand ..|> Command
+GoalCommand .up.|> Command
 GoalCommand ..> CommandResult : creates >
 
 
