@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.TextAlignment;
 import seedu.bookmark.MainApp;
 import seedu.bookmark.model.book.Book;
+import seedu.bookmark.model.book.Goal;
 
 /**
  * An UI component that displays information of a {@code Book}.
@@ -96,17 +97,7 @@ public class BookCard extends UiPart<Region> {
         book.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        String goalString = "Goal";
-        if (!book.hasGoal()) {
-            goalString += ": No goals set";
-        } else if (book.goalCompleted()) {
-            goalString += " (completed!): " + book.getGoal().toString();
-        } else if (book.goalInProgress()) {
-            goalString += " (in progress): " + book.getGoal().toString();
-        } else if (book.goalOverdue()) {
-            goalString += " (overdue): " + book.getGoal().toString();
-        }
-        goal.setText(goalString);
+        goal.setText(determineGoalText(book));
         goal.setStyle(determineGoalStyle(book));
 
         if (book.hasNotes()) {
@@ -118,7 +109,7 @@ public class BookCard extends UiPart<Region> {
         }
     }
 
-    private String determineGoalStyle(Book book) {
+    protected String determineGoalStyle(Book book) {
         if (book.goalCompleted()) {
             return COMPLETED_STYLE;
         } else if (book.goalInProgress()) {
@@ -130,6 +121,17 @@ public class BookCard extends UiPart<Region> {
         }
     }
 
+    protected String determineGoalText(Book book) {
+        String goalText = String.format("Goal: %s", book.getGoal().toString());
+        if (book.goalCompleted()) {
+            goalText += Goal.UI_COMPLETED;
+        } else if (book.goalOverdue()) {
+            goalText += Goal.UI_OVERDUE;
+        } else if (book.goalInProgress()) {
+            goalText += Goal.UI_IN_PROGRESS;
+        }
+        return goalText;
+    }
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
