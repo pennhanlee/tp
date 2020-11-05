@@ -51,7 +51,7 @@ public class Genre {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Genre // instanceof handles nulls
-                && value.equals(((Genre) other).value)); // state check
+                && value.toLowerCase().equals(((Genre) other).value.toLowerCase())); // state check
     }
 
     @Override

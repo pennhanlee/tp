@@ -131,8 +131,7 @@ public class Book {
 
         return otherBook != null
                 && otherBook.getName().equals(getName())
-                && otherBook.getGenre().equals(getGenre())
-                && otherBook.getTotalPages().equals(getTotalPages());
+                && otherBook.getGenre().equals(getGenre());
     }
 
     /**
@@ -257,7 +256,8 @@ public class Book {
                 .append(getTotalPages())
                 .append(" Bookmarked at: ")
                 .append(bookmarkPage)
-                .append(" Tags: ");
+                .append("\n")
+                .append("Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Goal: ")
                 .append(getGoal().toString())
