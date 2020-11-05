@@ -15,8 +15,8 @@ import seedu.bookmark.model.book.Goal;
 public class GoalCommandParserTest {
     private static final String VALID_PAGE = " p/10";
     private static final String VALID_DEADLINE = " d/20-12-2040";
-    private static final String INVALID_PAGE = " p/10bawj";
-    private static final String INVALID_DEADLINE = " d/20/12/20240";
+    private static final String INVALID_PAGE = " p/10b";
+    private static final String INVALID_DEADLINE_FORMAT = " d/20-12-20240";
     private static final String VALID_GOAL_COMMAND = " p/10 d/20-12-2040";
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -56,11 +56,11 @@ public class GoalCommandParserTest {
 
     @Test
     public void parse_invalidPageDeadline_failure() {
-        assertParseFailure(parser, "1" + VALID_PAGE + INVALID_DEADLINE,
+        assertParseFailure(parser, "1" + VALID_PAGE + INVALID_DEADLINE_FORMAT,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS)); // invalid deadline
         assertParseFailure(parser, "1" + INVALID_PAGE + VALID_DEADLINE,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS)); // invalid page
-        assertParseFailure(parser, "1" + INVALID_PAGE + INVALID_DEADLINE, // invalid page n deadline
+        assertParseFailure(parser, "1" + INVALID_PAGE + INVALID_DEADLINE_FORMAT, // invalid page n deadline
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Goal.MESSAGE_CONSTRAINTS));
     }
 
