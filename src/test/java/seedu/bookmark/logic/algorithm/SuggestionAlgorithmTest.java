@@ -76,7 +76,7 @@ public class SuggestionAlgorithmTest {
 
     @Test
     public void findSuggestion_distanceLimit() {
-        int distance_tolerance = SuggestionAlgorithm.DISTANCE_TOLERANCE;
+        int distanceTolerance = SuggestionAlgorithm.DISTANCE_TOLERANCE;
         String validWord = "Harry";
         Book testBook = new BookBuilder().withName(validWord).withGenre("Fiction").withTotalPages("100").build();
         wordBank.addToWordBank(testBook);
@@ -90,7 +90,7 @@ public class SuggestionAlgorithmTest {
         assertTrue(suggestions.contains(validWordObject));
 
         //word found when at distance limit
-        String wordAtDistanceLimit = "Ha" + "a".repeat(distance_tolerance) + "rry";
+        String wordAtDistanceLimit = "Ha" + "a".repeat(distanceTolerance) + "rry";
         int wordDistanceAtLimit = suggestionAlgorithm.calculateDistance(wordAtDistanceLimit, validWord);
         Word wordObjectAtLimit = new Word(wordAtDistanceLimit, wordDistanceAtLimit);
         validWordObject = new Word(validWord, wordDistanceAtLimit);
@@ -99,7 +99,7 @@ public class SuggestionAlgorithmTest {
 
 
         //word not found when out of distance limit
-        String wordOutOfDistanceLimit = "Ha" + "a".repeat(distance_tolerance + 1) + "rry";
+        String wordOutOfDistanceLimit = "Ha" + "a".repeat(distanceTolerance + 1) + "rry";
         int wordDistanceOutOfLimit = suggestionAlgorithm.calculateDistance(wordOutOfDistanceLimit, validWord);
         Word wordObjectOutOfLimit = new Word(wordOutOfDistanceLimit, wordDistanceOutOfLimit);
         validWordObject = new Word(validWord, wordDistanceOutOfLimit);

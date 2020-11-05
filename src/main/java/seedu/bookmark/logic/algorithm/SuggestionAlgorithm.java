@@ -16,8 +16,8 @@ import seedu.bookmark.model.wordstore.Word;
  */
 public class SuggestionAlgorithm {
 
-    private final WordBank wordBank;
     public static final int DISTANCE_TOLERANCE = 3;
+    private final WordBank wordBank;
 
     /**
      * Creates a SuggestionAlgorithm object
@@ -58,7 +58,8 @@ public class SuggestionAlgorithm {
      * @throws IllegalArgumentException if either source or target is null
      */
     //@@author crwohlfeil-reused
-    //Reused from https://github.com/crwohlfeil/damerau-levenshtein/blob/master/src/main/java/com/codeweasel/DamerauLevenshtein.java with minor modifications
+    //Reused from https://github.com/crwohlfeil/damerau-levenshtein/blob/master/src/main/java/com/codeweasel/
+    // DamerauLevenshtein.java with minor modifications
     public int calculateDistance(String source, String target) {
         requireNonNull(source);
         requireNonNull(target);
