@@ -11,10 +11,14 @@ import static seedu.bookmark.testutil.TypicalBooks.getTypicalLibrary;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.bookmark.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Library;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
@@ -46,7 +50,7 @@ public class AddNoteCommandTest {
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.MOST_RECENTLY_USED);
         assertCommandSuccess(addNoteCommand, model, expectedResult, expectedModel);
     }
 
@@ -59,6 +63,24 @@ public class AddNoteCommandTest {
         AddNoteCommand addNoteCommand = new AddNoteCommand(INDEX_FIRST_BOOK, new Note("Chapter 1", "Chapter 1"));
 
         assertCommandFailure(addNoteCommand, modifiedModel, AddNoteCommand.MESSAGE_DUPLICATE_NOTE);
+    }
+
+    @Test
+    public void execute_tooManyNotesUnfilteredList_failure() {
+        Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+        BookBuilder builder = new BookBuilder(firstBook);
+        List<String> notes = new ArrayList<>();
+        for (int i = 0; i <= Book.MAX_NOTE_COUNT; i++) {
+            notes.add(String.valueOf(i));
+        }
+        // booktoAddNotes has the valid max number of notes
+        Book bookToAddNotes = builder.withNotes(notes.toArray(new String[]{})).build();
+        Model modifiedModel = new ModelManager(new Library(model.getLibrary()), new UserPrefs());
+        modifiedModel.setBook(firstBook, bookToAddNotes);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(INDEX_FIRST_BOOK, new Note("TEST", "TEST"));
+
+        assertCommandFailure(addNoteCommand, modifiedModel, String.format(Messages.MESSAGE_TOO_MANY_NOTES,
+                Book.MAX_NOTE_COUNT));
     }
 
     @Test

@@ -6,6 +6,7 @@ import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 
@@ -23,8 +24,9 @@ public class UndoCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
         model.addBook(HARRY_POTTER);
+        model.save();
         CommandResult expectedResult = new CommandResult(UndoCommand.MESSAGE_SUCCESS, false , false,
-                CommandResult.ViewType.MOST_RECENTLY_USED);
+                ViewType.DEFAULT);
         assertCommandSuccess(new UndoCommand(), model, expectedResult, expectedModel);
     }
 }

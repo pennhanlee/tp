@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bookmark.commons.core.Messages;
 import seedu.bookmark.commons.core.index.Index;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.model.Model;
 import seedu.bookmark.model.ModelManager;
 import seedu.bookmark.model.UserPrefs;
@@ -22,8 +23,9 @@ import seedu.bookmark.testutil.BookBuilder;
 public class GoalCommandTest {
     private Model model = new ModelManager(getTypicalLibrary(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
-    private Goal validGoal = new Goal("10", "15-10-2024");
+    private Goal validGoal = new Goal("501", "15-10-2024");
     private Goal overdueGoal = new Goal("10 15-10-1999");
+    private Goal lowPageGoal = new Goal("51", "15-10-2024");
 
     @Test
     public void execute_validIndex_success() {
@@ -35,7 +37,9 @@ public class GoalCommandTest {
                 bookToSetGoal.getName(), validGoal.toString());
         expectedModel.setBook(bookToSetGoal, bookWithGoal);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, false,
+                ViewType.MOST_RECENTLY_USED);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
     }
 
     @Test
@@ -60,6 +64,15 @@ public class GoalCommandTest {
         GoalCommand goalCommand = new GoalCommand(outOfBoundIndex, validGoal);
 
         assertCommandFailure(goalCommand, model, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidLowPage_throwsCommandException() {
+        GoalCommand goalCommand = new GoalCommand(INDEX_FIRST_BOOK, lowPageGoal);
+        Book bookToSetGoal = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+
+        assertCommandFailure(goalCommand, model, String.format(GoalCommand.MESSAGE_ALREADY_COMPLETED,
+                bookToSetGoal.getPagesRead()));
     }
 
     @Test

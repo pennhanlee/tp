@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.TextAlignment;
 import seedu.bookmark.model.book.Note;
 
 public class NoteCard extends UiPart<Region> {
@@ -37,5 +38,9 @@ public class NoteCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         title.setText(note.title);
         body.setText(note.text);
+        title.setWrapText(true);
+        title.setTextAlignment(TextAlignment.JUSTIFY);
+        body.setWrapText(true);
+        body.setTextAlignment(TextAlignment.JUSTIFY);
     }
 }

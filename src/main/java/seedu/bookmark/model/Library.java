@@ -75,6 +75,13 @@ public class Library implements ReadOnlyLibrary {
     }
 
     /**
+     * Returns the number of books stored in this {@code Library}.
+     */
+    public int getSize() {
+        return books.getSize();
+    }
+
+    /**
      * Adds a book to the library.
      * The book must not already exist in the library.
      */

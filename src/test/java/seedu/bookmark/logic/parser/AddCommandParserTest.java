@@ -1,6 +1,7 @@
 package seedu.bookmark.logic.parser;
 
 import static seedu.bookmark.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bookmark.commons.core.Messages.MESSAGE_TOO_MANY_TAGS;
 import static seedu.bookmark.logic.commands.CommandTestUtil.BOOKMARK_DESC_JANE_EYRE;
 import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_1984;
 import static seedu.bookmark.logic.commands.CommandTestUtil.GENRE_DESC_JANE_EYRE;
@@ -22,6 +23,7 @@ import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_NAME_JANE_EYRE
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_BAD;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TAG_GOOD;
 import static seedu.bookmark.logic.commands.CommandTestUtil.VALID_TOTAL_PAGES_JANE_EYRE;
+import static seedu.bookmark.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bookmark.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.bookmark.testutil.TypicalBooks.COMPULSORY_NINETEEN_EIGHTY_FOUR;
@@ -107,6 +109,17 @@ public class AddCommandParserTest {
         // invalid tag
         assertParseFailure(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
                 + INVALID_TAG_DESC + VALID_TAG_BAD + TOTAL_PAGES_DESC_JANE_EYRE, Tag.MESSAGE_CONSTRAINTS);
+
+        // too many tags
+        int tagLimit = Book.MAX_TAG_COUNT;
+        StringBuilder userInput = new StringBuilder(NAME_DESC_JANE_EYRE
+                + GENRE_DESC_JANE_EYRE + TOTAL_PAGES_DESC_JANE_EYRE);
+
+        for (int i = 0; i <= tagLimit + 1; i++) {
+            userInput.append(String.format(" %s %d ", PREFIX_TAG, i));
+        }
+
+        assertParseFailure(parser, userInput.toString(), String.format(MESSAGE_TOO_MANY_TAGS, tagLimit));
 
         // invalid total pages
         assertParseFailure(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
