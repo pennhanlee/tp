@@ -25,6 +25,7 @@ public class GoalCommandTest {
     private Model expectedModel = new ModelManager(getTypicalLibrary(), new UserPrefs());
     private Goal validGoal = new Goal("501", "15-10-2024");
     private Goal overdueGoal = new Goal("10 15-10-1999");
+    private Goal lowPageGoal = new Goal("51", "15-10-2024");
 
     @Test
     public void execute_validIndex_success() {
@@ -63,6 +64,15 @@ public class GoalCommandTest {
         GoalCommand goalCommand = new GoalCommand(outOfBoundIndex, validGoal);
 
         assertCommandFailure(goalCommand, model, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidLowPage_throwsCommandException() {
+        GoalCommand goalCommand = new GoalCommand(INDEX_FIRST_BOOK, lowPageGoal);
+        Book bookToSetGoal = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+
+        assertCommandFailure(goalCommand, model, String.format(GoalCommand.MESSAGE_ALREADY_COMPLETED,
+                bookToSetGoal.getPagesRead()));
     }
 
     @Test

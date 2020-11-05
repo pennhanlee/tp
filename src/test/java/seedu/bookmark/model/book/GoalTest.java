@@ -11,9 +11,6 @@ public class GoalTest {
     public static final String BEFORE_NOW = "10-10-1999";
     public static final String VALID_PAGE = "8";
     public static final String AFTER_NOW = "10-10-2021";
-    public static final String VALID_GOAL = "10 10-10-2024";
-    public static final String NULL_PAGE_GOAL = "10-10-2024";
-    public static final String NULL_DEADLINE_GOAL = "10";
 
     @Test
     public void test_isSameGoal() {
@@ -41,19 +38,34 @@ public class GoalTest {
     }
 
     @Test
-    public void test_validGoal() {
+    public void test_validGoalDate() {
         String validDate = "20-10-2024";
-        String invalidDate = "19183109823/11/2024";
+        String invalidDate = "38-10-2024";
+        String invalidMonth = "20-13-2024";
+        String invalidYear = "20-11-1"; // Year invalid format
+        String invalidSeparator = "20/10/2024";
+        String dateNull = "";
         String validPage = "10";
-        String invalidPage = "10b";
-        String invalidYear = "20/11/1";
-        String validDateInvalidNumber = "48-11-2024";
 
         assertTrue(validDate.matches(Goal.DEADLINE_REGEX));
         assertTrue(Goal.isValidGoal(validPage, validDate));
-        assertFalse(Goal.isValidGoal(invalidPage, validDate));
         assertFalse(Goal.isValidGoal(validPage, invalidDate));
         assertFalse(Goal.isValidGoal(validPage, invalidYear));
-        assertFalse(Goal.isValidGoal(validPage, validDateInvalidNumber));
+        assertFalse(Goal.isValidGoal(validPage, invalidMonth));
+        assertFalse(Goal.isValidGoal(validPage, invalidSeparator));
+        assertFalse(Goal.isValidGoal(validPage, dateNull));
+    }
+
+    @Test
+    public void test_validGoalPage() {
+        String validDate = "20-10-2024";
+        String validPage = "10";
+        String invalidPageLetter = "10b";
+        String pageNull = "";
+
+        assertTrue(validDate.matches(Goal.DEADLINE_REGEX));
+        assertTrue(Goal.isValidGoal(validPage, validDate));
+        assertFalse(Goal.isValidGoal(invalidPageLetter, validDate));
+        assertFalse(Goal.isValidGoal(pageNull, validDate));
     }
 }
