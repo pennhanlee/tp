@@ -13,7 +13,7 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric. \n"
             + String.format("Maximum of %d characters allowed.", MAX_TAG_LENGTH);
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]"
-            + "{1," + MAX_TAG_LENGTH + "}$";
+            + "{0," + (MAX_TAG_LENGTH - 1) + "}$";
 
     public final String tagName;
 
