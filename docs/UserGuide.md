@@ -181,7 +181,6 @@ track your book reading progress together with us!
   `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]`
 </div>
 
-
 <div markdown="block" class="alert alert-warning">
 :star: **Important Detail:** 
 
@@ -193,8 +192,10 @@ track your book reading progress together with us!
 
 Example Command | Result
 -----------------|--------
-`add n/Fifty Shades of Gray g/Romance tp/350 b/200` | Adds a book named `Fifty Shades of Gray`, with genre `Romance`, with `350` total pages, bookmarked at page `200`
-`add n/Harry Potter and the Chamber of Secrets g/Fiction t/Wizards tp/1500 b/25` | Adds a book named `Harry Potter and the Chamber of Secrets`, with genre `Fiction`, with a tag `Wizards`, with `1500` total pages, bookmarked at page `25`
+`add n/Pacman g/Game strategy tp/5000` | Adds a book named `Pacman`, with genre `Game strategy`, with `5000` total pages
+
+   ![addcommand](images/addcommandeg.png)
+   _when adding book named Pacman_
 
 ### Viewing details of a book : `view`
 
@@ -225,6 +226,7 @@ Example Command | Result
 `view 2` | views the 2nd book in the list. 
 
    ![detailed_view](images/detailed_view.PNG)
+   _when viewing book at index 2 when in list_
 
 ### Listing all books : `list`
 
@@ -248,6 +250,7 @@ Example Command | Result
 
 
    ![list_view](images/mainwindow.png) 
+   _when using `list`to show all books_
 
 ### Locating books: `find`
 
@@ -275,9 +278,12 @@ by filtering your list of books to only those that you want.
 
 Example Command | Result
 -----------------|--------
-`find n/ ant bear` | Returns a list of books that contain `ant` and/or `bear` in its name.
-`find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
+`find n/bear` | Returns a list of books that contain `ant` and/or `bear` in its name.
+`find t/dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
 `find c/` | Returns a list of completed books.
+
+   ![findcommand](images/findcommandeg.png)
+   _when finding bear in name_
 
 #### Suggestions feature for Typing Error when finding a book
 
@@ -304,6 +310,9 @@ Example Command | Result
 -------------| ---------------
 find n/Hsrry | Did you mean: Harry?
 find n/Drgns | Did you mean: Dragons?
+
+   ![suggestion](images/suggestioneg.png)
+   _when artemis is typed wrongly_
 
 ### Sorting books: `sort` 
 
@@ -334,6 +343,9 @@ Example Command | Result
 `sort b/` | Returns a list of books sorted by ascending number of pages read.
 `sort rp/` | Returns a list of books sorted by ascending reading progress.
 
+   ![sortcommand](images/sortcommandeg.png)
+   _when sorted by genre_
+
 ### Deleting a book : `delete`
 
 Having feels for some spring cleaning? Delete unwanted books from _bookmark_ by
@@ -360,6 +372,10 @@ Example Command | Result
 -----------------|--------
 `delete 2` | deletes the 2nd book in the book list.
 
+| ![delete1](images/deleteeg1.png) | ![delete2](images/deleteeg2.png) |
+| ------------ | --------------|
+_when 2nd book in the list is deleted_
+
 ### Editing a book : `edit`
 
 Made a mistake? You can update information of a book simply by using our Edit Command! Use the command 
@@ -385,8 +401,12 @@ to edit the book name, genre, tags, total_pages or current bookmarked page.
 
 Example Command | Result
 -----------------|--------
-`edit 1 b/101` | Edits the bookmark of the 1st book to be `101`.
 `edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
+`edit 2 b/250` | Edits the bookmark of the 2nd book to be `250`.
+
+| ![edit1](images/editeg1.png) | ![delete2](images/editeg2.png) |
+| ------------ | --------------|
+_when 2nd book in the list is edited to change bookmark_
 
 ### Set goal for your book: `goal`
 
@@ -407,6 +427,7 @@ to finish a certain page by a deadline for a book in _bookmark_.
 :star: **Important Detail:** 
 
    * Page number and deadline must be provided.
+   * You can only set dates that have not passed
    * Your goal is displayed in yellow, green or red for in progress, completed or overdue.
    * To remove a goal from specified book, refer to [remove a goal command](#remove-your-goal) below.
     
@@ -422,7 +443,10 @@ to finish a certain page by a deadline for a book in _bookmark_.
 
 Example Command | Result
 -----------------|--------
-`goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the 1st book by 22nd May 2020.
+`goal 3 p/69 d/22-11-2020` | Sets a goal to reach page 69 of the 3rd book by 22nd November 2020.
+
+   ![goalcommand](images/goaleg2.png)
+   _when adding a goal to the 3rd book_
 
 ### Remove your Goal: `goaldel`
 
@@ -446,6 +470,10 @@ If you prefer to have no goals attached to your book or if you have completed a 
 Example Command | Result
 -----------------|--------
 `goaldel 1` | Goal successfully removed for Harry Potter.
+
+| ![goaldelcommand1](images/goaldeleg1.png) | ![goaldelcommand2](images/goaldeleg2.png) |
+| ------ | ---------- |
+_when goal is deleted from the 1st book_
 
 ### Adding a note to a book : `note`
 
@@ -476,6 +504,10 @@ Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
 
+| ![notecommand](images/noteeg1.png) | ![notecommand](images/noteeg2.png) |
+| ---- | ---- |
+_when note is added to the 1st book_
+
 ### Deleting a note from a book : `notedel`
 
 Too many notes? Clear away unwanted notes using our Delete Note command so that you
@@ -502,6 +534,10 @@ Example Command | Result
 -----------------|--------
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
 `notedel 4 2` | Deletes the 4th note of the 2nd book displayed
+
+| ![notedelcommand](images/notedeleg1.png) | ![notedelcommand](images/notedeleg2.png) |
+| ---- | ---- |
+_when the 3rd note of the 1st book is deleted_
 
 ### Undoing a command : `undo`
 
@@ -533,6 +569,10 @@ Example Command | Result
    entered during your last usage session cannot be undone using the `undo` command once you start the application.
 </div> 
 
+| ![undocommand](images/undocommand1.png) | ![undocommand](images/undocommand2.png) |
+| ---- | ---- |
+_when the delete command on the 2nd book is undone_
+
 ### Redoing a command: `redo`
 
 If you have accidentally undone an action, use the redo command to redo the last action that you have undone!
@@ -556,6 +596,10 @@ If you have accidentally undone an action, use the redo command to redo the last
 Example Command | Result
 --------------- | ----------
 `redo` | Previously undone command is invoked again
+_when redo is called on a deleted book (previously undone)_
+
+| ![undocommand](images/undocommand2.png) | ![redocommand](images/redocommand.png) |
+| ---- | ---- |
 
 <div markdown="block" class="alert alert-danger">
 :warning: **Warning:** 
@@ -584,32 +628,16 @@ Example Command | Result
 --------------- | ----------
 `clear` | Clears the entire _bookmark_ storage
 
+| ![clearcommand](images/clear2.png) | ![clearcommand](images/clear2.png) |
+| ---- | ---- |
+_when `clear` is called_
+
 <div markdown="block" class="alert alert-danger">
 :warning: **Warning: ** 
 
    Take caution! While the undo feature will help you restore books deleted by `Clear`, you will not be able
    to recover your deleted books if you call too many commands (10 and more) after clearing!
 </div>
-
-### Exiting the program : `exit`
-
-Ready to continue your reading? Close the program by using our Exit Command to safely exit the 
-program.
- 
-<div markdown="block" class="alert alert-success">
-:heavy_check_mark: **Format:** 
-
-   `exit`
-</div>
-
-<div markdown="block" class="alert alert-warning">
-:star: **Important Detail:** 
-
-</div>
-
-Example Command | Result
----------------- | ---------
-`exit` | Exits _bookmark_
 
 ### Saving the data
 
@@ -637,6 +665,29 @@ the top of the application window.
 Example Command | Result
 -----------------|--------
 `help` | Help Window opens
+
+ ![helpcommand](images/helpeg.png)
+ _when `help` is invoked_
+
+### Exiting the program : `exit`
+
+Ready to continue your reading? Close the program by using our Exit Command to safely exit the 
+program.
+ 
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   `exit`
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detail:** 
+
+</div>
+
+Example Command | Result
+---------------- | ---------
+`exit` | Exits _bookmark_
 
 --------------------------------------------------------------------------------------------------------------------
 
