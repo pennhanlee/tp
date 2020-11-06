@@ -54,6 +54,12 @@ activate Model
 Model --> AddCommand
 deactivate Model
 
+AddCommand -> Model : sortByDefaultComparator()
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
 create CommandResult
 AddCommand -> CommandResult
 activate CommandResult
