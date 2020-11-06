@@ -74,7 +74,7 @@ get cracking and start saving your best reads and ideas into _bookmark_, Type aw
 Here's a brief tour of the _bookmark_ application! <br>
 When you open _bookmark_, you will be greeted by our user-friendly interface. (Exhibit 1)
     
-   ![Ui](images/Ui.png)
+   ![Ui](images/mainwindow.png)
    *Exhibit 1*
    
 You can find a list of all your recorded books in the main window. (Exhibit 2) <br>
@@ -121,29 +121,6 @@ Prefix | Explanation
 
 ## Features
 
-Before we begin, you should be familiar with these annotations that this User Guide will use
-to bring emphasis to important points! 
-
-<div markdown="block" class="alert alert-primary">
-:information_source: **Information:**
-Information to know
-</div>
-
-<div markdown="block" class="alert alert-success">
-:heavy_check_mark: **Example:**
-Example to follow
-</div>
-
-<div markdown="block" class="alert alert-warning">
-:star: **Important Details:**
-Important point
-</div>
-
-<div markdown="block" class="alert alert-danger">
-:warning: **Warning:**
-Caution is advised for this area
-</div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -167,7 +144,6 @@ Caution is advised for this area
 
 </div>
 
-
 ### Adding a book into _bookmark_: `add`
 
 Add your book into _bookmark_ by using our Add Command so that you can
@@ -184,7 +160,7 @@ track your book reading progress.
 
    * `NAME` is limited to 1 to 120 characters.
    * `GENRE` and `TAG` only accepts Alphabets and Numbers (Special symbols like ! ? * are not supported)
-   * You can add multiple tags
+   * You can add up to 10 tags
    * Adding tags and/or bookmarks is optional
 </div>
 
@@ -221,7 +197,7 @@ Example Command | Result
 -----------------|--------
 `view 2` | views the 2nd book in the list. 
 
-   ![detailed_view](images/detailed_view.PNG)
+   ![detailed_view](images/viewcommandeg.PNG)
 
 ### Listing all books : `list`
 
@@ -238,7 +214,7 @@ Example Command | Result
 `list` | displays all books stored in _bookmark_
 
 
-   ![list_view](images/mainwindow.png) 
+   ![list_view](images/editeg1.png) 
 
 ### Locating books: `find`
 
@@ -301,7 +277,7 @@ find n/Hsrry | Did you mean: Harry?
 find n/Drgns | Did you mean: Dragons?
 
    ![suggestion](images/suggestioneg.png)
-   _when artemis is typed wrongly_
+   _Result when Keyword: Artermis is typed wrongly_
 
 ### Sorting books: `sort` 
 
@@ -360,11 +336,12 @@ you remove books that you no longer want to track.
 
 Example Command | Result
 -----------------|--------
-`delete 2` | deletes the 2nd book in the book list.
+`delete 2` | deletes the 2nd book in the book list. 
 
-| ![delete1](images/deleteeg1.png) | ![delete2](images/deleteeg2.png) |
-| ------------ | --------------|
-|   |  |
+| Before `delete` | After `delete` |
+| --------------- | ------------ |
+| <img src="images/deleteeg2.png" alt="delete" width="750px"> | <img src="images/deleteeg2.png" alt="delete" width="750px"> | 
+
 
 ### Editing a book : `edit`
 
@@ -390,11 +367,11 @@ you can keep your books up to date.
 Example Command | Result
 -----------------|--------
 `edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
-`edit 2 b/250` | Edits the bookmark of the 2nd book to be `250`.
+`edit 2 b/250` | Edits the bookmark of the 2nd book to be `250`. 
 
-| ![edit1](images/editeg1.png) | ![delete2](images/editeg2.png) |
-| ------------ | --------------|
-_when 2nd book in the list is edited to change bookmark_
+| Before 2nd book is edited | After 2nd book is edited | 
+| ------------------------- | ------------------------ |
+| <img src="images/editeg1.png" alt="edit" width="750px"> | <img src="images/editeg2.png" alt="edit" width="750px"> | 
 
 ### Set goal for your book: `goal`
 
@@ -457,9 +434,10 @@ Example Command | Result
 `goaldel 1` | Goal successfully removed for Harry Potter. 
 
 
+| Before goal is deleted | After goal is deleted | 
+| ------------------------- | ------------------------ |
+| <img src="images/goaldeleg1.png" alt="goaldel" width="750px"> | <img src="images/goaldeleg2.png" alt="goaldel" width="750px"> | 
 
- ![goaldelcommand1](images/goaldeleg1.png) | ![goaldelcommand2](images/goaldeleg2.png) 
- ------ | ---------- 
 
 ### Adding a note to a book : `note`
 
@@ -487,10 +465,13 @@ You can use the Note Command to add notes to your book so that you can pen down 
 
 Example Command | Result
 -----------------|--------
-`note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
+`note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!` 
 
-| ![notecommand](images/noteeg1.png) | ![notecommand](images/noteeg2.png) |
-| ---- | ---- |
+
+| Before note is added | After note is added | 
+| ------------------------- | ------------------------ |
+| <img src="images/noteeg1.png" alt="note" width="750px"> | <img src="images/noteeg2.png" alt="note" width="750px"> | 
+
 
 ### Deleting a note from a book : `notedel`
 
@@ -519,9 +500,9 @@ Example Command | Result
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
 `notedel 4 2` | Deletes the 4th note of the 2nd book displayed 
 
-
- ![notedelcommand](images/notedeleg1.png) | ![notedelcommand](images/notedeleg2.png) 
- -------- | -------- 
+| Before note is deleted | After note is deleted | 
+| ------------------------- | ------------------------ |
+| <img src="images/notedeleg1.png" alt="notedel" width="750px"> | <img src="images/notedeleg2.png" alt="notedel" width="750px"> | 
  
 
 ### Undoing a command : `undo`
@@ -555,10 +536,10 @@ Example Command | Result
    entered during your last usage session cannot be undone using the `undo` command when you start the application again.
 </div>  
 
+| Before undo command | After undo command | 
+| ------------------------- | ------------------------ |
+| <img src="images/undocommand1.png" alt="undo" width="750px"> | <img src="images/undocommand2.png" alt="undo" width="750px"> | 
 
- ![undocommand](images/undocommand1.png) | ![undocommand](images/undocommand2.png)
- ---- | ---- 
-_when the delete command on the 2nd book is undone_ 
 
 
 ### Redoing a command: `redo`
@@ -588,8 +569,9 @@ Example Command | Result
 
 _when redo is called on a deleted book (previously undone)_  
 
- ![undocommand](images/undocommand2.png) | ![redocommand](images/redocommand.png) 
- ---- | ---- 
+| Before redo command | After redo command | 
+| ------------------------- | ------------------------ |
+| <img src="images/undocommand2.png" alt="redo" width="750px"> | <img src="images/redocommand.png" alt="redo" width="750px"> | 
 
 <div markdown="block" class="alert alert-danger">
 :warning: **Warning:** 
