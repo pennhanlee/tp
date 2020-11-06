@@ -667,7 +667,7 @@ Example Command | Result
 `library.json` file located in the `data` file of your previous bookmark home folder.
 
 **Q**: How many books can I add to _bookmark_? <br>
-**A**: You can add a total of 100 books in _bookmark_.
+**A**: You can add a total of 100 books to _bookmark_.
 
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
