@@ -832,13 +832,53 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 **MSS**
 
-1. User requests to add a note to a specific book using its index in the list.
-2. User specifies the note title and body.
-3. The note is added to the book.
+1. User requests to add a note to a specific book using its displayed index.
+2. The note is added to the specified book.
 
     Use case ends.
+    
+**Extensions**
 
-**Use Case: UC10 - Sorting the book list**
+* 1a. The index given is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1b. The provided prefix is invalid.
+
+    * 1b1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1c. The provided value for note title and text is invalid.
+
+    * 1c1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+**Use Case: UC10 - Deleting a note**
+
+**MSS**
+
+1. User requests to delete a note from a specific book using its displayed index.
+2. The requested note is deleted from the specified book.
+
+**Extensions**
+
+* 1a. The index given is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+* 1b. The note index provided is invalid.
+
+    * 1b1. bookmark returns an error message.
+    
+    Use case resumes at step 1.
+
+**Use Case: UC11 - Sorting the book list**
 
 **MSS**
 
