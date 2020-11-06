@@ -41,9 +41,9 @@ public class BookTest {
         editedHarryPotter = new BookBuilder(HARRY_POTTER).withGenre(VALID_GENRE_1984).build();
         assertFalse(HARRY_POTTER.isSameBook(editedHarryPotter));
 
-        // different total pages -> returns false
+        // different total pages -> returns true
         editedHarryPotter = new BookBuilder(HARRY_POTTER).withTotalPages(VALID_TOTAL_PAGES_1984).build();
-        assertFalse(HARRY_POTTER.isSameBook(editedHarryPotter));
+        assertTrue(HARRY_POTTER.isSameBook(editedHarryPotter));
 
         // different bookmarks -> returns true
         editedHarryPotter = new BookBuilder(HARRY_POTTER).withBookmark(VALID_BOOKMARK_1984).build();

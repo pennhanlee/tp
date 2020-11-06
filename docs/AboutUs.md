@@ -31,7 +31,7 @@ We are a team based in the [National University of Singapore, School of Computin
 <img src="images/pennhanlee.png" width="200px">
 
 [[github](http://github.com/pennhanlee)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/pennhanlee.md)]
 
 * Role: Developer
 * Responsibilities: Data

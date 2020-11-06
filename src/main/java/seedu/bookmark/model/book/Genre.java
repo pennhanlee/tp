@@ -20,7 +20,7 @@ public class Genre {
      * otherwise " " (a blank string) becomes a valid input. Max of 60 characters.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]"
-            + "{1," + MAX_GENRE_LENGTH + "}$";
+            + "{0," + (MAX_GENRE_LENGTH - 1) + "}$";
 
     public final String value;
 
@@ -51,7 +51,7 @@ public class Genre {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Genre // instanceof handles nulls
-                && value.equals(((Genre) other).value)); // state check
+                && value.toLowerCase().equals(((Genre) other).value.toLowerCase())); // state check
     }
 
     @Override

@@ -19,12 +19,10 @@ public class TagTest {
     }
 
     @Test
-    public void consturctor_tooLogTagName_throwsIllegalArgumentException() {
-        StringBuilder tooLong = new StringBuilder();
-        // tooLong is one character too long
-        tooLong.append("a".repeat(Tag.MAX_TAG_LENGTH + 2));
+    public void constructor_tooLogTagName_throwsIllegalArgumentException() {
+        String tooLong = "a".repeat(Tag.MAX_TAG_LENGTH + 1);
 
-        assertThrows(IllegalArgumentException.class, () -> new Tag(tooLong.toString()));
+        assertThrows(IllegalArgumentException.class, () -> new Tag(tooLong));
     }
 
     @Test
@@ -32,12 +30,8 @@ public class TagTest {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
 
-        // too long tag name
-        StringBuilder tooLong = new StringBuilder();
-        // tooLong is one character too long
-        tooLong.append("a".repeat(Tag.MAX_TAG_LENGTH + 2));
-
-        assertFalse(Tag.isValidTagName(tooLong.toString()));
+        // 1 char too long tag name
+        assertFalse(Tag.isValidTagName("a".repeat(Tag.MAX_TAG_LENGTH + 1)));
     }
 
 }

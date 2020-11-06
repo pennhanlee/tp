@@ -31,8 +31,8 @@ public class UndoCommand extends Command {
             String finalBookList = model.getFilteredBookList().toString();
             logger.info("Undo success, books modified: " + finalBookList);
 
-            ViewType newViewType = VIEW_MANAGER.getViewType(model.getCurrentState());
-            VIEW_MANAGER.setCurrentView(newViewType);
+            ViewType newViewType = VIEW_TYPE_MANAGER.getViewType(model.getCurrentState());
+            VIEW_TYPE_MANAGER.setCurrentView(newViewType);
             return new CommandResult(MESSAGE_SUCCESS, false, false,
                     newViewType);
         } catch (UndoException e) {
