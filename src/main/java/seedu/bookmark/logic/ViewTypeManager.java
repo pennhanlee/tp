@@ -23,6 +23,10 @@ public class ViewTypeManager {
     };
     private ViewType currentView = ViewType.DEFAULT;
 
+    public ViewType getCurrentViewType() {
+        return currentView;
+    }
+
     /**
      * Returns the correct {@code ViewType} for the given {@code State}.
      */

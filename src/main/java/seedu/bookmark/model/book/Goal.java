@@ -3,7 +3,9 @@ package seedu.bookmark.model.book;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class Goal {
     public static final String MESSAGE_CONSTRAINTS =
@@ -120,12 +122,18 @@ public class Goal {
         return LocalDate.parse(deadlineLocalDateFormat);
     }
 
+    private static String getDateDescription(String deadline) {
+        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("dd MMM yyyy", new Locale("en"));
+        LocalDate date = parseDeadline(deadline);
+        return date.format(oldFormat);
+    }
+
     @Override
     public String toString() {
         if (this.equals(Goal.defaultGoal())) {
             return "Currently no goal";
         }
-        return String.format("Finish page %s before %s", page, deadline);
+        return String.format("Finish page %s before %s", page, getDateDescription(deadline));
     }
 
     @Override
