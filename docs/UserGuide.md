@@ -215,7 +215,7 @@ View Command. <br>
    * If you would like to go back to see all your books, you can use the [list](#listing-all-books--list) command.
 </div>
 
-*Suppose you have two books currently displayed*
+*Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
@@ -358,6 +358,8 @@ you remove books that you no longer want to track.
      call more than 10 commands after deletion.
 </div>
 
+*Suppose you have at least two books currently displayed*
+
 Example Command | Result
 -----------------|--------
 `delete 2` | deletes the 2nd book in the book list.
@@ -386,6 +388,8 @@ you can keep your books up to date.
    * At least one of the fields must be provided.
    * Existing values will be updated to the input values.
 </div>
+
+*Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
@@ -451,6 +455,8 @@ a book so that you can remove unwanted goals.
    * The index refers to the index number shown in the displayed book list.
    * The index **must be a positive number** 1, 2, 3, …​
 </div>
+
+*Suppose you have at least one book currently displayed*
 
 Example Command | Result
 -----------------|--------
