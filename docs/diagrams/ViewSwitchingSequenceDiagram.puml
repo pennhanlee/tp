@@ -45,16 +45,16 @@ activate DetailedBookListPanel
 create DetailedBookCard
 DetailedBookListPanel -> DetailedBookCard
 activate DetailedBookCard
-DetailedBookCard -> DetailedBookListPanel
-deactivate DetailedBookCard
-
 loop for all notes in the book to display
     create NoteCard
-    DetailedBookListPanel -> NoteCard
+    DetailedBookCard -> NoteCard
     activate NoteCard
-    NoteCard -> DetailedBookListPanel
+    NoteCard -> DetailedBookCard
     deactivate NoteCard
 end
+
+DetailedBookCard -> DetailedBookListPanel
+deactivate DetailedBookCard
 
 DetailedBookListPanel -> MainWindow
 deactivate DetailedBookListPanel

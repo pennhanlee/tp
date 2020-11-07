@@ -156,7 +156,8 @@ regarding the books stored, and the **detailed view** which displays detailed in
 the display of book information.
 When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
 while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
-`DetailedBookCard`. 
+`DetailedBookCard`. `DetailedBookCard` will in turn use other components to display the book information,
+such as `NoteCard` to display the notes added to a book.
 
 Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the `BookCard` or `DetailedBookCard`
 respectively.
@@ -165,7 +166,7 @@ The class diagram below shows the relevant classes involved:
 
 ![Ui view class diagram](images/UiViewClassDiagram.png)
 
-##### Switching between the two views
+#### Switching between the two views
 
 `MainWindow` and `CommandResult` facilitates the switching between the two views.
 
@@ -347,6 +348,8 @@ Command : `sort n/`
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
+#### Design considerations
+
 ##### Aspect: Sorting visible observable list or internal observable list
 
 * **Alternative 1 (current choice):** Sorting internal observable list
@@ -501,6 +504,7 @@ Command: `note 1 n/Thoughts txt/Something`
 
 
 ### Undo/redo feature
+
 #### Implementation
 
 The undo/redo mechanism is implemented by storing the state of the application after each command. The state of the 
@@ -534,7 +538,7 @@ the method `Model#save()` will be called which adds a new `State`, representing 
 and causes `HistoryManager` to store the previous `State`. Additionally, `ViewTypeManager#addViewTypePairing()` will be 
 called to create a new pairing between the newly created `State` and the appropriate `ViewType` to use to display the contents of the 
 Model to the user. The stored `States` and its corresponding `ViewType` pairing will be used to change the application
-state accordingly when a undo or redo operation, exposed as `Model#undo` and `Model#redo` respectively, is executed.
+state accordingly when a undo or redo operation, exposed as `Model#undo()` and `Model#redo()` respectively, is executed.
 
 The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
@@ -629,7 +633,7 @@ The activity diagram below explains the flow of execution when a new state is ad
 
 ![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
-#### Design consideration:
+#### Design considerations
 
 ##### Aspect: How undo & redo executes
 
@@ -744,7 +748,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 **Extensions**
 
-* 1a. User provides the wrong code.
+* 1a. User provides the wrong command.
 
     * 1a1. bookmark returns an error message.
 
@@ -767,7 +771,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 **MSS**
 
 1. User <u>requests to list all books (UC05)</u>.
-2. User requests to view a specific book using its index in the list.
+2. User requests to view a specific book using its displayed index.
 3. bookmark returns all the book's information to user.
 
     Use case ends.
@@ -776,7 +780,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 * 2a. The index given is invalid.
 
-    * 3a1. bookmark returns an error message.
+    * 2a1. bookmark returns an error message.
 
       Use case resumes at step 2.
 
@@ -785,7 +789,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 **MSS**
 
 1.  User <u>requests to list all books (UC05)</u>.
-2.  User requests to delete a specific book using its index in the list.
+2.  User requests to delete a specific book using its displayed index.
 3.  bookmark deletes the book.
 
     Use case ends.
@@ -803,7 +807,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 **MSS**
 
 1. User <u>requests to list all books (UC05)</u>.
-2. User requests to edit a specific book using its index on list.
+2. User requests to edit a specific book using its displayed index.
 3. The requested entry is updated.
 
     Use case ends.
@@ -873,7 +877,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 **MSS**
 
-1. User requests to add a goal to a specific book using its index in the list.
+1. User requests to add a goal to a specific book using its displayed index.
 2. User specifies the goal target and deadline.
 3. The goal is added to the book.
 
@@ -890,13 +894,53 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 **MSS**
 
-1. User requests to add a note to a specific book using its index in the list.
-2. User specifies the note title and body.
-3. The note is added to the book.
+1. User requests to add a note to a specific book using its displayed index.
+2. The note is added to the specified book.
 
     Use case ends.
+    
+**Extensions**
 
-**Use Case: UC10 - Sorting the book list**
+* 1a. The index given is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1b. The provided prefix is invalid.
+
+    * 1b1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1c. The provided value for note title and text is invalid.
+
+    * 1c1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+**Use Case: UC10 - Deleting a note**
+
+**MSS**
+
+1. User requests to delete a note from a specific book using its displayed index.
+2. The requested note is deleted from the specified book.
+
+**Extensions**
+
+* 1a. The index given is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+* 1b. The note index provided is invalid.
+
+    * 1b1. bookmark returns an error message.
+    
+    Use case resumes at step 1.
+
+**Use Case: UC11 - Sorting the book list**
 
 **MSS**
 
@@ -911,7 +955,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 2.  Should be able to hold up to 100 books without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be backwards compatible with data from previous versions.
-5.  Should be not crash when data is given in compatible formats.
+5.  Should not crash when data is given in compatible formats.
 6.  The app should be accessible via the downloaded JAR file without any other installations needed.
 
 *{More to be added}*
@@ -935,9 +979,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the bookmark.jar file and copy into an empty folder
+   a. Download the bookmark.jar file and copy into an empty folder
 
-   1. Double-click the bookmark.jar file Expected: Shows the GUI with a set of sample books. The window size may not be optimum.
+   b. Double-click the bookmark.jar file Expected: Shows the GUI with a set of sample books. The window size may not be optimum.
    
    <div markdown="span" class="alert alert-info">:information_source: **Note:** If double clicking does not work,
    navigate to the folder containing the jar file using your terminal or command prompt and enter `java -jar bookmark.jar`
@@ -946,43 +990,43 @@ testers are expected to do more *exploratory* testing.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a book
 
 1. Deleting a book while all books are being shown.
 
-   1. Prerequisites: List all books using the `list` command. Multiple books in the list.
+   a. Prerequisites: List all books using the `list` command. Multiple books in the list.
 
-   1. Test case: `delete 1`<br>
+   b. Test case: `delete 1`<br>
       Expected: First book is deleted from the list. Details of the deleted book shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   c. Test case: `delete 0`<br>
       Expected: No book is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Adding a book
 
 1. Adding a book while all books are being shown.
 
-   1. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
+   a. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
       Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
       50 will be created and added to the list
 
-   1. Test case: `add n/Test book g/T@st genre tp/1000 b/50`<br>
+   b. Test case: `add n/Test book g/T@st genre tp/1000 b/50`<br>
       Expected: No book is added. Error details shown in the status message.
    
-   1. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X <br>
+   c. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X <br>
       Expected: Similar to previous
 
 2. Adding a book while only some books are being shown.
 
-   1. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
+   a. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
       Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
       50 will be created and added to the list. All books will be shown.  
 
@@ -990,23 +1034,26 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a book while all books are being shown.
 
-   1. Prerequisites: List all books using the `list` command. Multiple books in the list.
+   a. Prerequisites: List all books using the `list` command. Multiple books in the list.
 
-   1. Test case: `edit 1 n/Edited Name`<br>
+   b. Test case: `edit 1 n/Edited Name`<br>
       Expected: First book in the list is edited to have a name of "Edited Name"
       Details of the edited book shown in the status message.
+  
+   c. Test case: `edit 1 t/Good t/Educational`<br>
+      Expected: First book in the list has all existing tags removed and the "Good" and "Educational" tags added.
 
-   1. Test case: `edit 0 n/Edited Name`<br>
+   d. Test case: `edit 0 n/Edited Name`<br>
       Expected: No book is edited. Error details shown in the status message.
-
-   1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      
+   e. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous. 
 
 1. Editing a book while only some books are being shown.
 
-   1. Prerequisites: Book list filtered by a command (e.g `find` command). At least one book shown in the list.
+   a. Prerequisites: Book list filtered by a command (e.g `find` command). At least one book shown in the list.
    
-   1. Test case: `edit 1 n/Edited Name`<br>
+   b. Test case: `edit 1 n/Edited Name`<br>
       Expected: First book in the list is edited to have a name of "Edited Name".
       Details of the edited book shown in the status message.
       The edited book remains in the list regardless of how it was edited.
@@ -1015,15 +1062,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting the book list while some books are being shown.
 
-   1. Prerequisites: Book list is showing at least 2 books to see the sorting effect.
+   a. Prerequisites: Book list is showing at least 2 books to see the sorting effect.
    
-   1. Test case: `sort n/`<br>
+   b. Test case: `sort n/`<br>
       Expected: The books shown in the list will be sorted by their names in lexicographical order.
       
 1. Adding a book into a sorted book list.
 
-   1. Prerequisites: Book list is initially showing at least 1 books to see the sorting effect.
-   1. Test case: `sort n/`<br> followed by `add` command to add another book.
+   a. Prerequisites: Book list is initially showing at least 1 books to see the sorting effect.
+   b. Test case: `sort n/`<br> followed by `add` command to add another book.
       Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
       The new book will be added to the book list in the correct position that maintains the sorted order.
 
@@ -1031,14 +1078,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Using undo when there are no commands to undo.
 
-   1. Prerequisites: Must not have made any commands since starting the application.
+   a. Prerequisites: Must not have made any commands since starting the application.
    
-   1. Test case: `undo`<br>
+   b. Test case: `undo`<br>
       Expected: Nothing is undone. Error details shown in status message.
 
 1. Using undo when there are commands to undo.
 
-   1. Test case: Any command except `help` and `exit` followed by `undo`
+   a. Test case: Any command except `help` and `exit` followed by `undo`
       Expected: The command entered is undone. The application reverts to exactly how it was before the command was
       made. Success message shown in status message.
       
@@ -1046,14 +1093,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Using redo when there are no undone commands to redo.
 
-   1. Prerequisites: Must not have used `undo` command since starting the application.
+   a. Prerequisites: Must not have used `undo` command since starting the application.
    
-   1. Test case: `redo`<br>
+   b. Test case: `redo`<br>
       Expected: Nothing is redone. Error details shown in status message.
 
 1. Using redo when there are undone commands to redo.
 
-   1. Test case: Any command except `help` and `exit`, followed by `undo` and then `redo`<br>
+   a. Test case: Any command except `help` and `exit`, followed by `undo` and then `redo`<br>
       Expected: The command entered is first undone, then on using `redo`, it will be redone. The application will be 
       exactly as it was after the first  command was entered. Success message shown in status message.
       
@@ -1061,18 +1108,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data files
 
-   1. Prerequisites: Must have started the application at least once.
+   a. Prerequisites: Must have started the application at least once.
    
-   1. Test case: In the folder containing `bookmark.jar`, delete the `data/library.json` file. Open the application. 
+   b. Test case: In the folder containing `bookmark.jar`, delete the `data/library.json` file. Open the application. 
       Make some commands and then close the application with the `exit` command. <br>
       Expected: The application starts up with some sample data. On exit, the `data/library.json` file is created again,
       containing the new data.
 
 1. Dealing with corrupted data files
 
-   1. Prerequisites: Must have started the application at least once. At least one book stored in the data file.
+   a. Prerequisites: Must have started the application at least once. At least one book stored in the data file.
    
-   1. Test case: In the folder containing `bookmark.jar`, open the `data/library.json` file and edit it by removing the
+   b. Test case: In the folder containing `bookmark.jar`, open the `data/library.json` file and edit it by removing the
       "name"" property from one of the JSON objects. This simulates a corrupted data file. Open the application. Make 
       some commands and then close the application with the `exit` command. <br>
       Expected: The application starts up with no books being displayed. On exit, the `data/library.json` file is recreated,
