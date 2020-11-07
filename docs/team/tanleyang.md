@@ -15,7 +15,7 @@ Given below are my contributions to the project.
 ### Summary of Contributions
 * **Code contributed:** [RepoSense](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=CS2103T-F13-2&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=TanLeYang&tabRepo=AY2021S1-CS2103T-F13-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other)
 
-* **Enhancement:** Added the ability to **undo previous commands** and **redo undone commands**.
+* **New Feature:** Added the ability to **undo previous commands** and **redo undone commands**.
   * What it does: Allows the user to undo previous commands or redo commands that have been undone.
   
   * Justification: This feature enhances the application by allowing the user to easily undo any mistakes made when
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
   * Code contributed for this enhancement: [#115](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/115), 
     [#140](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/140)
 
-* **Enhancement:** Added ability for Ui to switch between a summarised and detailed view of the books stored.
+* **New Feature:** Added ability for Ui to switch between a summarised and detailed view of the books stored.
 
   * What it does: Allows the user to select and view a specific book in detail. The application by default shows a 
     summarised view of books but users can use the view command to select a specific book and view its complete details. 
@@ -51,12 +51,11 @@ Given below are my contributions to the project.
   * Code contributed for this enhancement: [#92](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/92),
     [#121](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/121), [#165](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/165)
    
-* **Minor enhancement:** Designed the Ui of _bookmark_. Added a sidebar to the Ui to display meta-data to user.
-  
-  * Code contributed for this enhancement: [#92](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/92)
+* **Enhancements to existing features:** 
+  * Re-designed the Ui of _bookmark_. Added a sidebar to the Ui to display meta-data to user. [#92](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/92)
+  * Added more thorough input validation for the user entered fields. [#130](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/130)  
 
 * **Contributions to team member's enhancements:**
-  
   * Did the initial refactoring of the code inherited from the AB3 project. [#76](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/76)
 
 * **Documentation:**<br>
