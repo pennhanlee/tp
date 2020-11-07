@@ -108,7 +108,7 @@ respectively.
 
 The class diagram below shows the relevant classes involved:
 
-![Ui view class diagram](images/UiViewClassDiagram.png)
+![Ui view class diagram](../images/UiViewClassDiagram.png)
 
 #### Switching between the two views
 
@@ -127,12 +127,12 @@ Based on the type of `ViewType` returned by `CommandResult#getViewType()`, `Main
 
 The activity diagram below illustrates the flow of execution when the UI decides which view to use:
 
-![View switching flow of execution](images/ViewSwitchingActivityDiagram.png)
+![View switching flow of execution](../images/ViewSwitchingActivityDiagram.png)
 
 Below is a sequence diagram that shows a scenario whereby the UI switches from the default summarised view to the
 detailed view:
 
-![Switching to detailed view sequence diagram](images/ViewSwitchingSequenceDiagram.png)
+![Switching to detailed view sequence diagram](../images/ViewSwitchingSequenceDiagram.png)
 
 #### Design considerations
 
@@ -187,7 +187,7 @@ state accordingly when a undo or redo operation, exposed as `Model#undo()` and `
 The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
 
-![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
+![UndoRedoClassDiagram](../images/UndoRedoClassDiagram.png)
 
 The next section will go into more detail about how the state of the application is managed as well as how undo and redo
 executes.
@@ -205,7 +205,7 @@ Step 1. The user launches the application for the first time. The `HistoryManage
 initial state of the model as the current state, i.e State 1. Undo and redo deques will be empty. `ViewTypeManager`'s map
 will also only have 1 entry, mapping the initial `State` to `ViewType.DEFAULT`.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoState0](../images/UndoRedoState0.png)
 
 Step 2. The user executes add command to add a new book. The command will call the `Model#save()` method
 which will create a new `State`, State 2, representing the new state of the Model and add it into `HistoryManager` via the 
@@ -214,7 +214,7 @@ will be pushed into the undo deque. `ViewTypeManager`'s map will be updated acco
 `ViewTypeManager#addViewTypePairing()` method with State 2 and the correct `ViewType` to be used to display State 2 to 
 the user.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoState1](../images/UndoRedoState1.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#save()`, so the state will not be saved.
 
@@ -225,18 +225,18 @@ This causes the current state, State 2 to be pushed to the redo deque. State 1 w
 made the current state. `ViewTypeManager#getViewType()` will be called with State 1 in order to get the correct 
 `ViewType` to display State 1 with.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoState2](../images/UndoRedoState2.png)
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![UndoSequenceDiagram](../images/UndoSequenceDiagram.png)
 
 Step 4. The user changes his mind again, deciding that he wants to add the book. He redoes the action by using the redo
 command, causing the current state, State 1 to be pushed back into the undo deque and State 2 to be popped from the redo
 deque and made the current state. Again, `ViewTypeManager#getViewType()` will be called to get the correct `ViewType`
 to display State 2 with.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoState3](../images/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the undo deque or redo deque is empty
 when the user tries to undo and redo respectively, an error will be shown and no state change will occur.
@@ -246,19 +246,19 @@ when the user tries to undo and redo respectively, an error will be shown and no
 Step 5. Now suppose the user adds a book and then edits a book, causing State 3 and State 4 to be created. He then
 undoes the edit command. `HistoryManager` will now look like this:
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoState5](../images/UndoRedoState5.png)
 
 Step 6: The user decides to then delete a book, causing State 5 to be created and made the current state.
 The previous current state, State 3, will be pushed into the undo deque while the redo deque is cleared and 
 hence State 4 is deleted.
 
-![UndoRedoState6](images/UndoRedoState6.png)
+![UndoRedoState6](../images/UndoRedoState6.png)
 
 This design choice of clearing the redo deque when a new state is added was made because states existing in the redo deque
 cannot be represented in a linear, sequential path together with newly added states. Hence, it will be confusing
 to allow users to redo to these states. To see this, we can plot the evolution of state changes in a sequential manner: 
 
-![UndoRedoState7](images/UndoRedoState7.png)
+![UndoRedoState7](../images/UndoRedoState7.png)
 
 To get a clearer picture, we consider what could occur if the redo deque is not 
 cleared upon adding new state into the `HistoryManager`. 
@@ -275,7 +275,7 @@ then the oldest state in the undo deque will be deleted to make room. A similar 
 with its map being implemented as a FIFO cache with a fixed maximum size.
 The activity diagram below explains the flow of execution when a new state is added to `HistoryManager`.
 
-![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
+![NewStateActivityDiagram](../images/NewStateActivityDiagram.png)
 
 #### Design considerations
 
