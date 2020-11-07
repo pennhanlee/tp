@@ -406,10 +406,12 @@ to be used as the suggested word.
 Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
 will return a Standard Message for no suggestion.
 
-_Within the `SuggestionAlgorithm#FindSuggestion()`_ <br>
-![Suggestion Feature flow of events](images/SuggestionActivityDiagram1.png)
+_Within the `SuggestionAlgorithm#FindSuggestion()`_<br> 
 
-_Within `FindCommand#execute()`_ <br>
+![Suggestion Feature flow of events](images/SuggestionActivityDiagram1.png) 
+
+_Within `FindCommand#execute()`_
+
 ![Suggestion Feature flow of events](images/SuggestionActivityDiagram2.png)
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
