@@ -3,7 +3,7 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "find n/ harry"
+title After command "find n/harry"
 
 class State1 as "__fl0:filteredList__"
 
