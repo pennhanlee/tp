@@ -906,19 +906,19 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1b. The provided prefix is invalid.
 
     * 1b1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1c. The provided value for note title and text is invalid.
 
     * 1c1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 **Use Case: UC10 - Deleting a note**
 
@@ -935,13 +935,13 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 * 1b. The note index provided is invalid.
 
     * 1b1. bookmark returns an error message.
     
-    Use case resumes at step 1.
+    Use case ends.
 
 **Use Case: UC11 - Sorting the book list**
 
@@ -958,7 +958,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 **Use Case: UC12 - Finding keywords**
 
@@ -975,19 +975,19 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1b. bookmark does not find any matching books, but notes that there are similar words to the input keyword(s) in the displayed book list. 
 
     * 1b1. bookmark returns a message informing user that no matching books were found and suggests an alternative keyword to the user that is similar to the keyword(s) inputted.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1c. bookmark does not find any matching books, and notes that there no similar words to the input keyword(s) in the displayed book list. 
 
     * 1c1.  bookmark returns a message informing user that no matching books and alternative keyword suggestions were found.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 ### Non-Functional Requirements
 
