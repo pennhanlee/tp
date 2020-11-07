@@ -166,7 +166,7 @@ The class diagram below shows the relevant classes involved:
 
 ![Ui view class diagram](images/UiViewClassDiagram.png)
 
-##### Switching between the two views
+#### Switching between the two views
 
 `MainWindow` and `CommandResult` facilitates the switching between the two views.
 
@@ -291,6 +291,8 @@ Below is a sequence diagram that shows a scenario whereby the user decides to so
 Command : `sort n/`
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+#### Design considerations
 
 ##### Aspect: Sorting visible observable list or internal observable list
 
@@ -444,6 +446,7 @@ Command: `note 1 n/Thoughts txt/Something`
 
 
 ### Undo/redo feature
+
 #### Implementation
 
 The undo/redo mechanism is implemented by storing the state of the application after each command. The state of the 
@@ -572,7 +575,7 @@ The activity diagram below explains the flow of execution when a new state is ad
 
 ![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
-#### Design consideration:
+#### Design considerations
 
 ##### Aspect: How undo & redo executes
 
