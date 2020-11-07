@@ -340,7 +340,7 @@ Example Command | Result
 
 | What you should see |
 | --------------- |
-| Before 'delete 2' |
+| Before `delete 2` |
 | <img src="images/deleteeg1.png" alt="delete"> |
 | After `delete 2` | 
 | <img src="images/deleteeg2.png" alt="delete"> | 
@@ -376,7 +376,7 @@ Example Command | Result
 | ------------------- |
 | Before `edit 2 b/250` |
 | <img src="images/editeg1.png" alt="edit"> |
-| After 2nd book is edited |  
+| After `edit 2 b/250` |  
 | <img src="images/editeg2.png" alt="edit"> | 
 
 ### Set goal for your book: `goal`
