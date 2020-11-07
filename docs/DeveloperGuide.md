@@ -219,8 +219,8 @@ eg. List, View, Edit etc.
 `LogicManager` will handle the user input by first identifying the type of command (eg. Add, List, View, Edit etc.) and create a 
 `XYZCommandParser` object that will handle the remaining user input if any to produce a `XYZCommand`. 
 
-`XYZCommand` will then handle the specific action through the functionality of the command in `XYZCommand#execute()` 
-method, interact with and modifying `ModelManager` to display the appropriate
+`XYZCommand` will then handle the specific command through `XYZCommand#execute()`. This method 
+interacts with and modifies `ModelManager` to display the appropriate
 list of book(s). A `CommandResult` object which contains the return message 
 to the User will be created by `XYZCommand` and passed to the UI component to be displayed to the User.
 
