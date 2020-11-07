@@ -21,7 +21,7 @@ We are a team based in the [National University of Singapore, School of Computin
 <img src="images/tanleyang.png" width="200px">
 
 [[github](http://github.com/TanLeYang)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tanleyang.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
