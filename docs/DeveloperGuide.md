@@ -390,7 +390,7 @@ Below is a sequence diagram that shows a scenario where a suggestion is provided
 
 #### Implementation
 
-*bookmark* allows Users to add notes to a book.
+*bookmark* allows Users to add their reading goal to a book.
 
 This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `GoalCommand` and `Book`.
 
@@ -815,16 +815,32 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 **MSS**
 
-1. User requests to add a goal to a specific book using its index in the list.
-2. User specifies the goal target and deadline.
+1. User requests to add a goal to a specific book using its displayed index.
+2. User specifies their goal's page and deadline.
 3. The goal is added to the book.
 
     Use case ends.
 
 **Extensions**
+* 1a. User provides an invalid index.
+    * 1a1. _bookmark_ returns an error message.
+    
+    Use case returns at step 1.
+
+* 2a. User provides an invalid page. A page is invalid when it is a non-positive integers,
+lower than the specified book's `bookmark`, or higher than the specified book's `totalPages`.
+    * 2a1. _bookmark_ returns an error message.
+    
+    Use case resumes at step 2.
+
+* 2b. User provides an invalid deadline. A deadline is invalid 
+when it has the wrong format, or the date has already passed.
+    * 2b1. _bookmark_ returns an error message.
+    
+    Use case resumes at step 2.
 
 * 3a. There is already a goal for the book.
-    * 3a1. bookmark replaces the existing goal with the new goal.
+    * 3a1. _bookmark_ replaces the existing goal with the new goal.
     
     Use case resumes at step 3.
 
@@ -846,6 +862,21 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 2. bookmark sorts all the books by name.
 
     Use case ends.
+
+**Use Case: UC11 - Delete a goal**
+
+**MSS**
+
+1. User requests to delete the goal of a specific book using its displayed index.
+2. The goal is removed from the book.
+
+    Use case ends.
+    
+**Extensions**
+* 1a. User provides an invalid index.
+    * 1a1. _bookmark_ returns an error message.
+    
+    Use case returns at step 1.
 
 ### Non-Functional Requirements
 
