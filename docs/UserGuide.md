@@ -340,7 +340,7 @@ Example Command | Result
 
 | Before `delete` | After `delete` |
 | --------------- | ------------ |
-| <img src="images/deleteeg2.png" alt="delete" width="750px"> | <img src="images/deleteeg2.png" alt="delete" width="750px"> | 
+| <img src="images/deleteeg1.png" alt="delete" width="1000px"> | <img src="images/deleteeg2.png" alt="delete" width="1000px"> | 
 
 
 ### Editing a book : `edit`
