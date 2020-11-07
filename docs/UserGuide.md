@@ -338,9 +338,12 @@ Example Command | Result
 -----------------|--------
 `delete 2` | deletes the 2nd book in the book list. 
 
-| Before `delete` | After `delete` |
-| --------------- | ------------ |
-| <img src="images/deleteeg1.png" alt="delete" width="1000px"> | <img src="images/deleteeg2.png" alt="delete" width="1000px"> | 
+| What you should see |
+| --------------- |
+| Before 'delete 2' |
+| <img src="images/deleteeg1.png" alt="delete"> |
+| After `delete 2` | 
+| <img src="images/deleteeg2.png" alt="delete"> | 
 
 
 ### Editing a book : `edit`
@@ -369,9 +372,12 @@ Example Command | Result
 `edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
 `edit 2 b/250` | Edits the bookmark of the 2nd book to be `250`. 
 
-| Before 2nd book is edited | After 2nd book is edited | 
-| ------------------------- | ------------------------ |
-| <img src="images/editeg1.png" alt="edit" width="750px"> | <img src="images/editeg2.png" alt="edit" width="750px"> | 
+| What you should see |
+| ------------------- |
+| Before `edit 2 b/250` |
+| <img src="images/editeg1.png" alt="edit"> |
+| After 2nd book is edited |  
+| <img src="images/editeg2.png" alt="edit"> | 
 
 ### Set goal for your book: `goal`
 
@@ -433,10 +439,12 @@ Example Command | Result
 -----------------|--------
 `goaldel 1` | Goal successfully removed for Harry Potter. 
 
-
-| Before goal is deleted | After goal is deleted | 
-| ------------------------- | ------------------------ |
-| <img src="images/goaldeleg1.png" alt="goaldel" width="750px"> | <img src="images/goaldeleg2.png" alt="goaldel" width="750px"> | 
+| What you should see |
+| ------------------- |
+| Before `goaldel 1` |
+| <img src="images/goaldeleg1.png" alt="goaldel"> |
+| After `goaldel 1` |
+| <img src="images/goaldeleg2.png" alt="goaldel"> | 
 
 
 ### Adding a note to a book : `note`
@@ -467,10 +475,12 @@ Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!` 
 
-
-| Before note is added | After note is added | 
-| ------------------------- | ------------------------ |
-| <img src="images/noteeg1.png" alt="note" width="750px"> | <img src="images/noteeg2.png" alt="note" width="750px"> | 
+| What you should see |
+| ------------------- |
+| Before `note 1 n/Thoughts txt/What is he thinking!` |
+| <img src="images/noteeg1.png" alt="note"> |
+| After `note 1 n/Thoughts txt/What is he thinking!` |
+| <img src="images/noteeg2.png" alt="note"> | 
 
 
 ### Deleting a note from a book : `notedel`
@@ -500,9 +510,12 @@ Example Command | Result
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
 `notedel 4 2` | Deletes the 4th note of the 2nd book displayed 
 
-| Before note is deleted | After note is deleted | 
-| ------------------------- | ------------------------ |
-| <img src="images/notedeleg1.png" alt="notedel" width="750px"> | <img src="images/notedeleg2.png" alt="notedel" width="750px"> | 
+| What you should see |
+| ------------------- |
+| Before `notedel 1 3` |
+| <img src="images/notedeleg1.png" alt="notedel"> |
+| After `notedel 1 3` |
+| <img src="images/notedeleg2.png" alt="notedel"> | 
  
 
 ### Undoing a command : `undo`
@@ -536,9 +549,12 @@ Example Command | Result
    entered during your last usage session cannot be undone using the `undo` command when you start the application again.
 </div>  
 
-| Before undo command | After undo command | 
-| ------------------------- | ------------------------ |
-| <img src="images/undocommand1.png" alt="undo" width="750px"> | <img src="images/undocommand2.png" alt="undo" width="750px"> | 
+| What you should see |
+| ------------------- |
+| Before `undo` |
+| <img src="images/undocommand1.png" alt="undo"> |
+| After `undo` | 
+| <img src="images/undocommand2.png" alt="undo"> | 
 
 
 
@@ -569,9 +585,12 @@ Example Command | Result
 
 _when redo is called on a deleted book (previously undone)_  
 
-| Before redo command | After redo command | 
-| ------------------------- | ------------------------ |
-| <img src="images/undocommand2.png" alt="redo" width="750px"> | <img src="images/redocommand.png" alt="redo" width="750px"> | 
+| What you should see |
+| ------------------- |
+| Before `redo` |
+| <img src="images/undocommand2.png" alt="redo"> |
+| After `redo` |
+| <img src="images/redocommand.png" alt="redo"> | 
 
 <div markdown="block" class="alert alert-danger">
 :warning: **Warning:** 
