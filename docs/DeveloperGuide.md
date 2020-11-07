@@ -279,7 +279,7 @@ Step 1. The user launches the application for the first time. `FilteredList` is 
 
 ![FindState1](images/FindState1.png)
 
-Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The 
+Step 2. The user executes `find n/Harry` command to find all books with Harry in the Name field. The 
 `NameContainsKeywordsPredicate` predicate is generated and is used as a filter in this scenario.
 
 ![FindState2](images/FindState2.png)
@@ -297,7 +297,7 @@ The activity diagram below illustrates the flow of execution when the user input
 
 Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
 field.<br>
-Command : `find n/ Harry`
+Command : `find n/Harry`
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
@@ -335,6 +335,7 @@ Currently, the `sort` command supports sorting by name, genre, bookmark, and rea
 The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
 would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
 user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
+
 When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
 updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
 where sorting of the internal observable list based on the `comparator` occurs.
@@ -844,7 +845,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 **Extensions**
 
 * 1a. The book list is empty.
-    * 1a1. bookmark returns a message informing user that book list is empty.
+    * 1a1. bookmark returns a message informing user that the book list is empty.
 
     Use case ends.
 
@@ -926,6 +927,8 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 1. User requests to delete a note from a specific book using its displayed index.
 2. The requested note is deleted from the specified book.
 
+    Use case ends.
+
 **Extensions**
 
 * 1a. The index given is invalid.
@@ -944,10 +947,47 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
 **MSS**
 
-1. User requests to sort the book list by name.
-2. bookmark sorts all the books by name.
+1. User requests to sort the displayed book list by a specified field.
+2. bookmark sorts the displayed book list by the specified field.  
 
     Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+**Use Case: UC12 - Finding keywords**
+
+**MSS**
+
+1. User requests to find keyword(s) in the displayed book list by a specified field.
+2. Books that contain keyword(s) in the specified field are returned to the user in a new list.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. The field provided is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1b. bookmark does not find any matching books, but notes that there are similar words to the input keyword(s) in the displayed book list. 
+
+    * 1b1. bookmark returns a message informing user that no matching books were found and suggests an alternative keyword to the user that is similar to the keyword(s) inputted.
+
+    Use case resumes at step 1.
+
+ * 1c. bookmark does not find any matching books, and notes that there no similar words to the input keyword(s) in the displayed book list. 
+
+    * 1c1.  bookmark returns a message informing user that no matching books and alternative keyword suggestions were found.
+
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 

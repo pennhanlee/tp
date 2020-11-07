@@ -5,7 +5,7 @@ skinparam ClassBorderColor #000000
 
 title After command "find n/ harry"
 
-class State1 as "__fb0:filteredList__"
+class State1 as "__fl0:filteredList__"
 
 class Pointer as "__b0:Harry Potter__" #FFFFF
 class Pointer1 as "__b1:Hunger Games__" #FFFFF

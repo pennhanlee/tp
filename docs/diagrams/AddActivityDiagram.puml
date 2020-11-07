@@ -6,10 +6,10 @@ if() then ([No user input error \n or missing fields])
     :Check for Duplicate Books;
     if() then ([No Duplicate Book Found])
         :Add book into Model and Storage;
+        :Sort books by user's sorting preference, if any;
     else ([Duplicate Book found])
         :Produce Error Message;
     endif
-    :Sort books by user's sorting preference, if any;
 else ([Input error or missing fields])
     :Produce Error Message;
 endif
