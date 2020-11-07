@@ -419,7 +419,8 @@ you can motivate yourself to read.
    * The `INDEX` **must be a positive number** 1, 2, 3, …
    * If you add a goal to a book with an existing goal, the newly added goal will replace it.
    * You can only set dates that have not passed
-   * You can only set pages higher than your current bookmarked page, and lower than total pages of the book.
+   * You can only set pages higher than your current bookmarked page, and lower or 
+   equal to the total number of pages of the book.
    * Your goal is displayed in yellow, green or red for in progress, completed or overdue.
     
    Goal In Progress:
