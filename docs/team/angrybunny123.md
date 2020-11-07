@@ -29,7 +29,7 @@ Given below are my contributions to the project.
     completion status. Prior to the enhancement, only finding of books by name was supported.
   * What it does: Allows the user to find books by name, genre, tag and completion status.
   * Justification: This feature improves the product significantly because a user can find books by a specific field, which
-    makes it easier to find specific books as well as a certain class of books e.g. all books that contain the same genre
+    makes it easier to find specific books as well as a certain subset of books e.g. all books that contain the same genre
     or all books that contain the same tag.
   * Highlights: This enhancement involved the creation of several predicate classes packaged within the
     `seedu.bookmark.model.book.predicates` package that are used to filter the book list according to user input. The chosen 
