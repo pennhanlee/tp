@@ -23,9 +23,11 @@ Given below are my contributions to the project.
     the undo command would be very useful in providing convenience to the user. The redo command also allows the user to
     move back and forth in history, allowing users to conveniently compare changes.
   
-  * Highlights: This feature must work with all other commands as well as future commands to be added and not slow
-    down the application. Hence proper brainstorming and planning of the implementation had to be done to ensure the 
-    implementation can be easily extended to work with future commands as well as be as memory efficent as possible.
+  * Highlights: This feature must work with all other commands as well as future commands to be added.
+    Hence proper brainstorming and planning of the implementation had to be done to ensure the 
+    implementation can be easily extended to work with future commands. Furthermore, the feature should not affect the
+    speed of the application, hence care had to be taken to ensure redundant states are not stored in order to
+    improve the memory efficiency. 
     The implementation was challenging as the application will display the book in different ways according to user entered
     commands, hence there was not only a need to keep track of the changes to the books stored,
     but also how the books were being displayed in order to allow the undo/redo command to bring the application back to
@@ -46,7 +48,9 @@ Given below are my contributions to the project.
     
   * Highlights: This feature must work fast as switching between views should be as smooth as possible to ensure a good
     user experience. Hence, special care was taken to minimize unecessary re-renderings. Furthermore, the Ui needed to be
-    in sync with changes to the Model which was accomplished by following the Observer design pattern.
+    in sync with changes to the Model. The above requirements were met using an implementation that applied the Observer
+    design pattern. Additionally, as I had no prior experience with JavaFX, I had to pick up and learn JavaFX
+    quickly in order to successfully implement this feature. 
   
   * Code contributed for this enhancement: [#92](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/92),
     [#121](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/121), [#165](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/165)
@@ -77,9 +81,7 @@ Given below are my contributions to the project.
   * PRs reviewed (with non-trivial review comments): [#107](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/107),
     [#97](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/97), [#168](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/168),
     [#119](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/119)
-  
   * Contributed to forum discussions (e.g [1](https://github.com/nus-cs2103-AY2021S1/forum/issues/170), [2](https://github.com/nus-cs2103-AY2021S1/forum/issues/182))
-  
   * Reported bugs and suggestions for other teams in the class (e.g [1](https://github.com/TanLeYang/ped/issues/4),
   [2](https://github.com/TanLeYang/ped/issues/3), [3](https://github.com/TanLeYang/ped/issues/1))
   
