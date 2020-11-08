@@ -14,5 +14,6 @@ MainWindow *-down-> "1" BookListPanel
 BookListPanel -right-> "*" BookCard : renders >
 DetailedBookListPanel -up-|> BookListPanel
 DetailedBookCard -up-|> BookCard
+DetailedBookCard -right-> "*" NoteCard : renders >
 
 @enduml

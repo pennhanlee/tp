@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.bookmark.commons.core.GuiSettings;
 import seedu.bookmark.commons.core.LogsCenter;
 import seedu.bookmark.logic.Logic;
+import seedu.bookmark.logic.ViewType;
 import seedu.bookmark.logic.commands.CommandResult;
 import seedu.bookmark.logic.commands.exceptions.CommandException;
 import seedu.bookmark.logic.parser.exceptions.ParseException;
@@ -198,6 +199,30 @@ public class MainWindow extends UiPart<Stage> {
         return bookListPanel;
     }
 
+    private void decideViewType(ViewType viewType) {
+        switch (viewType) {
+        case DEFAULT:
+            resetView();
+            break;
+        case DETAILED:
+            if (logic.getFilteredBookList().size() <= 1) {
+                // can only use detailed view when there is <= 1 books to display
+                changeToDetailedView();
+            } else {
+                resetView();
+            }
+            break;
+        case MOST_RECENTLY_USED:
+            if (logic.getFilteredBookList().size() > 1) {
+                // cannot keep using detailed view if there are > 1 books to display
+                resetView();
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -217,27 +242,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            switch (commandResult.getViewType()) {
-            case DEFAULT:
-                resetView();
-                break;
-            case DETAILED:
-                if (logic.getFilteredBookList().size() <= 1) {
-                    // can only use detailed view when there is <= 1 books to display
-                    changeToDetailedView();
-                } else {
-                    resetView();
-                }
-                break;
-            case MOST_RECENTLY_USED:
-                if (logic.getFilteredBookList().size() > 1) {
-                    // cannot keep using detailed view if there are > 1 books to display
-                    resetView();
-                }
-                break;
-            default:
-                break;
-            }
+            decideViewType(commandResult.getViewType());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

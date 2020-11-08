@@ -19,6 +19,8 @@ Example usages:
 * Update the details of a specified book
 * Delete a specified book
 * Listing all books in the application
+* Add notes to books
+* Set reading goals
 
 **bookmark is a desktop application for managing your books and reading progress.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
@@ -31,3 +33,10 @@ bookmark is an open source project and we welcome contributions from the communi
 ## Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+<br>
+Icons from [Flaticon](https://www.flaticon.com/free-icon/bookmark_807354?term=bookmark&page=2&position=43) and
+[Icons8](https://icons8.com/icons/set/white-exclamation-mark-emoji") <br>
+Background splash image from [Unsplash](https://unsplash.com/photos/YLSwjSy7stw) 
+
+
+

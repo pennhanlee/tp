@@ -1,12 +1,11 @@
 package seedu.bookmark.model.wordstore;
 
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bookmark.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_AND;
+import static seedu.bookmark.testutil.TypicalWords.CORRECT_CHAMBER;
 import static seedu.bookmark.testutil.TypicalWords.CORRECT_HARRY;
 import static seedu.bookmark.testutil.TypicalWords.HARRY;
 import static seedu.bookmark.testutil.TypicalWords.MISSPELT_HARRY;
@@ -85,6 +84,12 @@ public class WordTest {
         Word countChangedHarry = new Word(harry);
         countChangedHarry.addCount();
         assertTrue(CORRECT_HARRY.isSameWord(countChangedHarry));
+
+        // different word with same count -> returns false
+        String chamber = CORRECT_CHAMBER.getWord();
+        Word wordChamber = new Word(chamber);
+        assertEquals(wordChamber.getCount(), CORRECT_HARRY.getCount());
+        assertFalse(wordChamber.isSameWord(CORRECT_HARRY));
 
         // null -> returns false
         assertFalse(HARRY_POTTER.isSameBook(null));

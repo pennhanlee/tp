@@ -48,7 +48,7 @@ deactivate CommandParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteBook(1)
 activate Model
 
 Model --> DeleteCommand
