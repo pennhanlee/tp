@@ -994,6 +994,18 @@ testers are expected to do more *exploratory* testing.
 
    b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
+### Viewing a book
+
+1. Viewing a particular book
+
+   a. Prerequisites: At least 1 book being displayed in the book list.
+   
+   b. Test case: `view 1`<br>
+      Expected: View the first book in the book list. The Ui will switch to only show more
+      detailed information about the selected book and will not show all other books. The
+      displayed book will have an `INDEX` of 1 since it is the first and only book being
+      displayed.
 
 ### Deleting a book
 
@@ -1016,13 +1028,13 @@ testers are expected to do more *exploratory* testing.
 
    a. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
       Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
-      50 will be created and added to the list
+      50 will be created and added to the list.
 
    b. Test case: `add n/Test book g/T@st genre tp/1000 b/50`<br>
       Expected: No book is added. Error details shown in the status message.
    
-   c. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X <br>
-      Expected: Similar to previous
+   c. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X. <br>
+      Expected: Similar to previous.
 
 2. Adding a book while only some books are being shown.
 
@@ -1051,12 +1063,23 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a book while only some books are being shown.
 
-   a. Prerequisites: Book list filtered by a command (e.g `find` command). At least one book shown in the list.
+   a. Prerequisites: Book list filtered by a command (e.g `find` command). At least 1 book shown in the list.
    
    b. Test case: `edit 1 n/Edited Name`<br>
       Expected: First book in the list is edited to have a name of "Edited Name".
       Details of the edited book shown in the status message.
       The edited book remains in the list regardless of how it was edited.
+      
+### Finding books
+
+1. Finding books by keywords.
+
+   a. Prerequisites: At least 1 book being displayed in the book list.
+   
+   b. Test case: `find n/XXX` where `XXX` is a keyword you want to find for. <br>
+      Expected: Books with `XXX` in their names will be shown, books that do not will not
+      be shown. <br>
+      Note: `find` only matches full words, it will not match substrings of a word.
       
 ### Sorting the book list
 
@@ -1069,7 +1092,7 @@ testers are expected to do more *exploratory* testing.
       
 1. Adding a book into a sorted book list.
 
-   a. Prerequisites: Book list is initially showing at least 1 books to see the sorting effect.
+   a. Prerequisites: Book list is initially showing at least 1 book to see the sorting effect.
    b. Test case: `sort n/`<br> followed by `add` command to add another book.
       Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
       The new book will be added to the book list in the correct position that maintains the sorted order.
@@ -1085,7 +1108,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Using undo when there are commands to undo.
 
-   a. Test case: Any command except `help` and `exit` followed by `undo`
+   a. Test case: Any command except `help` and `exit` followed by `undo`<br>
       Expected: The command entered is undone. The application reverts to exactly how it was before the command was
       made. Success message shown in status message.
       
@@ -1103,6 +1126,67 @@ testers are expected to do more *exploratory* testing.
    a. Test case: Any command except `help` and `exit`, followed by `undo` and then `redo`<br>
       Expected: The command entered is first undone, then on using `redo`, it will be redone. The application will be 
       exactly as it was after the first  command was entered. Success message shown in status message.
+
+1. Using redo not immediately after an undo command.
+   
+   a. Test case:
+      * Any command except `help` and `exit`,
+      * `undo`,
+      * Any command except `help` and `exit`
+      * `redo` <br>
+     Expected: The redo command will not execute. Error details shown in status message.
+
+### Adding a note
+
+1. Adding a note to a book.
+
+   a. Prerequisites: Book list is showing at least 1 book, not viewing a particular book with
+      the `view` command.
+   
+   b. Test case: `note 1 n/Hello txt/This is a note` <br>
+      Expected: A note with the title "Hello" and body "This is a note" will be added to 
+      the first book in the displayed book list. Only the title of the note will be displayed.
+      Doing `view 1` will allow you to see the body of the note added.
+
+1. Adding a note to a book being viewed.
+
+   a. Prerequisites: Viewing a particular book using the `view` command.
+   
+   b. Test case: `note 1 n/Hello txt/This is a note`<br>
+      Expected: A note with the title "Hello" and body "This is a note" will be added to the
+      book being viewed. Both the body and the title of the note will be displayed.
+
+### Deleting a note
+
+1. Deleting a note from a book.
+
+   a. Prerequisites: Book list is showing at least 1 book that has at least one note added.
+   
+   b. Test case: `notedel X 1` where X is the Xth book in the displayed book list.
+      The Xth book must have at least one note added.<br>
+      Expected: The first note of the selected book will be deleted.
+
+### Adding a goal
+
+1. Adding a goal to a book.
+
+   a. Prerequisites: At least one book being displayed in the book list.
+   
+   b. Test case: `goal 1 p/X g/DD-MM-YYYY` <br>
+      Expected: Goal to read up till X pages by DD-MM-YYYY will be added to the first book.<br>
+      Note: X must be more than the bookmarked page and less than the total number of pages in
+      the first book, DD-MM-YYYY must not be in the past.
+
+### Deleting a goal
+
+1. Deleting a goal from a book.
+
+   a. Prerequisities: At least one book with a goal being displayed in the book list.
+   
+   b. Test case: `goaldel X` where X is the Xth book in the displayed book list.
+      The Xth book must have a goal set. <br>
+      Expected: The goal of the selected book will be deleted. Success message shown in status message.
+      
       
 ### Saving data
 
