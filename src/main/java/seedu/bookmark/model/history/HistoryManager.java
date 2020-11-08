@@ -87,10 +87,10 @@ public class HistoryManager {
      * Add a state to the undo deque, removes the oldest states to make space if necessary.
      */
     private void addToUndo(State state) {
-        while (undoDeque.size() >= MAX_UNDO_COUNT) {
-            undoDeque.removeFirst();
-        }
         undoDeque.push(state);
+        while (undoDeque.size() > MAX_UNDO_COUNT) {
+            undoDeque.removeLast();
+        }
         assert(undoDeque.size() <= MAX_UNDO_COUNT);
     }
 
