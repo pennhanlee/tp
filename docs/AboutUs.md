@@ -42,7 +42,7 @@ We are a team based in the [National University of Singapore, School of Computin
 <img src="images/pangpuncake.png" width="200px">
 
 [[github](http://github.com/pangpuncake)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/pangpuncake.md)]
 
 * Role: Developer
 * Responsibilities: Storage
