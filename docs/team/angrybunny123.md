@@ -52,9 +52,9 @@ Given below are my contributions to the project.
       [#171](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/171))
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#97](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/97), 
-  [\#121](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/121), [\#130](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/130), 
-  [\#164](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/164)
+  * PRs reviewed (with non-trivial review comments): [\#121](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/121), 
+  [\#130](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/130), [\#164](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/164), 
+  [\#180](https://github.com/AY2021S1-CS2103T-F13-2/tp/pull/180)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2021S1/forum/issues/141), [2](https://github.com/nus-cs2103-AY2021S1/forum/issues/170))
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/angrybunny123/ped/issues/3), 
   [2](https://github.com/angrybunny123/ped/issues/4), [3](https://github.com/angrybunny123/ped/issues/14))
