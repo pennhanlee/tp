@@ -1214,7 +1214,7 @@ testers are expected to do more *exploratory* testing.
    
    </div>
 
-## **Appendix: Effort** ##
+## **Appendix: Effort** 
 
 ### Model
 The `Model` of _bookmark_ is definitely more complex than that of AB3. In AB3, the Person class had fields that were mostly
