@@ -3,13 +3,14 @@ layout: page
 title: User Guide
 ---
 
-_bookmark_ is a desktop application to manage your indulgent bookworm habits! Use _bookmark_ to track your book reading progress 
-or pen down thoughts of mindboggling fan theories about your favourite characters!
+_bookmark_ is a desktop application for readers to manage their reading progress.
 
-_bookmark_ allows you to add and update your beloved books, track your reading progress using our bookmark and even add reading goals and notes to your chosen books!
+_bookmark_ allows you to easily track your **reading progress** so that you'll never need to use a physical bookmark or
+lose track of where you stopped reading ever again. With many interesting features like **note taking** and **goal setting**,
+_bookmark_ will be your faithful reading companion, helping to make reading even more interactive and exciting.
 
-Guess what? _bookmark_ also uses the special Command Line Interface style so if you love to type, you're in luck! So 
-get cracking and start saving your best reads and ideas into _bookmark_, Type away!~
+This user guide introduces you to the many features of _bookmark_ and how you can benefit from them. With this guide,
+you will be ready to use _bookmark_ to enhance your reading experience.
 
 * Table of Contents
 {:toc}
@@ -197,7 +198,7 @@ Example Command | Result
 -----------------|--------
 `view 2` | views the 2nd book in the list. 
 
-   ![detailed_view](images/viewcommandeg.PNG)
+   ![detailed_view](images/viewcommandeg.png)
 
 ### Listing all books : `list`
 
@@ -605,7 +606,9 @@ _when redo is called on a deleted book (previously undone)_
 
    The redo command will not execute if there are no undone commands available to redo. Once _bookmark_ is closed, the
    commands that have been undone during your last usage session cannot be redone using the `redo` command when you
-   start _bookmark_ again.
+   start _bookmark_ again.<br>
+   Using any commands other than `help`, `exit`, `redo` and `undo` will erase any earlier commands that you have 
+   undone, hence these commands will not recoverable by the `redo` command.
 </div>
 
 ### Clearing all books : `clear`
@@ -619,7 +622,7 @@ You can use the Clear Command to delete all your books at once.
 </div>  
 
 <div markdown="block" class="alert alert-danger">
-:warning: **Warning: ** 
+:warning: **Warning:** 
 
    Take caution! While the undo feature will help you restore books deleted by `clear`, you will not be able
    to recover your deleted books if you call too many commands (10 and more) after clearing!
