@@ -51,11 +51,11 @@ activate AddCommand
 AddCommand -> Model : addBook(book)
 activate Model
 
-Model --> AddCommand
-deactivate Model
-
-AddCommand -> Model : sortByDefaultComparator()
+Model -> Model : sortByDefaultComparator()
 activate Model
+
+Model --> Model
+deactivate Model
 
 Model --> AddCommand
 deactivate Model

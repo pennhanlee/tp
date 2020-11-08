@@ -7,15 +7,6 @@ We are a team based in the [National University of Singapore, School of Computin
 
 ## Project team
 
-### Kenneth Teo
-
-<img src="images/angrybunny123.png" width="200px">
-
-[[github](https://github.com/angrybunny123)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Tan Le Yang
 
 <img src="images/tanleyang.png" width="200px">
@@ -26,6 +17,16 @@ We are a team based in the [National University of Singapore, School of Computin
 * Role: Team Lead
 * Responsibilities: UI
 
+### Kenneth Teo
+
+<img src="images/angrybunny123.png" width="200px">
+
+[[github](https://github.com/angrybunny123)]
+[[portfolio](team/angrybunny123.md)]
+
+* Role: Developer
+* Responsibilities: Logic
+
 ### Lee Penn Han
 
 <img src="images/pennhanlee.png" width="200px">
@@ -34,7 +35,7 @@ We are a team based in the [National University of Singapore, School of Computin
 [[portfolio](team/pennhanlee.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Model
 
 ### Pang Wai Kye
 
@@ -44,7 +45,7 @@ We are a team based in the [National University of Singapore, School of Computin
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities:
+* Responsibilities: Storage
 
 ### Le Minh Giang
 
@@ -52,7 +53,7 @@ We are a team based in the [National University of Singapore, School of Computin
 
 [[github](http://github.com/mgiang2015)]
 
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/mgiang2015.md)]
 
 * Role: Developer
 * Responsibilities: UI
