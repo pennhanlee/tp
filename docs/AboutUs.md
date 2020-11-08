@@ -53,7 +53,7 @@ We are a team based in the [National University of Singapore, School of Computin
 
 [[github](http://github.com/mgiang2015)]
 
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/mgiang2015.md)]
 
 * Role: Developer
 * Responsibilities: UI
