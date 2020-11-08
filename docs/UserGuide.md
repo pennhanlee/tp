@@ -680,6 +680,11 @@ Example Command | Result
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
 
+**Q**: How do I edit my book's goal once I have completed that goal?<br>
+**A**: If you want to set a new goal to that book, use the [`goal`](#set-goal-for-your-book-goal) command
+and specify your updated page and deadline. If you wish to remove your goal,
+you can use the [`goaldel`](#remove-your-goal-goaldel) command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
