@@ -1214,3 +1214,45 @@ testers are expected to do more *exploratory* testing.
    
    </div>
 
+## **Appendix: Effort** ##
+
+### Model
+The `Model` of _bookmark_ is definitely more complex than that of AB3. In AB3, the Person class had fields that were mostly
+served as simple attributes for Person objects.
+
+In _bookmark_, each book has more complex attributes, such as `Note` and `Goal`. Each note can be added and deleted individually
+and and each goal also has to keep track of multiple attributes such as the deadline and the target page. Additionally,
+the different attributes have to interact with one another to ensure that they are valid. For instance, we have to make sure
+that `Bookmark`'s value does not exceed the `TotalPages`'s value as the bookmarked page cannot be greater than the total
+number of pages in a book. The logic behind can be implemented in various ways and we went through different approaches 
+to keep the logic as simple as possible. 
+
+Additionally, the `Model` of _bookmark_ supports even more complex functionality such as undoing and redoing as well as
+additions to support the suggestions feature which was not present in AB3.
+
+### Logic
+As the complexity of `Model` increased, the complexity of `Logic` would also have to increase. _bookmark_'s `Logic` supports
+many more Commands compared to AB3, including an improved `find` Command, `sort` Command, `note` Command and many more.
+
+Significant effort was put in to implement new logic for _bookmark_ as the `Logic` of _bookmark_ is responsible for
+a lot more compared to AB3. For example, a new `ViewTypeManager` class was created to keep track of what `ViewType` to display
+a given state of the application with so that the `undo` and `redo` commands can work well. We also put significant
+effort into sanitising and validating user input as well as increasing the testing rigour to ensure that _bookmark_'s parsers
+can handle unexpected inputs smoothly.  
+
+### Storage
+The `Storage` was extended to support more options for user preferences such as sorting preference. Furthermore, the 
+more complex attributes of each `Book` mentioned earlier have to be stored into the JSON file in an appropriate format.
+We spent quite a while discussing and deciding on the best way to represent each new attribute in the JSON file.
+
+### Ui
+A lot of effort was put into the `Ui`. Our team put in quite a bit of effort in ensuring that our interface was pleasing
+to the eye and user-friendly. We also introduced a "view switching" feature which allows users to switch between different
+pages which made the Ui a lot more interactive compared to the single page view of AB3's Ui. 
+
+### Overall
+As a whole, the process was not an easy one for the _bookmark_ team. We started off with plans for many features that we
+eventually decided were not suitable. Hence, in the first iterations, we spent quite a bit of time coming up with new
+ideas to be implemented. Nevertheless, we put in consistent effort throughout the weeks to build, test and
+improve the new features within the timeline of the iteration. Although not perfect, the end product is something that
+we are proud of and we can say for sure that we did not spare any effort throughout the process.
