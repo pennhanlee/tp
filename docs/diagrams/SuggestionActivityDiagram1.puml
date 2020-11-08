@@ -1,7 +1,6 @@
 @startuml
 start
 :User misspell word in FindCommand;
-while() is ([Misspell words \n remaining])
     :Search wordBank for suggestions;
     while() is ([words remaining \n in wordBank])
     if() then ([Word within \n Distance Limit])
@@ -9,15 +8,6 @@ while() is ([Misspell words \n remaining])
     else ([Else])
     endif
     endwhile ([else])
-    :Store words in PriorityQueue;
-endwhile ([else]])
-if() then ([No words in PriorityQueue])
-    :Prepare No Suggestion Message;
-else ([Else])
-    :Poll first word;
-    :Prepare Suggestion Message;
-endif
-:Return message to user;
-
+    :Return Suggestion List;
 end
 @enduml

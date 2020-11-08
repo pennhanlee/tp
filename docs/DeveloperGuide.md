@@ -203,6 +203,62 @@ detailed view:
   * Pros: More in-line with the purpose of the detailed view of showing only one book
   * Cons: More work has to be done to sync up the UI with the model.
   
+### General _bookmark_ Command Logic
+
+_bookmark_'s commands generally follow the same procedure. The following section will explain the 
+general flow of events for the following commands: 
+* `add`
+* `list`
+* `view`
+* `edit`
+* `delete` 
+
+The listed commands follow a similar sequence diagram as adding a book. These commands are 
+facilitated by `LogicManager`, `ModelManager`, `XYZCommandParser` and `XYZCommand` where XYZ refers to the specific command.
+eg. List, View, Edit etc. 
+
+`LogicManager` will handle the user input by first identifying the type of command (eg. Add, List, View, Edit etc.) and create a 
+`XYZCommandParser` object that will handle the remaining user input if any to produce a `XYZCommand`. 
+
+`XYZCommand` will then handle the specific command through `XYZCommand#execute()`. This method 
+interacts with and modifies `ModelManager` to display the appropriate
+list of book(s). A `CommandResult` object which contains the return message 
+to the User will be created by `XYZCommand` and passed to the UI component to be displayed to the User.
+
+*If the commands are in incorrect format, an exception message will be passed to the UI component to be displayed to the User*
+
+#### Implementation
+
+In this section, `Add` command will be used as an example.
+
+This feature is facilitated mainly by `LogicManager`, `ModelManager`, `AddCommandParser` and `AddCommand`.
+
+![Classes involved in the Add Command](images/LogicClassDiagram.png)
+
+Step 1: `LogicManager#execute()` handles the command to identify the type of command (eg. Add)
+ to create `AddCommandParser` to parse the remaining inputs. `AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. <br>
+
+Step 2: This `Book` object will be passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
+*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
+
+Step 3: `LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` into
+the `Model` via `ModelManager#addBook()`. Subsequently, `ModelManager#sortByDefaultComparator()` would be called
+to sort the internal book list according to the user's sorting preference, if any. <br>
+This method will return a `CommandResult` object which contains the return message to be displayed for the user. <br>
+
+Step 4: `CommandResult` is returned as a feedback to the user. <br>
+*If there is an existing book with the same name, an exception will be thrown with a message to the User*
+
+Below is an activity diagram which illustrates the flow of events for adding a book
+
+![Add command flow of execution](images/AddActivityDiagram.png)
+
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
+Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
+
+![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png) 
+
+
 ### Find feature
 
 #### Implementation
@@ -223,7 +279,7 @@ Step 1. The user launches the application for the first time. `FilteredList` is 
 
 ![FindState1](images/FindState1.png)
 
-Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The 
+Step 2. The user executes `find n/Harry` command to find all books with Harry in the Name field. The 
 `NameContainsKeywordsPredicate` predicate is generated and is used as a filter in this scenario.
 
 ![FindState2](images/FindState2.png)
@@ -241,7 +297,7 @@ The activity diagram below illustrates the flow of execution when the user input
 
 Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
 field.<br>
-Command : `find n/ Harry`
+Command : `find n/Harry`
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
@@ -279,6 +335,7 @@ Currently, the `sort` command supports sorting by name, genre, bookmark, and rea
 The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
 would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
 user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
+
 When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
 updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
 where sorting of the internal observable list based on the `comparator` occurs.
@@ -304,37 +361,6 @@ Command : `sort n/`
 * **Alternative 2:** Sorting visible observable list
   * Pros: Sorts the user's book list temporarily, which is useful if the user only wants the sorted view momentarily.
   * Cons: Book list would always return to default view after subsequent commands which could be distracting.
-  
-### Add book
-
-#### Implementation
-
-*bookmark* allows Users to add books into the application.
-
-This feature is facilitated mainly by `LogicManager`, `ModelManager`, `AddCommandParser` and `AddCommand`.
-
-![Classes involved in the Add Command](images/LogicClassDiagram.png)
-
-`LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs.
-`AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. This `Book` object will be
-passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
-*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
-
-`LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` attribute into
-the `Model` via `ModelManager#addBook()`. Subsequently, `ModelManager#sortByDefaultComparator()` would be called
-to sort the internal book list according to the user's sorting preference, if any.
-Finally, a `CommandResult` is returned as a feedback to the user. <br>
-*If there is an existing book with the same name, an exception will be thrown with a message to the User*
-
-Below is an activity diagram which illustrates the flow of events for adding a book
-
-![Add command flow of execution](images/AddActivityDiagram.png)
-
-Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
-Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
-
-![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png)
-
 
 ### Suggestion feature
 
@@ -355,7 +381,8 @@ For example:
 * Hrary -> Harry (Edit Distance 1)
 * Haarry -> Harry (Edit Distance 1)
 
-The suggestion mechanism is facilitated by `Logic` Component through `FindCommand` which calls on `SuggestionAlgorithm`.
+The suggestion mechanism is facilitated by `Logic` Component through `FindCommand` which calls on `SuggestionAlgorithm` if 
+no books can be found.
 `SuggestionAlgorithm` will call on `WordBank` in `Model` for the stored words required to complete the mechanism.
 `SuggestionAlgorithm` will implement the following operations:
 * `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion
@@ -371,7 +398,7 @@ Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in
 *harry is deliberately mispelled* <br>
 `FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty.
 
-Step 2: `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
+Step 2: Since no books are found, `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
 in the appropriate `WordStore` of `WordBank`.
 
 Step 3: `SuggestionAlgorithm#calculateDistance()` will be called to calculate the edit distance of `h@rry` and the words in `nameWordBank`
@@ -383,11 +410,43 @@ to be used as the suggested word.
 Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
 will return a Standard Message for no suggestion.
 
-![Did you mean? flow of events](images/SuggestionActivityDiagram.png)
+_Within the `SuggestionAlgorithm#FindSuggestion()`_<br> 
+
+![Suggestion Feature flow of events](images/SuggestionActivityDiagram1.png) 
+
+_Within `FindCommand#execute()`_
+
+![Suggestion Feature flow of events](images/SuggestionActivityDiagram2.png)
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
-![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
+![Interactions inside logic component and Algo component for Suggestion feature](images/SuggestionSequenceDiagram.png)
+
+#### Design Consideration
+
+##### Aspect: Data structure for storing words 
+
+
+ * **Alternative 1: Using Damerau-Levenstien Algorithm (Currently Implemented)**
+   The Damerau-Levenstien Algorithm will cover calculation for the edit distance for 3 kinds of String Differences as mentioned above 
+   * Pros: <br> Will provide an accurate measure of the closest matching word based on the distance <br>
+   First letter need not match the keyword (First letter might be typed wrongly too)
+   * Cons: <br>
+    Incurs either a large time complexity (3^n) where n is length of string to be compared with (No Memoization) <br>
+   Incurs a large space consumption (construction of 2D Array) (With Memoization)
+
+   * **Alternative 2: Storing all words in a Trie**  
+   Store all words into a Trie Data structure and use recursion to find the matching words.
+   * Pros: Easy to implement, consumes less time and space than Alternative 1
+   * Cons: <br> Words must start with the same letter, hence its on the assumption that 1st letter of the word is not 
+   misspelt. <br>
+   Difficult to find transpositional errors (Eg. Harry vs Hrary)
+
+Alternative 1 was ultimately chosen as it is difficult to predict what type of typing errors will be committed. Hence, analysing
+missing, additional or transpositional letters are equally important. It is also naive to assume that users will not type the first
+letter wrongly too. In addition, there was no noticeable degradation of performance during testing using Alternative 1. Since Alternative 1
+provided a better solution to a Suggestion Feature with no noticeable performance slowdown, it was hence chosen. 
+
 
 ### Add Goal feature
 
@@ -786,7 +845,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 **Extensions**
 
 * 1a. The book list is empty.
-    * 1a1. bookmark returns a message informing user that book list is empty.
+    * 1a1. bookmark returns a message informing user that the book list is empty.
 
     Use case ends.
 
@@ -863,19 +922,19 @@ when it has the wrong format, or the date has already passed.
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1b. The provided prefix is invalid.
 
     * 1b1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1c. The provided value for note title and text is invalid.
 
     * 1c1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 **Use Case: UC10 - Deleting a note**
 
@@ -884,26 +943,68 @@ when it has the wrong format, or the date has already passed.
 1. User requests to delete a note from a specific book using its displayed index.
 2. The requested note is deleted from the specified book.
 
+    Use case ends.
+
 **Extensions**
 
 * 1a. The index given is invalid.
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 * 1b. The note index provided is invalid.
 
     * 1b1. bookmark returns an error message.
     
-    Use case resumes at step 1.
+    Use case ends.
 
 **Use Case: UC11 - Sorting the book list**
 
 **MSS**
 
-1. User requests to sort the book list by name.
-2. bookmark sorts all the books by name.
+1. User requests to sort the displayed book list by a specified field.
+2. bookmark sorts the displayed book list by the specified field.  
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case ends.
+    
+**Use Case: UC12 - Finding keywords**
+
+**MSS**
+
+1. User requests to find keyword(s) in the displayed book list by a specified field.
+2. Books that contain keyword(s) in the specified field are returned to the user in a new list.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. The field provided is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case ends.
+
+ * 1b. bookmark does not find any matching books but is able to find similar words to the input keyword(s) stored in the 
+    application to provide as recommendations.
+
+    * 1b1. bookmark returns a message informing user that no matching books were found and provides the suggestion of a 
+    similar keyword that is found in the application.
+
+    Use case ends.
+
+ * 1c. bookmark does not find any matching books and is unable to find any similar words to the input keyword(s) stored 
+     in the application.
+
+    * 1c1.  bookmark returns a message informing user that neither matching books nor alternative keyword suggestions were found.
 
     Use case ends.
 
