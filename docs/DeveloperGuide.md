@@ -977,15 +977,15 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     Use case ends.
 
- * 1b. bookmark does not find any matching books, but notes that there are similar words to the input keyword(s) in the displayed book list. 
+ * 1b. bookmark does not find any matching books but is able to find similar words to the input keyword(s) stored in the application.
 
-    * 1b1. bookmark returns a message informing user that no matching books were found and suggests an alternative keyword to the user that is similar to the keyword(s) inputted.
+    * 1b1. bookmark returns a message informing user that no matching books were found and provides the suggestion of a similar keyword that is found in the application.
 
     Use case ends.
 
- * 1c. bookmark does not find any matching books, and notes that there no similar words to the input keyword(s) in the displayed book list. 
+ * 1c. bookmark does not find any matching books and is unable to find any similar words to the input keyword(s) stored in the application.
 
-    * 1c1.  bookmark returns a message informing user that no matching books and alternative keyword suggestions were found.
+    * 1c1.  bookmark returns a message informing user that neither matching books nor alternative keyword suggestions were found.
 
     Use case ends.
 
