@@ -5,12 +5,12 @@ title: User Guide
 
 _bookmark_ is a desktop application for readers to manage their reading progress.
 
-_bookmark_ allows you to easily track your **reading progress** so you'll never need to use a physical bookmark or
+_bookmark_ allows you to easily track your **reading progress** so that you'll never need to use a physical bookmark or
 lose track of where you stopped reading again. With many interesting features like **note taking** and **goal setting**,
 _bookmark_ will be your faithful reading companion, helping to make reading even more interactive and exciting.
 
-This user guide introduces what you can do with _bookmark_ and how it can benefit you. With this guide,
-you will be ready to use _bookmark_ to enhance your reading experience!
+This user guide introduces what you to the many features of _bookmark_ and how you can benefit from them. With this guide,
+you will be ready to use _bookmark_ to enhance your reading experience.
 
 * Table of Contents
 {:toc}

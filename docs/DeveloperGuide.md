@@ -1246,13 +1246,13 @@ more complex attributes of each `Book` mentioned earlier have to be stored into 
 We spent quite a while discussing and deciding on the best way to represent each new attribute in the JSON file.
 
 ### Ui
-A lot of effort was put into the `Ui`. Our team put in quite a bit of effort in ensuring that our interface was pleasing
+A lot of effort was put into the `Ui`. Our team put in a lot of effort in ensuring that our interface is pleasing
 to the eye and user-friendly. We also introduced a "view switching" feature which allows users to switch between different
 pages which made the Ui a lot more interactive compared to the single page view of AB3's Ui. 
 
 ### Overall
 As a whole, the process was not an easy one for the _bookmark_ team. We started off with plans for many features that we
-eventually decided were not suitable. Hence, in the first iterations, we spent quite a bit of time coming up with new
+eventually decided were not suitable. Hence, in the first iterations, we spent a considerable amount of time coming up with new
 ideas to be implemented. Nevertheless, we put in consistent effort throughout the weeks to build, test and
-improve the new features within the timeline of the iteration. Although not perfect, the end product is something that
+improve the new features within the timeline of the iterations. Although not perfect, the end product is something that
 we are proud of and we can say for sure that we did not spare any effort throughout the process.
