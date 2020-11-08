@@ -72,15 +72,13 @@ get cracking and start saving your best reads and ideas into _bookmark_, Type aw
 ### The _bookmark_ Tour
 
 Here's a brief tour of the _bookmark_ application! <br>
-When you open _bookmark_, you will greeted by our lovely bookshelf GUI in a few seconds. (Exhibit 1)
+When you open _bookmark_, you will be greeted by our user-friendly interface. (Exhibit 1)
     
-   ![Ui](images/Ui.png)
+   ![Ui](images/mainwindow.png)
    *Exhibit 1*
    
-You can find a list of all your recorded books at the main window. (Exhibit 2) <br>
-The books only show
-a condensed version of your books. Notes and Goals will be shown when you view a chosen book!
-
+You can find a list of all your recorded books in the main window. (Exhibit 2) <br>
+Summarised versions of your book records will be displayed in a list. 
    ![Ui](images/mainwindow_list.png)
    *Exhibit 2*
    
@@ -123,29 +121,6 @@ Prefix | Explanation
 
 ## Features
 
-Before we begin, you should be familiar with these annotations that this User Guide will use
-to bring emphasis to important points! 
-
-<div markdown="block" class="alert alert-primary">
-:information_source: **Information:**
-Information to know
-</div>
-
-<div markdown="block" class="alert alert-success">
-:heavy_check_mark: **Example:**
-Example to follow
-</div>
-
-<div markdown="block" class="alert alert-warning">
-:star: **Important Detail:**
-Important point
-</div>
-
-<div markdown="block" class="alert alert-danger">
-:warning: **Warning:**
-Caution is advised for this area
-</div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -169,107 +144,163 @@ Caution is advised for this area
 
 </div>
 
+### Adding a book into _bookmark_: `add`
 
-### Adding a bookmark: `add`
+Add your book into _bookmark_ by using our Add Command so that you can
+track your book reading progress.
 
-Adds your book into _bookmark_ by using our Add Command so that you can
-track your book reading progress together with us!
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-Format: <br>
- `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]` <br>
-*tags and bookmarks are optional!*
+  `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]`
+</div>
 
 <div markdown="block" class="alert alert-warning">
-:star: **Important Detail:**
-* Genre and Tags only accepts Alphabets and Numbers (No special symbols like ! ? *)
+:star: **Important Detailss:** 
+
+   * `NAME` is limited to 1 to 120 characters.
+   * `GENRE` and `TAG` only accepts Alphabets and Numbers (Special symbols like ! ? * are not supported)
+   * You can add up to 10 tags
+   * Adding tags and/or bookmarks is optional
 </div>
 
 Example Command | Result
 -----------------|--------
-`add n/Fifty Shades of Gray g/Romance tp/350 b/200` | Adds a book named `Fifty Shades of Gray`, with genre `Romance`, with `350` total pages, bookmarked at page `200`
-`add n/Harry Potter and the Chamber of Secrets g/Fiction t/Wizards tp/1500 b/25` | Adds a book named `Harry Potter and the Chamber of Secrets`, with genre `Fiction`, with a tag `Wizards`, with `1500` total pages, bookmarked at page `25`
+`add n/Pacman g/Game strategy tp/5000` | Adds a book named `Pacman`, with genre `Game strategy`, with `5000` total pages
+
+   ![addcommand](images/addcommandeg.png)
 
 ### Viewing details of a book : `view`
 
-Want a closer look? Look at the detailed information of your recorded book by using our 
+View detailed information such as notes of your book of choice by using the
 View Command. <br>
-With this command, you can see your recorded book contents in detail. <br>
-If you would like to go back to see all your books, you can type in `list`.
 
-<div markdown="block" class="alert alert-primary">
-:information_source: **Information:**
-After using the view command, the viewed book will have an INDEX of 1 since it is the only book shown on the screen.
-To interact with the book, use the INDEX of 1 to refer to the book.
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:**
+
+   `view INDEX`
 </div>
 
-Format: `view INDEX`
-* View the title, bookmark and percentage completed, goal and notes added of a specified book.
-* The `INDEX` refers to the index number shown in the displayed book list.
-* The `INDEX` **must be a positive number** 1, 2, 3, …
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detailss:** 
 
-*Suppose you have two books currently displayed*
+   * The `INDEX` refers to the index number shown in the displayed book list.
+   * The `INDEX` **must be a positive number** 1, 2, 3, …
+   * After using the view command, the viewed book will have an INDEX of 1 since it is the only book shown on the screen. 
+      To interact with the book, use the INDEX of 1 to refer to the book.
+   * If you would like to go back to see all your books, you can use the [list](#listing-all-books--list) command.
+</div>
+
+*Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
-`list` <br> `view 2` | views the 2nd book in the list. 
+`view 2` | views the 2nd book in the list. 
 
-   ![detailed_view](images/detailed_view.PNG)
+   ![detailed_view](images/viewcommandeg.PNG)
 
 ### Listing all books : `list`
 
-Want to see all your books in storage? Use the List Command to display all
-the books that you have added since the day you started!
+You can use the List Command to display all the books that you have added into _bookmark_
 
-Format: `list`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-   ![list_view](images/mainwindow.png) 
-
-### Locating books: `find`
-
-Looking for something? Use the Find Command to search for your book of choice
-by filtering your list of books to only those that you want. 
-
-Format: `find {Field}` <br>
-
-{Field} refers to any of the following:
-* `n/BOOK_TITLE` : find by input book name
-* `g/GENRE` : find by input book genre
-* `t/TAG` : find by input tag
-* `c/` : find by completed books
-* `nc/` : find by uncompleted books
+   `list`
+</div>
 
 Example Command | Result
 -----------------|--------
-`find n/ ant bear` | Returns a list of books that contain `ant` and/or `bear` in its name.
-`find t/ dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
+`list` | displays all books stored in _bookmark_
+
+
+   ![list_view](images/editeg1.png) 
+
+### Locating books: `find`
+
+You can use the Find Command to search for your book of choice
+by filtering your list of books to only show those that you are searching for. 
+
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   `find {Field}` <br>
+   {Field} refers to any of the following:
+   * `n/BOOK_TITLE` : find by input book name
+   * `g/GENRE` : find by input book genre
+   * `t/TAG` : find by input tag
+   * `c/` : find by completed books
+   * `nc/` : find by uncompleted books
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Detailss:** 
+
+   * In the current version of _bookmark_ You can only find on 1 field
+   * You cannot add any keywords behind `c/` and `nc/` prefix
+   * You can interact with your found books with their updated `INDEX` on the displayed list. 
+</div>
+
+Example Command | Result
+-----------------|--------
+`find n/bear` | Returns a list of books that contain `bear` in its name.
+`find t/dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
 `find c/` | Returns a list of completed books.
+
+   ![findcommand](images/findcommandeg.png)
+   _Result of `find n/bear`_
 
 #### Suggestions feature for Typing Error when finding a book
 
-Oh no! you've misspelled your book when adding it into the storage and you 
-can't seem to recall its actual name! <br> Fret not, _bookmark_ has an automatic Suggestion feature
-that will recommend the closest matching word to your misspelled word! 
+If you had misspelled your search keyword,
+_bookmark_ has an automatic Suggestion feature that will recommend the closest matching word to your misspelled word 
+to aid you in locating your book. 
 
-This feature also works when finding using these fields: 
-* Name
-* Genre
-* Tags
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   This process is activated automatically when using Find command and does not require any manual inputs
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   This feature is applied when finding for books using these fields: 
+   * Name
+   * Genre
+   * Tags
+</div>
 
 Example Command | Result
 -------------| ---------------
 find n/Hsrry | Did you mean: Harry?
+find n/Drgns | Did you mean: Dragons?
+
+   ![suggestion](images/suggestioneg.png)
+   _Result when Keyword: Artermis is typed wrongly_
 
 ### Sorting books: `sort` 
 
-Too messy? Use our Sort Command to organise your bookshelf! The sort command will
-help you organise your books in based on the order you indicate.
+You can use the Sort Command to organise your bookshelf so that you can view your books
+in the order you have indicated.
 
-Format: `sort {Field}` <br>
-{Field} refers to any of the following:
-* `n/` : Sort by Name
-* `g/` : Sort by Genre
-* `b/` : Sort by bookmarked page
-* `rp/` : Sort by reading progress
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+`sort {Field}` <br>
+    {Field} refers to any of the following:
+   * `n/` : Sort by Name
+   * `g/` : Sort by Genre
+   * `b/` : Sort by bookmarked page
+   * `rp/` : Sort by reading progress
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   * You should not add any inputs behind the prefixes
+   * You can interact with your sorted books with their updated `INDEX` on the displayed list. 
+</div>
 
 Example Command | Result
 -----------------|--------
@@ -278,188 +309,319 @@ Example Command | Result
 `sort b/` | Returns a list of books sorted by ascending number of pages read.
 `sort rp/` | Returns a list of books sorted by ascending reading progress.
 
+   ![sortcommand](images/sortcommandeg.png)
+   _Result of `sort g/`_
+
 ### Deleting a book : `delete`
 
-Having feels for some spring cleaning? Delete unwanted books from _bookmark_ by
-using our Delete Command! <br> 
-Be aware that deleted books will not be retrievable after you restart the application or 
-call more than 10 commands after deletion!
+You can use the Delete Command to delete unwanted books from _bookmark_ so that 
+you remove books that you no longer want to track. 
 
-Format: `delete INDEX`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-* Deletes the book at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed book list.
-* The `INDEX` **must be a positive number** 1, 2, 3, …
+    `delete INDEX`
+
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   * Deletes the book at the specified `INDEX`.
+   * The `INDEX` refers to the index number shown in the displayed book list.
+   * The `INDEX` **must be a positive number** 1, 2, 3, …
+   * Be aware that deleted books will not be retrievable after you restart the application or 
+     call more than 10 commands after deletion.
+</div>
+
+*Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
-`list` <br> `delete 2` | deletes the 2nd book in the book list.
+`delete 2` | deletes the 2nd book in the book list. 
+
+| What you should see |
+| --------------- |
+| Before `delete 2` |
+| <img src="images/deleteeg1.png" alt="delete"> |
+| After `delete 2` | 
+| <img src="images/deleteeg2.png" alt="delete"> | 
+
 
 ### Editing a book : `edit`
 
-Made a mistake? You can update information of a book simply by using our Edit Command! Use the command 
-to edit the book name, genre, tags, total_pages or current bookmarked page. 
+You can use the Edit Command to update information of a book so that
+you can keep your books up to date. 
 
-Format: `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-* Use `list` to display your list of books
-* Edit the book at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed book list.
-* The `INDEX` **must be a positive number** 1, 2, 3, …​
-* At least one of the fields must be provided.
-* Existing values will be updated to the input values.
+`edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]` 
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   * Edit the book at the specified `INDEX`.
+   * The `INDEX` refers to the index number shown in the displayed book list.
+   * The `INDEX` **must be a positive number** 1, 2, 3, …​
+   * At least one of the fields must be provided.
+   * Existing values will be updated to the input values.
+</div>
+
+*Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
-`list` <br> `edit 1 b/101` | Edits the bookmark of the 1st book to be `101`.
-`list` <br> `edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
+`edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
+`edit 2 b/250` | Edits the bookmark of the 2nd book to be `250`. 
+
+| What you should see |
+| ------------------- |
+| Before `edit 2 b/250` |
+| <img src="images/editeg1.png" alt="edit"> |
+| After `edit 2 b/250` |  
+| <img src="images/editeg2.png" alt="edit"> | 
 
 ### Set goal for your book: `goal`
 
-Don't we all love a challenge? Challenge yourself and set a reading goal 
-to finish a certain page by a deadline for a book in _bookmark_.
+You can use the Goal Command to set a reading goal to your chosen book so that 
+you can motivate yourself to read.
 
-Format: `goal INDEX p/PAGE d/DD-MM-YYYY`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-* Use `list` to display your list of books
-* Sets goal for the book at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed book list.
-* The `INDEX` **must be a positive number** 1, 2, 3, …
-* Page number and deadline must be provided.
-* Your goal is displayed in yellow, green or red for in progress, completed or overdue.
-* To remove a goal from specified book, refer to [remove a goal command](#remove-your-goal) below.
+`goal INDEX p/PAGE d/DD-MM-YYYY` 
+</div>
 
-Goal In Progress:
-![goal_in_progress](images/GoalUi_InProgress.png)
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
 
-Goal Completed:
-![goal_completed](images/GoalUi_Completed.png)
-
-Goal Overdue:
-![goal_overdue](images/GoalUi_Overdue.png)
+   * Sets goal for the book at the specified `INDEX`.
+   * The `INDEX` refers to the index number shown in the displayed book list.
+   * The `INDEX` **must be a positive number** 1, 2, 3, …
+   * If you add a goal to a book with an existing goal, the newly added goal will replace it.
+   * You can only set dates that have not passed
+   * Your goal is displayed in yellow, green or red for in progress, completed or overdue.
+    
+   Goal In Progress:
+    ![goal_in_progress](images/GoalUi_InProgress.png)
+    
+   Goal Completed:
+    ![goal_completed](images/GoalUi_Completed.png)
+    
+   Goal Overdue:
+    ![goal_overdue](images/GoalUi_Overdue.png)
+</div>
 
 Example Command | Result
 -----------------|--------
-`list`<br>`goal 1 p/69 d/22-05-2020` | Sets a goal to reach page 69 of the 1st book by 22nd May 2020.
+`goal 3 p/69 d/22-11-2020` | Sets a goal to reach page 69 of the 3rd book by 22nd November 2020.
+
+   ![goalcommand](images/goaleg2.png)
 
 ### Remove your Goal: `goaldel`
 
-Remove the goal you set for a particular book.\
-If you prefer to have no goals attached to your book or if you have completed a goal, you can choose to remove the goal.
+You can use the Goal Delete command to remove the previously set goal from
+a book so that you can remove unwanted goals.
 
-Format: `goaldel INDEX`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-* Removes goal for the book at the specified `INDEX`.
-* The index refers to the index number shown in the displayed book list.
-* The index **must be a positive number** 1, 2, 3, …​
+   `goaldel INDEX`
+</div>
 
-Example Command | Result
------------------|--------
-`goaldel 1` | Goal successfully removed for Harry Potter.
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
 
-### Adding a note to a book : `note`
-
-Feeling the Shakespear in you? Use the Note Command to pen down your thoughts for your
-book of choice! Notes will be differentiated based on the title you give and 
-will be displayed in full when you `view` a book! 
-
-Format: `note INDEX n/TITLE txt/TEXT`
-
-* Use `list` to display your list of books
-* Edits the book at the specified `INDEX`.
-* The index refers to the index number shown in the displayed book list.
-* The index **must be a positive number** 1, 2, 3, …​
-* `TITLE` and `INDEX` must not start with a whitespace.
-* `TITLE` is limited to 1 to 120 characters.
-* `TEXT` is limited to 1 to 1000 characters.
+   * Removes goal for the book at the specified `INDEX`.
+   * The index refers to the index number shown in the displayed book list.
+   * The index **must be a positive number** 1, 2, 3, …​
+</div>
 
 *Suppose you have at least one book currently displayed*
 
 Example Command | Result
 -----------------|--------
-`note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!`
+`goaldel 1` | Goal successfully removed for Harry Potter. 
+
+| What you should see |
+| ------------------- |
+| Before `goaldel 1` |
+| <img src="images/goaldeleg1.png" alt="goaldel"> |
+| After `goaldel 1` |
+| <img src="images/goaldeleg2.png" alt="goaldel"> | 
+
+
+### Adding a note to a book : `note`
+
+You can use the Note Command to add notes to your book so that you can pen down your thoughts and reflections.
+
+
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+`note INDEX n/TITLE txt/TEXT` 
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   * `TITLE` and `INDEX` must not start with a whitespace.
+   * `TITLE` is limited to 1 to 120 characters.
+   * `TEXT` is limited to 1 to 1000 characters.
+   * Edits the book at the specified `INDEX`.
+   * The index refers to the index number shown in the displayed book list.
+   * The index **must be a positive number** 1, 2, 3, …​
+</div>
+
+*Suppose you have at least one book currently displayed*
+
+Example Command | Result
+-----------------|--------
+`note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!` 
+
+| What you should see |
+| ------------------- |
+| Before `note 1 n/Thoughts txt/What is he thinking!` |
+| <img src="images/noteeg1.png" alt="note"> |
+| After `note 1 n/Thoughts txt/What is he thinking!` |
+| <img src="images/noteeg2.png" alt="note"> | 
+
 
 ### Deleting a note from a book : `notedel`
 
-Too many notes? Clear away unwanted notes using our Delete Note command so that you
-can keep your stored books looking nice and clean! 
+You can use the Delete Note command to delete notes so that you can
+remove unwanted notes from _bookmark_.
 
-Format: `notedel INDEX NOTE_INDEX`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-* Use `list` to display your list of books 
-* Deletes the note at the specified `NOTE_INDEX` of the book specified at `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed book list.
-* The `NOTE_INDEX` refers to the index number shown in the displayed notes in the detailed view.
-* All indexes **must be a positive number** 1, 2, 3, …​
+`notedel INDEX NOTE_INDEX`
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   * Deletes the note at the specified `NOTE_INDEX` of the book specified at `INDEX`.
+   * The `INDEX` refers to the index number shown in the displayed book list.
+   * The `NOTE_INDEX` refers to the index number shown in the displayed notes in the detailed view.
+   * All indexes **must be a positive number** 1, 2, 3, …​
+</div>
 
 *Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
-`notedel 4 2` | Deletes the 4th note of the 2nd book displayed
+`notedel 4 2` | Deletes the 4th note of the 2nd book displayed 
+
+| What you should see |
+| ------------------- |
+| Before `notedel 1 3` |
+| <img src="images/notedeleg1.png" alt="notedel"> |
+| After `notedel 1 3` |
+| <img src="images/notedeleg2.png" alt="notedel"> | 
+ 
 
 ### Undoing a command : `undo`
 
-Made a mistake? _bookmark_ provides an undo command to undo the last action that you've made.
-You can undo as many as 10 previous actions.
+You can use the Undo Command to revert previous commands so that you can
+correct your mistakes. 
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
 
-**:information_source: About commands that can be undone:**<br>
+   `undo`
+</div>
 
-* All commands can be undone except the following: <br>
-  * `exit`
-  * `help`
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
 
+   * All commands can be undone except the following: <br>
+     * `exit`
+     * `help`
+   * You can undo as many as 10 previous actions.
 </div>
 
 Example Command | Result
 --------------- | ----------
 `undo` | Previous version is restored
 
-The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
-entered during your usage session cannot be undone using the `undo` command once you quit and restart the application. 
+<div markdown="block" class="alert alert-danger">
+:warning: **Warning:** 
+
+   The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
+   entered during your last usage session cannot be undone using the `undo` command when you start the application again.
+</div>  
+
+| What you should see |
+| ------------------- |
+| Before `undo` |
+| <img src="images/undocommand1.png" alt="undo"> |
+| After `undo` | 
+| <img src="images/undocommand2.png" alt="undo"> | 
+
+
 
 ### Redoing a command: `redo`
 
-If you have accidentally undone an action, use the redo command to redo the last action that you have undone!
-This command can be used multiple times consecutively to redo up to ten undone commands. <br> 
-You should use `redo` in conjunction with the [undo](#undoing-a-command--undo) command.
+You can use the Redo Command to reinstate previously undone commands.
 
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   `redo`
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   * This command can be used multiple times consecutively to redo up to ten undone commands. <br> 
+     You should use `redo` in conjunction with the [undo](#undoing-a-command--undo) command. 
+   * All commands can be redone except the following: <br>
+     * `exit`
+     * `help`
+</div> 
+ 
+ 
 Example Command | Result
 --------------- | ----------
-`redo` | Previously undone command is invoked again
+`redo` | Previously undone command is invoked again 
 
-The redo command will not execute if there are no undone commands available to undo. Once _bookmark_ is closed, the
-commands that have been undone during your last usage session cannot be redone using the `redo` command when you
-start _bookmark_ again.
+_when redo is called on a deleted book (previously undone)_  
+
+| What you should see |
+| ------------------- |
+| Before `redo` |
+| <img src="images/undocommand2.png" alt="redo"> |
+| After `redo` |
+| <img src="images/redocommand.png" alt="redo"> | 
+
+<div markdown="block" class="alert alert-danger">
+:warning: **Warning:** 
+
+   The redo command will not execute if there are no undone commands available to redo. Once _bookmark_ is closed, the
+   commands that have been undone during your last usage session cannot be redone using the `redo` command when you
+   start _bookmark_ again.
+</div>
 
 ### Clearing all books : `clear`
 
-Looking to clear your entire book records? Use the Clear Command to swiftly delete all books at one go!. 
+You can use the Clear Command to delete all your books at once.
+
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   `clear`
+</div>  
+
 <div markdown="block" class="alert alert-danger">
-:warning: **Warning: **
-Take caution! While the undo feature will help you restore books deleted by `Clear`, you will not be able
-to recover your deleted books if you call too many commands (10 and more) after clearing!
+:warning: **Warning: ** 
+
+   Take caution! While the undo feature will help you restore books deleted by `clear`, you will not be able
+   to recover your deleted books if you call too many commands (10 and more) after clearing!
 </div>
-
-Example Command | Result
---------------- | ----------
-`clear` | Clears the entire _bookmark_ storage
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Ready to continue your reading? Close the program by using our Exit Command to safely exit the 
-program. 
-
-Format: `exit`
-
-Example Command | Result
----------------- | ---------
-`exit` | Exits _bookmark_
 
 ### Saving the data
 
@@ -468,15 +630,40 @@ _bookmark_ data will be saved in the hard disk automatically after any command t
 
 ### Accessing Help : `help`
 
-Looking for help? You can find our help window readily available by pressing F1, typing
-`help` in the input textbox or simply clicking on the Help icon at the navigation bar located at 
-the top of the application window. 
+You can use the Help Command to access the Help window so that you can quickly
+find details to the commands that _bookmark_ supports.
 
-Format: `help`
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   `help`
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:star: **Important Details:** 
+
+   You can also press `F1` on your keyboard or click on `help` on the navigation bar located at the top of the window.
+</div>
 
 Example Command | Result
 -----------------|--------
 `help` | Help Window opens
+
+ ![helpcommand](images/helpeg.png)
+
+### Exiting the program : `exit`
+
+You can use the Exit Command to quickly exit _bookmark_.
+ 
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: **Format:** 
+
+   `exit`
+</div>
+
+Example Command | Result
+---------------- | ---------
+`exit` | Exits _bookmark_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -485,6 +672,9 @@ Example Command | Result
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the 
 `library.json` file located in the `data` file of your previous bookmark home folder.
+
+**Q**: How many books can I add to _bookmark_? <br>
+**A**: You can add a total of 100 books to _bookmark_.
 
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
@@ -495,22 +685,22 @@ Example Command | Result
 
 Action | Format
 --------|------------------
-**Add** | `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
-**View** | `view INDEX`
-**List** | `list`
-**Find** | `find n/BOOK_TITLE`, `find g/GENRE`, `find t/TAG`, `find c/`, `find nc/`
-**Sort** | `sort n/`, `sort g/`, `sort b/`, `sort rp/`
-**Delete** | `delete INDEX`
-**Edit** | `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
-**Add Goal** | `goal INDEX p/PAGE d/DD-MM-YYYY`
-**Delete Goal** | `goaldel INDEX`
-**Add Note** | `note INDEX n/TITLE txt/TEXT`
-**Delete Note** | `notedel INDEX NOTE_INDEX`
-**Undo** | `undo`
-**Redo** | `redo`
-**Clear** | `clear`
-**Exit** | `exit`
-**Help** | `help`
+**[Add](#adding-a-book-into-_bookmark_-add)** | `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
+**[View](#viewing-details-of-a-book--view)** | `view INDEX`
+**[List](#listing-all-books--list)** | `list`
+**[Find](#locating-books-find)** | `find n/BOOK_TITLE`, `find g/GENRE`, `find t/TAG`, `find c/`, `find nc/`
+**[Sort](#sorting-books-sort)** | `sort n/`, `sort g/`, `sort b/`, `sort rp/`
+**[Delete](#deleting-a-book--delete)** | `delete INDEX`
+**[Edit](#editing-a-book--edit)** | `edit INDEX [n/BOOK_TITLE] [tp/TOTAL_PAGES] [b/PAGE_NUMBER] [g/GENRE] [t/TAG]`
+**[Add Goal](#set-goal-for-your-book-goal)** | `goal INDEX p/PAGE d/DD-MM-YYYY`
+**[Delete Goal](#remove-your-goal-goaldel)** | `goaldel INDEX`
+**[Add Note](#adding-a-note-to-a-book--note)** | `note INDEX n/TITLE txt/TEXT`
+**[Delete Note](#deleting-a-note-from-a-book--notedel)** | `notedel INDEX NOTE_INDEX`
+**[Undo](#undoing-a-command--undo)** | `undo`
+**[Redo](#redoing-a-command-redo)** | `redo`
+**[Clear](#clearing-all-books--clear)** | `clear`
+**[Exit](#exiting-the-program--exit)** | `exit`
+**[Help](#accessing-help--help)** | `help`
 
 ## Glossary
 

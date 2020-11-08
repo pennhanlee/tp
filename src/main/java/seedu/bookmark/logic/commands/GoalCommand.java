@@ -31,6 +31,9 @@ public class GoalCommand extends Command {
     public static final String MESSAGE_ADD_GOAL_SUCCESS = "New goal for %s: %s";
     public static final String MESSAGE_GOAL_OVERSHOT_TOTAL_PAGES = "Your goal (page %d) "
             + "overshot number of pages of the book (%d pages). Please choose a valid page!";
+    public static final String MESSAGE_ZERO_GOAL = "Please choose a page larger than 0";
+    public static final String MESSAGE_ALREADY_COMPLETED = "Your reading progress (page %d) has already "
+            + "exceeded this goal!\nPlease choose a page at least more than your current bookmark.";
     private final Index targetIndex;
     private final Goal goal;
 
@@ -57,11 +60,20 @@ public class GoalCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DEADLINE_OVERDUE, goal.deadline));
         }
 
+        if (goal.getPageInt() == 0) {
+            throw new CommandException(MESSAGE_ZERO_GOAL);
+        }
+
         Book bookWithoutGoal = allBooks.get(targetIndex.getZeroBased());
 
         if (bookWithoutGoal.getTotalPagesNumber() < goal.getPageInt()) { // If goal > totalPages
             throw new CommandException(String.format(MESSAGE_GOAL_OVERSHOT_TOTAL_PAGES, goal.getPageInt(),
                     bookWithoutGoal.getTotalPagesNumber()));
+        }
+
+        if (bookWithoutGoal.getPagesRead() >= goal.getPageInt()) { // Goal behind current progress
+            throw new CommandException(String.format(MESSAGE_ALREADY_COMPLETED,
+                    bookWithoutGoal.getPagesRead()));
         }
 
         Book bookWithGoal = Book.setGoal(bookWithoutGoal, goal);

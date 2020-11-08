@@ -119,16 +119,10 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the library data.
+* stores a `Library` object that represents the data added by the user.
 * stores a `WordBank` that contains instances of words in Library.
 * exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Library`, which `Person` references. This allows `Library` to only require one `Tag` object per unique `Tag`, instead of each `Book` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
 
 
 ### Storage component
@@ -162,7 +156,8 @@ regarding the books stored, and the **detailed view** which displays detailed in
 the display of book information.
 When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
 while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
-`DetailedBookCard`. 
+`DetailedBookCard`. `DetailedBookCard` will in turn use other components to display the book information,
+such as `NoteCard` to display the notes added to a book.
 
 Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the `BookCard` or `DetailedBookCard`
 respectively.
@@ -171,7 +166,7 @@ The class diagram below shows the relevant classes involved:
 
 ![Ui view class diagram](images/UiViewClassDiagram.png)
 
-##### Switching between the two views
+#### Switching between the two views
 
 `MainWindow` and `CommandResult` facilitates the switching between the two views.
 
@@ -208,12 +203,73 @@ detailed view:
   * Pros: More in-line with the purpose of the detailed view of showing only one book
   * Cons: More work has to be done to sync up the UI with the model.
   
+### General _bookmark_ Command Logic
+
+_bookmark_'s commands generally follow the same procedure. The following section will explain the 
+general flow of events for the following commands: 
+* `add`
+* `list`
+* `view`
+* `edit`
+* `delete` 
+
+The listed commands follow a similar sequence diagram as adding a book. These commands are 
+facilitated by `LogicManager`, `ModelManager`, `XYZCommandParser` and `XYZCommand` where XYZ refers to the specific command.
+eg. List, View, Edit etc. 
+
+`LogicManager` will handle the user input by first identifying the type of command (eg. Add, List, View, Edit etc.) and create a 
+`XYZCommandParser` object that will handle the remaining user input if any to produce a `XYZCommand`. 
+
+`XYZCommand` will then handle the specific command through `XYZCommand#execute()`. This method 
+interacts with and modifies `ModelManager` to display the appropriate
+list of book(s). A `CommandResult` object which contains the return message 
+to the User will be created by `XYZCommand` and passed to the UI component to be displayed to the User.
+
+*If the commands are in incorrect format, an exception message will be passed to the UI component to be displayed to the User*
+
+#### Implementation
+
+In this section, `Add` command will be used as an example.
+
+This feature is facilitated mainly by `LogicManager`, `ModelManager`, `AddCommandParser` and `AddCommand`.
+
+![Classes involved in the Add Command](images/LogicClassDiagram.png)
+
+Step 1: `LogicManager#execute()` handles the command to identify the type of command (eg. Add)
+ to create `AddCommandParser` to parse the remaining inputs. `AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. <br>
+
+Step 2: This `Book` object will be passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
+*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
+
+Step 3: `LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` into
+the `Model` via `ModelManager#addBook()`. Subsequently, `ModelManager#sortByDefaultComparator()` would be called
+to sort the internal book list according to the user's sorting preference, if any. <br>
+This method will return a `CommandResult` object which contains the return message to be displayed for the user. <br>
+
+Step 4: `CommandResult` is returned as a feedback to the user. <br>
+*If there is an existing book with the same name, an exception will be thrown with a message to the User*
+
+Below is an activity diagram which illustrates the flow of events for adding a book
+
+![Add command flow of execution](images/AddActivityDiagram.png)
+
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
+Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
+
+![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png) 
+
+
 ### Find feature
 
 #### Implementation
+
+*bookmark* allows users to find books by a specified field.
+
+This feature is facilitated mainly by `ModelManager`, `FindCommandParser` and `FindCommand`.
+
 The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList()` method. 
 `ModelManager#updateFilteredBookList()` takes in a single parameter, a `predicate`, and applies the `predicate` 
-on all elements of the observable book list. Elements that satisfy the `predicate` remain in the 
+on all elements of the observable book list. Books that satisfy the `predicate` remain in the 
 list, while elements that do not are removed and omitted from the user's view. Currently, the `find` command 
 supports finding by name, genre and tag fields, and can also filter completed & non-completed books.
 
@@ -223,23 +279,24 @@ Step 1. The user launches the application for the first time. `FilteredList` is 
 
 ![FindState1](images/FindState1.png)
 
-Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The `NameContainsKeywordsPredicate` predicate is generated
-and used as a filter in this scenario.
+Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The 
+`NameContainsKeywordsPredicate` predicate is generated and is used as a filter in this scenario.
 
 ![FindState2](images/FindState2.png)
 
 #### Filtering the FilteredList
 The `FindCommandParser#parse()` parses the `find` command input, and checks for input errors for which if found,
-an error would be thrown. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
-user's input filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
-and when `FindCommand#execute()` is called, the `predicate` is passed on to `ModelManager#updateFilteredBookList()`,
+would throw an error. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
+user's input keyword(s) and filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
+and when `FindCommand#execute()` is called, the `predicate` is passed to `ModelManager#updateFilteredBookList()`,
 where the filtering of the observable book list based on the `predicate` occurs. 
 
 The activity diagram below illustrates the flow of execution when the user inputs a `find` command.
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
-Below is a sequence diagram that shows a scenario whereby the user decides to find keywords in the book name field:
+Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
+field.<br>
 Command : `find n/ Harry`
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
@@ -257,35 +314,52 @@ Command : `find n/ Harry`
   the user uses the keyword for multiple fields.
   * Cons: Might not be easy to find specific books, i.e. cannot streamline the search as well.
 
+### Sort feature
 
-### Add book
+#### Implementation 
 
-#### Implementation
+*bookmark* allows Users to sort books by a specified field.
 
-*bookmark* allows Users to add books into the application.
+This feature is facilitated mainly by `ModelManager`, `SortCommandParser` and `SortCommand`.
 
-This feature is facilitated mainly by `LogicManager`, `AddCommandParser` and `AddCommand`.
+`ModelManager#sortFilteredBookList()` takes in a single parameter, a `comparator`, and applies the `comparator` on all elements
+of the internal observable book list. Book's are sorted according to the input comparator in ascending order. 
 
-![Classes involved in the Add Command](images/LogicClassDiagram.png)
+`ModelManager#setSortingPreference()` takes in a single parameter, a `newSortingPreference`, and updates the sorting preference 
+in the `preferences.json` file. Thereafter, the specified sorting mechanism will apply to the user until the user decides to change 
+the sorting mechanism using the sort command. 
 
-`LogicManager#execute()` handles the command word to create `AddCommandParser` to parse the remaining inputs.
-`AddCommandParser#parse()` tokenizes each prefix to create a `Book` object. This `Book` object will be
-passed as a parameter to create a `AddCommand` that will be returned to `LogicManager`<br>
-*If there are missing or invalid prefixes, an exception will be thrown with a message to the User.*
+Currently, the `sort` command supports sorting by name, genre, bookmark, and reading progress.
 
-`LogicManager#execute()` will call `AddCommand#execute()` to add the `Book` attribute into
-the `Model`to return a `CommandResult` as a feedback to the user.
-*If there is an existing book with the same name, an exception will be thrown with a message to the User*
+#### Sorting the ObservableList
+The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
+would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
+user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
+When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
+updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
+where sorting of the internal observable list based on the `comparator` occurs.
 
-Below is an activity diagram which illustrates the flow of events for adding a book
+The activity diagram below illustrates the flow of execution when the user inputs a `sort` command.
 
-![Add command flow of execution](images/AddActivityDiagram.png)
+![SortActivityDiagram](images/SortActivityDiagram.png)
 
-Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
-Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
+Below is a sequence diagram that shows a scenario whereby the user decides to sort books by the name field.
+Command : `sort n/`
 
-![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png)
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
+#### Design considerations
+
+##### Aspect: Sorting visible observable list or internal observable list
+
+* **Alternative 1 (current choice):** Sorting internal observable list
+  * Pros: Allows user to set sorting preference. When the user exits and reopens the application, the books would remain
+  in the sorted order.
+  * Cons: Could be a drawback if the user only wants to sort for temporary view.
+  
+* **Alternative 2:** Sorting visible observable list
+  * Pros: Sorts the user's book list temporarily, which is useful if the user only wants the sorted view momentarily.
+  * Cons: Book list would always return to default view after subsequent commands which could be distracting.
 
 ### Suggestion feature
 
@@ -306,7 +380,8 @@ For example:
 * Hrary -> Harry (Edit Distance 1)
 * Haarry -> Harry (Edit Distance 1)
 
-The suggestion mechanism is facilitated by `Logic` Component through `FindCommand` which calls on `SuggestionAlgorithm`.
+The suggestion mechanism is facilitated by `Logic` Component through `FindCommand` which calls on `SuggestionAlgorithm` if 
+no books can be found.
 `SuggestionAlgorithm` will call on `WordBank` in `Model` for the stored words required to complete the mechanism.
 `SuggestionAlgorithm` will implement the following operations:
 * `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion
@@ -322,7 +397,7 @@ Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in
 *harry is deliberately mispelled* <br>
 `FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty.
 
-Step 2: `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
+Step 2: Since no books are found, `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
 in the appropriate `WordStore` of `WordBank`.
 
 Step 3: `SuggestionAlgorithm#calculateDistance()` will be called to calculate the edit distance of `h@rry` and the words in `nameWordBank`
@@ -334,11 +409,69 @@ to be used as the suggested word.
 Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
 will return a Standard Message for no suggestion.
 
-![Did you mean? flow of events](images/SuggestionActivityDiagram.png)
+_Within the `SuggestionAlgorithm#FindSuggestion()`_<br> 
+
+![Suggestion Feature flow of events](images/SuggestionActivityDiagram1.png) 
+
+_Within `FindCommand#execute()`_
+
+![Suggestion Feature flow of events](images/SuggestionActivityDiagram2.png)
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
 
-![Interactions inside logic component and Algo component for Didyoumean feature](images/SuggestionSequenceDiagram.png)
+![Interactions inside logic component and Algo component for Suggestion feature](images/SuggestionSequenceDiagram.png)
+
+#### Design Consideration
+
+##### Aspect: Data structure for storing words 
+
+
+ * **Alternative 1: Using Damerau-Levenstien Algorithm (Currently Implemented)**
+   The Damerau-Levenstien Algorithm will cover calculation for the edit distance for 3 kinds of String Differences as mentioned above 
+   * Pros: <br> Will provide an accurate measure of the closest matching word based on the distance <br>
+   First letter need not match the keyword (First letter might be typed wrongly too)
+   * Cons: <br>
+    Incurs either a large time complexity (3^n) where n is length of string to be compared with (No Memoization) <br>
+   Incurs a large space consumption (construction of 2D Array) (With Memoization)
+
+   * **Alternative 2: Storing all words in a Trie**  
+   Store all words into a Trie Data structure and use recursion to find the matching words.
+   * Pros: Easy to implement, consumes less time and space than Alternative 1
+   * Cons: <br> Words must start with the same letter, hence its on the assumption that 1st letter of the word is not 
+   misspelt. <br>
+   Difficult to find transpositional errors (Eg. Harry vs Hrary)
+
+Alternative 1 was ultimately chosen as it is difficult to predict what type of typing errors will be committed. Hence, analysing
+missing, additional or transpositional letters are equally important. It is also naive to assume that users will not type the first
+letter wrongly too. In addition, there was no noticeable degradation of performance during testing using Alternative 1. Since Alternative 1
+provided a better solution to a Suggestion Feature with no noticeable performance slowdown, it was hence chosen. 
+
+
+### Add Goal feature
+
+#### Implementation
+
+*bookmark* allows Users to add notes to a book.
+
+This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `GoalCommand` and `Book`.
+
+![class diagram for goals](images/GoalClassDiagram.png)
+
+`LogicManager#execute()` (not shown in the diagram above) handles the command word to create 
+`GoalCommandParser` to parse the remaining inputs. `GoalCommandParser#parse()` tokenizes each prefix
+to create a `Goal` object. This `Goal` object will be passed as a parameter to create a `GoalCommand`
+that will be returned to `Logic Manager`.\
+*If there are missing or invalid parameters in command, an exception will be thrown with a 
+message to the User.*
+
+Below is an activity diagram which illustrates the flow of events for adding a Goal.
+
+![goal activity diagram](images/GoalActivityDiagram.png)
+
+Below is a sequence diagram which illustrates a scenario where a User adds a valid Goal
+to a valid book via Command: `goal 1 p/69 d/10-12-2020`
+
+![goal sequence diagram](images/GoalSequenceDiagram.png)
 
 ### Add Note feature
 
@@ -371,6 +504,7 @@ Command: `note 1 n/Thoughts txt/Something`
 
 
 ### Undo/redo feature
+
 #### Implementation
 
 The undo/redo mechanism is implemented by storing the state of the application after each command. The state of the 
@@ -402,9 +536,9 @@ Whenever the user enters any commands EXCEPT:
    
 the method `Model#save()` will be called which adds a new `State`, representing the new state of the Model, to `HistoryManager`
 and causes `HistoryManager` to store the previous `State`. Additionally, `ViewTypeManager#addViewTypePairing()` will be 
-called to create a new pairing between the newly create `State` and the appropriate `ViewType` to use to display the contents of the 
+called to create a new pairing between the newly created `State` and the appropriate `ViewType` to use to display the contents of the 
 Model to the user. The stored `States` and its corresponding `ViewType` pairing will be used to change the application
-state accordingly when a undo or redo operation, exposed as `Model#undo` and `Model#redo` respectively, is executed.
+state accordingly when a undo or redo operation, exposed as `Model#undo()` and `Model#redo()` respectively, is executed.
 
 The class diagram below illustrates the classes that facilitates the undo and redo
 feature.
@@ -499,7 +633,7 @@ The activity diagram below explains the flow of execution when a new state is ad
 
 ![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
-#### Design consideration:
+#### Design considerations
 
 ##### Aspect: How undo & redo executes
 
@@ -552,14 +686,15 @@ would cause multiple states to be created for a single command.
 
 **Target user profile**:
 
-* has a need to keep track of pages stopped at for multiple books
-* has a need to keep track of library loans
+* has a need to keep track of which page they stopped reading at for multiple books
+* has a need to set reading goals and write reflections about what they read
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage bookmarks and library loans faster than a typical mouse/GUI driven app. Removes the need for physical bookmarks and loan receipts.
+**Value proposition**: Manage bookmarks faster than a typical mouse/GUI driven app. 
+Removes the need for physical bookmarks. Help maintain the motivation to read by making reading more interactive.
 
 
 ### User stories
@@ -568,40 +703,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                         |
 | -------- | ------------------------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | see all the data of the book                                               | get information about the book                                         |
 | `* * *`  | user                                       | add a new book                                                             | track my progress                                                      |
 | `* * *`  | user                                       | delete a book                                                              | remove books that I no longer read                                     |
 | `* * *`  | user                                       | find a book by name                                                        | locate details of books without having to go through the entire list   |
-| `* * *`  | user                                       | see all the data about a particular book (title, bookmark, progress)                                                        | locate details of books without having to go through the entire list   |
+| `* * *`  | user                                       | see all the data about a particular book (title, bookmark, progress)       | get all necessary information about my book                            |
 | `* * *`  | user                                       | view a list of all the books and their progress                            | conveniently check my progress on all my books                         |
 | `* * *`  | user                                       | update the data of a book                                                  |                                                                        |
+| `* * *`  | user                                       | have an easy to use user interface                                                     | easily navigate through the system with minimal difficulty             |
+| `* * *`  | user                                       | have a help page                                                           | find out how to use the app                                            |
 | `* *`    | user                                       | classify my books according to genre                                       | organise my books better                                               |
 | `* *`    | analytical user                            | write down my thoughts on a book                                           | re-read my analysis later                                              |
 | `* *`    | user                                       | create my own classifications for genres not in the application            | organise the books to my liking                                        |
 | `* *`    | Kindle user                                | have a clearer representation of my progress                               | conveniently get my progress without navigating to the Kindle screen   |
-| `* * *`  | forgetful user                             | keep track of my loan expiry                                               | remember to return the book or extend the loan                         |
-| `*`      | user                                       | have a visual representation of my loans expiry period                     | instantly know the urgency of each loan                                |
-| `*`      | user                                       | set reminders for a book loan                                              | be reminded to return my book on time                                  |
 | `* *`    | user                                       | place tags or notes at different pages                                     | stop using sticky notes                                                |
-| `* * *`  | user                                       | have an easy interface                                                     | easily navigate through the system with minimal difficulty             |
-| `* * *`  | user                                       | have a help page                                                           | find out how to use the app                                            |
 | `* *`    | user                                       | have a few functions that I can use seamlessly                             | learn the app easily without bothering with large numbers of functions |
 | `* *`    | user                                       | be able to edit my tags and reflections                                    | edit mistakes and typos                                                |
 | `* *`    | careless user                              | undo any wrong commands that i’ve entered                                  |                                                                        |
+| `* *`    | user                                       | be able to filter my books by Lexicographic order, Date, Reading, Finished | get the information I'm looking for                                    |
+| `* *`    | beginner user                              | have default settings                                                      | skip configuring them at the start                                     |
+| `*`      | user                                       | have a home page that summarises important details                         | conveniently access the most important information                     |
 | `*`      | user                                       | have colour coded tags                                                     | so that I can easily differentiate important tags from the rest        |
 | `*`      | user                                       | customise the look of the application                                      | make it feel personal                                                  |
 | `*`      | user                                       | have a summary page for statistics on the books I've read                  |                                                                        |
 | `*`      | user                                       | be able to resize the application                                          | fit it to different screens                                            |
-| `* *`    | user                                       | be able to filter my books by Lexicographic order, Date, Reading, Finished | get the information I'm looking for                                    |
 | `*`      | user                                       | see and modify my current settings                                         |                                                                        |
-| `* * *`  | user                                       | have a home page that summarises important details                         | conveniently access the most important information                     |
-| `* *`    | beginner user                              | have default settings                                                      | skip configuring them at the start                                     |
-| `*`      | user                                       | customise the background by uploading my own photo                         | get the information I'm looking for                                    |
+| `*`      | user                                       | customise the background by uploading my own photo                         | customerize the look of the app to my liking                           |
+| `*`      | forgetful user                             | keep track of my loaned books expiry date                                  | remember to return the book or extend the loan                         |
+| `*`      | user                                       | have a visual representation of my loans expiry period                     | instantly know the urgency of each loan                                |
+| `*`      | user                                       | set reminders for a book loan                                              | be reminded to return my book on time                                  |
 
 
 ### Use cases
 
-(For all use cases below, the **System** is `bookmark` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is `bookmark` and the **Actor** is the `user`, unless specified otherwise
 
 **Use case: UC01 - Add a book**
 
@@ -614,7 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User provides the wrong code.
+* 1a. User provides the wrong command.
 
     * 1a1. bookmark returns an error message.
 
@@ -637,8 +771,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>requests to list all books (UC05)</u>.
-2. User requests to view a specific book using its index on list.
-3. bookmark returns title, bookmark and progress of the book to user.
+2. User requests to view a specific book using its displayed index.
+3. bookmark returns all the book's information to user.
 
     Use case ends.
 
@@ -646,7 +780,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The index given is invalid.
 
-    * 3a1. bookmark returns an error message.
+    * 2a1. bookmark returns an error message.
 
       Use case resumes at step 2.
 
@@ -655,7 +789,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User <u>requests to list all books (UC05)</u>.
-2.  User requests to delete a specific book using its index on list.
+2.  User requests to delete a specific book using its displayed index.
 3.  bookmark deletes the book.
 
     Use case ends.
@@ -673,28 +807,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>requests to list all books (UC05)</u>.
-2. User requests to edit a specific book using its index on list.
-3. The requested entry is updated
+2. User requests to edit a specific book using its displayed index.
+3. The requested entry is updated.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The index given is invalid
+* 2a. The index given is invalid.
 
-    * 2a1. bookmark returns an error message
-
-    Use case resumes at step 2.
-
- * 2b. The requested entry to update is invalid
-
-    * 2b1. bookmark returns an error message
+    * 2a1. bookmark returns an error message.
 
     Use case resumes at step 2.
 
- * 2c. The provided value for the entry to update is invalid
+ * 2b. The requested entry to update is invalid.
 
-    * 2c1. bookmark returns an error message
+    * 2b1. bookmark returns an error message.
+
+    Use case resumes at step 2.
+
+ * 2c. The provided value for the entry to update is invalid.
+
+    * 2c1. bookmark returns an error message.
 
     Use case resumes at step 2.
 
@@ -702,34 +836,126 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list all books
-2. bookmark returns a list of books
+1. User requests to list all books.
+2. bookmark returns a list of all books.
 
-    Use case ends
+    Use case ends.
 
 **Extensions**
 
-* 1a. The book list is empty
-    * 1a1. bookmark returns a message informing user that book list is empty
+* 1a. The book list is empty.
+    * 1a1. bookmark returns a message informing user that book list is empty.
 
-    Use case ends
+    Use case ends.
 
 **Use Case: UC06 - Help**
 
 **MSS**
 
-1. User requests to see the Help page
-2. bookmark returns the Help page
+1. User requests to see the Help page.
+2. bookmark returns the Help page.
 
-    Use case ends
+    Use case ends.
+
+**Use Case: UC07 - Undo**
+
+**MSS**
+
+1. User requests to undo last action.
+2. bookmark undoes the last user action.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There is no action to undo.
+    * 1a1. bookmark returns a message informing user that there is no action to undo.
+    
+    Use case ends.
+
+**Use Case: UC08 - Adding a goal**
+
+**MSS**
+
+1. User requests to add a goal to a specific book using its displayed index.
+2. User specifies the goal target and deadline.
+3. The goal is added to the book.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. There is already a goal for the book.
+    * 3a1. bookmark replaces the existing goal with the new goal.
+    
+    Use case resumes at step 3.
+
+**Use Case: UC09 - Adding a note**
+
+**MSS**
+
+1. User requests to add a note to a specific book using its displayed index.
+2. The note is added to the specified book.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. The index given is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1b. The provided prefix is invalid.
+
+    * 1b1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+
+ * 1c. The provided value for note title and text is invalid.
+
+    * 1c1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+**Use Case: UC10 - Deleting a note**
+
+**MSS**
+
+1. User requests to delete a note from a specific book using its displayed index.
+2. The requested note is deleted from the specified book.
+
+**Extensions**
+
+* 1a. The index given is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case resumes at step 1.
+    
+* 1b. The note index provided is invalid.
+
+    * 1b1. bookmark returns an error message.
+    
+    Use case resumes at step 1.
+
+**Use Case: UC11 - Sorting the book list**
+
+**MSS**
+
+1. User requests to sort the book list by name.
+2. bookmark sorts all the books by name.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 books without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 100 books without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The user interface should be self-explanatory and intuitive for first time users.
-5.  The app should give proper indications to user when user action is in an invalid format.
+4.  Should be backwards compatible with data from previous versions.
+5.  Should not crash when data is given in compatible formats.
 6.  The app should be accessible via the downloaded JAR file without any other installations needed.
 
 *{More to be added}*
@@ -737,7 +963,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -754,40 +979,154 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   a. Download the bookmark.jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   b. Double-click the bookmark.jar file Expected: Shows the GUI with a set of sample books. The window size may not be optimum.
+   
+   <div markdown="span" class="alert alert-info">:information_source: **Note:** If double clicking does not work,
+   navigate to the folder containing the jar file using your terminal or command prompt and enter `java -jar bookmark.jar`
+    
+   </div>
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a book
 
-1. Deleting a book while all books are being shown
+1. Deleting a book while all books are being shown.
 
-   1. Prerequisites: List all books using the `list` command. Multiple books in the list.
+   a. Prerequisites: List all books using the `list` command. Multiple books in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   b. Test case: `delete 1`<br>
+      Expected: First book is deleted from the list. Details of the deleted book shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
+   c. Test case: `delete 0`<br>
+      Expected: No book is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a book
 
+1. Adding a book while all books are being shown.
+
+   a. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
+      Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
+      50 will be created and added to the list
+
+   b. Test case: `add n/Test book g/T@st genre tp/1000 b/50`<br>
+      Expected: No book is added. Error details shown in the status message.
+   
+   c. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X <br>
+      Expected: Similar to previous
+
+2. Adding a book while only some books are being shown.
+
+   a. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
+      Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
+      50 will be created and added to the list. All books will be shown.  
+
+### Editing a book
+
+1. Editing a book while all books are being shown.
+
+   a. Prerequisites: List all books using the `list` command. Multiple books in the list.
+
+   b. Test case: `edit 1 n/Edited Name`<br>
+      Expected: First book in the list is edited to have a name of "Edited Name"
+      Details of the edited book shown in the status message.
+  
+   c. Test case: `edit 1 t/Good t/Educational`<br>
+      Expected: First book in the list has all existing tags removed and the "Good" and "Educational" tags added.
+
+   d. Test case: `edit 0 n/Edited Name`<br>
+      Expected: No book is edited. Error details shown in the status message.
+      
+   e. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous. 
+
+1. Editing a book while only some books are being shown.
+
+   a. Prerequisites: Book list filtered by a command (e.g `find` command). At least one book shown in the list.
+   
+   b. Test case: `edit 1 n/Edited Name`<br>
+      Expected: First book in the list is edited to have a name of "Edited Name".
+      Details of the edited book shown in the status message.
+      The edited book remains in the list regardless of how it was edited.
+      
+### Sorting the book list
+
+1. Sorting the book list while some books are being shown.
+
+   a. Prerequisites: Book list is showing at least 2 books to see the sorting effect.
+   
+   b. Test case: `sort n/`<br>
+      Expected: The books shown in the list will be sorted by their names in lexicographical order.
+      
+1. Adding a book into a sorted book list.
+
+   a. Prerequisites: Book list is initially showing at least 1 books to see the sorting effect.
+   b. Test case: `sort n/`<br> followed by `add` command to add another book.
+      Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
+      The new book will be added to the book list in the correct position that maintains the sorted order.
+
+### Undo 
+
+1. Using undo when there are no commands to undo.
+
+   a. Prerequisites: Must not have made any commands since starting the application.
+   
+   b. Test case: `undo`<br>
+      Expected: Nothing is undone. Error details shown in status message.
+
+1. Using undo when there are commands to undo.
+
+   a. Test case: Any command except `help` and `exit` followed by `undo`
+      Expected: The command entered is undone. The application reverts to exactly how it was before the command was
+      made. Success message shown in status message.
+      
+### Redo
+
+1. Using redo when there are no undone commands to redo.
+
+   a. Prerequisites: Must not have used `undo` command since starting the application.
+   
+   b. Test case: `redo`<br>
+      Expected: Nothing is redone. Error details shown in status message.
+
+1. Using redo when there are undone commands to redo.
+
+   a. Test case: Any command except `help` and `exit`, followed by `undo` and then `redo`<br>
+      Expected: The command entered is first undone, then on using `redo`, it will be redone. The application will be 
+      exactly as it was after the first  command was entered. Success message shown in status message.
+      
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   a. Prerequisites: Must have started the application at least once.
+   
+   b. Test case: In the folder containing `bookmark.jar`, delete the `data/library.json` file. Open the application. 
+      Make some commands and then close the application with the `exit` command. <br>
+      Expected: The application starts up with some sample data. On exit, the `data/library.json` file is created again,
+      containing the new data.
 
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data files
+
+   a. Prerequisites: Must have started the application at least once. At least one book stored in the data file.
+   
+   b. Test case: In the folder containing `bookmark.jar`, open the `data/library.json` file and edit it by removing the
+      "name"" property from one of the JSON objects. This simulates a corrupted data file. Open the application. Make 
+      some commands and then close the application with the `exit` command. <br>
+      Expected: The application starts up with no books being displayed. On exit, the `data/library.json` file is recreated,
+      containing the new data and will overwrite the "corrupted" data file.
+      
+   <div markdown="span" class="alert alert-info">:information_source: **Note:** In normal usage, users are not expected 
+   to manually make changes to the JSON data file. 
+   
+   </div>
+

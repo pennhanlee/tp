@@ -53,11 +53,9 @@ public class TotalPagesTest {
         assertFalse(TotalPages.isValidTotalPages("-123"));
 
         // too many digits total pages
-        StringBuilder tooLong = new StringBuilder();
-        // tooLong is one character too long
-        tooLong.append("1".repeat(TotalPages.MAX_TOTAL_PAGES_LENGTH + 2));
+        String tooLong = "1".repeat(TotalPages.MAX_TOTAL_PAGES_LENGTH + 1);
 
-        assertThrows(IllegalArgumentException.class, () -> new TotalPages(tooLong.toString()));
+        assertThrows(IllegalArgumentException.class, () -> new TotalPages(tooLong));
 
         // valid total pages
         assertTrue(TotalPages.isValidTotalPages("123"));

@@ -51,11 +51,11 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
                  + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBook));
 
-        // multiple names - last name accepted
+        // multiple names
         assertParseSuccess(parser, NAME_DESC_1984 + NAME_DESC_JANE_EYRE + GENRE_DESC_JANE_EYRE
                  + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBook));
 
-        // multiple genres - last genres accepted
+        // multiple genres
         assertParseSuccess(parser, NAME_DESC_JANE_EYRE + GENRE_DESC_1984 + GENRE_DESC_JANE_EYRE
                  + TAG_DESC_GOOD + TOTAL_PAGES_DESC_JANE_EYRE + BOOKMARK_DESC_JANE_EYRE, new AddCommand(expectedBook));
 

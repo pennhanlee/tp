@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeFontColor white
 
 package Model {
 Interface Model <<Interface>>
