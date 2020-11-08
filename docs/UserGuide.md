@@ -9,7 +9,7 @@ _bookmark_ allows you to easily track your **reading progress** so that you'll n
 lose track of where you stopped reading ever again. With many interesting features like **note taking** and **goal setting**,
 _bookmark_ will be your faithful reading companion, helping to make reading even more interactive and exciting.
 
-This user guide introduces what you to the many features of _bookmark_ and how you can benefit from them. With this guide,
+This user guide introduces you to the many features of _bookmark_ and how you can benefit from them. With this guide,
 you will be ready to use _bookmark_ to enhance your reading experience.
 
 * Table of Contents
