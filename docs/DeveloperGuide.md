@@ -279,7 +279,7 @@ Step 1. The user launches the application for the first time. `FilteredList` is 
 
 ![FindState1](images/FindState1.png)
 
-Step 2. The user executes `find n/ Harry` command to find all books with Harry in the Name field. The 
+Step 2. The user executes `find n/Harry` command to find all books with Harry in the Name field. The 
 `NameContainsKeywordsPredicate` predicate is generated and is used as a filter in this scenario.
 
 ![FindState2](images/FindState2.png)
@@ -297,7 +297,7 @@ The activity diagram below illustrates the flow of execution when the user input
 
 Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
 field.<br>
-Command : `find n/ Harry`
+Command : `find n/Harry`
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
@@ -335,6 +335,7 @@ Currently, the `sort` command supports sorting by name, genre, bookmark, and rea
 The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
 would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
 user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
+
 When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
 updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
 where sorting of the internal observable list based on the `comparator` occurs.
@@ -451,7 +452,7 @@ provided a better solution to a Suggestion Feature with no noticeable performanc
 
 #### Implementation
 
-*bookmark* allows Users to add notes to a book.
+*bookmark* allows Users to add their reading goal to a book.
 
 This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `GoalCommand` and `Book`.
 
@@ -844,7 +845,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 **Extensions**
 
 * 1a. The book list is empty.
-    * 1a1. bookmark returns a message informing user that book list is empty.
+    * 1a1. bookmark returns a message informing user that the book list is empty.
 
     Use case ends.
 
@@ -884,9 +885,25 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
     Use case ends.
 
 **Extensions**
+* 1a. User provides an invalid index.
+    * 1a1. _bookmark_ returns an error message.
+    
+    Use case returns at step 1.
+
+* 2a. User provides an invalid page. A page is invalid when it is a non-positive integers,
+lower than the specified book's `bookmark`, or higher than the specified book's `totalPages`.
+    * 2a1. _bookmark_ returns an error message.
+    
+    Use case resumes at step 2.
+
+* 2b. User provides an invalid deadline. A deadline is invalid 
+when it has the wrong format, or the date has already passed.
+    * 2b1. _bookmark_ returns an error message.
+    
+    Use case resumes at step 2.
 
 * 3a. There is already a goal for the book.
-    * 3a1. bookmark replaces the existing goal with the new goal.
+    * 3a1. _bookmark_ replaces the existing goal with the new goal.
     
     Use case resumes at step 3.
 
@@ -905,19 +922,19 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1b. The provided prefix is invalid.
 
     * 1b1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
  * 1c. The provided value for note title and text is invalid.
 
     * 1c1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 **Use Case: UC10 - Deleting a note**
 
@@ -926,28 +943,85 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 1. User requests to delete a note from a specific book using its displayed index.
 2. The requested note is deleted from the specified book.
 
+    Use case ends.
+
 **Extensions**
 
 * 1a. The index given is invalid.
 
     * 1a1. bookmark returns an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
     
 * 1b. The note index provided is invalid.
 
     * 1b1. bookmark returns an error message.
     
-    Use case resumes at step 1.
+    Use case ends.
 
 **Use Case: UC11 - Sorting the book list**
 
 **MSS**
 
-1. User requests to sort the book list by name.
-2. bookmark sorts all the books by name.
+1. User requests to sort the displayed book list by a specified field.
+2. bookmark sorts the displayed book list by the specified field.  
 
     Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case ends.
+    
+**Use Case: UC12 - Finding keywords**
+
+**MSS**
+
+1. User requests to find keyword(s) in the displayed book list by a specified field.
+2. Books that contain keyword(s) in the specified field are returned to the user in a new list.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. The field provided is invalid.
+
+    * 1a1. bookmark returns an error message.
+
+    Use case ends.
+
+ * 1b. bookmark does not find any matching books but is able to find similar words to the input keyword(s) stored in the 
+    application to provide as recommendations.
+
+    * 1b1. bookmark returns a message informing user that no matching books were found and provides the suggestion of a 
+    similar keyword that is found in the application.
+
+    Use case ends.
+
+ * 1c. bookmark does not find any matching books and is unable to find any similar words to the input keyword(s) stored 
+     in the application.
+
+    * 1c1.  bookmark returns a message informing user that neither matching books nor alternative keyword suggestions were found.
+
+    Use case ends.
+
+**Use Case: UC11 - Delete a goal**
+
+**MSS**
+
+1. User requests to delete the goal of a specific book using its displayed index.
+2. The goal is removed from the book.
+
+    Use case ends.
+    
+**Extensions**
+* 1a. User provides an invalid index.
+    * 1a1. _bookmark_ returns an error message.
+    
+    Use case returns at step 1.
 
 ### Non-Functional Requirements
 

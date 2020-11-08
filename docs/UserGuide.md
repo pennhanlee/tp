@@ -403,6 +403,8 @@ you can motivate yourself to read.
    * The `INDEX` **must be a positive number** 1, 2, 3, …
    * If you add a goal to a book with an existing goal, the newly added goal will replace it.
    * You can only set dates that have not passed
+   * You can only set pages higher than your current bookmarked page, and lower or 
+   equal to the total number of pages of the book.
    * Your goal is displayed in yellow, green or red for in progress, completed or overdue.
     
    Goal In Progress:
@@ -679,8 +681,16 @@ Example Command | Result
 **Q**: How many books can I add to _bookmark_? <br>
 **A**: You can add a total of 100 books to _bookmark_.
 
+**Q**: After using the `sort` command, will my books continue to remain sorted even after exiting _bookmark_? <br>
+**A**: Your books will remain in your specified sorting order even after exiting and restarting _bookmark_.
+
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
+
+**Q**: How do I edit my book's goal once I have completed that goal?<br>
+**A**: If you want to set a new goal to that book, use the [`goal`](#set-goal-for-your-book-goal) command
+and specify your updated page and deadline. If you wish to remove your goal,
+you can use the [`goaldel`](#remove-your-goal-goaldel) command.
 
 --------------------------------------------------------------------------------------------------------------------
 
