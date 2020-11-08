@@ -692,6 +692,12 @@ Example Command | Result
 and specify your updated page and deadline. If you wish to remove your goal,
 you can use the [`goaldel`](#remove-your-goal-goaldel) command.
 
+**Q**: Why can't I view my other books when I am viewing a book?<br>
+**A**: If you want to view your other books, please ensure that the book you would like to view is **currently
+displayed** on the screen. You can use the [`list`](#listing-all-books--list) command to view all books, and use the
+[`view`](#viewing-details-of-a-book--view) command with the index of the book you would like to view.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
