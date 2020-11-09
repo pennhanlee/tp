@@ -526,6 +526,8 @@ Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!` 
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `note 1 n/Thoughts txt/What is he thinking!` |
@@ -709,6 +711,8 @@ find details to the commands that _bookmark_ supports.
 Example Command | Result
 -----------------|--------
 `help` | Help Window opens
+
+<div style="page-break-after: always;"></div>
 
  ![helpcommand](images/helpeg.png)
 
