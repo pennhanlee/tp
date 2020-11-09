@@ -369,6 +369,8 @@ Example Command | Result
 -----------------|--------
 `delete 2` | deletes the 2nd book in the displayed book list
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | --------------- |
 | Before `delete 2` |
@@ -406,6 +408,8 @@ Example Command | Result
 -----------------|--------
 `edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively
 `edit 2 b/250` | Edits the bookmark of the 2nd book to be `250` 
+
+<div style="page-break-after: always;"></div>
 
 | What you should see |
 | ------------------- |
@@ -482,6 +486,8 @@ Example Command | Result
 -----------------|--------
 `goaldel 1` | Goal removed for the 1st book displayed in the list
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `goaldel 1` |
@@ -557,6 +563,8 @@ Example Command | Result
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
 `notedel 2 4` | Deletes the 4th note of the 2nd book displayed 
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `notedel 1 3` |
@@ -598,6 +606,8 @@ Example Command | Result
    entered during your last session cannot be undone using the `undo` command when you start the application again.
 </div>  
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `undo` |
@@ -631,6 +641,8 @@ You can use the Redo Command to reinstate previously undone commands.
 Example Command | Result
 --------------- | ----------
 `redo` | Reverts the most recent `undo`
+
+<div style="page-break-after: always;"></div>
 
 _when redo is called on a previously restored deleted book_  
 
@@ -670,12 +682,12 @@ You can use the Clear Command to delete all your books at once.
    to recover your deleted books if you call too many commands (10 and more) after clearing.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ### Saving the data
 
 _bookmark_ data will be saved in the hard disk automatically after any command that changes the data is called.
  There is no need to save manually.
+
+<div style="page-break-after: always;"></div>
 
 ### Accessing Help : `help`
 
