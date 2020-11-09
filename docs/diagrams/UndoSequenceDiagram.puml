@@ -15,7 +15,7 @@ end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> CommandParser : parseCommand(undo)
+LogicManager -> CommandParser : parseCommand("undo")
 activate CommandParser
 
 create UndoCommand
