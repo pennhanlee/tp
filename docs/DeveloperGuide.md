@@ -452,7 +452,7 @@ provided a better solution to a Suggestion Feature with no noticeable performanc
 
 #### Implementation
 
-*bookmark* allows Users to add notes to a book.
+*bookmark* allows Users to add their reading goal to a book.
 
 This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `GoalCommand` and `Book`.
 
@@ -885,9 +885,25 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
     Use case ends.
 
 **Extensions**
+* 1a. User provides an invalid index.
+    * 1a1. _bookmark_ returns an error message.
+    
+    Use case returns at step 1.
+
+* 2a. User provides an invalid page. A page is invalid when it is a non-positive integers,
+lower than the specified book's `bookmark`, or higher than the specified book's `totalPages`.
+    * 2a1. _bookmark_ returns an error message.
+    
+    Use case resumes at step 2.
+
+* 2b. User provides an invalid deadline. A deadline is invalid 
+when it has the wrong format, or the date has already passed.
+    * 2b1. _bookmark_ returns an error message.
+    
+    Use case resumes at step 2.
 
 * 3a. There is already a goal for the book.
-    * 3a1. bookmark replaces the existing goal with the new goal.
+    * 3a1. _bookmark_ replaces the existing goal with the new goal.
     
     Use case resumes at step 3.
 
@@ -992,6 +1008,21 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     Use case ends.
 
+**Use Case: UC11 - Delete a goal**
+
+**MSS**
+
+1. User requests to delete the goal of a specific book using its displayed index.
+2. The goal is removed from the book.
+
+    Use case ends.
+    
+**Extensions**
+* 1a. User provides an invalid index.
+    * 1a1. _bookmark_ returns an error message.
+    
+    Use case returns at step 1.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1037,6 +1068,18 @@ testers are expected to do more *exploratory* testing.
 
    b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
+### Viewing a book
+
+1. Viewing a particular book
+
+   a. Prerequisites: At least 1 book being displayed in the book list.
+   
+   b. Test case: `view 1`<br>
+      Expected: View the first book in the book list. The Ui will switch to only show more
+      detailed information about the selected book and will not show all other books. The
+      displayed book will have an `INDEX` of 1 since it is the first and only book being
+      displayed.
 
 ### Deleting a book
 
@@ -1059,13 +1102,13 @@ testers are expected to do more *exploratory* testing.
 
    a. Test case: `add n/Test book g/Test genre tp/1000 b/50`<br>
       Expected: A book with the name of "Test book", genre of "Test genre", 1000 total pages and bookmark placed at page
-      50 will be created and added to the list
+      50 will be created and added to the list.
 
    b. Test case: `add n/Test book g/T@st genre tp/1000 b/50`<br>
       Expected: No book is added. Error details shown in the status message.
    
-   c. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X <br>
-      Expected: Similar to previous
+   c. Other incorrect add commands to try: `add n/Test g/Test tp/X b/Y` where Y is larger than X. <br>
+      Expected: Similar to previous.
 
 2. Adding a book while only some books are being shown.
 
@@ -1094,12 +1137,23 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a book while only some books are being shown.
 
-   a. Prerequisites: Book list filtered by a command (e.g `find` command). At least one book shown in the list.
+   a. Prerequisites: Book list filtered by a command (e.g `find` command). At least 1 book shown in the list.
    
    b. Test case: `edit 1 n/Edited Name`<br>
       Expected: First book in the list is edited to have a name of "Edited Name".
       Details of the edited book shown in the status message.
       The edited book remains in the list regardless of how it was edited.
+      
+### Finding books
+
+1. Finding books by keywords.
+
+   a. Prerequisites: At least 1 book being displayed in the book list.
+   
+   b. Test case: `find n/XXX` where `XXX` is a keyword you want to find for. <br>
+      Expected: Books with `XXX` in their names will be shown, books that do not will not
+      be shown. <br>
+      Note: `find` only matches full words, it will not match substrings of a word.
       
 ### Sorting the book list
 
@@ -1112,7 +1166,7 @@ testers are expected to do more *exploratory* testing.
       
 1. Adding a book into a sorted book list.
 
-   a. Prerequisites: Book list is initially showing at least 1 books to see the sorting effect.
+   a. Prerequisites: Book list is initially showing at least 1 book to see the sorting effect.
    b. Test case: `sort n/`<br> followed by `add` command to add another book.
       Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
       The new book will be added to the book list in the correct position that maintains the sorted order.
@@ -1128,7 +1182,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Using undo when there are commands to undo.
 
-   a. Test case: Any command except `help` and `exit` followed by `undo`
+   a. Test case: Any command except `help` and `exit` followed by `undo`<br>
       Expected: The command entered is undone. The application reverts to exactly how it was before the command was
       made. Success message shown in status message.
       
@@ -1146,6 +1200,67 @@ testers are expected to do more *exploratory* testing.
    a. Test case: Any command except `help` and `exit`, followed by `undo` and then `redo`<br>
       Expected: The command entered is first undone, then on using `redo`, it will be redone. The application will be 
       exactly as it was after the first  command was entered. Success message shown in status message.
+
+1. Using redo not immediately after an undo command.
+   
+   a. Test case:
+      * Any command except `help` and `exit`,
+      * `undo`,
+      * Any command except `help` and `exit`
+      * `redo` <br>
+     Expected: The redo command will not execute. Error details shown in status message.
+
+### Adding a note
+
+1. Adding a note to a book.
+
+   a. Prerequisites: Book list is showing at least 1 book, not viewing a particular book with
+      the `view` command.
+   
+   b. Test case: `note 1 n/Hello txt/This is a note` <br>
+      Expected: A note with the title "Hello" and body "This is a note" will be added to 
+      the first book in the displayed book list. Only the title of the note will be displayed.
+      Doing `view 1` will allow you to see the body of the note added.
+
+1. Adding a note to a book being viewed.
+
+   a. Prerequisites: Viewing a particular book using the `view` command.
+   
+   b. Test case: `note 1 n/Hello txt/This is a note`<br>
+      Expected: A note with the title "Hello" and body "This is a note" will be added to the
+      book being viewed. Both the body and the title of the note will be displayed.
+
+### Deleting a note
+
+1. Deleting a note from a book.
+
+   a. Prerequisites: Book list is showing at least 1 book that has at least one note added.
+   
+   b. Test case: `notedel X 1` where X is the Xth book in the displayed book list.
+      The Xth book must have at least one note added.<br>
+      Expected: The first note of the selected book will be deleted.
+
+### Adding a goal
+
+1. Adding a goal to a book.
+
+   a. Prerequisites: At least one book being displayed in the book list.
+   
+   b. Test case: `goal 1 p/X g/DD-MM-YYYY` <br>
+      Expected: Goal to read up till X pages by DD-MM-YYYY will be added to the first book.<br>
+      Note: X must be more than the bookmarked page and less than the total number of pages in
+      the first book, DD-MM-YYYY must not be in the past.
+
+### Deleting a goal
+
+1. Deleting a goal from a book.
+
+   a. Prerequisities: At least one book with a goal being displayed in the book list.
+   
+   b. Test case: `goaldel X` where X is the Xth book in the displayed book list.
+      The Xth book must have a goal set. <br>
+      Expected: The goal of the selected book will be deleted. Success message shown in status message.
+      
       
 ### Saving data
 
@@ -1173,3 +1288,45 @@ testers are expected to do more *exploratory* testing.
    
    </div>
 
+## **Appendix: Effort** 
+
+### Model
+The `Model` of _bookmark_ is definitely more complex than that of AB3. In AB3, the Person class had fields that were mostly
+served as simple attributes for Person objects.
+
+In _bookmark_, each book has more complex attributes, such as `Note` and `Goal`. Each note can be added and deleted individually
+and and each goal also has to keep track of multiple attributes such as the deadline and the target page. Additionally,
+the different attributes have to interact with one another to ensure that they are valid. For instance, we have to make sure
+that `Bookmark`'s value does not exceed the `TotalPages`'s value as the bookmarked page cannot be greater than the total
+number of pages in a book. The logic behind can be implemented in various ways and we went through different approaches 
+to keep the logic as simple as possible. 
+
+Additionally, the `Model` of _bookmark_ supports even more complex functionality such as undoing and redoing as well as
+additions to support the suggestions feature which was not present in AB3.
+
+### Logic
+As the complexity of `Model` increased, the complexity of `Logic` would also have to increase. _bookmark_'s `Logic` supports
+many more Commands compared to AB3, including an improved `find` Command, `sort` Command, `note` Command and many more.
+
+Significant effort was put in to implement new logic for _bookmark_ as the `Logic` of _bookmark_ is responsible for
+a lot more compared to AB3. For example, a new `ViewTypeManager` class was created to keep track of what `ViewType` to display
+a given state of the application with so that the `undo` and `redo` commands can work well. We also put significant
+effort into sanitising and validating user input as well as increasing the testing rigour to ensure that _bookmark_'s parsers
+can handle unexpected inputs smoothly.  
+
+### Storage
+The `Storage` was extended to support more options for user preferences such as sorting preference. Furthermore, the 
+more complex attributes of each `Book` mentioned earlier have to be stored into the JSON file in an appropriate format.
+We spent quite a while discussing and deciding on the best way to represent each new attribute in the JSON file.
+
+### Ui
+A lot of effort was put into the `Ui`. Our team put in a lot of effort in ensuring that our interface is pleasing
+to the eye and user-friendly. We also introduced a "view switching" feature which allows users to switch between different
+pages which made the Ui a lot more interactive compared to the single page view of AB3's Ui. 
+
+### Overall
+As a whole, the process was not an easy one for the _bookmark_ team. We started off with plans for many features that we
+eventually decided were not suitable. Hence, in the first iterations, we spent a considerable amount of time coming up with new
+ideas to be implemented. Nevertheless, we put in consistent effort throughout the weeks to build, test and
+improve the new features within the timeline of the iterations. Although not perfect, the end product is something that
+we are proud of and we can say for sure that we did not spare any effort throughout the process.

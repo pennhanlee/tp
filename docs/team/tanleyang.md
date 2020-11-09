@@ -87,7 +87,7 @@ Given below are my contributions to the project.
   
 ### Contributions to the Developer Guide
 
-Given below are the contributions I made to the Developer Guide.
+Given below are some of the contributions I made to the Developer Guide.
 
 ### Changing Ui view
 

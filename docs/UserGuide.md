@@ -3,13 +3,14 @@ layout: page
 title: User Guide
 ---
 
-_bookmark_ is a desktop application to manage your indulgent bookworm habits! Use _bookmark_ to track your book reading progress 
-or pen down thoughts of mindboggling fan theories about your favourite characters!
+_bookmark_ is a desktop application for readers to manage their reading progress.
 
-_bookmark_ allows you to add and update your beloved books, track your reading progress using our bookmark and even add reading goals and notes to your chosen books!
+_bookmark_ allows you to easily track your **reading progress** so that you'll never need to use a physical bookmark or
+lose track of where you stopped reading ever again. With many interesting features like **note taking** and **goal setting**,
+_bookmark_ will be your faithful reading companion, helping to make reading even more interactive and exciting.
 
-Guess what? _bookmark_ also uses the special Command Line Interface style so if you love to type, you're in luck! So 
-get cracking and start saving your best reads and ideas into _bookmark_, Type away!~
+This user guide introduces you to the many features of _bookmark_ and how you can benefit from them. With this guide,
+you will be ready to use _bookmark_ to enhance your reading experience.
 
 * Table of Contents
 {:toc}
@@ -197,7 +198,7 @@ Example Command | Result
 -----------------|--------
 `view 2` | views the 2nd book in the list. 
 
-   ![detailed_view](images/viewcommandeg.PNG)
+   ![detailed_view](images/viewcommandeg.png)
 
 ### Listing all books : `list`
 
@@ -402,6 +403,8 @@ you can motivate yourself to read.
    * The `INDEX` **must be a positive number** 1, 2, 3, …
    * If you add a goal to a book with an existing goal, the newly added goal will replace it.
    * You can only set dates that have not passed
+   * You can only set pages higher than your current bookmarked page, and lower or 
+   equal to the total number of pages of the book.
    * Your goal is displayed in yellow, green or red for in progress, completed or overdue.
     
    Goal In Progress:
@@ -603,7 +606,9 @@ _when redo is called on a deleted book (previously undone)_
 
    The redo command will not execute if there are no undone commands available to redo. Once _bookmark_ is closed, the
    commands that have been undone during your last usage session cannot be redone using the `redo` command when you
-   start _bookmark_ again.
+   start _bookmark_ again.<br>
+   Using any commands other than `help`, `exit`, `redo` and `undo` will erase any earlier commands that you have 
+   undone, hence these commands will not recoverable by the `redo` command.
 </div>
 
 ### Clearing all books : `clear`
@@ -617,7 +622,7 @@ You can use the Clear Command to delete all your books at once.
 </div>  
 
 <div markdown="block" class="alert alert-danger">
-:warning: **Warning: ** 
+:warning: **Warning:** 
 
    Take caution! While the undo feature will help you restore books deleted by `clear`, you will not be able
    to recover your deleted books if you call too many commands (10 and more) after clearing!
@@ -681,6 +686,17 @@ Example Command | Result
 
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
+
+**Q**: How do I edit my book's goal once I have completed that goal?<br>
+**A**: If you want to set a new goal to that book, use the [`goal`](#set-goal-for-your-book-goal) command
+and specify your updated page and deadline. If you wish to remove your goal,
+you can use the [`goaldel`](#remove-your-goal-goaldel) command.
+
+**Q**: Why can't I view my other books when I am viewing a book?<br>
+**A**: If you want to view your other books, please ensure that the book you would like to view is **currently
+displayed** on the screen. You can use the [`list`](#listing-all-books--list) command to view all books, and use the
+[`view`](#viewing-details-of-a-book--view) command with the index of the book you would like to view.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

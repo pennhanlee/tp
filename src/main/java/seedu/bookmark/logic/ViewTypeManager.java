@@ -11,7 +11,7 @@ import seedu.bookmark.model.history.State;
  */
 public class ViewTypeManager {
 
-    private static final int MAX_CACHE_SIZE = HistoryManager.MAX_UNDO_COUNT * 2;
+    private static final int MAX_CACHE_SIZE = HistoryManager.MAX_UNDO_COUNT + 1;
     /**
      * Cache that maps {@code State} to a {@code ViewType}.
      * Deletes entries for obsolete states to prevent excessive memory usage.
