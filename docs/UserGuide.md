@@ -676,6 +676,9 @@ Example Command | Result
 **Q**: How many books can I add to _bookmark_? <br>
 **A**: You can add a total of 100 books to _bookmark_.
 
+**Q**: After using the `sort` command, will my books continue to remain sorted even after exiting _bookmark_? <br>
+**A**: Your books will remain in your specified sorting order even after exiting and restarting _bookmark_.
+
 **Q**: How can I know more about the available commands that _bookmark_ supports?<br>
 **A**: Type `help` to open up the Help Window where the available commands will be shown.
 
