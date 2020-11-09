@@ -17,6 +17,8 @@ you will be ready to use _bookmark_ to enhance your reading experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 ### Installation
@@ -37,6 +39,8 @@ you will be ready to use _bookmark_ to enhance your reading experience.
 `add n/My First Book g/NonFiction t/Yay tp/1000` 
 
 1. You should see that My First Book will be added into the list of books stored.
+
+<div style="page-break-after: always;"></div>
 
 #### MacOS Users
 
@@ -68,7 +72,7 @@ you will be ready to use _bookmark_ to enhance your reading experience.
 
 1. You should see that My First Book will be added into the list of books stored.
 
-
+<div style="page-break-after: always;"></div>
 
 ### The _bookmark_ Tour
 
@@ -78,17 +82,23 @@ When you open _bookmark_, you will be greeted by our user-friendly interface. (E
    ![Ui](images/mainwindow.png)
    *Exhibit 1*
    
+<div style="page-break-after: always;"></div>   
+
 You can find a list of all your recorded books in the main window. (Exhibit 2) <br>
 Summarised versions of your book records will be displayed in a list. 
    ![Ui](images/mainwindow_list.png)
    *Exhibit 2*
    
+<div style="page-break-after: always;"></div>   
+
 You can also see data of the summary of all the displayed books, bookmarks and pages read on the
 right side of the application window. (Exhibit 3)
 
    ![Ui](images/mainwindow_summary.png)
    *Exhibit 3*
    
+<div style="page-break-after: always;"></div>
+
 You can start to invoke commands by typing them in the provided input box at the bottom of 
 the application window. (Exhibit 4) <br>
  _bookmark_ will reply you with the appropriate response for each command.
@@ -100,6 +110,7 @@ Want to do more? Refer to the [Features](#features) section below for details of
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## Prefixes
 
@@ -119,6 +130,8 @@ Prefix | Explanation
 `p/` | The page to set your goal on
 `d/` | The date to complete your goal by
 `txt/` | The text of your note
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -145,6 +158,8 @@ Prefix | Explanation
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a book into _bookmark_: `add`
 
 Add your book into _bookmark_ by using our Add Command so that you can
@@ -170,6 +185,8 @@ Example Command | Result
 `add n/Pacman g/Game strategy tp/5000` | Adds a book named `Pacman`, with genre `Game strategy`, with `5000` total pages
 
    ![addcommand](images/addcommandeg.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing details of a book : `view`
 
@@ -200,6 +217,8 @@ Example Command | Result
 
    ![detailed_view](images/viewcommandeg.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all books : `list`
 
 You can use the List Command to display all the books that you have added into _bookmark_
@@ -216,6 +235,8 @@ Example Command | Result
 
 
    ![list_view](images/editeg1.png) 
+
+<div style="page-break-after: always;"></div>
 
 ### Locating books: `find`
 
@@ -251,6 +272,8 @@ Example Command | Result
    ![findcommand](images/findcommandeg.png)
    _Result of `find n/bear`_
 
+<div style="page-break-after: always;"></div>
+
 #### Word suggestion for typing errors
 
 If you had misspelled your search keyword,
@@ -280,6 +303,8 @@ find n/Drgns | Did you mean: Dragons?
 
    ![suggestion](images/suggestioneg.png)
    _Result when Keyword: Artermis is typed wrongly_
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting books: `sort` 
 
@@ -314,6 +339,8 @@ Example Command | Result
    ![sortcommand](images/sortcommandeg.png)
    _Result of `sort g/`_
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a book : `delete`
 
 You can use the Delete Command to delete unwanted books from _bookmark_ so that 
@@ -342,6 +369,8 @@ Example Command | Result
 -----------------|--------
 `delete 2` | deletes the 2nd book in the displayed book list
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | --------------- |
 | Before `delete 2` |
@@ -349,6 +378,8 @@ Example Command | Result
 | After `delete 2` | 
 | <img src="images/deleteeg2.png" alt="delete"> | 
 
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a book : `edit`
 
@@ -378,12 +409,16 @@ Example Command | Result
 `edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively
 `edit 2 b/250` | Edits the bookmark of the 2nd book to be `250` 
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `edit 2 b/250` |
 | <img src="images/editeg1.png" alt="edit"> |
 | After `edit 2 b/250` |  
 | <img src="images/editeg2.png" alt="edit"> | 
+
+<div style="page-break-after: always;"></div>
 
 ### Set goal for your book: `goal`
 
@@ -423,6 +458,8 @@ Example Command | Result
 
    ![goalcommand](images/goaleg2.png)
    _Result of `goal 3 p/69 d/22-11-2020`_
+
+<div style="page-break-after: always;"></div>
    
 ### Remove your Goal: `goaldel`
 
@@ -449,6 +486,8 @@ Example Command | Result
 -----------------|--------
 `goaldel 1` | Goal removed for the 1st book displayed in the list
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `goaldel 1` |
@@ -456,6 +495,8 @@ Example Command | Result
 | After `goaldel 1` |
 | <img src="images/goaldeleg2.png" alt="goaldel"> | 
 
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a note to a book : `note`
 
@@ -485,6 +526,8 @@ Example Command | Result
 -----------------|--------
 `note 1 n/Thoughts txt/What is he thinking!` | Adds a note to the first book shown with the title `Thoughts` and text `What is he thinking!` 
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `note 1 n/Thoughts txt/What is he thinking!` |
@@ -492,6 +535,8 @@ Example Command | Result
 | After `note 1 n/Thoughts txt/What is he thinking!` |
 | <img src="images/noteeg2.png" alt="note"> | 
 
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a note from a book : `notedel`
 
@@ -520,6 +565,8 @@ Example Command | Result
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
 `notedel 2 4` | Deletes the 4th note of the 2nd book displayed 
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `notedel 1 3` |
@@ -527,6 +574,8 @@ Example Command | Result
 | After `notedel 1 3` |
 | <img src="images/notedeleg2.png" alt="notedel"> | 
  
+ 
+ <div style="page-break-after: always;"></div>
 
 ### Undoing a command : `undo`
 
@@ -559,6 +608,8 @@ Example Command | Result
    entered during your last session cannot be undone using the `undo` command when you start the application again.
 </div>  
 
+<div style="page-break-after: always;"></div>
+
 | What you should see |
 | ------------------- |
 | Before `undo` |
@@ -566,7 +617,7 @@ Example Command | Result
 | After `undo` | 
 | <img src="images/undocommand2.png" alt="undo"> | 
 
-
+<div style="page-break-after: always;"></div>
 
 ### Redoing a command: `redo`
 
@@ -593,6 +644,8 @@ Example Command | Result
 --------------- | ----------
 `redo` | Reverts the most recent `undo`
 
+<div style="page-break-after: always;"></div>
+
 _when redo is called on a previously restored deleted book_  
 
 | What you should see |
@@ -611,6 +664,8 @@ _when redo is called on a previously restored deleted book_
    Using any commands other than `help`, `exit`, `redo` and `undo` will erase any earlier commands that you have 
    undone, hence these commands will not recoverable by the `redo` command.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all books : `clear`
 
@@ -634,6 +689,8 @@ You can use the Clear Command to delete all your books at once.
 _bookmark_ data will be saved in the hard disk automatically after any command that changes the data is called.
  There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### Accessing Help : `help`
 
 You can use the Help Command to access the Help window so that you can quickly
@@ -655,7 +712,11 @@ Example Command | Result
 -----------------|--------
 `help` | Help Window opens
 
+<div style="page-break-after: always;"></div>
+
  ![helpcommand](images/helpeg.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -672,6 +733,8 @@ Example Command | Result
 `exit` | Exits _bookmark_
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -701,6 +764,8 @@ displayed** on the screen. You can use the [`list`](#listing-all-books--list) co
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Action | Format
@@ -721,6 +786,8 @@ Action | Format
 **[Clear](#clearing-all-books--clear)** | `clear`
 **[Exit](#exiting-the-program--exit)** | `exit`
 **[Help](#accessing-help--help)** | `help`
+
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
