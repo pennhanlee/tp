@@ -31,12 +31,12 @@ you will be ready to use _bookmark_ to enhance your reading experience.
 
 #### Windows Users
 1. Double-click the `bookmark.jar` file to start the application. <br>
-*If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
+*If you're starting the application for the first time, you will see some sample books. Simply delete them with our delete command if you want a fresh start.*
 
-1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
+1. Add your first book. <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
 `add n/My First Book g/NonFiction t/Yay tp/1000` 
 
-1. You should see that My First Book will be added into the list of books you see! 
+1. You should see that My First Book will be added into the list of books stored.
 
 #### MacOS Users
 
@@ -45,12 +45,12 @@ you will be ready to use _bookmark_ to enhance your reading experience.
 1. Right-click the `bookmark.jar` file and navigate to `Open With` and click `Jar Launcher`.
 
 1. Allow _bookmark_ to run by clicking `Open`.<br>
-*If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
+*If you're starting the application for the first time, you will see some sample books. Simply delete them with our delete command if you want a fresh start.*
 
-1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
+1. Add your first book. <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
 `add n/My First Book g/Non-Fiction t/Yay tp/1000` 
 
-1. You should see that My First Book will be added into the list of books you see!
+1. You should see that My First Book will be added into the list of books stored.
 
 ##### Alternative Method
 
@@ -61,18 +61,18 @@ you will be ready to use _bookmark_ to enhance your reading experience.
 1. Find the folder containing bookmark and drag it into the terminal and hit enter.
 
 1. Run this command to start the application. `java -jar bookmark.jar`. <br>
-*If you're starting _bookmark_ for the first time, you will see some sample books! Simply delete them with our delete command if you want a fresh start!*
+*If you're starting the application for the first time, you will see some sample books. Simply delete them with our delete command if you want a fresh start.*
 
-1. Add your first book! <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
-`add n/My First Book g/Non-Fiction t/Yay tp/1000` 
+1. Add your first book. <br> Invoke your first command by typing this in the input box located at the bottom of the application. <br>
+`add n/My First Book g/NonFiction t/Yay tp/1000` 
 
-1. You should see that My First Book will be added into the list of books you see!
+1. You should see that My First Book will be added into the list of books stored.
 
 
 
 ### The _bookmark_ Tour
 
-Here's a brief tour of the _bookmark_ application! <br>
+Here's a brief tour of the _bookmark_ application. <br>
 When you open _bookmark_, you will be greeted by our user-friendly interface. (Exhibit 1)
     
    ![Ui](images/mainwindow.png)
@@ -83,7 +83,7 @@ Summarised versions of your book records will be displayed in a list.
    ![Ui](images/mainwindow_list.png)
    *Exhibit 2*
    
-You can also see data of the summary of all the shown books, bookmarks and pages read on the
+You can also see data of the summary of all the displayed books, bookmarks and pages read on the
 right side of the application window. (Exhibit 3)
 
    ![Ui](images/mainwindow_summary.png)
@@ -104,11 +104,11 @@ Want to do more? Refer to the [Features](#features) section below for details of
 ## Prefixes
 
 Before diving into the features, this section will provide you with some
-information on what each prefix used in the features below represent.
+information on what each prefix represents.
 
 Prefix | Explanation
 -------|------------
-`n/` | Name of the book / Title of the note to add to a book
+`n/` | Name of the book / Title of the note
 `g/` | Genre of the book
 `t/` | Tag attached to a book
 `tp/` | Total pages of the book
@@ -126,7 +126,7 @@ Prefix | Explanation
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the information to be given by you.<br>
+* Words in `UPPER_CASE` are the information to be provided by you.<br>
   e.g. in `add n/BOOK_TITLE`, `BOOK_TITLE` refers to the name of the book you want to add.
 
 * Words in square brackets are optional.<br>
@@ -134,14 +134,14 @@ Prefix | Explanation
   You can always edit the book to have that information at a later time.
 
 * Words with trailing `…` refers to fields that can be used multiple times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` means that the Tag field can be omitted or used multiple times, `t/friend t/family` etc.
 
 * You can enter your book information in any order you like.<br>
   e.g. If our command instructions specify `n/BOOK_TITLE tp/TOTAL_PAGES`, `tp/TOTAL_PAGES n/BOOK_TITLE` is also acceptable.
   
-* The `INDEX` will **change based on the currently shown books on the screen.**
+* The `INDEX` will **change based on the books currently shown on the screen.**
   For example, the `INDEX` of the first book shown will be 1, the `INDEX` of the second book shown will be 2, etc.
-  If you would like to use commands on other books, please ensure they are currently displayed.
+  If you would like to use commands on other books, please ensure that they are currently displayed.
 
 </div>
 
@@ -160,9 +160,9 @@ track your book reading progress.
 :star: **Important Detailss:** 
 
    * `NAME` is limited to 1 to 120 characters.
-   * `GENRE` and `TAG` only accepts Alphabets and Numbers (Special symbols like ! ? * are not supported)
-   * You can add up to 10 tags
-   * Adding tags and/or bookmarks is optional
+   * `GENRE` and `TAG` only accepts Alphabets and Numbers (Special symbols like ! ? * are not supported).
+   * You can add up to 10 tags.
+   * Adding tags and/or bookmarks is optional.
 </div>
 
 Example Command | Result
@@ -183,7 +183,7 @@ View Command. <br>
 </div>
 
 <div markdown="block" class="alert alert-warning">
-:star: **Important Detailss:** 
+:star: **Important Details:** 
 
    * The `INDEX` refers to the index number shown in the displayed book list.
    * The `INDEX` **must be a positive number** 1, 2, 3, …
@@ -192,11 +192,11 @@ View Command. <br>
    * If you would like to go back to see all your books, you can use the [list](#listing-all-books--list) command.
 </div>
 
-*Suppose you have at least two books currently displayed*
+*Suppose you have at least one book currently displayed*
 
 Example Command | Result
 -----------------|--------
-`view 2` | views the 2nd book in the list. 
+`view 1` | views the 1st book in the list 
 
    ![detailed_view](images/viewcommandeg.png)
 
@@ -227,31 +227,31 @@ by filtering your list of books to only show those that you are searching for.
 
    `find {Field}` <br>
    {Field} refers to any of the following:
-   * `n/BOOK_TITLE` : find by input book name
-   * `g/GENRE` : find by input book genre
-   * `t/TAG` : find by input tag
-   * `c/` : find by completed books
-   * `nc/` : find by uncompleted books
+   * `n/BOOK_TITLE` : find by book name
+   * `g/GENRE` : find by book genre
+   * `t/TAG` : find by tag
+   * `c/` : find all completed books
+   * `nc/` : find all uncompleted books
 </div>
 
 <div markdown="block" class="alert alert-warning">
-:star: **Important Detailss:** 
+:star: **Important Details:** 
 
-   * In the current version of _bookmark_ You can only find on 1 field
-   * You cannot add any keywords behind `c/` and `nc/` prefix
+   * In the current version of _bookmark_, you can only find books using 1 field.
+   * You cannot add any keywords behind `c/` and `nc/` prefix.
    * You can interact with your found books with their updated `INDEX` on the displayed list. 
 </div>
 
 Example Command | Result
 -----------------|--------
-`find n/bear` | Returns a list of books that contain `bear` in its name.
-`find t/dog cat` | Returns a list of books that contain `dog` and/or `cat` in its tags.
-`find c/` | Returns a list of completed books.
+`find n/bear` | Returns a list of books that contain `bear` in their name
+`find t/dog cat` | Returns a list of books that contain `dog` and/or `cat` in their tags
+`find c/` | Returns a list of all completed books
 
    ![findcommand](images/findcommandeg.png)
    _Result of `find n/bear`_
 
-#### Suggestions feature for Typing Error when finding a book
+#### Word suggestion for typing errors
 
 If you had misspelled your search keyword,
 _bookmark_ has an automatic Suggestion feature that will recommend the closest matching word to your misspelled word 
@@ -260,13 +260,14 @@ to aid you in locating your book.
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: **Format:** 
 
-   This process is activated automatically when using Find command and does not require any manual inputs
+   This process is activated automatically when using the [Find command](#locating-books-find) and does not require any 
+   manual inputs.
 </div>
 
 <div markdown="block" class="alert alert-warning">
 :star: **Important Details:** 
 
-   This feature is applied when finding for books using these fields: 
+   This feature is applied when finding books using these fields: 
    * Name
    * Genre
    * Tags
@@ -292,23 +293,23 @@ in the order you have indicated.
     {Field} refers to any of the following:
    * `n/` : Sort by Name
    * `g/` : Sort by Genre
-   * `b/` : Sort by bookmarked page
-   * `rp/` : Sort by reading progress
+   * `b/` : Sort by Bookmarked Page
+   * `rp/` : Sort by Reading Progress
 </div>
 
 <div markdown="block" class="alert alert-warning">
 :star: **Important Details:** 
 
-   * You should not add any inputs behind the prefixes
+   * You should not add any inputs behind the prefixes.
    * You can interact with your sorted books with their updated `INDEX` on the displayed list. 
 </div>
 
 Example Command | Result
 -----------------|--------
-`sort n/` | Returns a list of books sorted by name in alphabetical order.
-`sort g/` | Returns a list of books sorted by genre in alphabetical order.
-`sort b/` | Returns a list of books sorted by ascending number of pages read.
-`sort rp/` | Returns a list of books sorted by ascending reading progress.
+`sort n/` | Returns a list of books sorted by name in alphabetical order
+`sort g/` | Returns a list of books sorted by genre in alphabetical order
+`sort b/` | Returns a list of books sorted by ascending number of pages read
+`sort rp/` | Returns a list of books sorted by ascending reading progress
 
    ![sortcommand](images/sortcommandeg.png)
    _Result of `sort g/`_
@@ -316,12 +317,12 @@ Example Command | Result
 ### Deleting a book : `delete`
 
 You can use the Delete Command to delete unwanted books from _bookmark_ so that 
-you remove books that you no longer want to track. 
+you can remove books that you no longer want to track. 
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: **Format:** 
 
-    `delete INDEX`
+   `delete INDEX`
 
 </div>
 
@@ -339,7 +340,7 @@ you remove books that you no longer want to track.
 
 Example Command | Result
 -----------------|--------
-`delete 2` | deletes the 2nd book in the book list. 
+`delete 2` | deletes the 2nd book in the displayed book list
 
 | What you should see |
 | --------------- |
@@ -367,15 +368,15 @@ you can keep your books up to date.
    * The `INDEX` refers to the index number shown in the displayed book list.
    * The `INDEX` **must be a positive number** 1, 2, 3, …​
    * At least one of the fields must be provided.
-   * Existing values will be updated to the input values.
+   * Existing values will be overwritten by the input values.
 </div>
 
 *Suppose you have at least two books currently displayed*
 
 Example Command | Result
 -----------------|--------
-`edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively.
-`edit 2 b/250` | Edits the bookmark of the 2nd book to be `250`. 
+`edit 2 n/Harry Potter g/Fantasy` | Edits the name and genre of the 2nd book to `Harry Potter` and `Fantasy` respectively
+`edit 2 b/250` | Edits the bookmark of the 2nd book to be `250` 
 
 | What you should see |
 | ------------------- |
@@ -386,7 +387,7 @@ Example Command | Result
 
 ### Set goal for your book: `goal`
 
-You can use the Goal Command to set a reading goal to your chosen book so that 
+You can use the Goal Command to set a reading goal for your chosen book so that 
 you can motivate yourself to read.
 
 <div markdown="block" class="alert alert-success">
@@ -398,14 +399,13 @@ you can motivate yourself to read.
 <div markdown="block" class="alert alert-warning">
 :star: **Important Details:** 
 
-   * Sets goal for the book at the specified `INDEX`.
+   * Sets a goal for the book at the specified `INDEX`.
    * The `INDEX` refers to the index number shown in the displayed book list.
    * The `INDEX` **must be a positive number** 1, 2, 3, …
    * If you add a goal to a book with an existing goal, the newly added goal will replace it.
-   * You can only set dates that have not passed
-   * You can only set pages higher than your current bookmarked page, and lower or 
-   equal to the total number of pages of the book.
-   * Your goal is displayed in yellow, green or red for in progress, completed or overdue.
+   * You can only set dates that have not passed.
+   * You can only set pages more than your current bookmarked page and not beyond the total number of pages of the book.
+   * Your goal is displayed in yellow, green or red for in progress, completed or overdue respectively.
     
    Goal In Progress:
     ![goal_in_progress](images/GoalUi_InProgress.png)
@@ -419,10 +419,11 @@ you can motivate yourself to read.
 
 Example Command | Result
 -----------------|--------
-`goal 3 p/69 d/22-11-2020` | Sets a goal to reach page 69 of the 3rd book by 22nd November 2020.
+`goal 3 p/69 d/22-11-2020` | Sets a goal for the 3rd book displayed to reach page 69 by 22nd November 2020
 
    ![goalcommand](images/goaleg2.png)
-
+   _Result of `goal 3 p/69 d/22-11-2020`_
+   
 ### Remove your Goal: `goaldel`
 
 You can use the Goal Delete command to remove the previously set goal from
@@ -446,7 +447,7 @@ a book so that you can remove unwanted goals.
 
 Example Command | Result
 -----------------|--------
-`goaldel 1` | Goal successfully removed for Harry Potter. 
+`goaldel 1` | Goal removed for the 1st book displayed in the list
 
 | What you should see |
 | ------------------- |
@@ -508,7 +509,7 @@ remove unwanted notes from _bookmark_.
 
    * Deletes the note at the specified `NOTE_INDEX` of the book specified at `INDEX`.
    * The `INDEX` refers to the index number shown in the displayed book list.
-   * The `NOTE_INDEX` refers to the index number shown in the displayed notes in the detailed view.
+   * The `NOTE_INDEX` refers to the order in which the notes are displayed from left to right.
    * All indexes **must be a positive number** 1, 2, 3, …​
 </div>
 
@@ -517,7 +518,7 @@ remove unwanted notes from _bookmark_.
 Example Command | Result
 -----------------|--------
 `notedel 1 3` | Deletes the 3rd note of the 1st book displayed
-`notedel 4 2` | Deletes the 4th note of the 2nd book displayed 
+`notedel 2 4` | Deletes the 4th note of the 2nd book displayed 
 
 | What you should see |
 | ------------------- |
@@ -549,13 +550,13 @@ correct your mistakes.
 
 Example Command | Result
 --------------- | ----------
-`undo` | Previous version is restored
+`undo` | Reverts the most recent change
 
 <div markdown="block" class="alert alert-danger">
 :warning: **Warning:** 
 
    The undo command will not execute if there are no commands available to undo. Once you close _bookmark_, the commands
-   entered during your last usage session cannot be undone using the `undo` command when you start the application again.
+   entered during your last session cannot be undone using the `undo` command when you start the application again.
 </div>  
 
 | What you should see |
@@ -580,7 +581,7 @@ You can use the Redo Command to reinstate previously undone commands.
 <div markdown="block" class="alert alert-warning">
 :star: **Important Details:** 
 
-   * This command can be used multiple times consecutively to redo up to ten undone commands. <br> 
+   * This command can be used multiple times consecutively to redo up to 10 undone commands. <br> 
      You should use `redo` in conjunction with the [undo](#undoing-a-command--undo) command. 
    * All commands can be redone except the following: <br>
      * `exit`
@@ -590,15 +591,15 @@ You can use the Redo Command to reinstate previously undone commands.
  
 Example Command | Result
 --------------- | ----------
-`redo` | Previously undone command is invoked again 
+`redo` | Reverts the most recent `undo`
 
-_when redo is called on a deleted book (previously undone)_  
+_when redo is called on a previously restored deleted book_  
 
 | What you should see |
 | ------------------- |
 | Before `redo` |
 | <img src="images/undocommand2.png" alt="redo"> |
-| After `redo` |
+| After `redo` (the restored book is deleted) |
 | <img src="images/redocommand.png" alt="redo"> | 
 
 <div markdown="block" class="alert alert-danger">
@@ -624,8 +625,8 @@ You can use the Clear Command to delete all your books at once.
 <div markdown="block" class="alert alert-danger">
 :warning: **Warning:** 
 
-   Take caution! While the undo feature will help you restore books deleted by `clear`, you will not be able
-   to recover your deleted books if you call too many commands (10 and more) after clearing!
+   While the undo feature will help you restore books deleted by `clear`, you will not be able
+   to recover your deleted books if you call too many commands (10 and more) after clearing.
 </div>
 
 ### Saving the data
@@ -704,7 +705,7 @@ displayed** on the screen. You can use the [`list`](#listing-all-books--list) co
 
 Action | Format
 --------|------------------
-**[Add](#adding-a-book-into-_bookmark_-add)** | `add n/BOOK_TITLE g/GENRE [t/TAG] tp/TOTAL_PAGES [b/PAGE_NUMBER]`
+**[Add](#adding-a-book-into-_bookmark_-add)** | `add n/BOOK_TITLE g/GENRE [t/TAG]... tp/TOTAL_PAGES [b/PAGE_NUMBER]`
 **[View](#viewing-details-of-a-book--view)** | `view INDEX`
 **[List](#listing-all-books--list)** | `list`
 **[Find](#locating-books-find)** | `find n/BOOK_TITLE`, `find g/GENRE`, `find t/TAG`, `find c/`, `find nc/`
@@ -727,6 +728,6 @@ Term | Meaning
 -------- | ------------
 **Genre** | The classification of the book <br> (eg. Fiction, Nonfiction, Selfhelp etc.)
 **Tag** | Short descriptive words to describe your book <br> (eg. Fun, Exciting, Magic)
-**Note** | Short paragraphs written by you to be added to your stored book records.
+**Note** | Short paragraphs written by you to be added to your stored book records
 **Goal** | A date set by you to finish a certain page of the book
 **Reading Progress** | The percentage of the book completed
