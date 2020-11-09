@@ -19,7 +19,7 @@ feature in _bookmark_.
 
 ### Audience 
 
-The intended audience is any person who is looking to understand the system architecture and design of _bookmark_
+The intended audience is anyone looking to understand the system architecture and design of _bookmark_.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call:
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -154,12 +154,12 @@ regarding the books stored, and the **detailed view** which displays detailed in
 
 `BookListPanel` `BookCard` as well as its corresponding subclasses `DetailedBookListPanel` and `DetailedBookCard` facilitates
 the display of book information.
-When in the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
+In the summarised view, `MainWindow` renders `BookListPanel` which displays the book information using `BookCard`,
 while in the detailed view, `DetailedBookListPanel` is rendered which displays the book information using
 `DetailedBookCard`. `DetailedBookCard` will in turn use other components to display the book information,
 such as `NoteCard` to display the notes added to a book.
 
-Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display the `BookCard` or `DetailedBookCard`
+Both `BookListPanel` and `DetailedBookListPanel` makes use of JavaFX's `ListView` to display `BookCard` or `DetailedBookCard`
 respectively.
 
 The class diagram below shows the relevant classes involved:
@@ -172,11 +172,11 @@ The class diagram below shows the relevant classes involved:
 
 `MainWindow#executeCommand()` initializes all changes to what is displayed by the UI by calling `Logic#execute()`
 which returns a `CommandResult`. `MainWindow#executeCommand()` is called when user enters a command into the application.
-From the returned `CommandResult`, `CommandResult#getViewType()` indicates how the UI should switch its view.
-`CommandResult#getViewType()` returns a `ViewType`, of which there are three types: 
-   * `ViewType.DEFAULT` - Instructs UI to switch to the default, summarised view
-   * `ViewType.DETAILED` - Instructs UI to switch to the detailed, single book view
-   * `ViewType.MOST_RECENTLY_USED` - Instructs UI to stay in whatever view it is in
+From the returned `CommandResult`, `CommandResult#getViewType()` indicates which view the UI should switch to according
+to which `ViewType` is returned:
+   * `ViewType.DEFAULT` - Instructs UI to switch to the default, summarised view.
+   * `ViewType.DETAILED` - Instructs UI to switch to the detailed, single book view.
+   * `ViewType.MOST_RECENTLY_USED` - Instructs UI to stay in whatever view it is in.
 
 Based on the type of `ViewType` returned by `CommandResult#getViewType()`, `MainWindow#resetView()`,
 `MainWindow#changeToDetailedView()`, or no method is called accordingly.
@@ -195,9 +195,9 @@ detailed view:
 ##### Aspect: What to display DetailedBookCard with
 
 * **Alternative 1 (current choice):** Use JavaFX ListView
-  * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method
+  * Pros: Easy to keep UI up to sync with model by overriding ListCell's updateItem method.
   * Cons: Extra care must be taken to not allow multiple books to be displayed as detailed view is only meant to show
-  one book
+  one book.
 
 * **Alternative 2:** Use other JavaFX layouts
   * Pros: More in-line with the purpose of the detailed view of showing only one book
@@ -249,11 +249,11 @@ This method will return a `CommandResult` object which contains the return messa
 Step 4: `CommandResult` is returned as a feedback to the user. <br>
 *If there is an existing book with the same name, an exception will be thrown with a message to the User*
 
-Below is an activity diagram which illustrates the flow of events for adding a book
+Below is an activity diagram which illustrates the flow of events for adding a book:
 
 ![Add command flow of execution](images/AddActivityDiagram.png)
 
-Below is a sequence diagram which illustrates the a scenario where a User adds a valid book <br>
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid book: <br>
 Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
 
 ![Interactions inside the logic component for the add command](images/AddSequenceDiagram.png) 
@@ -269,11 +269,11 @@ This feature is facilitated mainly by `ModelManager`, `FindCommandParser` and `F
 
 The find mechanism is facilitated by `ModelManager`, specifically, the `ModelManager#updateFilteredBookList()` method. 
 `ModelManager#updateFilteredBookList()` takes in a single parameter, a `predicate`, and applies the `predicate` 
-on all elements of the observable book list. Books that satisfy the `predicate` remain in the 
-list, while elements that do not are removed and omitted from the user's view. Currently, the `find` command 
-supports finding by name, genre and tag fields, and can also filter completed & non-completed books.
+on all elements of the observable book list. Books that satisfy the `predicate` remain displayed in the user's
+view, while elements that do not are hidden from the user's view. Currently, the `find` command 
+supports finding by name, genre and tag fields, and can also find all completed or non-completed books.
 
-Given below is an example usage scenario and how the find mechanism alters `FilteredList` at each step.
+Given below is an example usage scenario and how the find mechanism alters `FilteredList` at each step:
 
 Step 1. The user launches the application for the first time. `FilteredList` is initialised with the user's book data.
 
@@ -286,17 +286,17 @@ Step 2. The user executes `find n/Harry` command to find all books with Harry in
 
 #### Filtering the FilteredList
 The `FindCommandParser#parse()` parses the `find` command input, and checks for input errors for which if found,
-would throw an error. Subsequently, `FindCommandParser#predicateGenerator()` generates a predicate based on the 
+would throw an error. Subsequently, `FindCommandParser#predicateGenerator()` generates a `predicate` based on the 
 user's input keyword(s) and filtering prefix. The resulting `predicate` is used to generate a new `FindCommand` object, 
 and when `FindCommand#execute()` is called, the `predicate` is passed to `ModelManager#updateFilteredBookList()`,
 where the filtering of the observable book list based on the `predicate` occurs. 
 
-The activity diagram below illustrates the flow of execution when the user inputs a `find` command.
+The activity diagram below illustrates the flow of execution when the user inputs a `find` command:
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
 Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
-field.<br>
+field:<br>
 Command : `find n/Harry`
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
@@ -323,28 +323,28 @@ Command : `find n/Harry`
 This feature is facilitated mainly by `ModelManager`, `SortCommandParser` and `SortCommand`.
 
 `ModelManager#sortFilteredBookList()` takes in a single parameter, a `comparator`, and applies the `comparator` on all elements
-of the internal observable book list. Book's are sorted according to the input comparator in ascending order. 
+of the internal observable book list. Books are sorted according to the input comparator in ascending order. 
 
 `ModelManager#setSortingPreference()` takes in a single parameter, a `newSortingPreference`, and updates the sorting preference 
-in the `preferences.json` file. Thereafter, the specified sorting mechanism will apply to the user until the user decides to change 
+in the `preferences.json` file. Thereafter, the specified sorting mechanism will apply until the user decides to change 
 the sorting mechanism using the sort command. 
 
 Currently, the `sort` command supports sorting by name, genre, bookmark, and reading progress.
 
 #### Sorting the ObservableList
-The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors for which if found,
-would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
+The `SortCommandParser#parse()` parses the `sort` command input, and checks for input errors. If there are input errors,
+the method would throw an error. Subsequently, `ComparatorGenerator#comparatorGenerator()` generates a comparator based on the 
 user's `inputPrefix`. `inputPrefix` and the resultant `comparator` are used to generate a new `SortCommand` object.
 
-When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()`, where 
-updating of user sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
-where sorting of the internal observable list based on the `comparator` occurs.
+When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager#setSortingPreference()` to
+update the user's sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
+where the internal observable list is sorted based on the `comparator`.
 
-The activity diagram below illustrates the flow of execution when the user inputs a `sort` command.
+The activity diagram below illustrates the flow of execution when the user calls for a `sort` command:
 
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
-Below is a sequence diagram that shows a scenario whereby the user decides to sort books by the name field.
+Below is a sequence diagram that shows a scenario whereby the user decides to sort books by the name field: <br>
 Command : `sort n/`
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
@@ -366,8 +366,8 @@ Command : `sort n/`
 
 #### Implementation
 
-*bookmark*'s Did you mean? feature uses the Damerau-Levenshtien algorithm to calculate the distance between the
-user-input word and the words in the application Library.
+*bookmark*'s Suggestion feature uses the Damerau-Levenshtien algorithm to calculate the distance between the
+user-input word and the words in the application WordBank.
 
 The `Edit Distance` refers to the number of steps needed to change difference between two words. 
 This mechanism is implemented through 3 operations: 
@@ -385,30 +385,31 @@ The suggestion mechanism is facilitated by `Logic` Component through `FindComman
 no books can be found.
 `SuggestionAlgorithm` will call on `WordBank` in `Model` for the stored words required to complete the mechanism.
 `SuggestionAlgorithm` will implement the following operations:
-* `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion
-* `SuggestionAlgorithm#calculateDistance()` — Calculate the EditDistance of the source word and words in the WordBank
+* `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion.
+* `SuggestionAlgorithm#calculateDistance()` — Calculate the EditDistance of the source word and words in the WordBank.
 
-The class diagram below shows the relevant classes involved.
+The class diagram below shows the relevant classes involved:
 
 ![Suggestion Algorithm and the Classes involved](images/SuggestionAlgorithmClassDiagram.png)
 
 Given below is an example usage scenario and how a Suggestion mechanism behaves at each step.
 
 Step 1: The user inputs the command `find n/h@rry` to find books with `harry` in their names. <br>
-*harry is deliberately mispelled* <br>
-`FindCommand` will implement `execute` and the `model`'s `FilteredList`  will be empty.
+*harry is deliberately typed wrongly* <br>
+`FindCommand#execute()` is activated. As the keyword has a typing error, the model's `FilteredList`  will be empty since it cannot find any matching books.
 
-Step 2: Since no books are found, `FindCommand` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
+Step 2: Since no books are found, `FindCommand#execute()` will call on `SuggestionAlgorithm#findSuggestions()` to find the closest matching word
 in the appropriate `WordStore` of `WordBank`.
 
-Step 3: `SuggestionAlgorithm#calculateDistance()` will be called to calculate the edit distance of `h@rry` and the words in `nameWordBank`
-and store words that are within the predefined `DISTANCE_LIMIT`.
+Step 3: `SuggestionAlgorithm#findSuggestions()` will call upon
+`SuggestionAlgorithm#calculateDistance()` to calculate the edit distance of `h@rry` and the words in `nameWordBank`. 
+Words found to be within the predefined `DISTANCE_LIMIT` will be added to an `ArrayList` to be returned to the `FindCommand` 
+within `FindCommand#execute()`.
 
 Step 4: `FindCommand#execute()` will add each word into a `PriorityQueue` and poll out the word with the smallest distance
-to be used as the suggested word.
-
-Step 4*: If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
-will return a Standard Message for no suggestion.
+to be used as the suggested word. <br>
+*If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
+will return a Standard Message for no suggestion.*
 
 _Within the `SuggestionAlgorithm#FindSuggestion()`_<br> 
 
@@ -418,7 +419,7 @@ _Within `FindCommand#execute()`_
 
 ![Suggestion Feature flow of events](images/SuggestionActivityDiagram2.png)
 
-Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed.
+Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed:
 
 ![Interactions inside logic component and Algo component for Suggestion feature](images/SuggestionSequenceDiagram.png)
 
@@ -432,14 +433,14 @@ Below is a sequence diagram that shows a scenario where a suggestion is provided
    * Pros: <br> Will provide an accurate measure of the closest matching word based on the distance <br>
    First letter need not match the keyword (First letter might be typed wrongly too)
    * Cons: <br>
-    Incurs either a large time complexity (3^n) where n is length of string to be compared with (No Memoization) <br>
+   Incurs either a large time complexity (3^n) where n is length of string to be compared with (No Memoization) <br>
    Incurs a large space consumption (construction of 2D Array) (With Memoization)
 
    * **Alternative 2: Storing all words in a Trie**  
-   Store all words into a Trie Data structure and use recursion to find the matching words.
-   * Pros: Easy to implement, consumes less time and space than Alternative 1
-   * Cons: <br> Words must start with the same letter, hence its on the assumption that 1st letter of the word is not 
-   misspelt. <br>
+   Store all words into a Trie data structure and uses recursion to find the matching words.
+   * Pros: Easy to implement and consumes less time and space than Alternative 1.
+   * Cons: <br> Words must start with the same letter. Hence it is based on the assumption that the 1st letter of the word is not 
+   typed wrongly. <br>
    Difficult to find transpositional errors (Eg. Harry vs Hrary)
 
 Alternative 1 was ultimately chosen as it is difficult to predict what type of typing errors will be committed. Hence, analysing
@@ -461,16 +462,16 @@ This feature is facilitated mainly by `LogicManager`, `GoalCommandParser`, `Goal
 `LogicManager#execute()` (not shown in the diagram above) handles the command word to create 
 `GoalCommandParser` to parse the remaining inputs. `GoalCommandParser#parse()` tokenizes each prefix
 to create a `Goal` object. This `Goal` object will be passed as a parameter to create a `GoalCommand`
-that will be returned to `Logic Manager`.\
+that will be returned to `LogicManager`.
 *If there are missing or invalid parameters in command, an exception will be thrown with a 
 message to the User.*
 
-Below is an activity diagram which illustrates the flow of events for adding a Goal.
+Below is an activity diagram which illustrates the flow of events for adding a Goal:
 
 ![goal activity diagram](images/GoalActivityDiagram.png)
 
 Below is a sequence diagram which illustrates a scenario where a User adds a valid Goal
-to a valid book via Command: `goal 1 p/69 d/10-12-2020`
+to a valid book: <br> Command: `goal 1 p/69 d/10-12-2020`
 
 ![goal sequence diagram](images/GoalSequenceDiagram.png)
 
@@ -493,11 +494,11 @@ passed as a parameter to create a `AddNoteCommand` that will be returned to `Log
 the `Model` and return a `CommandResult` as a feedback to the user.
 *If there is an existing note with the same title and text, an exception will be thrown with a message to the User*
 
-Below is an activity diagram which illustrates the flow of events for adding a book
+Below is an activity diagram which illustrates the flow of events for adding a book:
 
 ![Add note command flow of execution](images/NoteActivityDiagram.png)
 
-Below is a sequence diagram which illustrates the a scenario where a User adds a valid note to a valid book<br>
+Below is a sequence diagram which illustrates the a scenario where a User adds a valid note to a valid book:<br>
 Command: `note 1 n/Thoughts txt/Something`
 
 ![Interactions inside the logic component for the add note command](images/NoteSequenceDiagram.png)
@@ -516,7 +517,7 @@ application can be divided into two components:
 The state of the Model is managed by `HistoryManager`. It does so by storing `State` objects. Each `State` object contains a 
 `ReadOnlyLibrary`, `ReadOnlyUserPrefs` and a `Predicate` used to decide which books stored in the Model should be visible to
 users. `HistoryManager` maintains a current state property representing the current state of the Model. It also stores 
-previous states that be restored via a redo or undo.
+previous states that can be restored via a redo or undo.
 
 * `HistoryManager#addNewState()` — Adds a new state to be used as the current state
 * `HistoryManager#undo()` — Restores the most recent previous state.
@@ -525,7 +526,7 @@ previous states that be restored via a redo or undo.
 The state of the Ui is managed by `ViewTypeManager`. 
 The state of the Ui refers to what `ViewType` the Ui is in (see [Changing Ui View](#changing-ui-view)).
 `ViewTypeManager` maintains a mapping between `State` objects and a `ViewType`. This mapping indicates what 
-`ViewType` the Ui should be given a particular `State` of the Model.
+`ViewType` the Ui should use when provided with a particular `State` of the Model.
 
 * `ViewTypeManager#addViewTypePairing()` — Adds a new pairing between a given `State` and `ViewType`
 * `ViewTypeManager#getViewType()` — Get the correct `ViewType` for the given `State`
@@ -541,8 +542,7 @@ called to create a new pairing between the newly created `State` and the appropr
 Model to the user. The stored `States` and its corresponding `ViewType` pairing will be used to change the application
 state accordingly when a undo or redo operation, exposed as `Model#undo()` and `Model#redo()` respectively, is executed.
 
-The class diagram below illustrates the classes that facilitates the undo and redo
-feature.
+The class diagram below illustrates the classes that facilitates the undo and redo feature:
 
 ![UndoRedoClassDiagram](images/UndoRedoClassDiagram.png)
 
@@ -556,7 +556,7 @@ The undo deque stores the states to be recovered via an undo command, while the 
 to be recovered via a redo command. `ViewTypeManager` maintains a map that maps `State` objects to a corresponding 
 `ViewType`.
 
-Below is an example to illustrate how undoing and redoing works in a typical scenario.
+Below is an example to illustrate how undoing and redoing works in a typical scenario:
 
 Step 1. The user launches the application for the first time. The `HistoryManager` will be inititalised with the
 initial state of the model as the current state, i.e State 1. Undo and redo deques will be empty. `ViewTypeManager`'s map
@@ -630,7 +630,7 @@ Furthermore, to prevent excessive memory usage, a cap on the number of states st
 can be set in `HistoryManager#MAX_UNDO_COUNT`. If a new state is added but the undo deque is already at max capacity,
 then the oldest state in the undo deque will be deleted to make room. A similar strategy is employed for `ViewTypeManager`,
 with its map being implemented as a FIFO cache with a fixed maximum size.
-The activity diagram below explains the flow of execution when a new state is added to `HistoryManager`.
+The activity diagram below explains the flow of execution when a new state is added to `HistoryManager`:
 
 ![NewStateActivityDiagram](images/NewStateActivityDiagram.png)
 
@@ -745,7 +745,7 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 1. User requests to add a book.
 2. bookmark adds the book.
 
-    Use case ends
+    Use case ends.
 
 **Extensions**
 
@@ -890,14 +890,12 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
     
     Use case returns at step 1.
 
-* 2a. User provides an invalid page. A page is invalid when it is a non-positive integers,
-lower than the specified book's `bookmark`, or higher than the specified book's `totalPages`.
+* 2a. User provides an invalid page.
     * 2a1. _bookmark_ returns an error message.
     
     Use case resumes at step 2.
 
-* 2b. User provides an invalid deadline. A deadline is invalid 
-when it has the wrong format, or the date has already passed.
+* 2b. User provides an invalid deadline.
     * 2b1. _bookmark_ returns an error message.
     
     Use case resumes at step 2.
@@ -1155,6 +1153,10 @@ testers are expected to do more *exploratory* testing.
       be shown. <br>
       Note: `find` only matches full words, it will not match substrings of a word.
       
+   c. Test case: `find g/YYY` where `YYY` is a keyword you want to find for. <br> 
+      Expected: Books with `YYY` in their genres will be shown, books that do not will not
+      be shown. <br>
+      
 ### Sorting the book list
 
 1. Sorting the book list while some books are being shown.
@@ -1166,7 +1168,7 @@ testers are expected to do more *exploratory* testing.
       
 1. Adding a book into a sorted book list.
 
-   a. Prerequisites: Book list is initially showing at least 1 book to see the sorting effect.
+   a. Prerequisites: Book list is initially showing at least 1 book to see the sorting effect. <br>
    b. Test case: `sort n/`<br> followed by `add` command to add another book.
       Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
       The new book will be added to the book list in the correct position that maintains the sorted order.
