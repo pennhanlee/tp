@@ -939,6 +939,8 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use Case: UC07 - Undo**
 
 **MSS**
@@ -986,6 +988,8 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
     
     Use case resumes at step 3.
 
+<div style="page-break-after: always;"></div>
+
 **Use Case: UC09 - Adding a note**
 
 **MSS**
@@ -1014,6 +1018,8 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
     * 1c1. bookmark returns an error message.
 
     Use case ends.
+    
+<div style="page-break-after: always;"></div>
     
 **Use Case: UC10 - Deleting a note**
 
@@ -1087,7 +1093,9 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
 
     Use case ends.
 
-**Use Case: UC11 - Delete a goal**
+<div style="page-break-after: always;"></div>
+
+**Use Case: UC13 - Delete a goal**
 
 **MSS**
 
@@ -1180,6 +1188,8 @@ testers are expected to do more *exploratory* testing.
 
    d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a book
 
