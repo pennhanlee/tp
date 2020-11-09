@@ -46,6 +46,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/bookmark/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
@@ -67,6 +69,8 @@ Each of the four components,
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
 ![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -199,12 +203,12 @@ The activity diagram below illustrates the flow of execution when the UI decides
 
 ![View switching flow of execution](images/ViewSwitchingActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 Below is a sequence diagram that shows a scenario whereby the UI switches from the default summarised view to the
 detailed view:
 
 ![Switching to detailed view sequence diagram](images/ViewSwitchingSequenceDiagram.png)
-
-<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -266,12 +270,16 @@ the `Model` via `ModelManager#addBook()`. Subsequently, `ModelManager#sortByDefa
 to sort the internal book list according to the user's sorting preference, if any. <br>
 This method will return a `CommandResult` object which contains the return message to be displayed for the user. <br>
 
+<div style="page-break-after: always;"></div>
+
 Step 4: `CommandResult` is returned as a feedback to the user. <br>
 *If there is an existing book with the same name, an exception will be thrown with a message to the User*
 
 Below is an activity diagram which illustrates the flow of events for adding a book:
 
 ![Add command flow of execution](images/AddActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Below is a sequence diagram which illustrates the a scenario where a User adds a valid book: <br>
 Command: `add n/Harry Potter g/Fiction tp/1000 b/100`
@@ -300,6 +308,8 @@ Step 1. The user launches the application for the first time. `FilteredList` is 
 
 ![FindState1](images/FindState1.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `find n/Harry` command to find all books with Harry in the Name field. The 
 `NameContainsKeywordsPredicate` predicate is generated and is used as a filter in this scenario.
 
@@ -317,6 +327,8 @@ where the filtering of the observable book list based on the `predicate` occurs.
 The activity diagram below illustrates the flow of execution when the user inputs a `find` command:
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Below is a sequence diagram that shows a scenario whereby the user decides to find the keyword `Harry` in the book name 
 field:<br>
@@ -367,9 +379,13 @@ When `SortCommand#execute()` is called, `inputPrefix` is passed to `ModelManager
 update the user's sorting preferences in `preferences.json` occurs. `comparator` is passed to `ModelManager#sortFilteredBookList()`,
 where the internal observable list is sorted based on the `comparator`.
 
+<div style="page-break-after: always;"></div>
+
 The activity diagram below illustrates the flow of execution when the user calls for a `sort` command:
 
 ![SortActivityDiagram](images/SortActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Below is a sequence diagram that shows a scenario whereby the user decides to sort books by the name field: <br>
 Command : `sort n/`
@@ -419,9 +435,13 @@ no books can be found.
 * `SuggestionAlgorithm#findSuggestions()` — Filters the relevant words to be returned as a suggestion.
 * `SuggestionAlgorithm#calculateDistance()` — Calculate the EditDistance of the source word and words in the WordBank.
 
+<div style="page-break-after: always;"></div>
+
 The class diagram below shows the relevant classes involved:
 
-![Suggestion Algorithm and the Classes involved](images/SuggestionAlgorithmClassDiagram.png)
+![Suggestion Algorithm and the Classes involved](images/SuggestionAlgorithmClassDiagram.png) 
+
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how a Suggestion mechanism behaves at each step.
 
@@ -442,6 +462,8 @@ to be used as the suggested word. <br>
 *If no words are within the `DISTANCE_LIMIT` in Step 3, there will not be any words in the `PriorityQueue` and `FindCommand#execute()`
 will return a Standard Message for no suggestion.*
 
+<div style="page-break-after: always;"></div>
+
 _Within the `SuggestionAlgorithm#FindSuggestion()`_<br> 
 
 ![Suggestion Feature flow of events](images/SuggestionActivityDiagram1.png) 
@@ -449,6 +471,8 @@ _Within the `SuggestionAlgorithm#FindSuggestion()`_<br>
 _Within `FindCommand#execute()`_
 
 ![Suggestion Feature flow of events](images/SuggestionActivityDiagram2.png)
+
+<div style="page-break-after: always;"></div>
 
 Below is a sequence diagram that shows a scenario where a suggestion is provided when a typing error is committed:
 
@@ -500,6 +524,8 @@ that will be returned to `LogicManager`.
 *If there are missing or invalid parameters in command, an exception will be thrown with a 
 message to the User.*
 
+<div style="page-break-after: always;"></div>
+
 Below is an activity diagram which illustrates the flow of events for adding a Goal:
 
 ![goal activity diagram](images/GoalActivityDiagram.png)
@@ -530,9 +556,13 @@ passed as a parameter to create a `AddNoteCommand` that will be returned to `Log
 the `Model` and return a `CommandResult` as a feedback to the user.
 *If there is an existing note with the same title and text, an exception will be thrown with a message to the User*
 
-Below is an activity diagram which illustrates the flow of events for adding a book:
+<div style="page-break-after: always;"></div>
+
+Below is an activity diagram which illustrates the flow of events for adding a note:
 
 ![Add note command flow of execution](images/NoteActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Below is a sequence diagram which illustrates the a scenario where a User adds a valid note to a valid book:<br>
 Command: `note 1 n/Thoughts txt/Something`
@@ -615,6 +645,8 @@ the user.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Step 3. The user decides that adding the book was a mistake and decides to undo the action by using the undo command.
 This causes the current state, State 2 to be pushed to the redo deque. State 1 will be popped from the undo deque and 
 made the current state. `ViewTypeManager#getViewType()` will be called with State 1 in order to get the correct 
@@ -625,6 +657,8 @@ made the current state. `ViewTypeManager#getViewType()` will be called with Stat
 The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Step 4. The user changes his mind again, deciding that he wants to add the book. He redoes the action by using the redo
 command, causing the current state, State 1 to be pushed back into the undo deque and State 2 to be popped from the redo
@@ -637,6 +671,8 @@ to display State 2 with.
 when the user tries to undo and redo respectively, an error will be shown and no state change will occur.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Step 5. Now suppose the user adds a book and then edits a book, causing State 3 and State 4 to be created. He then
 undoes the edit command. `HistoryManager` will now look like this:
@@ -809,6 +845,8 @@ For all use cases below, the **System** is `bookmark` and the **Actor** is the `
     * 1c1. bookmark returns an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC02 - View a book**
 
@@ -1114,6 +1152,8 @@ testers are expected to do more *exploratory* testing.
    b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
        
+<div style="page-break-after: always;"></div>       
+
 ### Viewing a book
 
 1. Viewing a particular book
@@ -1125,8 +1165,6 @@ testers are expected to do more *exploratory* testing.
       detailed information about the selected book and will not show all other books. The
       displayed book will have an `INDEX` of 1 since it is the first and only book being
       displayed.
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a book
 
@@ -1193,6 +1231,8 @@ testers are expected to do more *exploratory* testing.
       Details of the edited book shown in the status message.
       The edited book remains in the list regardless of how it was edited.
       
+<div style="page-break-after: always;"></div>
+      
 ### Finding books
 
 1. Finding books by keywords.
@@ -1208,7 +1248,6 @@ testers are expected to do more *exploratory* testing.
       Expected: Books with `YYY` in their genres will be shown, books that do not will not
       be shown. <br>
       
-<div style="page-break-after: always;"></div>
       
 ### Sorting the book list
 
@@ -1225,6 +1264,8 @@ testers are expected to do more *exploratory* testing.
    b. Test case: `sort n/`<br> followed by `add` command to add another book.
       Expected: After the sort command, the books shown in the list will be sorted by their names in lexicographical order.
       The new book will be added to the book list in the correct position that maintains the sorted order.
+
+<div style="page-break-after: always;"></div>
 
 ### Undo 
 
@@ -1296,6 +1337,8 @@ testers are expected to do more *exploratory* testing.
    b. Test case: `notedel X 1` where X is the Xth book in the displayed book list.
       The Xth book must have at least one note added.<br>
       Expected: The first note of the selected book will be deleted.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a goal
 
@@ -1374,6 +1417,8 @@ a lot more compared to AB3. For example, a new `ViewTypeManager` class was creat
 a given state of the application with so that the `undo` and `redo` commands can work well. We also put significant
 effort into sanitising and validating user input as well as increasing the testing rigour to ensure that _bookmark_'s parsers
 can handle unexpected inputs smoothly.  
+
+<div style="page-break-after: always;"></div>
 
 ### Storage
 The `Storage` was extended to support more options for user preferences such as sorting preference. Furthermore, the 
